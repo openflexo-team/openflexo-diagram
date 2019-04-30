@@ -1,0 +1,14 @@
+**/target
+**/build
+*.ipr
+*.idea
+*.iws
+*.iml
+.classpath
+.project
+.settings
+.DS_Store
+/pom.xml~
+/target
+/.gradle/
+/infer-out/

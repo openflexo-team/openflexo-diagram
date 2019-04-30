@@ -1,0 +1,3 @@
+include 'flexodiagram',
+    'flexodiagram-test-rc',
+    'flexodiagram-ui'
