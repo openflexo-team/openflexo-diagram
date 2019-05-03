@@ -1,0 +1,15 @@
+dependencies {
+   compile project(":diagram-ta-ui")
+
+  // openflexo dep
+   compile flexoUi()
+   compile fmlTechnologyAdapterUi()
+  // external dep
+  // testing dep
+   testCompile testUtils()
+   testCompile ginaTest()
+   testCompile flexoUiTest()
+}
+tasks.withType(Test) {
+	jvmArgs += ["-Djava.awt.headless=true"]
+}

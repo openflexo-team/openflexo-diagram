@@ -1,0 +1,8 @@
+#Metadata for directory /Users/sylvain/GIT-2.0.0/formose/formose-rc/src/main/resources/DocumentLibrary.fml
+#Wed Nov 28 17:33:32 CET 2018
+DocumentLibrary.fml.xml.version=0.1
+DocumentLibrary.fml.xml.uri=http\://formose.lacl.fr/DocumentLibrary.viewpoint
+DocumentLibrary.fml.xml.requiredModelSlotList=org.openflexo.foundation.fml.rt.FMLRTVirtualModelInstanceModelSlot
+DocumentLibrary.fml.xml.modelVersion=1.0
+DocumentLibrary.fml.xml.virtualModelClassName=org.openflexo.foundation.fml.VirtualModel
+DocumentLibrary.fml.xml.name=DocumentLibrary
