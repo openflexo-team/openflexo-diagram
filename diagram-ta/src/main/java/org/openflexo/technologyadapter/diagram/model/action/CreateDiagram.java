@@ -47,9 +47,9 @@ import org.openflexo.foundation.FlexoObject;
 import org.openflexo.foundation.FlexoObject.FlexoObjectImpl;
 import org.openflexo.foundation.action.FlexoAction;
 import org.openflexo.foundation.action.FlexoActionFactory;
+import org.openflexo.foundation.action.TechnologySpecificFlexoAction;
 import org.openflexo.foundation.resource.RepositoryFolder;
 import org.openflexo.foundation.resource.SaveResourceException;
-import org.openflexo.localization.LocalizedDelegate;
 import org.openflexo.pamela.exceptions.ModelDefinitionException;
 import org.openflexo.technologyadapter.diagram.DiagramTechnologyAdapter;
 import org.openflexo.technologyadapter.diagram.metamodel.DiagramSpecification;
@@ -63,7 +63,8 @@ import org.openflexo.toolbox.StringUtils;
  * 
  * @author sylvain
  */
-public class CreateDiagram extends FlexoAction<CreateDiagram, RepositoryFolder<DiagramResource, ?>, FlexoObject> {
+public class CreateDiagram extends FlexoAction<CreateDiagram, RepositoryFolder<DiagramResource, ?>, FlexoObject>
+		implements TechnologySpecificFlexoAction<DiagramTechnologyAdapter> {
 
 	private static final Logger logger = Logger.getLogger(CreateDiagram.class.getPackage().getName());
 
@@ -114,12 +115,17 @@ public class CreateDiagram extends FlexoAction<CreateDiagram, RepositoryFolder<D
 		super(actionType, focusedObject, globalSelection, editor);
 	}
 
-	@Override
+	/*@Override
 	public LocalizedDelegate getLocales() {
 		if (getServiceManager() != null) {
 			return getServiceManager().getTechnologyAdapterService().getTechnologyAdapter(DiagramTechnologyAdapter.class).getLocales();
 		}
 		return super.getLocales();
+	}*/
+
+	@Override
+	public Class<DiagramTechnologyAdapter> getTechnologyAdapterClass() {
+		return DiagramTechnologyAdapter.class;
 	}
 
 	@Override

@@ -53,7 +53,7 @@ import org.openflexo.foundation.FlexoEditor;
 import org.openflexo.foundation.FlexoObject.FlexoObjectImpl;
 import org.openflexo.foundation.action.FlexoActionFactory;
 import org.openflexo.foundation.action.FlexoGUIAction;
-import org.openflexo.localization.LocalizedDelegate;
+import org.openflexo.foundation.action.TechnologySpecificFlexoAction;
 import org.openflexo.swing.ImageUtils;
 import org.openflexo.swing.ImageUtils.ImageType;
 import org.openflexo.technologyadapter.diagram.DiagramTechnologyAdapter;
@@ -65,7 +65,8 @@ import org.openflexo.technologyadapter.diagram.model.DiagramShape;
  * @author vincent leilde
  * 
  */
-public class ExportDiagramToImageAction extends FlexoGUIAction<ExportDiagramToImageAction, DiagramElement<?>, DiagramElement<?>> {
+public class ExportDiagramToImageAction extends FlexoGUIAction<ExportDiagramToImageAction, DiagramElement<?>, DiagramElement<?>>
+		implements TechnologySpecificFlexoAction<DiagramTechnologyAdapter> {
 
 	private static final Logger logger = Logger.getLogger(ExportDiagramToImageAction.class.getPackage().getName());
 
@@ -105,11 +106,8 @@ public class ExportDiagramToImageAction extends FlexoGUIAction<ExportDiagramToIm
 	}
 
 	@Override
-	public LocalizedDelegate getLocales() {
-		if (getServiceManager() != null) {
-			return getServiceManager().getTechnologyAdapterService().getTechnologyAdapter(DiagramTechnologyAdapter.class).getLocales();
-		}
-		return super.getLocales();
+	public Class<DiagramTechnologyAdapter> getTechnologyAdapterClass() {
+		return DiagramTechnologyAdapter.class;
 	}
 
 	private ScreenshotImage<? extends DiagramElement<? extends ContainerGraphicalRepresentation>> screenshot;

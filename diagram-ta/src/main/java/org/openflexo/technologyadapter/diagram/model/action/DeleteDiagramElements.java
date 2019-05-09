@@ -51,16 +51,17 @@ import org.openflexo.foundation.FlexoObject;
 import org.openflexo.foundation.FlexoObject.FlexoObjectImpl;
 import org.openflexo.foundation.action.FlexoAction;
 import org.openflexo.foundation.action.FlexoActionFactory;
+import org.openflexo.foundation.action.TechnologySpecificFlexoAction;
 import org.openflexo.foundation.fml.DeletionScheme;
 import org.openflexo.foundation.fml.rt.FlexoConceptInstance;
-import org.openflexo.localization.LocalizedDelegate;
 import org.openflexo.technologyadapter.diagram.DiagramTechnologyAdapter;
 import org.openflexo.technologyadapter.diagram.model.DiagramConnector;
 import org.openflexo.technologyadapter.diagram.model.DiagramElement;
 import org.openflexo.technologyadapter.diagram.model.DiagramShape;
 
 // TODO: to be fully reimplemented !!!
-public class DeleteDiagramElements extends FlexoAction<DeleteDiagramElements, DiagramElement<?>, DiagramElement<?>> {
+public class DeleteDiagramElements extends FlexoAction<DeleteDiagramElements, DiagramElement<?>, DiagramElement<?>>
+		implements TechnologySpecificFlexoAction<DiagramTechnologyAdapter> {
 
 	private static final Logger logger = Logger.getLogger(DeleteDiagramElements.class.getPackage().getName());
 
@@ -143,11 +144,8 @@ public class DeleteDiagramElements extends FlexoAction<DeleteDiagramElements, Di
 	}
 
 	@Override
-	public LocalizedDelegate getLocales() {
-		if (getServiceManager() != null) {
-			return getServiceManager().getTechnologyAdapterService().getTechnologyAdapter(DiagramTechnologyAdapter.class).getLocales();
-		}
-		return super.getLocales();
+	public Class<DiagramTechnologyAdapter> getTechnologyAdapterClass() {
+		return DiagramTechnologyAdapter.class;
 	}
 
 	@Override

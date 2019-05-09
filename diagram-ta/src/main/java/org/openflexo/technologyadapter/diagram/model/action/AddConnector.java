@@ -47,7 +47,7 @@ import org.openflexo.foundation.FlexoEditor;
 import org.openflexo.foundation.FlexoObject.FlexoObjectImpl;
 import org.openflexo.foundation.action.FlexoAction;
 import org.openflexo.foundation.action.FlexoActionFactory;
-import org.openflexo.localization.LocalizedDelegate;
+import org.openflexo.foundation.action.TechnologySpecificFlexoAction;
 import org.openflexo.technologyadapter.diagram.DiagramTechnologyAdapter;
 import org.openflexo.technologyadapter.diagram.model.DiagramConnector;
 import org.openflexo.technologyadapter.diagram.model.DiagramContainerElement;
@@ -55,7 +55,8 @@ import org.openflexo.technologyadapter.diagram.model.DiagramElement;
 import org.openflexo.technologyadapter.diagram.model.DiagramElementImpl;
 import org.openflexo.technologyadapter.diagram.model.DiagramShape;
 
-public class AddConnector extends FlexoAction<AddConnector, DiagramShape, DiagramElement<?>> {
+public class AddConnector extends FlexoAction<AddConnector, DiagramShape, DiagramElement<?>>
+		implements TechnologySpecificFlexoAction<DiagramTechnologyAdapter> {
 
 	private static final Logger logger = Logger.getLogger(AddConnector.class.getPackage().getName());
 
@@ -101,11 +102,8 @@ public class AddConnector extends FlexoAction<AddConnector, DiagramShape, Diagra
 	}
 
 	@Override
-	public LocalizedDelegate getLocales() {
-		if (getServiceManager() != null) {
-			return getServiceManager().getTechnologyAdapterService().getTechnologyAdapter(DiagramTechnologyAdapter.class).getLocales();
-		}
-		return super.getLocales();
+	public Class<DiagramTechnologyAdapter> getTechnologyAdapterClass() {
+		return DiagramTechnologyAdapter.class;
 	}
 
 	@Override
