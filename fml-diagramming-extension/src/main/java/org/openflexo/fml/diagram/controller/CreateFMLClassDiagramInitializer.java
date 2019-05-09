@@ -44,13 +44,13 @@ import javax.swing.Icon;
 
 import org.openflexo.components.wizard.Wizard;
 import org.openflexo.components.wizard.WizardDialog;
+import org.openflexo.fml.diagram.FMLDiagrammingIconLibrary;
 import org.openflexo.fml.diagram.action.CreateFMLClassDiagram;
 import org.openflexo.foundation.action.FlexoActionFactory;
 import org.openflexo.foundation.action.FlexoActionRunnable;
 import org.openflexo.foundation.fml.FMLObject;
 import org.openflexo.foundation.fml.VirtualModel;
 import org.openflexo.gina.controller.FIBController.Status;
-import org.openflexo.technologyadapter.diagram.gui.DiagramIconLibrary;
 import org.openflexo.view.controller.ActionInitializer;
 import org.openflexo.view.controller.ControllerActionInitializer;
 
@@ -89,7 +89,7 @@ public class CreateFMLClassDiagramInitializer extends ActionInitializer<CreateFM
 
 	@Override
 	protected Icon getEnabledIcon(FlexoActionFactory<CreateFMLClassDiagram, VirtualModel, FMLObject> actionType) {
-		return DiagramIconLibrary.DIAGRAM_ICON;
+		return FMLDiagrammingIconLibrary.CLASS_DIAGRAM_ICON;
 	}
 
 }

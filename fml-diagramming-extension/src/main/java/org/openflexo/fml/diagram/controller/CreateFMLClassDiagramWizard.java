@@ -44,11 +44,11 @@ import java.util.logging.Logger;
 import org.openflexo.ApplicationContext;
 import org.openflexo.components.wizard.FlexoWizard;
 import org.openflexo.components.wizard.WizardStep;
+import org.openflexo.fml.diagram.FMLDiagrammingIconLibrary;
 import org.openflexo.fml.diagram.action.CreateFMLClassDiagram;
 import org.openflexo.gina.annotation.FIBPanel;
 import org.openflexo.icon.IconFactory;
 import org.openflexo.icon.IconLibrary;
-import org.openflexo.technologyadapter.diagram.gui.DiagramIconLibrary;
 import org.openflexo.toolbox.StringUtils;
 import org.openflexo.view.controller.FlexoController;
 
@@ -74,7 +74,7 @@ public class CreateFMLClassDiagramWizard extends FlexoWizard {
 
 	@Override
 	public Image getDefaultPageImage() {
-		return IconFactory.getImageIcon(DiagramIconLibrary.DIAGRAM_BIG_ICON, IconLibrary.NEW_32_32).getImage();
+		return IconFactory.getImageIcon(FMLDiagrammingIconLibrary.CLASS_DIAGRAM_BIG_ICON, IconLibrary.NEW_32_32).getImage();
 	}
 
 	public DescribeClassDiagram getDescribeClassDiagram() {
@@ -109,23 +109,14 @@ public class CreateFMLClassDiagramWizard extends FlexoWizard {
 				setIssueMessage(noNameMessage(), IssueMessageType.ERROR);
 				return false;
 			}
-
-			/*if (action.getFocusedObject().getExampleDiagram(getNewDiagramName()) != null) {
+			if (action.isDuplicated()) {
 				setIssueMessage(duplicatedNameMessage(), IssueMessageType.ERROR);
 				return false;
 			}
-			
-			if (!getNewDiagramName().equals(JavaUtils.getClassName(getNewDiagramName()))
-					&& !getNewDiagramName().equals(JavaUtils.getVariableName(getNewDiagramName()))) {
+			if (!action.isValidName()) {
 				setIssueMessage(invalidNameMessage(), IssueMessageType.ERROR);
 				return false;
 			}
-			
-			if (StringUtils.isEmpty(getNewDiagramName())) {
-				setIssueMessage(noTitleMessage(), IssueMessageType.ERROR);
-				return false;
-			}*/
-
 			return true;
 		}
 
@@ -165,7 +156,7 @@ public class CreateFMLClassDiagramWizard extends FlexoWizard {
 		}
 
 		private String duplicatedNameMessage() {
-			return action.getLocales().localizedForKey("a_diagram_with_that_name_already_exists");
+			return action.getLocales().localizedForKey("a_class_diagram_with_that_name_already_exists");
 		}
 	}
 

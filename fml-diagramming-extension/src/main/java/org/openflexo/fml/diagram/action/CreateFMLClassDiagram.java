@@ -56,11 +56,15 @@ import org.openflexo.foundation.fml.VirtualModel;
 import org.openflexo.foundation.fml.rm.VirtualModelResource;
 import org.openflexo.foundation.fml.rm.VirtualModelResourceFactory;
 import org.openflexo.foundation.fml.rt.FMLRTVirtualModelInstance;
+import org.openflexo.foundation.fml.rt.rm.FMLRTVirtualModelInstanceResource;
 import org.openflexo.foundation.resource.FlexoResource;
 import org.openflexo.foundation.resource.FlexoResourceCenter;
 import org.openflexo.foundation.resource.RepositoryFolder;
+import org.openflexo.localization.LocalizedDelegate;
 import org.openflexo.technologyadapter.diagram.fml.action.CreateFMLControlledDiagramVirtualModelInstance;
+import org.openflexo.toolbox.JavaUtils;
 import org.openflexo.toolbox.StringUtils;
+import org.openflexo.view.controller.TechnologyAdapterControllerService;
 
 public class CreateFMLClassDiagram extends FlexoAction<CreateFMLClassDiagram, VirtualModel, FMLObject> {
 
@@ -241,10 +245,37 @@ public class CreateFMLClassDiagram extends FlexoAction<CreateFMLClassDiagram, Vi
 		if (StringUtils.isEmpty(getClassDiagramName())) {
 			return false;
 		}
-		// TODO: duplicated VMI
-		/*else if (getFocusedObject().getDeclaringVirtualModel().getFlexoConcept(newFlexoConceptName) != null) {
+		if (isDuplicated()) {
 			return false;
-		}*/
+		}
 		return true;
 	}
+
+	public boolean isDuplicated() {
+		for (FMLRTVirtualModelInstanceResource vmiRes : ((VirtualModelResource) getFocusedObject().getResource()).getContainedVMI()) {
+			if (vmiRes.getName().equals(getClassDiagramName())) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean isValidName() {
+		if (!getClassDiagramName().equals(JavaUtils.getClassName(getClassDiagramName()))
+				&& !getClassDiagramName().equals(JavaUtils.getVariableName(getClassDiagramName()))) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public LocalizedDelegate getLocales() {
+		if (getServiceManager() != null) {
+			TechnologyAdapterControllerService tacService = getServiceManager().getService(TechnologyAdapterControllerService.class);
+			FMLDiagrammingPlugin plugin = tacService.getPlugin(FMLDiagrammingPlugin.class);
+			return plugin.getLocales();
+		}
+		return super.getLocales();
+	}
+
 }

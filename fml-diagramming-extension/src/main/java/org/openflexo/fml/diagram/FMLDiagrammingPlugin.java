@@ -45,7 +45,7 @@ import org.openflexo.foundation.fml.FMLTechnologyAdapter;
 import org.openflexo.module.FlexoModule;
 import org.openflexo.technologyadapter.diagram.controller.DiagramTechnologyAdapterController;
 import org.openflexo.view.controller.ControllerActionInitializer;
-import org.openflexo.view.controller.TechnologyAdapterPlugin;
+import org.openflexo.view.controller.TechnologyAdapterPluginController;
 
 /**
  * Technology-specific controller provided by {@link FMLTechnologyAdapter}<br>
@@ -53,7 +53,7 @@ import org.openflexo.view.controller.TechnologyAdapterPlugin;
  * @author sylvain
  *
  */
-public class FMLDiagrammingPlugin extends TechnologyAdapterPlugin<FMLTechnologyAdapter> {
+public class FMLDiagrammingPlugin extends TechnologyAdapterPluginController<FMLTechnologyAdapter> {
 
 	private static final Logger logger = Logger.getLogger(FMLDiagrammingPlugin.class.getPackage().getName());
 
@@ -62,6 +62,11 @@ public class FMLDiagrammingPlugin extends TechnologyAdapterPlugin<FMLTechnologyA
 	@Override
 	public Class<FMLTechnologyAdapter> getTargetTechnologyAdapterClass() {
 		return FMLTechnologyAdapter.class;
+	}
+
+	@Override
+	protected String getLocalizationDirectory() {
+		return "FlexoLocalization/FMLDiagrammingPlugin";
 	}
 
 	@Override
