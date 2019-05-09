@@ -1,8 +1,0 @@
-#Metadata for directory /Users/sylvain/GIT-2.0.0/formose/formose-rc/src/main/resources/DocumentLibrary.fml/AbstractDocument.fml
-#Fri Jan 25 12:01:35 CET 2019
-AbstractDocument.fml.xml.version=0.1
-AbstractDocument.fml.xml.name=AbstractDocument
-AbstractDocument.fml.xml.uri=http\://formose.lacl.fr/DocumentLibrary.viewpoint/AbstractDocument.fml
-AbstractDocument.fml.xml.requiredModelSlotList=
-AbstractDocument.fml.xml.virtualModelClassName=org.openflexo.foundation.fml.VirtualModel
-AbstractDocument.fml.xml.modelVersion=1.0

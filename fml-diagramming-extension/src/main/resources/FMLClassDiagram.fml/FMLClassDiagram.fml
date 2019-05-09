@@ -1,0 +1,18 @@
+use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
+
+/**
+ * 
+ * @version 0.1
+ */
+@VirtualModel(uri="http://openflexo.org/fml-diagramming/FMLClassDiagram.fml")
+public class FMLClassDiagram {
+
+  public Diagram diagram;
+
+  @CreationScheme  
+  FMLClassDiagram:init() {  
+    diagram = CreateDiagram$CreateDiagramImpl_$$_jvst920_82 {    
+    };  
+  }  
+
+}

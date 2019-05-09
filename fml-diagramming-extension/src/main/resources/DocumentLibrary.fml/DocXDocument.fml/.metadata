@@ -1,8 +1,0 @@
-#Metadata for directory /Users/sylvain/GIT-2.0.0/formose/formose-rc/src/main/resources/DocumentLibrary.fml/DocXDocument.fml
-#Wed Nov 28 17:33:32 CET 2018
-DocXDocument.fml.xml.uri=http\://formose.lacl.fr/DocumentLibrary.viewpoint/DocXDocument.fml
-DocXDocument.fml.xml.version=0.1
-DocXDocument.fml.xml.requiredModelSlotList=org.openflexo.technologyadapter.docx.DocXModelSlot
-DocXDocument.fml.xml.virtualModelClassName=org.openflexo.foundation.fml.VirtualModel
-DocXDocument.fml.xml.name=DocXDocument
-DocXDocument.fml.xml.modelVersion=1.0

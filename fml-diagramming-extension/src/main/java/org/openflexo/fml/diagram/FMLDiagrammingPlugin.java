@@ -1,0 +1,153 @@
+/**
+ * 
+ * Copyright (c) 2014-2015, Openflexo
+ * 
+ * This file is part of Fml-technologyadapter-ui, a component of the software infrastructure 
+ * developed at Openflexo.
+ * 
+ * 
+ * Openflexo is dual-licensed under the European Union Public License (EUPL, either 
+ * version 1.1 of the License, or any later version ), which is available at 
+ * https://joinup.ec.europa.eu/software/page/eupl/licence-eupl
+ * and the GNU General Public License (GPL, either version 3 of the License, or any 
+ * later version), which is available at http://www.gnu.org/licenses/gpl.html .
+ * 
+ * You can redistribute it and/or modify under the terms of either of these licenses
+ * 
+ * If you choose to redistribute it and/or modify under the terms of the GNU GPL, you
+ * must include the following additional permission.
+ *
+ *          Additional permission under GNU GPL version 3 section 7
+ *
+ *          If you modify this Program, or any covered work, by linking or 
+ *          combining it with software containing parts covered by the terms 
+ *          of EPL 1.0, the licensors of this Program grant you additional permission
+ *          to convey the resulting work. * 
+ * 
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY 
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A 
+ * PARTICULAR PURPOSE. 
+ *
+ * See http://www.openflexo.org/license.html for details.
+ * 
+ * 
+ * Please contact Openflexo (openflexo-contacts@openflexo.org)
+ * or visit www.openflexo.org if you need additional information.
+ * 
+ */
+
+package org.openflexo.fml.diagram;
+
+import java.util.logging.Logger;
+
+import org.openflexo.fml.diagram.controller.CreateFMLClassDiagramInitializer;
+import org.openflexo.foundation.fml.FMLTechnologyAdapter;
+import org.openflexo.module.FlexoModule;
+import org.openflexo.technologyadapter.diagram.controller.DiagramTechnologyAdapterController;
+import org.openflexo.view.controller.ControllerActionInitializer;
+import org.openflexo.view.controller.TechnologyAdapterPlugin;
+
+/**
+ * Technology-specific controller provided by {@link FMLTechnologyAdapter}<br>
+ * 
+ * @author sylvain
+ *
+ */
+public class FMLDiagrammingPlugin extends TechnologyAdapterPlugin<FMLTechnologyAdapter> {
+
+	private static final Logger logger = Logger.getLogger(FMLDiagrammingPlugin.class.getPackage().getName());
+
+	public static final String FML_CLASS_DIAGRAM_VIRTUAL_MODEL_URI = "http://openflexo.org/fml-diagramming/FMLClassDiagram.fml";
+
+	@Override
+	public Class<FMLTechnologyAdapter> getTargetTechnologyAdapterClass() {
+		return FMLTechnologyAdapter.class;
+	}
+
+	@Override
+	public boolean isActivable(FlexoModule<?> module) {
+		return getTechnologyAdapterControllerService().getTechnologyAdapterController(DiagramTechnologyAdapterController.class)
+				.isActivated();
+	}
+
+	@Override
+	protected void initializeActions(ControllerActionInitializer actionInitializer) {
+
+		System.out.println("initializeActions for FMLDiagrammingPlugin");
+
+		new CreateFMLClassDiagramInitializer(actionInitializer);
+
+		/*WindowMenu viewMenu = actionInitializer.getController().getMenuBar().getWindowMenu();
+		viewMenu.addSeparator();
+		
+		WindowMenuItem foregroundInspectorItem = viewMenu.new WindowMenuItem(getLocales().localizedForKey("foreground_inspector"),
+				dialogInspectors.getForegroundStyleInspector());
+		WindowMenuItem backgroundInspectorItem = viewMenu.new WindowMenuItem(getLocales().localizedForKey("background_inspector"),
+				dialogInspectors.getBackgroundStyleInspector());
+		WindowMenuItem textInspectorItem = viewMenu.new WindowMenuItem(getLocales().localizedForKey("text_inspector"),
+				dialogInspectors.getTextPropertiesInspector());
+		WindowMenuItem shapeInspectorItem = viewMenu.new WindowMenuItem(getLocales().localizedForKey("shape_inspector"),
+				dialogInspectors.getShapeInspector());
+		WindowMenuItem connectorInspectorItem = viewMenu.new WindowMenuItem(getLocales().localizedForKey("connector_inspector"),
+				dialogInspectors.getConnectorInspector());
+		WindowMenuItem shadowInspectorItem = viewMenu.new WindowMenuItem(getLocales().localizedForKey("shadow_inspector"),
+				dialogInspectors.getShadowStyleInspector());
+		WindowMenuItem locationSizeInspectorItem = viewMenu.new WindowMenuItem(getLocales().localizedForKey("location_size_inspector"),
+				dialogInspectors.getLocationSizeInspector());
+		
+		viewMenu.add(foregroundInspectorItem);
+		viewMenu.add(backgroundInspectorItem);
+		viewMenu.add(textInspectorItem);
+		viewMenu.add(shapeInspectorItem);
+		viewMenu.add(connectorInspectorItem);
+		viewMenu.add(shadowInspectorItem);
+		viewMenu.add(locationSizeInspectorItem);
+		
+		// Set the screenshot builders
+		getTechnologyAdapter().setScreenshotBuilder(new DiagramScreenshotBuilder());
+		getTechnologyAdapter().setDiagramPaletteScreenshotBuilder(new DiagramPaletteScreenshotBuilder());
+		getTechnologyAdapter().setDiagramShapeScreenshotBuilder(new DiagramShapeScreenshotBuilder());
+		getTechnologyAdapter().setFMLControlledDiagramScreenshotBuilder(new FMLControlledDiagramScreenshotBuilder());
+		
+		// Add paste handlers
+		diagramElementPasteHandler = new DiagramElementPasteHandler(actionInitializer.getController().getSelectionManager());
+		actionInitializer.getEditingContext().registerPasteHandler(diagramElementPasteHandler);
+		
+		// Diagram edition
+		new CreateDiagramSpecificationInitializer(actionInitializer);
+		new DeleteDiagramSpecificationInitializer(actionInitializer);
+		new CreateExampleDiagramInitializer(actionInitializer);
+		new DeleteExampleDiagramInitializer(actionInitializer);
+		new CreatePaletteElementFromShapeInitializer(actionInitializer);
+		new DeleteExampleDiagramElementsInitializer(actionInitializer);
+		new CreateDiagramFromPPTSlideInitializer(actionInitializer);
+		new CreateExampleDiagramFromPPTSlideInitializer(actionInitializer);
+		
+		// DiagramPalette edition
+		new CreateDiagramPaletteInitializer(actionInitializer);
+		new DeleteDiagramPaletteInitializer(actionInitializer);
+		new CreateDiagramPaletteElementInitializer(actionInitializer);
+		new DeleteDiagramPaletteElementInitializer(actionInitializer);
+		
+		new CreateFMLControlledDiagramVirtualModelInitializer(actionInitializer);
+		
+		new CreateFMLControlledDiagramVirtualModelInstanceInitializer(actionInitializer);
+		new OpenFMLControlledDiagramVirtualModelInstanceInitializer(actionInitializer);
+		new CreateDiagramInitializer(actionInitializer);
+		new DeleteDiagramInitializer(actionInitializer);
+		new AddShapeInitializer(actionInitializer);
+		new AddConnectorInitializer(actionInitializer);
+		new DeleteDiagramElementsInitializer(actionInitializer);
+		new DropSchemeActionInitializer(actionInitializer);
+		new DrawRectangleSchemeActionInitializer(actionInitializer);
+		new LinkSchemeActionInitializer(actionInitializer);
+		new ResetGraphicalRepresentationInitializer(actionInitializer);
+		new CreatePaletteElementFromFlexoConceptInitializer(actionInitializer);
+		new CreatePaletteElementFromShapeInitializer(actionInitializer);
+		new ExportDiagramToImageInitializer(actionInitializer);
+		new ExportFMLControlledDiagramToImageInitializer(actionInitializer);
+		new DeleteDiagramElementsAndFlexoConceptInstancesInitializer(actionInitializer);
+		*/
+	}
+
+}

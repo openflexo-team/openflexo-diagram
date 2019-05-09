@@ -48,6 +48,7 @@ import org.openflexo.foundation.action.FlexoActionFactory;
 import org.openflexo.foundation.fml.VirtualModel;
 import org.openflexo.foundation.fml.rt.VirtualModelInstance;
 import org.openflexo.foundation.fml.rt.action.CreateFMLRTVirtualModelInstance;
+import org.openflexo.foundation.resource.RepositoryFolder;
 import org.openflexo.technologyadapter.diagram.fml.FMLControlledDiagramContainerNature;
 import org.openflexo.technologyadapter.diagram.fml.FMLControlledDiagramVirtualModelNature;
 
@@ -77,6 +78,9 @@ public class CreateFMLControlledDiagramVirtualModelInstance
 					return true;
 				}
 			}
+			if (container instanceof RepositoryFolder) {
+				return true;
+			}
 			return false;
 		}
 
@@ -89,6 +93,7 @@ public class CreateFMLControlledDiagramVirtualModelInstance
 
 	static {
 		FlexoObjectImpl.addActionForClass(CreateFMLControlledDiagramVirtualModelInstance.actionType, VirtualModelInstance.class);
+		FlexoObjectImpl.addActionForClass(CreateFMLControlledDiagramVirtualModelInstance.actionType, RepositoryFolder.class);
 	}
 
 	CreateFMLControlledDiagramVirtualModelInstance(FlexoObject focusedObject, Vector<FlexoObject> globalSelection, FlexoEditor editor) {
