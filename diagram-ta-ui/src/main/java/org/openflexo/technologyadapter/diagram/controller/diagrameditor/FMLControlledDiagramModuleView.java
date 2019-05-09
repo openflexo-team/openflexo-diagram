@@ -70,10 +70,12 @@ public class FMLControlledDiagramModuleView extends JPanel implements ModuleView
 	private static Image DROP_KO_IMAGE = FIBIconLibrary.DROP_KO_CURSOR.getImage();
 
 	public static final Cursor dropOK = ToolBox.isMacOS()
-			? Toolkit.getDefaultToolkit().createCustomCursor(DROP_OK_IMAGE, new Point(16, 16), "Drop OK") : DragSource.DefaultMoveDrop;
+			? Toolkit.getDefaultToolkit().createCustomCursor(DROP_OK_IMAGE, new Point(16, 16), "Drop OK")
+			: DragSource.DefaultMoveDrop;
 
 	public static final Cursor dropKO = ToolBox.isMacOS()
-			? Toolkit.getDefaultToolkit().createCustomCursor(DROP_KO_IMAGE, new Point(16, 16), "Drop KO") : DragSource.DefaultMoveNoDrop;
+			? Toolkit.getDefaultToolkit().createCustomCursor(DROP_KO_IMAGE, new Point(16, 16), "Drop KO")
+			: DragSource.DefaultMoveNoDrop;
 
 	private final FMLControlledDiagramEditor editor;
 	private final FlexoPerspective perspective;
@@ -165,14 +167,6 @@ public class FMLControlledDiagramModuleView extends JPanel implements ModuleView
 		perspective.setBottomRightView(
 				getDiagramTechnologyAdapterController(getEditor().getFlexoController()).getInspectors().getPanelGroup());
 
-		/*SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				// Force right view to be visible
-				controller.getControllerModel().setRightViewVisible(true);
-			}
-		});*/
-
 		getEditor().getFlexoController().getControllerModel().setRightViewVisible(true);
 
 		getEditor().getFlexoController().getEditingContext().registerPasteHandler(getEditor().getPasteHandler());
@@ -190,26 +184,6 @@ public class FMLControlledDiagramModuleView extends JPanel implements ModuleView
 
 	@Override
 	public void show(final FlexoController controller, FlexoPerspective perspective) {
-
-		// Sets palette view of editor to be the top right view
-		/*perspective.setTopRightView(getEditor().getPaletteView());
-		// perspective.setHeader(((FreeDiagramModuleView) moduleView).getEditor().getS());
-		
-		getDiagramTechnologyAdapterController(controller).getInspectors().attachToEditor(getEditor());
-		getDiagramTechnologyAdapterController(controller).getDialogInspectors().attachToEditor(getEditor());
-		getDiagramTechnologyAdapterController(controller).getScaleSelector().attachToEditor(getEditor());
-		
-		perspective.setBottomRightView(getDiagramTechnologyAdapterController(controller).getInspectors().getPanelGroup());
-		
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				// Force right view to be visible
-				controller.getControllerModel().setRightViewVisible(true);
-			}
-		});
-		
-		controller.getControllerModel().setRightViewVisible(true);*/
 	}
 
 	@Override

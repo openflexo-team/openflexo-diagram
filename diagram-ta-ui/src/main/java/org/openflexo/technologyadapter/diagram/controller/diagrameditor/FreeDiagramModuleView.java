@@ -45,7 +45,6 @@ import java.util.logging.Logger;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.SwingUtilities;
 
 import org.openflexo.technologyadapter.diagram.controller.DiagramTechnologyAdapterController;
 import org.openflexo.technologyadapter.diagram.gui.widget.FIBDiagramBrowser;
@@ -118,26 +117,48 @@ public class FreeDiagramModuleView extends JPanel implements ModuleView<Diagram>
 
 	@Override
 	public void willHide() {
+
+		System.out.println("FreeDiagramModuleView WILL HIDE !!!!!!");
+
 		getPerspective().setBottomLeftView(null);
 
-		// Not required as no specific paste handler is required such edition
+		getEditor().getFlexoController().getControllerModel().setRightViewVisible(false);
+
+		perspective.setTopRightView(null);
+		perspective.setBottomRightView(null);
+
 		// getEditor().getFlexoController().getEditingContext().unregisterPasteHandler(getEditor().getPasteHandler());
 
 		bottomPanel.remove(getDiagramTechnologyAdapterController(getEditor().getFlexoController()).getScaleSelector().getComponent());
+
 	}
 
 	@Override
 	public void willShow() {
-		getPerspective().setBottomLeftView(browser);
 
-		// Not required as no specific paste handler is required such edition
+		System.out.println("FreeDiagramModuleView WILL SHOW !!!!!!");
+
+		// Sets palette view of editor to be the top right view
+		perspective.setTopRightView(getEditor().getPaletteView());
+		// perspective.setHeader(((FreeDiagramModuleView) moduleView).getEditor().getS());
+
+		DiagramTechnologyAdapterController diagramTAController = getDiagramTechnologyAdapterController(getEditor().getFlexoController());
+
+		diagramTAController.getInspectors().attachToEditor(getEditor());
+		diagramTAController.getDialogInspectors().attachToEditor(getEditor());
+		diagramTAController.getScaleSelector().attachToEditor(getEditor());
+
+		perspective.setBottomRightView(
+				getDiagramTechnologyAdapterController(getEditor().getFlexoController()).getInspectors().getPanelGroup());
+
+		getEditor().getFlexoController().getControllerModel().setRightViewVisible(true);
+
 		// getEditor().getFlexoController().getEditingContext().registerPasteHandler(getEditor().getPasteHandler());
 
 		bottomPanel.add(getDiagramTechnologyAdapterController(getEditor().getFlexoController()).getScaleSelector().getComponent(),
 				BorderLayout.EAST);
 
 		getPerspective().focusOnObject(getRepresentedObject());
-
 	}
 
 	public DiagramTechnologyAdapterController getDiagramTechnologyAdapterController(FlexoController controller) {
@@ -148,19 +169,20 @@ public class FreeDiagramModuleView extends JPanel implements ModuleView<Diagram>
 	@Override
 	public void show(final FlexoController controller, FlexoPerspective perspective) {
 
+		/*
 		// Sets palette view of editor to be the top right view
 		perspective.setTopRightView(getEditor().getPaletteView());
 		// perspective.setHeader(((FreeDiagramModuleView) moduleView).getEditor().getS());
-
+		
 		getDiagramTechnologyAdapterController(controller).getInspectors().attachToEditor(getEditor());
 		getDiagramTechnologyAdapterController(controller).getDialogInspectors().attachToEditor(getEditor());
 		getDiagramTechnologyAdapterController(controller).getScaleSelector().attachToEditor(getEditor());
-
+		
 		perspective.setBottomRightView(getDiagramTechnologyAdapterController(controller).getInspectors().getPanelGroup());
-
+		
 		SwingUtilities.invokeLater(() -> controller.getControllerModel().setRightViewVisible(true));
 		// Force right view to be visible
-		controller.getControllerModel().setRightViewVisible(true);
+		controller.getControllerModel().setRightViewVisible(true);*/
 	}
 
 	@Override
