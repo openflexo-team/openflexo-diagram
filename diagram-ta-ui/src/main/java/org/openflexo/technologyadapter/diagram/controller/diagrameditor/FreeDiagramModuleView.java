@@ -138,6 +138,8 @@ public class FreeDiagramModuleView extends JPanel implements ModuleView<Diagram>
 
 		System.out.println("FreeDiagramModuleView WILL SHOW !!!!!!");
 
+		getPerspective().setBottomLeftView(browser);
+
 		// Sets palette view of editor to be the top right view
 		perspective.setTopRightView(getEditor().getPaletteView());
 		// perspective.setHeader(((FreeDiagramModuleView) moduleView).getEditor().getS());
