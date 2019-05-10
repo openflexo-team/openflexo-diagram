@@ -11,8 +11,31 @@ public class FMLClassDiagram {
 
   @CreationScheme  
   FMLClassDiagram:init() {  
-    diagram = CreateDiagram$CreateDiagramImpl_$$_jvst920_82 {    
+    diagram = CreateDiagram$CreateDiagramImpl_$$_jvst920_7f {    
     };  
+  }  
+
+
+  @FlexoConcept  
+  public class FlexoConceptGR {  
+  
+    public DiagramShape shape;  
+    public DiagramShape header;  
+    public DiagramShape icon;  
+    public DiagramShape title;  
+    public DiagramShape propertiesContainer;  
+    public DiagramShape behaviourContainer;  
+  
+    @DropScheme    
+    FlexoConceptGR:dropFlexoConceptGRAtTopLevel() {    
+      shape = diagram.AddShape();      
+      header = diagram.AddShape();      
+      icon = diagram.AddShape();      
+      title = diagram.AddShape();      
+      propertiesContainer = diagram.AddShape();      
+      behaviourContainer = diagram.AddShape();    
+    }    
+  
   }  
 
 }
