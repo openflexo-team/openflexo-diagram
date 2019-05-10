@@ -42,8 +42,8 @@ import java.util.List;
 import java.util.Vector;
 import java.util.logging.Logger;
 
-import org.openflexo.diana.ShapeGraphicalRepresentation;
 import org.openflexo.diana.ScreenshotBuilder.ScreenshotImage;
+import org.openflexo.diana.ShapeGraphicalRepresentation;
 import org.openflexo.foundation.FlexoEditor;
 import org.openflexo.foundation.FlexoObject.FlexoObjectImpl;
 import org.openflexo.foundation.action.FlexoActionFactory;
@@ -60,7 +60,7 @@ public class CreatePaletteElementFromFlexoConcept
 	private static final Logger logger = Logger.getLogger(CreatePaletteElementFromFlexoConcept.class.getPackage().getName());
 
 	public static FlexoActionFactory<CreatePaletteElementFromFlexoConcept, FlexoConcept, FMLObject> actionType = new FlexoActionFactory<CreatePaletteElementFromFlexoConcept, FlexoConcept, FMLObject>(
-			"put_to_palette", FlexoActionFactory.defaultGroup, FlexoActionFactory.NORMAL_ACTION_TYPE) {
+			"put_to_palette", FlexoActionFactory.advancedGroup, FlexoActionFactory.NORMAL_ACTION_TYPE) {
 
 		/**
 		 * Factory method
@@ -106,7 +106,7 @@ public class CreatePaletteElementFromFlexoConcept
 	@Override
 	public VirtualModel getVirtualModel() {
 		if (getFlexoConcept() != null) {
-			return (VirtualModel) getFlexoConcept().getOwningVirtualModel();
+			return getFlexoConcept().getOwningVirtualModel();
 		}
 		return null;
 	}
