@@ -191,7 +191,7 @@ public interface FMLControlledDiagramElement<E extends DiagramElement<GR>, GR ex
 		 * @param grSpec
 		 */
 		private <T> void applyValue(GraphicalElementSpecification<T, GR> grSpec) {
-			if (grSpec.getValue() != null && grSpec.getValue().isValid()) {
+			if (getDiagramElement() != null && grSpec != null && grSpec.getValue() != null && grSpec.getValue().isValid()) {
 				T initValue;
 				try {
 					initValue = grSpec.getValue().getBindingValue(getFlexoConceptInstance());

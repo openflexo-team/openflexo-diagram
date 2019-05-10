@@ -42,7 +42,7 @@ import java.awt.Image;
 import java.util.logging.Logger;
 
 import org.openflexo.ApplicationContext;
-import org.openflexo.components.wizard.FlexoWizard;
+import org.openflexo.components.wizard.FlexoActionWizard;
 import org.openflexo.components.wizard.WizardStep;
 import org.openflexo.fml.diagram.FMLDiagrammingIconLibrary;
 import org.openflexo.fml.diagram.action.CreateFMLClassDiagram;
@@ -52,24 +52,21 @@ import org.openflexo.icon.IconLibrary;
 import org.openflexo.toolbox.StringUtils;
 import org.openflexo.view.controller.FlexoController;
 
-public class CreateFMLClassDiagramWizard extends FlexoWizard {
+public class CreateFMLClassDiagramWizard extends FlexoActionWizard<CreateFMLClassDiagram> {
 
 	@SuppressWarnings("unused")
 	private static final Logger logger = Logger.getLogger(CreateFMLClassDiagramWizard.class.getPackage().getName());
 
-	private final CreateFMLClassDiagram action;
-
 	private final DescribeClassDiagram describeClassDiagram;
 
 	public CreateFMLClassDiagramWizard(CreateFMLClassDiagram action, FlexoController controller) {
-		super(controller);
-		this.action = action;
+		super(action, controller);
 		addStep(describeClassDiagram = new DescribeClassDiagram());
 	}
 
 	@Override
 	public String getWizardTitle() {
-		return action.getLocales().localizedForKey("create_new_class_diagram");
+		return getAction().getLocales().localizedForKey("create_new_class_diagram");
 	}
 
 	@Override
@@ -95,12 +92,12 @@ public class CreateFMLClassDiagramWizard extends FlexoWizard {
 		}
 
 		public CreateFMLClassDiagram getAction() {
-			return action;
+			return CreateFMLClassDiagramWizard.this.getAction();
 		}
 
 		@Override
 		public String getTitle() {
-			return action.getLocales().localizedForKey("configure_new_class_diagram");
+			return getAction().getLocales().localizedForKey("configure_new_class_diagram");
 		}
 
 		@Override
@@ -109,11 +106,11 @@ public class CreateFMLClassDiagramWizard extends FlexoWizard {
 				setIssueMessage(noNameMessage(), IssueMessageType.ERROR);
 				return false;
 			}
-			if (action.isDuplicated()) {
+			if (getAction().isDuplicated()) {
 				setIssueMessage(duplicatedNameMessage(), IssueMessageType.ERROR);
 				return false;
 			}
-			if (!action.isValidName()) {
+			if (!getAction().isValidName()) {
 				setIssueMessage(invalidNameMessage(), IssueMessageType.ERROR);
 				return false;
 			}
@@ -121,42 +118,42 @@ public class CreateFMLClassDiagramWizard extends FlexoWizard {
 		}
 
 		public String getClassDiagramName() {
-			return action.getClassDiagramName();
+			return getAction().getClassDiagramName();
 		}
 
 		public void setClassDiagramName(String newDiagramName) {
 			if ((newDiagramName == null && getClassDiagramName() != null)
 					|| (newDiagramName != null && !newDiagramName.equals(getClassDiagramName()))) {
 				String oldValue = getClassDiagramName();
-				action.setClassDiagramName(newDiagramName);
+				getAction().setClassDiagramName(newDiagramName);
 				getPropertyChangeSupport().firePropertyChange("classDiagramName", oldValue, newDiagramName);
 				checkValidity();
 			}
 		}
 
 		public String getClassDiagramDescription() {
-			return action.getClassDiagramDescription();
+			return getAction().getClassDiagramDescription();
 		}
 
 		public void setClassDiagramDescription(String description) {
 			if ((description == null && getClassDiagramDescription() != null)
 					|| (description != null && !description.equals(getClassDiagramDescription()))) {
 				String oldValue = getClassDiagramDescription();
-				action.setClassDiagramDescription(description);
+				getAction().setClassDiagramDescription(description);
 				getPropertyChangeSupport().firePropertyChange("classDiagramDescription", oldValue, description);
 			}
 		}
 
 		private String noNameMessage() {
-			return action.getLocales().localizedForKey("no_diagram_name_defined");
+			return getAction().getLocales().localizedForKey("no_diagram_name_defined");
 		}
 
 		private String invalidNameMessage() {
-			return action.getLocales().localizedForKey("invalid_name_for_new_diagram");
+			return getAction().getLocales().localizedForKey("invalid_name_for_new_diagram");
 		}
 
 		private String duplicatedNameMessage() {
-			return action.getLocales().localizedForKey("a_class_diagram_with_that_name_already_exists");
+			return getAction().getLocales().localizedForKey("a_class_diagram_with_that_name_already_exists");
 		}
 	}
 

@@ -13,7 +13,7 @@ public class FMLClassDiagram {
 
   @CreationScheme  
   FMLClassDiagram:init(VirtualModelResource aVirtualModelResource) {  
-    diagram = CreateDiagram$CreateDiagramImpl_$$_jvst920_93 {    
+    diagram = CreateDiagram$CreateDiagramImpl_$$_jvst920_9a {    
     };    
     virtualModel = parameters.aVirtualModelResource.virtualModel;  
   }  
@@ -32,13 +32,23 @@ public class FMLClassDiagram {
   
     @DropScheme    
     FlexoConceptGR:dropFlexoConceptGRAtTopLevel() {    
-      concept = virtualModel.CreateFlexoConceptEditionAction();      
+      concept = virtualModel.CreateFlexoConcept();      
       shape = diagram.AddShape();      
       header = diagram.AddShape();      
       icon = diagram.AddShape();      
       title = diagram.AddShape();      
       propertiesContainer = diagram.AddShape();      
       behaviourContainer = diagram.AddShape();    
+    }    
+  
+    @DeletionScheme    
+    Void delete() {    
+      delete shape;      
+      delete header;      
+      delete icon;      
+      delete title;      
+      delete propertiesContainer;      
+      delete behaviourContainer;    
     }    
   
   }  

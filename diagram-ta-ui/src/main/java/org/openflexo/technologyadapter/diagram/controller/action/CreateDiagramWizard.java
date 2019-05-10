@@ -42,7 +42,7 @@ import java.awt.Image;
 import java.util.logging.Logger;
 
 import org.openflexo.ApplicationContext;
-import org.openflexo.components.wizard.FlexoWizard;
+import org.openflexo.components.wizard.FlexoActionWizard;
 import org.openflexo.components.wizard.WizardStep;
 import org.openflexo.gina.annotation.FIBPanel;
 import org.openflexo.icon.IconFactory;
@@ -53,24 +53,21 @@ import org.openflexo.technologyadapter.diagram.model.action.CreateDiagram;
 import org.openflexo.toolbox.StringUtils;
 import org.openflexo.view.controller.FlexoController;
 
-public class CreateDiagramWizard extends FlexoWizard {
+public class CreateDiagramWizard extends FlexoActionWizard<CreateDiagram> {
 
 	@SuppressWarnings("unused")
 	private static final Logger logger = Logger.getLogger(CreateDiagramWizard.class.getPackage().getName());
 
-	private final CreateDiagram action;
-
 	private final DescribeDiagram describeDiagram;
 
 	public CreateDiagramWizard(CreateDiagram action, FlexoController controller) {
-		super(controller);
-		this.action = action;
+		super(action, controller);
 		addStep(describeDiagram = new DescribeDiagram());
 	}
 
 	@Override
 	public String getWizardTitle() {
-		return action.getLocales().localizedForKey("create_new_diagram");
+		return getAction().getLocales().localizedForKey("create_new_diagram");
 	}
 
 	@Override
@@ -96,24 +93,25 @@ public class CreateDiagramWizard extends FlexoWizard {
 		}
 
 		public CreateDiagram getAction() {
-			return action;
+			return CreateDiagramWizard.this.getAction();
 		}
 
 		@Override
 		public String getTitle() {
-			return action.getLocales().localizedForKey("configure_new_diagram");
+			return getAction().getLocales().localizedForKey("configure_new_diagram");
 		}
 
 		@Override
 		public boolean isValid() {
 			if (StringUtils.isEmpty(getDiagramName())) {
-				setIssueMessage(action.getLocales().localizedForKey("please_enter_diagram_name"), IssueMessageType.ERROR);
+				setIssueMessage(getAction().getLocales().localizedForKey("please_enter_diagram_name"), IssueMessageType.ERROR);
 				return false;
 			}
 
-			if (action.getFocusedObject().getResourceWithName(getDiagramName()) != null
-					|| action.getFocusedObject().getResourceWithName(getDiagramName() + ".diagram") != null) {
-				setIssueMessage(action.getLocales().localizedForKey("a_diagram_with_that_name_already_exists"), IssueMessageType.ERROR);
+			if (getAction().getFocusedObject().getResourceWithName(getDiagramName()) != null
+					|| getAction().getFocusedObject().getResourceWithName(getDiagramName() + ".diagram") != null) {
+				setIssueMessage(getAction().getLocales().localizedForKey("a_diagram_with_that_name_already_exists"),
+						IssueMessageType.ERROR);
 				return false;
 			}
 
@@ -121,26 +119,26 @@ public class CreateDiagramWizard extends FlexoWizard {
 		}
 
 		public String getDiagramName() {
-			return action.getDiagramName();
+			return getAction().getDiagramName();
 		}
 
 		public void setDiagramName(String diagramName) {
 			if ((diagramName == null && getDiagramName() != null) || (diagramName != null && !diagramName.equals(getDiagramName()))) {
 				String oldValue = getDiagramName();
-				action.setDiagramName(diagramName);
+				getAction().setDiagramName(diagramName);
 				getPropertyChangeSupport().firePropertyChange("diagramName", oldValue, diagramName);
 				checkValidity();
 			}
 		}
 
 		public String getDescription() {
-			return action.getDescription();
+			return getAction().getDescription();
 		}
 
 		public void setDescription(String description) {
 			if ((description == null && getDescription() != null) || (description != null && !description.equals(getDescription()))) {
 				String oldValue = getDescription();
-				action.setDescription(description);
+				getAction().setDescription(description);
 				getPropertyChangeSupport().firePropertyChange("description", oldValue, description);
 			}
 		}

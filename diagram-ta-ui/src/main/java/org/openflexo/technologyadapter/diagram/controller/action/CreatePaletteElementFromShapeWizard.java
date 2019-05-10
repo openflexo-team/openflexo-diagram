@@ -43,7 +43,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import org.openflexo.ApplicationContext;
-import org.openflexo.components.wizard.FlexoWizard;
+import org.openflexo.components.wizard.FlexoActionWizard;
 import org.openflexo.components.wizard.WizardStep;
 import org.openflexo.foundation.fml.FlexoConcept;
 import org.openflexo.foundation.fml.VirtualModel;
@@ -59,24 +59,21 @@ import org.openflexo.technologyadapter.diagram.metamodel.DiagramSpecification;
 import org.openflexo.toolbox.StringUtils;
 import org.openflexo.view.controller.FlexoController;
 
-public class CreatePaletteElementFromShapeWizard extends FlexoWizard {
+public class CreatePaletteElementFromShapeWizard extends FlexoActionWizard<CreatePaletteElementFromShape> {
 
 	@SuppressWarnings("unused")
 	private static final Logger logger = Logger.getLogger(CreatePaletteElementFromShapeWizard.class.getPackage().getName());
 
-	private final CreatePaletteElementFromShape action;
-
 	private final PutToPaletteOptions configureNewConcept;
 
 	public CreatePaletteElementFromShapeWizard(CreatePaletteElementFromShape action, FlexoController controller) {
-		super(controller);
-		this.action = action;
+		super(action, controller);
 		addStep(configureNewConcept = new PutToPaletteOptions());
 	}
 
 	@Override
 	public String getWizardTitle() {
-		return action.getLocales().localizedForKey("use_this_shape_to_create_a_palette_element");
+		return getAction().getLocales().localizedForKey("use_this_shape_to_create_a_palette_element");
 	}
 
 	@Override
@@ -102,12 +99,12 @@ public class CreatePaletteElementFromShapeWizard extends FlexoWizard {
 		}
 
 		public CreatePaletteElementFromShape getAction() {
-			return action;
+			return CreatePaletteElementFromShapeWizard.this.getAction();
 		}
 
 		@Override
 		public String getTitle() {
-			return action.getLocales().localizedForKey("configure_palette_element");
+			return getAction().getLocales().localizedForKey("configure_palette_element");
 		}
 
 		@Override
@@ -148,51 +145,51 @@ public class CreatePaletteElementFromShapeWizard extends FlexoWizard {
 		}
 
 		public String getNewElementName() {
-			return action.getNewElementName();
+			return getAction().getNewElementName();
 		}
 
 		public void setNewElementName(String newElementName) {
 			if (!newElementName.equals(getNewElementName())) {
 				String oldValue = getNewElementName();
-				action.setNewElementName(newElementName);
+				getAction().setNewElementName(newElementName);
 				getPropertyChangeSupport().firePropertyChange("newElementName", oldValue, newElementName);
 				checkValidity();
 			}
 		}
 
 		public DiagramPalette getPalette() {
-			return action.getPalette();
+			return getAction().getPalette();
 		}
 
 		public void setPalette(DiagramPalette palette) {
 			if (palette != getPalette()) {
 				DiagramPalette oldValue = getPalette();
-				action.setPalette(palette);
+				getAction().setPalette(palette);
 				getPropertyChangeSupport().firePropertyChange("palette", oldValue, palette);
 				checkValidity();
 			}
 		}
 
 		public boolean getConfigureFMLControls() {
-			return action.getConfigureFMLControls();
+			return getAction().getConfigureFMLControls();
 		}
 
 		public void setConfigureFMLControls(boolean configureFMLControls) {
 			if (configureFMLControls != getConfigureFMLControls()) {
-				action.setConfigureFMLControls(configureFMLControls);
+				getAction().setConfigureFMLControls(configureFMLControls);
 				getPropertyChangeSupport().firePropertyChange("configureFMLControls", !configureFMLControls, configureFMLControls);
 				checkValidity();
 			}
 		}
 
 		public FlexoConcept getFlexoConcept() {
-			return action.getFlexoConcept();
+			return getAction().getFlexoConcept();
 		}
 
 		public void setFlexoConcept(FlexoConcept flexoConcept) {
 			if (flexoConcept != getFlexoConcept()) {
 				FlexoConcept oldValue = getFlexoConcept();
-				action.setFlexoConcept(flexoConcept);
+				getAction().setFlexoConcept(flexoConcept);
 				getPropertyChangeSupport().firePropertyChange("flexoConcept", oldValue, flexoConcept);
 				getPropertyChangeSupport().firePropertyChange("newElementName", null, getNewElementName());
 				getPropertyChangeSupport().firePropertyChange("availableDropSchemes", null, getAvailableDropSchemes());
@@ -201,51 +198,51 @@ public class CreatePaletteElementFromShapeWizard extends FlexoWizard {
 		}
 
 		public DropScheme getDropScheme() {
-			return action.getDropScheme();
+			return getAction().getDropScheme();
 		}
 
 		public void setDropScheme(DropScheme dropScheme) {
 			if (dropScheme != getDropScheme()) {
 				DropScheme oldValue = getDropScheme();
-				action.setDropScheme(dropScheme);
+				getAction().setDropScheme(dropScheme);
 				getPropertyChangeSupport().firePropertyChange("dropScheme", oldValue, dropScheme);
 				checkValidity();
 			}
 		}
 
 		public VirtualModel getVirtualModel() {
-			return action.getVirtualModel();
+			return getAction().getVirtualModel();
 		}
 
 		public void setVirtualModel(VirtualModel virtualModel) {
 			if (virtualModel != getVirtualModel()) {
 				VirtualModel oldValue = getVirtualModel();
-				action.setVirtualModel(virtualModel);
+				getAction().setVirtualModel(virtualModel);
 				getPropertyChangeSupport().firePropertyChange("virtualModel", oldValue, virtualModel);
 				checkValidity();
 			}
 		}
 
 		public VirtualModelResource getVirtualModelResource() {
-			return action.getVirtualModelResource();
+			return getAction().getVirtualModelResource();
 		}
 
 		public void setVirtualModelResource(VirtualModelResource virtualModelResource) {
 			if (virtualModelResource != getVirtualModelResource()) {
 				VirtualModelResource oldValue = getVirtualModelResource();
-				action.setVirtualModelResource(virtualModelResource);
+				getAction().setVirtualModelResource(virtualModelResource);
 				getPropertyChangeSupport().firePropertyChange("virtualModelResource", oldValue, virtualModelResource);
 				checkValidity();
 			}
 		}
 
 		public boolean takeScreenshotForTopLevelElement() {
-			return action.takeScreenshotForTopLevelElement();
+			return getAction().takeScreenshotForTopLevelElement();
 		}
 
 		public void setTakeScreenshotForTopLevelElement(boolean takeScreenshotForTopLevelElement) {
 			if (takeScreenshotForTopLevelElement != takeScreenshotForTopLevelElement()) {
-				action.setTakeScreenshotForTopLevelElement(takeScreenshotForTopLevelElement);
+				getAction().setTakeScreenshotForTopLevelElement(takeScreenshotForTopLevelElement);
 				getPropertyChangeSupport().firePropertyChange("takeScreenshotForTopLevelElement", !takeScreenshotForTopLevelElement,
 						takeScreenshotForTopLevelElement);
 				checkValidity();
@@ -253,12 +250,12 @@ public class CreatePaletteElementFromShapeWizard extends FlexoWizard {
 		}
 
 		public boolean overrideDefaultGraphicalRepresentations() {
-			return action.overrideDefaultGraphicalRepresentations();
+			return getAction().overrideDefaultGraphicalRepresentations();
 		}
 
 		public void setOverrideDefaultGraphicalRepresentations(boolean overrideDefaultGraphicalRepresentations) {
 			if (overrideDefaultGraphicalRepresentations != overrideDefaultGraphicalRepresentations()) {
-				action.setOverrideDefaultGraphicalRepresentations(overrideDefaultGraphicalRepresentations);
+				getAction().setOverrideDefaultGraphicalRepresentations(overrideDefaultGraphicalRepresentations);
 				getPropertyChangeSupport().firePropertyChange("overrideDefaultGraphicalRepresentations",
 						!overrideDefaultGraphicalRepresentations, overrideDefaultGraphicalRepresentations);
 				checkValidity();
@@ -274,27 +271,27 @@ public class CreatePaletteElementFromShapeWizard extends FlexoWizard {
 		}
 
 		public String noNameMessage() {
-			return action.getLocales().localizedForKey("no_palette_element_name_defined");
+			return getAction().getLocales().localizedForKey("no_palette_element_name_defined");
 		}
 
 		public String noPaletteSelectedMessage() {
-			return action.getLocales().localizedForKey("no_palette_selected");
+			return getAction().getLocales().localizedForKey("no_palette_selected");
 		}
 
 		public String duplicatedPaletteElement() {
-			return action.getLocales().localizedForKey("a_palette_element_with_that_name_already_exists");
+			return getAction().getLocales().localizedForKey("a_palette_element_with_that_name_already_exists");
 		}
 
 		public String noFlexoConceptSelectedMessage() {
-			return action.getLocales().localizedForKey("no_flexo_concept_selected");
+			return getAction().getLocales().localizedForKey("no_flexo_concept_selected");
 		}
 
 		public String noDropSchemeSelectedMessage() {
-			return action.getLocales().localizedForKey("no_drop_scheme_selected");
+			return getAction().getLocales().localizedForKey("no_drop_scheme_selected");
 		}
 
 		public String noVirtualModelSelectedMessage() {
-			return action.getLocales().localizedForKey("no_virtual_model_selected");
+			return getAction().getLocales().localizedForKey("no_virtual_model_selected");
 		}
 
 	}

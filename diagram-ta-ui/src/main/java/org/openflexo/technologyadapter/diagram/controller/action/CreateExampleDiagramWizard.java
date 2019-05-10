@@ -42,7 +42,7 @@ import java.awt.Image;
 import java.util.logging.Logger;
 
 import org.openflexo.ApplicationContext;
-import org.openflexo.components.wizard.FlexoWizard;
+import org.openflexo.components.wizard.FlexoActionWizard;
 import org.openflexo.components.wizard.WizardStep;
 import org.openflexo.gina.annotation.FIBPanel;
 import org.openflexo.icon.IconFactory;
@@ -54,24 +54,21 @@ import org.openflexo.toolbox.JavaUtils;
 import org.openflexo.toolbox.StringUtils;
 import org.openflexo.view.controller.FlexoController;
 
-public class CreateExampleDiagramWizard extends FlexoWizard {
+public class CreateExampleDiagramWizard extends FlexoActionWizard<CreateExampleDiagram> {
 
 	@SuppressWarnings("unused")
 	private static final Logger logger = Logger.getLogger(CreateExampleDiagramWizard.class.getPackage().getName());
 
-	private final CreateExampleDiagram action;
-
 	private final DescribeExampleDiagram configureNewExampleDiagram;
 
 	public CreateExampleDiagramWizard(CreateExampleDiagram action, FlexoController controller) {
-		super(controller);
-		this.action = action;
+		super(action, controller);
 		addStep(configureNewExampleDiagram = new DescribeExampleDiagram());
 	}
 
 	@Override
 	public String getWizardTitle() {
-		return action.getLocales().localizedForKey("create_new_example_diagram");
+		return getAction().getLocales().localizedForKey("create_new_example_diagram");
 	}
 
 	@Override
@@ -97,12 +94,12 @@ public class CreateExampleDiagramWizard extends FlexoWizard {
 		}
 
 		public CreateExampleDiagram getAction() {
-			return action;
+			return CreateExampleDiagramWizard.this.getAction();
 		}
 
 		@Override
 		public String getTitle() {
-			return action.getLocales().localizedForKey("configure_new_diagram");
+			return getAction().getLocales().localizedForKey("configure_new_diagram");
 		}
 
 		@Override
@@ -112,7 +109,7 @@ public class CreateExampleDiagramWizard extends FlexoWizard {
 				return false;
 			}
 
-			if (action.getFocusedObject().getExampleDiagram(getNewDiagramName()) != null) {
+			if (getAction().getFocusedObject().getExampleDiagram(getNewDiagramName()) != null) {
 				setIssueMessage(duplicatedNameMessage(), IssueMessageType.ERROR);
 				return false;
 			}
@@ -132,28 +129,28 @@ public class CreateExampleDiagramWizard extends FlexoWizard {
 		}
 
 		public String getNewDiagramName() {
-			return action.getNewDiagramName();
+			return getAction().getNewDiagramName();
 		}
 
 		public void setNewDiagramName(String newDiagramName) {
 			if ((newDiagramName == null && getNewDiagramName() != null)
 					|| (newDiagramName != null && !newDiagramName.equals(getNewDiagramName()))) {
 				String oldValue = getNewDiagramName();
-				action.setNewDiagramName(newDiagramName);
+				getAction().setNewDiagramName(newDiagramName);
 				getPropertyChangeSupport().firePropertyChange("newDiagramName", oldValue, newDiagramName);
 				checkValidity();
 			}
 		}
 
 		public String getNewDiagramTitle() {
-			return action.getNewDiagramTitle();
+			return getAction().getNewDiagramTitle();
 		}
 
 		public void setNewDiagramTitle(String newDiagramTitle) {
 			if ((newDiagramTitle == null && getNewDiagramTitle() != null)
 					|| (newDiagramTitle != null && !newDiagramTitle.equals(getNewDiagramTitle()))) {
 				String oldValue = getNewDiagramTitle();
-				action.setNewDiagramTitle(newDiagramTitle);
+				getAction().setNewDiagramTitle(newDiagramTitle);
 				getPropertyChangeSupport().firePropertyChange("newDiagramTitle", oldValue, newDiagramTitle);
 				checkValidity();
 				checkValidity();
@@ -161,31 +158,31 @@ public class CreateExampleDiagramWizard extends FlexoWizard {
 		}
 
 		public String getDescription() {
-			return action.getDescription();
+			return getAction().getDescription();
 		}
 
 		public void setDescription(String description) {
 			if ((description == null && getDescription() != null) || (description != null && !description.equals(getDescription()))) {
 				String oldValue = getDescription();
-				action.setDescription(description);
+				getAction().setDescription(description);
 				getPropertyChangeSupport().firePropertyChange("description", oldValue, description);
 			}
 		}
 
 		private String noTitleMessage() {
-			return action.getLocales().localizedForKey("no_diagram_title_defined");
+			return getAction().getLocales().localizedForKey("no_diagram_title_defined");
 		}
 
 		private String noNameMessage() {
-			return action.getLocales().localizedForKey("no_diagram_name_defined");
+			return getAction().getLocales().localizedForKey("no_diagram_name_defined");
 		}
 
 		private String invalidNameMessage() {
-			return action.getLocales().localizedForKey("invalid_name_for_new_diagram");
+			return getAction().getLocales().localizedForKey("invalid_name_for_new_diagram");
 		}
 
 		private String duplicatedNameMessage() {
-			return action.getLocales().localizedForKey("a_diagram_with_that_name_already_exists");
+			return getAction().getLocales().localizedForKey("a_diagram_with_that_name_already_exists");
 		}
 
 	}

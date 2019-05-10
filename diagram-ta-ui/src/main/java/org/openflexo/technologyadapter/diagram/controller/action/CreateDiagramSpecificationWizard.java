@@ -44,7 +44,7 @@ import java.net.URL;
 import java.util.logging.Logger;
 
 import org.openflexo.ApplicationContext;
-import org.openflexo.components.wizard.FlexoWizard;
+import org.openflexo.components.wizard.FlexoActionWizard;
 import org.openflexo.components.wizard.WizardStep;
 import org.openflexo.gina.annotation.FIBPanel;
 import org.openflexo.icon.IconFactory;
@@ -55,24 +55,21 @@ import org.openflexo.technologyadapter.diagram.metamodel.DiagramSpecification;
 import org.openflexo.toolbox.StringUtils;
 import org.openflexo.view.controller.FlexoController;
 
-public class CreateDiagramSpecificationWizard extends FlexoWizard {
+public class CreateDiagramSpecificationWizard extends FlexoActionWizard<CreateDiagramSpecification> {
 
 	@SuppressWarnings("unused")
 	private static final Logger logger = Logger.getLogger(CreateDiagramSpecificationWizard.class.getPackage().getName());
 
-	private final CreateDiagramSpecification action;
-
 	private final DescribeDiagramSpecification configureNewConcept;
 
 	public CreateDiagramSpecificationWizard(CreateDiagramSpecification action, FlexoController controller) {
-		super(controller);
-		this.action = action;
+		super(action, controller);
 		addStep(configureNewConcept = new DescribeDiagramSpecification());
 	}
 
 	@Override
 	public String getWizardTitle() {
-		return action.getLocales().localizedForKey("create_new_diagram_specification");
+		return getAction().getLocales().localizedForKey("create_new_diagram_specification");
 	}
 
 	@Override
@@ -98,39 +95,40 @@ public class CreateDiagramSpecificationWizard extends FlexoWizard {
 		}
 
 		public CreateDiagramSpecification getAction() {
-			return action;
+			return CreateDiagramSpecificationWizard.this.getAction();
 		}
 
 		@Override
 		public String getTitle() {
-			return action.getLocales().localizedForKey("configure_new_diagram_specification");
+			return getAction().getLocales().localizedForKey("configure_new_diagram_specification");
 		}
 
 		@Override
 		public boolean isValid() {
 
 			if (StringUtils.isEmpty(getNewDiagramSpecificationName())) {
-				setIssueMessage(action.getLocales().localizedForKey("no_diagram_specification_name_defined"), IssueMessageType.ERROR);
+				setIssueMessage(getAction().getLocales().localizedForKey("no_diagram_specification_name_defined"), IssueMessageType.ERROR);
 				return false;
 			}
 
 			if (StringUtils.isEmpty(getNewDiagramSpecificationURI())) {
-				setIssueMessage(action.getLocales().localizedForKey("please_supply_valid_diagram_specification_uri"),
+				setIssueMessage(getAction().getLocales().localizedForKey("please_supply_valid_diagram_specification_uri"),
 						IssueMessageType.ERROR);
 				return false;
 			}
 			try {
 				new URL(getNewDiagramSpecificationURI());
 			} catch (MalformedURLException e) {
-				setIssueMessage(action.getLocales().localizedForKey("malformed_uri"), IssueMessageType.ERROR);
+				setIssueMessage(getAction().getLocales().localizedForKey("malformed_uri"), IssueMessageType.ERROR);
 				return false;
 			}
 			if (getAction().getFocusedObject().getResourceRepository() == null) {
-				setIssueMessage(action.getLocales().localizedForKey("could_not_access_registered_resources"), IssueMessageType.ERROR);
+				setIssueMessage(getAction().getLocales().localizedForKey("could_not_access_registered_resources"), IssueMessageType.ERROR);
 				return false;
 			}
 			if (getAction().getFocusedObject().getResourceRepository().getResource(getNewDiagramSpecificationURI()) != null) {
-				setIssueMessage(action.getLocales().localizedForKey("already_existing_diagram_specification_uri"), IssueMessageType.ERROR);
+				setIssueMessage(getAction().getLocales().localizedForKey("already_existing_diagram_specification_uri"),
+						IssueMessageType.ERROR);
 				return false;
 			}
 			return true;
@@ -138,39 +136,39 @@ public class CreateDiagramSpecificationWizard extends FlexoWizard {
 		}
 
 		public String getNewDiagramSpecificationName() {
-			return action.getNewDiagramSpecificationName();
+			return getAction().getNewDiagramSpecificationName();
 		}
 
 		public void setNewDiagramSpecificationName(String newDiagramSpecificationName) {
 			if (!newDiagramSpecificationName.equals(getNewDiagramSpecificationName())) {
 				String oldValue = getNewDiagramSpecificationName();
-				action.setNewDiagramSpecificationName(newDiagramSpecificationName);
+				getAction().setNewDiagramSpecificationName(newDiagramSpecificationName);
 				getPropertyChangeSupport().firePropertyChange("newDiagramSpecificationName", oldValue, newDiagramSpecificationName);
 				checkValidity();
 			}
 		}
 
 		public String getNewDiagramSpecificationURI() {
-			return action.getNewDiagramSpecificationURI();
+			return getAction().getNewDiagramSpecificationURI();
 		}
 
 		public void setNewDiagramSpecificationURI(String newDiagramSpecificationURI) {
 			if (!newDiagramSpecificationURI.equals(getNewDiagramSpecificationURI())) {
 				String oldValue = getNewDiagramSpecificationURI();
-				action.setNewDiagramSpecificationURI(newDiagramSpecificationURI);
+				getAction().setNewDiagramSpecificationURI(newDiagramSpecificationURI);
 				getPropertyChangeSupport().firePropertyChange("newDiagramSpecificationURI", oldValue, newDiagramSpecificationURI);
 				checkValidity();
 			}
 		}
 
 		public String getNewDiagramSpecificationDescription() {
-			return action.getNewDiagramSpecificationDescription();
+			return getAction().getNewDiagramSpecificationDescription();
 		}
 
 		public void setNewDiagramSpecificationDescription(String newDiagramSpecificationDescription) {
 			if (!newDiagramSpecificationDescription.equals(getNewDiagramSpecificationDescription())) {
 				String oldValue = getNewDiagramSpecificationDescription();
-				action.setNewDiagramSpecificationDescription(newDiagramSpecificationDescription);
+				getAction().setNewDiagramSpecificationDescription(newDiagramSpecificationDescription);
 				getPropertyChangeSupport().firePropertyChange("newDiagramSpecificationDescription", oldValue,
 						newDiagramSpecificationDescription);
 				checkValidity();

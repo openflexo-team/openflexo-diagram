@@ -42,7 +42,7 @@ import java.awt.Image;
 import java.util.logging.Logger;
 
 import org.openflexo.ApplicationContext;
-import org.openflexo.components.wizard.FlexoWizard;
+import org.openflexo.components.wizard.FlexoActionWizard;
 import org.openflexo.components.wizard.WizardStep;
 import org.openflexo.gina.annotation.FIBPanel;
 import org.openflexo.icon.IconFactory;
@@ -54,24 +54,21 @@ import org.openflexo.toolbox.JavaUtils;
 import org.openflexo.toolbox.StringUtils;
 import org.openflexo.view.controller.FlexoController;
 
-public class CreateDiagramPaletteWizard extends FlexoWizard {
+public class CreateDiagramPaletteWizard extends FlexoActionWizard<CreateDiagramPalette> {
 
 	@SuppressWarnings("unused")
 	private static final Logger logger = Logger.getLogger(CreateDiagramPaletteWizard.class.getPackage().getName());
 
-	private final CreateDiagramPalette action;
-
 	private final DescribePalette describePalette;
 
 	public CreateDiagramPaletteWizard(CreateDiagramPalette action, FlexoController controller) {
-		super(controller);
-		this.action = action;
+		super(action, controller);
 		addStep(describePalette = new DescribePalette());
 	}
 
 	@Override
 	public String getWizardTitle() {
-		return action.getLocales().localizedForKey("create_new_diagram_palette");
+		return getAction().getLocales().localizedForKey("create_new_diagram_palette");
 	}
 
 	@Override
@@ -97,12 +94,12 @@ public class CreateDiagramPaletteWizard extends FlexoWizard {
 		}
 
 		public CreateDiagramPalette getAction() {
-			return action;
+			return CreateDiagramPaletteWizard.this.getAction();
 		}
 
 		@Override
 		public String getTitle() {
-			return action.getLocales().localizedForKey("configure_new_palette");
+			return getAction().getLocales().localizedForKey("configure_new_palette");
 		}
 
 		@Override
@@ -112,8 +109,8 @@ public class CreateDiagramPaletteWizard extends FlexoWizard {
 				return false;
 			}
 
-			if (action.getFocusedObject().getPalette(getNewPaletteName()) != null
-					|| action.getFocusedObject().getPalette(getNewPaletteName() + ".palette") != null) {
+			if (getAction().getFocusedObject().getPalette(getNewPaletteName()) != null
+					|| getAction().getFocusedObject().getPalette(getNewPaletteName() + ".palette") != null) {
 				setIssueMessage(duplicatedNameMessage(), IssueMessageType.ERROR);
 				return false;
 			}
@@ -128,41 +125,41 @@ public class CreateDiagramPaletteWizard extends FlexoWizard {
 		}
 
 		public String getNewPaletteName() {
-			return action.getNewPaletteName();
+			return getAction().getNewPaletteName();
 		}
 
 		public void setNewPaletteName(String newPaletteName) {
 			if ((newPaletteName == null && getNewPaletteName() != null)
 					|| (newPaletteName != null && !newPaletteName.equals(getNewPaletteName()))) {
 				String oldValue = getNewPaletteName();
-				action.setNewPaletteName(newPaletteName);
+				getAction().setNewPaletteName(newPaletteName);
 				getPropertyChangeSupport().firePropertyChange("newPaletteName", oldValue, newPaletteName);
 				checkValidity();
 			}
 		}
 
 		public String getDescription() {
-			return action.getDescription();
+			return getAction().getDescription();
 		}
 
 		public void setDescription(String description) {
 			if ((description == null && getDescription() != null) || (description != null && !description.equals(getDescription()))) {
 				String oldValue = getDescription();
-				action.setDescription(description);
+				getAction().setDescription(description);
 				getPropertyChangeSupport().firePropertyChange("description", oldValue, description);
 			}
 		}
 
 		private String noNameMessage() {
-			return action.getLocales().localizedForKey("no_palette_name_defined");
+			return getAction().getLocales().localizedForKey("no_palette_name_defined");
 		}
 
 		private String invalidNameMessage() {
-			return action.getLocales().localizedForKey("invalid_name_for_new_palette");
+			return getAction().getLocales().localizedForKey("invalid_name_for_new_palette");
 		}
 
 		private String duplicatedNameMessage() {
-			return action.getLocales().localizedForKey("a_palette_with_that_name_already_exists");
+			return getAction().getLocales().localizedForKey("a_palette_with_that_name_already_exists");
 		}
 
 	}

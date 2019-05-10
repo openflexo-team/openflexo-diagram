@@ -89,7 +89,7 @@ public class CreateFMLControlledDiagramVirtualModelInstanceWizard
 
 		@Override
 		public String getTitle() {
-			return action.getLocales().localizedForKey("choose_fml_controlled_diagram_virtual_model");
+			return getAction().getLocales().localizedForKey("choose_fml_controlled_diagram_virtual_model");
 		}
 
 	}
@@ -98,13 +98,13 @@ public class CreateFMLControlledDiagramVirtualModelInstanceWizard
 	public class ChooseAndConfigureCreationSchemeForFMLControlledDiagramVirtualModel extends AbstractChooseAndConfigureCreationScheme {
 
 		public ChooseAndConfigureCreationSchemeForFMLControlledDiagramVirtualModel() {
-			super(action.getCreationSchemeAction());
+			super(CreateFMLControlledDiagramVirtualModelInstanceWizard.this.getAction().getCreationSchemeAction());
 		}
 	}
 
 	@Override
 	public String getWizardTitle() {
-		return action.getLocales().localizedForKey("create_fml_controlled_diagram");
+		return getAction().getLocales().localizedForKey("create_fml_controlled_diagram");
 	}
 
 	@Override
