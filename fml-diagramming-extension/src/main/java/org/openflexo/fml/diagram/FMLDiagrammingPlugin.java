@@ -41,11 +41,18 @@ package org.openflexo.fml.diagram;
 import java.util.logging.Logger;
 
 import org.openflexo.fml.diagram.controller.CreateFMLClassDiagramInitializer;
+import org.openflexo.foundation.FlexoObject;
 import org.openflexo.foundation.fml.FMLTechnologyAdapter;
+import org.openflexo.foundation.fml.rt.FMLRTVirtualModelInstance;
 import org.openflexo.module.FlexoModule;
 import org.openflexo.technologyadapter.diagram.controller.DiagramTechnologyAdapterController;
+import org.openflexo.technologyadapter.diagram.controller.diagrameditor.FMLControlledDiagramEditor;
+import org.openflexo.technologyadapter.diagram.controller.diagrameditor.FMLControlledDiagramModuleView;
+import org.openflexo.view.ModuleView;
 import org.openflexo.view.controller.ControllerActionInitializer;
+import org.openflexo.view.controller.FlexoController;
 import org.openflexo.view.controller.TechnologyAdapterPluginController;
+import org.openflexo.view.controller.model.FlexoPerspective;
 
 /**
  * Technology-specific controller provided by {@link FMLTechnologyAdapter}<br>
@@ -153,6 +160,31 @@ public class FMLDiagrammingPlugin extends TechnologyAdapterPluginController<FMLT
 		new ExportFMLControlledDiagramToImageInitializer(actionInitializer);
 		new DeleteDiagramElementsAndFlexoConceptInstancesInitializer(actionInitializer);
 		*/
+	}
+
+	@Override
+	public boolean handleObject(FlexoObject object) {
+		if (object instanceof FMLRTVirtualModelInstance
+				&& ((FMLRTVirtualModelInstance) object).getVirtualModel().getURI().equals(FML_CLASS_DIAGRAM_VIRTUAL_MODEL_URI)) {
+			System.out.println("OK je le vois");
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public ModuleView<?> createModuleViewForObject(FlexoObject object, FlexoController controller, FlexoPerspective perspective) {
+		if (object instanceof FMLRTVirtualModelInstance
+				&& ((FMLRTVirtualModelInstance) object).getVirtualModel().getURI().equals(FML_CLASS_DIAGRAM_VIRTUAL_MODEL_URI)) {
+			FMLRTVirtualModelInstance vmInstance = (FMLRTVirtualModelInstance) object;
+			DiagramTechnologyAdapterController diagramTAController = getTechnologyAdapterControllerService()
+					.getTechnologyAdapterController(DiagramTechnologyAdapterController.class);
+			FMLControlledDiagramEditor editor = new FMLControlledDiagramEditor(vmInstance, false, controller,
+					diagramTAController.getToolFactory());
+			System.out.println("OK je l'instancie");
+			return new FMLControlledDiagramModuleView(editor, perspective);
+		}
+		return null;
 	}
 
 }

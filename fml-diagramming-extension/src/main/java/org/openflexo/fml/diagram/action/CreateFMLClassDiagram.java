@@ -102,26 +102,21 @@ public class CreateFMLClassDiagram extends FlexoAction<CreateFMLClassDiagram, Vi
 	private String classDiagramDescription;
 	private FMLRTVirtualModelInstance newClassDiagram;
 
-	public boolean switchNewlyCreatedFlexoConcept = true;
+	private FMLRTVirtualModelInstance newFMLControlledDiagram;
 
 	private CreateFMLClassDiagram(VirtualModel focusedObject, Vector<FMLObject> globalSelection, FlexoEditor editor) {
 		super(actionType, focusedObject, globalSelection, editor);
 	}
 
 	private <I> RepositoryFolder<?, I> getRepositoryFolder(VirtualModelResource resource, FlexoResourceCenter<I> rc) throws IOException {
-		System.out.println("On cherche le folder pour " + resource.getIODelegate().getSerializationArtefact());
 		RepositoryFolder<FlexoResource<?>, I> vmFolder = rc.getRepositoryFolder(resource);
 		I vmContainerDirectory = vmFolder.getSerializationArtefact();
-		System.out.println("vmContainerDirectory=" + vmContainerDirectory);
 		String directoryName = resource.getName();
 		if (!directoryName.endsWith(VirtualModelResourceFactory.FML_SUFFIX)) {
 			directoryName = directoryName + VirtualModelResourceFactory.FML_SUFFIX;
 		}
-		System.out.println("directoryName=" + directoryName);
 		I vmDirectory = rc.getDirectory(directoryName, vmContainerDirectory);
-		System.out.println("vmDirectory=" + vmDirectory);
 		RepositoryFolder<FlexoResource<?>, I> returned = rc.getRepositoryFolder(vmDirectory, true);
-		System.out.println("returned=" + returned);
 		return returned;
 	}
 
@@ -129,52 +124,11 @@ public class CreateFMLClassDiagram extends FlexoAction<CreateFMLClassDiagram, Vi
 	protected void doAction(Object context)
 			throws NotImplementedException, InvalidParameterException, InconsistentFlexoConceptHierarchyException, IOFlexoException {
 
-		/*FMLModelFactory factory = getFocusedObject().getFMLModelFactory();
-		
-		if (getSpecializedFlexoConceptClass() != null) {
-			newFlexoConcept = factory.newInstance(getSpecializedFlexoConceptClass());
-		}
-		else {
-			newFlexoConcept = factory.newFlexoConcept();
-		}
-		newFlexoConcept.setName(getNewFlexoConceptName());
-		newFlexoConcept.setDescription(getNewFlexoConceptDescription());
-		
-		// Unused FlexoConcept addressedConcept =
-		// getFocusedObject().getFlexoConcept();
-		VirtualModel virtualModel = getFocusedObject().getDeclaringVirtualModel();
-		
-		virtualModel.addToFlexoConcepts(newFlexoConcept);
-		
-		if (getContainerFlexoConcept() != null) {
-			if (getContainerFlexoConcept() instanceof VirtualModel) {
-				// nothing to do
-			}
-			else {
-				newFlexoConcept.setContainerFlexoConcept(getContainerFlexoConcept());
-			}
-		}
-		
-		performSetParentConcepts();
-		performCreateProperties();
-		performCreateBehaviours();
-		performCreateInspectors();
-		performPostProcessings();*/
-
-		System.out.println("Ouais on cree un diagramme de classe !");
-
 		VirtualModelResource classDiagramVirtualModelResource = getServiceManager().getVirtualModelLibrary()
 				.getVirtualModelResource(FMLDiagrammingPlugin.FML_CLASS_DIAGRAM_VIRTUAL_MODEL_URI);
 		VirtualModel classDiagramVirtualModel = classDiagramVirtualModelResource.getVirtualModel();
 
 		FlexoResourceCenter<?> resourceCenter = getFocusedObject().getResource().getResourceCenter();
-		/*RepositoryFolder<FlexoResource<?>, ?> vmFolder = resourceCenter.getRepositoryFolder(getFocusedObject().getResource());
-		System.out.println("folder: " + vmFolder);
-		
-		resourceCenter.getDirectory(getFocusedObject().getResource().getName(),
-				getFocusedObject().getResource().getIODelegate().getSerializationArtefact());
-		
-		vmFolder = vmFolder.getFolderNamed(getFocusedObject().getResource().getName());*/
 
 		RepositoryFolder<?, ?> vmFolder;
 		try {
@@ -182,8 +136,6 @@ public class CreateFMLClassDiagram extends FlexoAction<CreateFMLClassDiagram, Vi
 		} catch (IOException e) {
 			throw new IOFlexoException(e);
 		}
-
-		System.out.println("folder: " + vmFolder);
 
 		CreateFMLControlledDiagramVirtualModelInstance action = CreateFMLControlledDiagramVirtualModelInstance.actionType
 				.makeNewAction(vmFolder, null, getEditor());
@@ -195,22 +147,14 @@ public class CreateFMLClassDiagram extends FlexoAction<CreateFMLClassDiagram, Vi
 		action.setParameterValue(creationScheme.getParameters().get(0), getFocusedObject().getResource());
 		action.setSkipChoosePopup(true);
 
-		/*TypedDiagramModelSlot diagramModelSlot = newVirtualModel.getModelSlots(TypedDiagramModelSlot.class).get(0);
-		assertNotNull(diagramModelSlot);
-		TypedDiagramModelSlotInstanceConfiguration diagramModelSlotInstanceConfiguration = (TypedDiagramModelSlotInstanceConfiguration) action
-				.getModelSlotInstanceConfiguration(diagramModelSlot);
-		diagramModelSlotInstanceConfiguration.setOption(DefaultModelSlotInstanceConfigurationOption.CreatePrivateNewModel);
-		assertTrue(diagramModelSlotInstanceConfiguration.isValidConfiguration());*/
-
-		System.out.println("C'est parti");
-		System.out.println("valid=" + action.isValid());
-
 		action.doAction();
 
-		System.out.println("Ca a marche: " + action.hasActionExecutionSucceeded());
+		newFMLControlledDiagram = action.getNewVirtualModelInstance();
 
-		// assertTrue(action.hasActionExecutionSucceeded());
+	}
 
+	public FMLRTVirtualModelInstance getNewFMLControlledDiagram() {
+		return newFMLControlledDiagram;
 	}
 
 	public String getClassDiagramName() {
