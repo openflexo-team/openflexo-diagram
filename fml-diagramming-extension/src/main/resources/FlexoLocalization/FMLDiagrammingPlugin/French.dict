@@ -1,6 +1,7 @@
-a_class_diagram_with_that_name_already_exists=a_class_diagram_with_that_name_already_exists
-class_diagram=class_diagram
-configure_new_class_diagram=configure_new_class_diagram
-create_new_class_diagram=create_new_class_diagram
-invalid_name_for_new_diagram=invalid_name_for_new_diagram
-no_diagram_name_defined=no_diagram_name_defined
+a_class_diagram_with_that_name_already_exists=Un diagramme portant ce nom existe d\u00E9j\u00E0
+class_diagram=Diagramme de classe
+configure_new_class_diagram=Configuration du nouveau diagramme
+create_new_class_diagram=Cr\u00E9er un nouveau diagramme de classe
+invalid_name_for_new_diagram=Nom de diagramme invalide
+no_diagram_name_defined=Veuillez d\u00E9finir un nom de diagramme
+
