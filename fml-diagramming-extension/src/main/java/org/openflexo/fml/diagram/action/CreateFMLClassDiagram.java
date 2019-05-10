@@ -50,6 +50,7 @@ import org.openflexo.foundation.IOFlexoException;
 import org.openflexo.foundation.action.FlexoAction;
 import org.openflexo.foundation.action.FlexoActionFactory;
 import org.openflexo.foundation.action.NotImplementedException;
+import org.openflexo.foundation.fml.CreationScheme;
 import org.openflexo.foundation.fml.FMLObject;
 import org.openflexo.foundation.fml.InconsistentFlexoConceptHierarchyException;
 import org.openflexo.foundation.fml.VirtualModel;
@@ -189,7 +190,9 @@ public class CreateFMLClassDiagram extends FlexoAction<CreateFMLClassDiagram, Vi
 		action.setNewVirtualModelInstanceName(getClassDiagramName());
 		action.setNewVirtualModelInstanceTitle(getClassDiagramName());
 		action.setVirtualModel(classDiagramVirtualModel);
-		action.setCreationScheme(classDiagramVirtualModel.getCreationSchemes().get(0));
+		CreationScheme creationScheme = classDiagramVirtualModel.getCreationSchemes().get(0);
+		action.setCreationScheme(creationScheme);
+		action.setParameterValue(creationScheme.getParameters().get(0), getFocusedObject().getResource());
 		action.setSkipChoosePopup(true);
 
 		/*TypedDiagramModelSlot diagramModelSlot = newVirtualModel.getModelSlots(TypedDiagramModelSlot.class).get(0);

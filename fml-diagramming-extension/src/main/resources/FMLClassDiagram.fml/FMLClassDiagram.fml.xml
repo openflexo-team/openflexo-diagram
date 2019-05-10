@@ -50,15 +50,23 @@
     </DropScheme>
   </FlexoConcept>
   <UseModelSlotDeclaration id="0" modelSlotClass="org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot" userID="SYL" flexoID="-1" />
+  <UseModelSlotDeclaration id="1" modelSlotClass="org.openflexo.foundation.fml.ta.FMLModelSlot" userID="SYL" flexoID="-1" />
   <Inspector id="SYL-1" inspectorTitle="FMLClassDiagram" userID="SYL" flexoID="1" />
   <TypedDiagramModelSlot id="SYL-7" metaModelURI="http://openflexo.org/fml-diagramming/FMLClassDiagram.diagramspecification" isRequired="true" cloningStrategy="Reference" cardinality="ZeroOne" name="diagram" userID="SYL" flexoID="7">
     <FMLDiagramPaletteElementBinding id="SYL-42" paletteElementId="http://openflexo.org/fml-diagramming/FMLClassDiagram.diagramspecification/Palette.palette#FlexoConceptGR" userID="SYL" flexoID="42">
       <DropScheme idref="SYL-41" />
     </FMLDiagramPaletteElementBinding>
   </TypedDiagramModelSlot>
+  <FMLModelSlot id="SYL-49" isRequired="true" cloningStrategy="Reference" cardinality="ZeroOne" name="virtualModel" userID="SYL" flexoID="49" />
   <CreationScheme id="SYL-6" name="init" width="800" label="init" height="600" userID="SYL" flexoID="6">
-    <BehaviourControlGraph_AssignationAction id="SYL-8" assign="diagram" userID="SYL" flexoID="8">
-      <AssignableAction_CreateDiagram id="SYL-9" diagramSpecificationURI="http://openflexo.org/fml-diagramming/FMLClassDiagram.diagramspecification" diagramName="(this.name + &quot;Diagram&quot;)" resourceCenter="this.resourceCenter" relativePath="/Diagrams" userID="SYL" flexoID="9" />
-    </BehaviourControlGraph_AssignationAction>
+    <BehaviourControlGraph_Sequence id="SYL-52" userID="SYL" flexoID="52">
+      <ControlGraph2_AssignationAction id="SYL-51" assign="virtualModel" ownerContext="controlGraph2" userID="SYL" flexoID="51">
+        <AssignableAction_ExpressionAction id="SYL-50" expression="parameters.aVirtualModelResource.virtualModel" userID="SYL" flexoID="50" />
+      </ControlGraph2_AssignationAction>
+      <ControlGraph1_AssignationAction id="SYL-8" assign="diagram" ownerContext="controlGraph1" userID="SYL" flexoID="8">
+        <AssignableAction_CreateDiagram id="SYL-9" diagramSpecificationURI="http://openflexo.org/fml-diagramming/FMLClassDiagram.diagramspecification" diagramName="(this.name + &quot;Diagram&quot;)" resourceCenter="this.resourceCenter" relativePath="/Diagrams" userID="SYL" flexoID="9" />
+      </ControlGraph1_AssignationAction>
+    </BehaviourControlGraph_Sequence>
+    <GenericBehaviourParameter id="SYL-53" widget="CUSTOM_WIDGET" name="aVirtualModelResource" type="org.openflexo.foundation.resource.FlexoResourceType&lt;org.openflexo.foundation.fml.VirtualModel&gt;" userID="SYL" flexoID="53" />
   </CreationScheme>
 </VirtualModel>
