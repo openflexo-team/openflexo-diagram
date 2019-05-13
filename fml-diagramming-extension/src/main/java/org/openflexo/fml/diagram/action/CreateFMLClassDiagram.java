@@ -46,6 +46,7 @@ import java.util.logging.Logger;
 import org.openflexo.fml.diagram.FMLDiagrammingPlugin;
 import org.openflexo.foundation.FlexoEditor;
 import org.openflexo.foundation.FlexoObject.FlexoObjectImpl;
+import org.openflexo.foundation.FlexoServiceManager;
 import org.openflexo.foundation.IOFlexoException;
 import org.openflexo.foundation.action.FlexoAction;
 import org.openflexo.foundation.action.FlexoActionFactory;
@@ -57,12 +58,12 @@ import org.openflexo.foundation.fml.VirtualModel;
 import org.openflexo.foundation.fml.rm.VirtualModelResource;
 import org.openflexo.foundation.fml.rm.VirtualModelResourceFactory;
 import org.openflexo.foundation.fml.rt.FMLRTVirtualModelInstance;
+import org.openflexo.foundation.fml.rt.action.CreateBasicVirtualModelInstance;
 import org.openflexo.foundation.fml.rt.rm.FMLRTVirtualModelInstanceResource;
 import org.openflexo.foundation.resource.FlexoResource;
 import org.openflexo.foundation.resource.FlexoResourceCenter;
 import org.openflexo.foundation.resource.RepositoryFolder;
 import org.openflexo.localization.LocalizedDelegate;
-import org.openflexo.technologyadapter.diagram.fml.action.CreateFMLControlledDiagramVirtualModelInstance;
 import org.openflexo.toolbox.JavaUtils;
 import org.openflexo.toolbox.StringUtils;
 import org.openflexo.view.controller.TechnologyAdapterControllerService;
@@ -90,6 +91,11 @@ public class CreateFMLClassDiagram extends FlexoAction<CreateFMLClassDiagram, Vi
 		@Override
 		public boolean isEnabledForSelection(VirtualModel object, Vector<FMLObject> globalSelection) {
 			return object != null;
+		}
+
+		@Override
+		public LocalizedDelegate getLocales(FlexoServiceManager serviceManager) {
+			return serviceManager.getService(TechnologyAdapterControllerService.class).getPlugin(FMLDiagrammingPlugin.class).getLocales();
 		}
 
 	};
@@ -137,8 +143,7 @@ public class CreateFMLClassDiagram extends FlexoAction<CreateFMLClassDiagram, Vi
 			throw new IOFlexoException(e);
 		}
 
-		CreateFMLControlledDiagramVirtualModelInstance action = CreateFMLControlledDiagramVirtualModelInstance.actionType
-				.makeNewAction(vmFolder, null, getEditor());
+		CreateBasicVirtualModelInstance action = CreateBasicVirtualModelInstance.actionType.makeNewAction(vmFolder, null, getEditor());
 		action.setNewVirtualModelInstanceName(getClassDiagramName());
 		action.setNewVirtualModelInstanceTitle(getClassDiagramName());
 		action.setVirtualModel(classDiagramVirtualModel);
