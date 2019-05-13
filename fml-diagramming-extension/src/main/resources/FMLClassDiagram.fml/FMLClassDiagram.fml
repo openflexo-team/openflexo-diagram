@@ -13,8 +13,7 @@ public class FMLClassDiagram {
 
   @CreationScheme  
   FMLClassDiagram:init(VirtualModelResource aVirtualModelResource) {  
-    diagram = CreateDiagram$CreateDiagramImpl_$$_jvst920_9a {    
-    };    
+    diagram = CreateDiagram();    
     virtualModel = parameters.aVirtualModelResource.virtualModel;  
   }  
 
