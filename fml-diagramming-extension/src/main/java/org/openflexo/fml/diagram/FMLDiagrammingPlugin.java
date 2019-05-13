@@ -166,7 +166,6 @@ public class FMLDiagrammingPlugin extends TechnologyAdapterPluginController<FMLT
 	public boolean handleObject(FlexoObject object) {
 		if (object instanceof FMLRTVirtualModelInstance
 				&& ((FMLRTVirtualModelInstance) object).getVirtualModel().getURI().equals(FML_CLASS_DIAGRAM_VIRTUAL_MODEL_URI)) {
-			System.out.println("OK je le vois");
 			return true;
 		}
 		return false;
@@ -181,7 +180,6 @@ public class FMLDiagrammingPlugin extends TechnologyAdapterPluginController<FMLT
 					.getTechnologyAdapterController(DiagramTechnologyAdapterController.class);
 			FMLControlledDiagramEditor editor = new FMLControlledDiagramEditor(vmInstance, false, controller,
 					diagramTAController.getToolFactory());
-			System.out.println("OK je l'instancie");
 			return new FMLControlledDiagramModuleView(editor, perspective);
 		}
 		return null;
