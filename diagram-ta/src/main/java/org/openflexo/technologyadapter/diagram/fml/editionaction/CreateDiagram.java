@@ -47,7 +47,6 @@ import org.openflexo.foundation.FlexoException;
 import org.openflexo.foundation.fml.annotations.FML;
 import org.openflexo.foundation.fml.editionaction.AbstractCreateResource;
 import org.openflexo.foundation.fml.rt.RunTimeEvaluationContext;
-import org.openflexo.foundation.resource.FlexoResourceCenter;
 import org.openflexo.foundation.resource.ResourceLoadingCancelledException;
 import org.openflexo.pamela.annotations.Getter;
 import org.openflexo.pamela.annotations.ImplementationClass;
@@ -205,19 +204,13 @@ public interface CreateDiagram extends AbstractCreateResource<DiagramModelSlot, 
 		@Override
 		public Diagram execute(RunTimeEvaluationContext evaluationContext) throws FlexoException {
 
-			System.out.println("DiagSpec = " + getDiagramSpecification());
-			String resourceName = getResourceName(evaluationContext);
-			String resourceURI = getResourceURI(evaluationContext);
-			FlexoResourceCenter<?> rc = getResourceCenter(evaluationContext);
-			System.out.println("rc=" + rc);
-
 			DiagramTechnologyAdapter diagramTA = getServiceManager().getTechnologyAdapterService()
 					.getTechnologyAdapter(DiagramTechnologyAdapter.class);
 
 			DiagramResource newDiagramResource;
 			try {
-				newDiagramResource = createResource(diagramTA, DiagramResourceFactory.class, rc, resourceName, resourceURI,
-						getRelativePath(), DiagramResourceFactory.DIAGRAM_SUFFIX, true);
+				newDiagramResource = createResource(diagramTA, DiagramResourceFactory.class, evaluationContext,
+						DiagramResourceFactory.DIAGRAM_SUFFIX, true);
 				System.out.println("Return new diagram resource: " + newDiagramResource);
 
 				newDiagramResource.setMetaModelResource(getDiagramSpecificationResource());
