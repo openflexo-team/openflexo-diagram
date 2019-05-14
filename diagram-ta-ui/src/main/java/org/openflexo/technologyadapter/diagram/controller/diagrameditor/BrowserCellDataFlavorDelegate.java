@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
+import org.openflexo.connie.type.TypeUtils;
 import org.openflexo.diana.DianaUtils;
 import org.openflexo.diana.Drawing.DrawingTreeNode;
 import org.openflexo.diana.geom.DianaDimension;
@@ -26,7 +27,6 @@ import org.openflexo.diana.swing.control.tools.DataFlavorDelegate;
 import org.openflexo.diana.swing.control.tools.DianaViewDropListener;
 import org.openflexo.diana.view.DianaView;
 import org.openflexo.foundation.fml.FlexoConcept;
-import org.openflexo.foundation.fml.FlexoConceptInstanceType;
 import org.openflexo.foundation.fml.VirtualModel;
 import org.openflexo.foundation.fml.rt.FMLRTVirtualModelInstance;
 import org.openflexo.foundation.fml.rt.FlexoConceptInstance;
@@ -67,30 +67,29 @@ public class BrowserCellDataFlavorDelegate extends DataFlavorDelegate {
 	@Override
 	public boolean isDragOk(DropTargetDragEvent e) {
 
-		System.out.println("isDragOK with " + e + " ????");
+		// System.out.println("isDragOK with " + e + " ????");
 
 		try {
 			TransferedBrowserCell transferedBrowserCell = (TransferedBrowserCell) e.getTransferable()
 					.getTransferData(FIBBrowserModel.BROWSER_CELL_FLAVOR);
 
-			System.out.println("transferedBrowserCell=" + transferedBrowserCell);
-			System.out.println("e=" + e);
+			// System.out.println("transferedBrowserCell=" + transferedBrowserCell);
+			// System.out.println("e=" + e);
 
 			DrawingTreeNode<?, ?> focused = getFocusedObject(e);
 
-			System.out.println("focused=" + focused);
+			// System.out.println("focused=" + focused);
 
 			if (focused == null) {
 				return false;
 			}
 
-			if (getDianaEditor().getDragSourceContext().getTransferable() instanceof BrowserCell
-					&& ((BrowserCell) getDianaEditor().getDragSourceContext().getTransferable())
-							.getRepresentedObject() instanceof FlexoConceptInstance) {
-				FlexoConceptInstance droppedFCI = (FlexoConceptInstance) ((BrowserCell) getDianaEditor().getDragSourceContext()
-						.getTransferable()).getRepresentedObject();
-				System.out.println("droppedFCI=" + droppedFCI);
-				return getApplicableDropSchemes(droppedFCI, focused).size() > 0;
+			// System.out.println("getDianaEditor()=" + getDianaEditor());
+			// System.out.println("getDianaEditor().getDragSourceContext()=" + getDianaEditor().getDragSourceContext());
+
+			if (getDianaEditor().getDragSourceContext().getTransferable() instanceof BrowserCell) {
+				Object representedObject = ((BrowserCell) getDianaEditor().getDragSourceContext().getTransferable()).getRepresentedObject();
+				return getApplicableDropSchemes(representedObject, focused).size() > 0;
 			}
 		} catch (UnsupportedFlavorException e1) {
 			logger.warning("Unexpected: " + e1);
@@ -107,20 +106,17 @@ public class BrowserCellDataFlavorDelegate extends DataFlavorDelegate {
 	public boolean performDrop(DropTargetDropEvent e) {
 		Object data = getTransferData(e);
 
-		if (data instanceof TransferedBrowserCell && getDianaEditor().getDragSourceContext().getTransferable() instanceof BrowserCell
-				&& ((BrowserCell) getDianaEditor().getDragSourceContext().getTransferable())
-						.getRepresentedObject() instanceof FlexoConceptInstance) {
+		if (data instanceof TransferedBrowserCell && getDianaEditor().getDragSourceContext().getTransferable() instanceof BrowserCell) {
 			try {
 
-				FlexoConceptInstance droppedFCI = (FlexoConceptInstance) ((BrowserCell) getDianaEditor().getDragSourceContext()
-						.getTransferable()).getRepresentedObject();
+				Object representedObject = ((BrowserCell) getDianaEditor().getDragSourceContext().getTransferable()).getRepresentedObject();
 
 				DrawingTreeNode<?, ?> focused = getFocusedObject(e);
 				if (focused == null) {
 					return false;
 				}
 
-				List<DropScheme> applicableDropSchemes = getApplicableDropSchemes(droppedFCI, focused);
+				List<DropScheme> applicableDropSchemes = getApplicableDropSchemes(representedObject, focused);
 
 				// OK, let's got for the drop
 				if (applicableDropSchemes.size() > 0) {
@@ -150,14 +146,14 @@ public class BrowserCellDataFlavorDelegate extends DataFlavorDelegate {
 						for (final DropScheme dropScheme : applicableDropSchemes) {
 							JMenuItem menuItem = new JMenuItem(dropScheme.getDeclaringVirtualModel().getLocalizedDictionary()
 									.localizedForKey(dropScheme.getLabel() != null ? dropScheme.getLabel() : dropScheme.getName()));
-							menuItem.addActionListener(new DropSchemeActionListener(focused, dropScheme, droppedFCI, modelLocation));
+							menuItem.addActionListener(new DropSchemeActionListener(focused, dropScheme, representedObject, modelLocation));
 							popup.add(menuItem);
 						}
 						popup.show(getDrawingView(), (int) modelLocation.x, (int) modelLocation.y);
 						return true;
 					}
 					else { // availableDropSchemes.size() == 1
-						return performDropScheme(focused, applicableDropSchemes.get(0), droppedFCI, modelLocation);
+						return performDropScheme(focused, applicableDropSchemes.get(0), representedObject, modelLocation);
 					}
 
 				}
@@ -185,7 +181,7 @@ public class BrowserCellDataFlavorDelegate extends DataFlavorDelegate {
 		return null;
 	}
 
-	private List<DropScheme> getApplicableDropSchemes(FlexoConceptInstance fci, DrawingTreeNode<?, ?> focused) {
+	/*private List<DropScheme> getApplicableDropSchemes(FlexoConceptInstance fci, DrawingTreeNode<?, ?> focused) {
 		List<DropScheme> returned = new ArrayList<>();
 		if (getFMLControlledDiagram() == null) {
 			return returned;
@@ -201,10 +197,31 @@ public class BrowserCellDataFlavorDelegate extends DataFlavorDelegate {
 			}
 		}
 		return returned;
+	}*/
+
+	private List<DropScheme> getApplicableDropSchemes(Object object, DrawingTreeNode<?, ?> focused) {
+		List<DropScheme> returned = new ArrayList<>();
+		if (getFMLControlledDiagram() == null) {
+			return returned;
+		}
+		VirtualModel diagramVirtualModel = getFMLControlledDiagram().getVirtualModel();
+		for (FlexoConcept concept : diagramVirtualModel.getFlexoConcepts()) {
+			System.out.println("on regarde le concept " + concept);
+			for (DropScheme ds : concept.getFlexoBehaviours(DropScheme.class)) {
+				System.out.println("ds=" + ds);
+				if (ds.getParameters().size() == 1) {
+					System.out.println("isOfType " + ds.getParameters().get(0).getType() + " : " + object + " ? -> "
+							+ TypeUtils.isOfType(object, ds.getParameters().get(0).getType()));
+					if (TypeUtils.isOfType(object, ds.getParameters().get(0).getType())) {
+						returned.add(ds);
+					}
+				}
+			}
+		}
+		return returned;
 	}
 
-	private boolean performDropScheme(DrawingTreeNode<?, ?> target, DropScheme dropScheme, FlexoConceptInstance droppedFCI,
-			DianaPoint dropLocation) {
+	private boolean performDropScheme(DrawingTreeNode<?, ?> target, DropScheme dropScheme, Object droppedObject, DianaPoint dropLocation) {
 
 		FlexoConceptInstance parentFlexoConceptInstance = null;
 		ShapeRole parentShapeRole = null;
@@ -234,7 +251,7 @@ public class BrowserCellDataFlavorDelegate extends DataFlavorDelegate {
 				getDiagramEditor().getFlexoController().getEditor());
 		action.setParentInformations(parentFlexoConceptInstance, parentShapeRole);
 		action.setDropLocation(dropLocation);
-		action.setParameterValue(dropScheme.getParameters().get(0), droppedFCI);
+		action.setParameterValue(dropScheme.getParameters().get(0), droppedObject);
 		action.doAction();
 
 		// The new shape has well be added to the diagram, and the drawing (which listen to the diagram) has well received the event
@@ -252,20 +269,19 @@ public class BrowserCellDataFlavorDelegate extends DataFlavorDelegate {
 
 		private final DrawingTreeNode<?, ?> target;
 		private final DropScheme dropScheme;
-		private final FlexoConceptInstance droppedFCI;
+		private final Object droppedObject;
 		private final DianaPoint dropLocation;
 
-		DropSchemeActionListener(DrawingTreeNode<?, ?> target, DropScheme dropScheme, FlexoConceptInstance droppedFCI,
-				DianaPoint dropLocation) {
+		DropSchemeActionListener(DrawingTreeNode<?, ?> target, DropScheme dropScheme, Object droppedObject, DianaPoint dropLocation) {
 			this.target = target;
 			this.dropScheme = dropScheme;
-			this.droppedFCI = droppedFCI;
+			this.droppedObject = droppedObject;
 			this.dropLocation = dropLocation;
 		}
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			performDropScheme(target, dropScheme, droppedFCI, dropLocation);
+			performDropScheme(target, dropScheme, droppedObject, dropLocation);
 		}
 
 	}
