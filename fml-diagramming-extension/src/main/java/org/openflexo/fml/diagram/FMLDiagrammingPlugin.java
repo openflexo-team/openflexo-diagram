@@ -41,13 +41,13 @@ package org.openflexo.fml.diagram;
 import java.util.logging.Logger;
 
 import org.openflexo.fml.diagram.controller.CreateFMLClassDiagramInitializer;
+import org.openflexo.fml.diagram.view.FMLClassDiagramModuleView;
 import org.openflexo.foundation.FlexoObject;
 import org.openflexo.foundation.fml.FMLTechnologyAdapter;
 import org.openflexo.foundation.fml.rt.FMLRTVirtualModelInstance;
 import org.openflexo.module.FlexoModule;
 import org.openflexo.technologyadapter.diagram.controller.DiagramTechnologyAdapterController;
 import org.openflexo.technologyadapter.diagram.controller.diagrameditor.FMLControlledDiagramEditor;
-import org.openflexo.technologyadapter.diagram.controller.diagrameditor.FMLControlledDiagramModuleView;
 import org.openflexo.view.ModuleView;
 import org.openflexo.view.controller.ControllerActionInitializer;
 import org.openflexo.view.controller.FlexoController;
@@ -180,7 +180,7 @@ public class FMLDiagrammingPlugin extends TechnologyAdapterPluginController<FMLT
 					.getTechnologyAdapterController(DiagramTechnologyAdapterController.class);
 			FMLControlledDiagramEditor editor = new FMLControlledDiagramEditor(vmInstance, false, controller,
 					diagramTAController.getToolFactory());
-			return new FMLControlledDiagramModuleView(editor, perspective);
+			return new FMLClassDiagramModuleView(editor, perspective);
 		}
 		return null;
 	}

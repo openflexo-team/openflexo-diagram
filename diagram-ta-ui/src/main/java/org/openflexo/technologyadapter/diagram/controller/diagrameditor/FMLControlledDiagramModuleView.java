@@ -102,6 +102,10 @@ public class FMLControlledDiagramModuleView extends JPanel implements ModuleView
 		getRepresentedObject().getPropertyChangeSupport().addPropertyChangeListener(getRepresentedObject().getDeletedProperty(), this);
 	}
 
+	public FlexoController getFlexoController() {
+		return editor.getFlexoController();
+	}
+
 	public String getInfoMessage() {
 		return "Controlled diagramming - CTRL-drag to draw edges - ALT-drag to draw rectangles";
 		// return FlexoLocalization.getMainLocalizer().localizedForKey("controlled_diagramming")
@@ -153,6 +157,8 @@ public class FMLControlledDiagramModuleView extends JPanel implements ModuleView
 	public void willShow() {
 
 		System.out.println("FMLControlledDiagramModuleView WILL SHOW !!!!!!");
+
+		perspective.setBottomLeftView(null);
 
 		// Sets palette view of editor to be the top right view
 		perspective.setTopRightView(getEditor().getPaletteView());

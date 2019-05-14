@@ -50,6 +50,17 @@ public class FMLClassDiagram {
       delete behaviourContainer;    
     }    
   
+    @DropScheme    
+    FlexoConceptGR:representFlexoConceptGRAtTopLevel(FlexoConcept aConcept) {    
+      shape = diagram.AddShape();      
+      header = diagram.AddShape();      
+      icon = diagram.AddShape();      
+      title = diagram.AddShape();      
+      propertiesContainer = diagram.AddShape();      
+      behaviourContainer = diagram.AddShape();      
+      concept = parameters.aConcept;    
+    }    
+  
   }  
 
 }
