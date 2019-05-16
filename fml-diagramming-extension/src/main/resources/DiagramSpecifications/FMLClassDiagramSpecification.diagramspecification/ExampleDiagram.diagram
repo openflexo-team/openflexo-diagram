@@ -41,15 +41,15 @@
       </ShapeGraphicalRepresentation>
     </Shape>
     <Shape id="35" name="PropertiesContainer" userID="SYL" flexoID="7">
-      <Shape id="36" name="PropertyContainer" text="" userID="SYL" flexoID="12">
-        <ShapeGraphicalRepresentation id="37" relativeTextY="0.5" locationConstraints="UNMOVABLE" widthConstraints="parent.width" allowToLeaveBounds="false" adaptBoundsToContents="false" layoutManagerIdentifier="flow" heightConstraints="18" xConstraints="0" relativeTextX="0.5" dimensionConstraints="UNRESIZABLE" width="134.63855421686748" height="18.0" identifier="51113cfa" absoluteTextY="1.0" absoluteTextX="10.0" horizontalTextAlignment="LEFT" layer="1" text="" verticalTextAlignment="TOP">
+      <Shape id="36" name="PropertyContainer" text="Property" userID="SYL" flexoID="12">
+        <ShapeGraphicalRepresentation id="37" relativeTextY="0.5" locationConstraints="UNMOVABLE" widthConstraints="parent.width" allowToLeaveBounds="false" adaptBoundsToContents="false" layoutManagerIdentifier="flow" heightConstraints="18" xConstraints="0" relativeTextX="0.5" dimensionConstraints="UNRESIZABLE" width="134.63855421686748" height="18.0" identifier="51113cfa" absoluteTextY="1.0" absoluteTextX="10.0" horizontalTextAlignment="LEFT" layer="1" text="Property" verticalTextAlignment="TOP">
           <SelectedColorBackgroundStyle id="38" color="254,247,217" transparencyLevel="0.5" />
           <ForegroundStyle id="39" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" noStroke="true" capStyle="CAP_SQUARE" />
           <FocusedColorBackgroundStyle id="40" color="254,247,217" transparencyLevel="0.5" />
           <ShadowStyle id="41" drawShadow="false" />
           <FocusedForegroundStyle id="42" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
           <SelectedForegroundStyle id="43" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
-          <ColorBackgroundStyle id="44" color="255,0,51" transparencyLevel="0.5" />
+          <NoneBackgroundStyle id="44" transparencyLevel="0.5" />
           <RectangleShape id="45" />
           <TextStyle id="46" backgroundColor="255,255,255" color="0,0,0" font="Lucida Sans,0,11" />
         </ShapeGraphicalRepresentation>
