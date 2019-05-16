@@ -38,19 +38,13 @@
 
 package org.openflexo.fml.diagram;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.logging.Logger;
 
-import org.openflexo.connie.exception.InvalidBindingException;
-import org.openflexo.connie.exception.NullReferenceException;
-import org.openflexo.connie.exception.TypeMismatchException;
 import org.openflexo.fml.diagram.controller.CreateFMLClassDiagramInitializer;
 import org.openflexo.fml.diagram.view.FMLClassDiagramModuleView;
 import org.openflexo.foundation.FlexoObject;
 import org.openflexo.foundation.fml.FMLTechnologyAdapter;
-import org.openflexo.foundation.fml.FlexoConcept;
 import org.openflexo.foundation.fml.rt.FMLRTVirtualModelInstance;
-import org.openflexo.foundation.fml.rt.FlexoConceptInstance;
 import org.openflexo.module.FlexoModule;
 import org.openflexo.technologyadapter.diagram.controller.DiagramTechnologyAdapterController;
 import org.openflexo.technologyadapter.diagram.controller.diagrameditor.FMLControlledDiagramEditor;
@@ -193,16 +187,16 @@ public class FMLDiagrammingPlugin extends TechnologyAdapterPluginController<FMLT
 
 	@Override
 	public boolean handleObject(FlexoObject object) {
-		if (object instanceof FlexoConceptInstance
+		/*if (object instanceof FlexoConceptInstance
 				&& ((FlexoConceptInstance) object).getFlexoConcept().getName().equals("FlexoConceptGR")) {
 			return true;
-		}
+		}*/
 		return false;
 	}
 
 	@Override
 	public FlexoObject getRelevantObject(FlexoObject object) {
-		if (object instanceof FlexoConceptInstance
+		/*if (object instanceof FlexoConceptInstance
 				&& ((FlexoConceptInstance) object).getFlexoConcept().getName().equals("FlexoConceptGR")) {
 			try {
 				return (FlexoConcept) ((FlexoConceptInstance) object).execute("concept");
@@ -219,7 +213,7 @@ public class FMLDiagrammingPlugin extends TechnologyAdapterPluginController<FMLT
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
+		}*/
 		return object;
 	}
 

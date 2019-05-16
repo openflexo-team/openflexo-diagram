@@ -80,7 +80,6 @@ public class FMLClassDiagramModuleView extends FMLControlledDiagramModuleView {
 
 	public FMLClassDiagramModuleView(FMLControlledDiagramEditor editor, FlexoPerspective perspective) {
 		super(editor, perspective);
-		System.out.println("Perspective: " + perspective);
 		dgListener = new DGListener(getVirtualModelBrowser().getFIBBrowserWidget().getTechnologyComponent().getJTree());
 		dsListener = new DSListener();
 	}

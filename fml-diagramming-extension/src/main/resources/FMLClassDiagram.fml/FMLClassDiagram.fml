@@ -21,7 +21,7 @@ public class FMLClassDiagram {
   @FlexoConcept  
   public class FlexoConceptGR {  
   
-    public DiagramShape shape;  
+    public DiagramShape conceptShape;  
     public DiagramShape header;  
     public DiagramShape icon;  
     public DiagramShape title;  
@@ -32,7 +32,7 @@ public class FMLClassDiagram {
     @DropScheme    
     FlexoConceptGR:dropFlexoConceptGRAtTopLevel() {    
       concept = virtualModel.CreateFlexoConcept();      
-      shape = diagram.AddShape();      
+      conceptShape = diagram.AddShape();      
       header = diagram.AddShape();      
       icon = diagram.AddShape();      
       title = diagram.AddShape();      
@@ -42,7 +42,7 @@ public class FMLClassDiagram {
   
     @DeletionScheme    
     Void delete() {    
-      delete shape;      
+      delete conceptShape;      
       delete header;      
       delete icon;      
       delete title;      
@@ -52,13 +52,74 @@ public class FMLClassDiagram {
   
     @DropScheme    
     FlexoConceptGR:representFlexoConceptGRAtTopLevel(FlexoConcept aConcept) {    
-      shape = diagram.AddShape();      
+      conceptShape = diagram.AddShape();      
       header = diagram.AddShape();      
       icon = diagram.AddShape();      
       title = diagram.AddShape();      
       propertiesContainer = diagram.AddShape();      
       behaviourContainer = diagram.AddShape();      
-      concept = parameters.aConcept;    
+      concept = parameters.aConcept;      
+      this.updateProperties()    
+    }    
+  
+    @ActionScheme    
+    public Void updateProperties() {    
+      log "updateProperties()"      
+      for (property : concept.declaredProperties) {      
+        log ("Pour la property " + property)        
+        FlexoPropertyGR.create(property)      
+      }    
+    }    
+  
+  
+    @FlexoConcept    
+    public class FlexoPropertyGR {    
+      
+      public DiagramShape propertyShape;    
+      public FlexoProperty property;    
+      
+      @DeletionScheme      
+      Void delete() {      
+          
+      }      
+      
+      @DropScheme      
+      FlexoPropertyGR:dropProperty() {      
+          
+      }      
+      
+      @CreationScheme      
+      FlexoPropertyGR:create(FlexoProperty<Object> aProperty) {      
+        property = parameters.aProperty;        
+        log ("Coucou je cree la property " + parameters.aProperty)        
+        propertyShape = diagram.AddShape();      
+      }      
+      
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class FlexoPropertyGR {  
+  
+    public DiagramShape propertyShape;  
+    public FlexoProperty property;  
+  
+    @DeletionScheme    
+    Void delete() {    
+      
+    }    
+  
+    @DropScheme    
+    FlexoPropertyGR:dropProperty() {    
+      
+    }    
+  
+    @CreationScheme    
+    FlexoPropertyGR:create(FlexoProperty<Object> aProperty) {    
+      property = parameters.aProperty;      
+      log ("Coucou je cree la property " + parameters.aProperty)      
+      propertyShape = diagram.AddShape();    
     }    
   
   }  
