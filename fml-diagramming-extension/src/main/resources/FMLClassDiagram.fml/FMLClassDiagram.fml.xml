@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<VirtualModel id="SYL-5" virtualModelClass="org.openflexo.foundation.fml.VirtualModel" modelVersion="2.0" version="0.1" uri="http://openflexo.org/fml-diagramming/FMLClassDiagram.fml" bigIconResource="../Icons/ClassDiagram_64x64.png" smallIconResource="../Icons/ClassDiagram_16x16.png" name="FMLClassDiagram" mediumIconResource="../Icons/ClassDiagram_32x32.png" userID="SYL" flexoID="5">
+<VirtualModel id="SYL-5" virtualModelClass="org.openflexo.foundation.fml.VirtualModel" modelVersion="2.0" uri="http://openflexo.org/fml-diagramming/FMLClassDiagram.fml" version="0.1" bigIconResource="../Icons/ClassDiagram_64x64.png" smallIconResource="../Icons/ClassDiagram_16x16.png" name="FMLClassDiagram" mediumIconResource="../Icons/ClassDiagram_32x32.png" userID="SYL" flexoID="5">
   <FlexoConcept id="SYL-17" name="FlexoConceptGR" userID="SYL" flexoID="17">
     <Inspector id="SYL-13" inspectorTitle="FlexoConceptGR" userID="SYL" flexoID="13" />
     <EmbeddedFlexoConcept id="SYL-202" name="FlexoPropertyGR" userID="SYL" flexoID="202">
       <Inspector id="SYL-203" inspectorTitle="FlexoPropertyGR" userID="SYL" flexoID="203" />
       <ShapeRole id="SYL-220" previewHeight="18.0" previewY="91.0" previewX="0.0" previewWidth="248.0" exampleLabel="property" metamodelElementReference="http://openflexo.org/fml-diagramming/FMLClassDiagram.diagramspecification/ExampleDiagram.diagram#SYL_12" cloningStrategy="Clone" cardinality="ZeroOne" name="propertyShape" userID="SYL" flexoID="220">
-        <GRSpec id="SYL-329" featureName="label" value="property.name" userID="SYL" flexoID="329" />
+        <GRSpec id="SYL-375" featureName="label" value="property.name" userID="SYL" flexoID="375" />
       </ShapeRole>
       <FlexoPropertyRole id="SYL-268" container="virtualModel" cloningStrategy="Reference" cardinality="ZeroOne" name="property" userID="SYL" flexoID="268" />
       <DeletionScheme id="SYL-208" name="delete" width="800" label="delete" height="600" userID="SYL" flexoID="208">
@@ -39,7 +39,7 @@
     </ShapeRole>
     <ShapeRole id="SYL-21" previewHeight="20.0" previewY="0.0" previewX="20.0" previewWidth="114.63855421686748" exampleLabel="Concept" metamodelElementReference="http://openflexo.org/fml-diagramming/FMLClassDiagram.diagramspecification/ExampleDiagram.diagram#SYL_6" cloningStrategy="Clone" cardinality="ZeroOne" name="title" userID="SYL" flexoID="21">
       <ParentShapeRole idref="SYL-19" />
-      <GRSpec id="SYL-330" featureName="label" value="concept.name" userID="SYL" flexoID="330" />
+      <GRSpec id="SYL-376" featureName="label" value="concept.name" userID="SYL" flexoID="376" />
     </ShapeRole>
     <ShapeRole id="SYL-22" previewHeight="54.96682663016557" previewY="20.0" previewX="0.0" previewWidth="134.63855421686748" exampleLabel="" metamodelElementReference="http://openflexo.org/fml-diagramming/FMLClassDiagram.diagramspecification/ExampleDiagram.diagram#SYL_7" cloningStrategy="Clone" cardinality="ZeroOne" name="propertiesContainer" userID="SYL" flexoID="22">
       <ParentShapeRole idref="SYL-18" />
@@ -142,15 +142,37 @@
     </DropScheme>
     <ActionScheme id="SYL-299" visibility="Public" name="updateProperties" width="800" label="updateProperties" height="600" userID="SYL" flexoID="299">
       <BehaviourControlGraph_Sequence id="SYL-318" userID="SYL" flexoID="318">
-        <ControlGraph2_IterationAction id="SYL-302" iteratorName="property" ownerContext="controlGraph2" userID="SYL" flexoID="302">
-          <Iteration_ExpressionAction id="SYL-303" expression="concept.declaredProperties" ownerContext="iterationControlGraph" userID="SYL" flexoID="303" />
-          <ControlGraph_Sequence id="SYL-319" ownerContext="controlGraph" userID="SYL" flexoID="319">
-            <ControlGraph2_AddFlexoConceptInstance id="SYL-305" container="this" creationSchemeURI="http://openflexo.org/fml-diagramming/FMLClassDiagram.fml#FlexoPropertyGR.create(aProperty)" receiver="container" ownerContext="controlGraph2" userID="SYL" flexoID="305">
-              <AddFlexoConceptInstanceParameter id="SYL-306" paramName="aProperty" value="property" userID="SYL" flexoID="306" />
-            </ControlGraph2_AddFlexoConceptInstance>
-            <ControlGraph1_LogAction id="SYL-316" logLevel="INFO" logString="(&quot;Pour la property &quot; + property)" ownerContext="controlGraph1" userID="SYL" flexoID="316" />
-          </ControlGraph_Sequence>
-        </ControlGraph2_IterationAction>
+        <ControlGraph2_Sequence id="SYL-362" ownerContext="controlGraph2" userID="SYL" flexoID="362">
+          <ControlGraph2_Sequence id="SYL-363" ownerContext="controlGraph2" userID="SYL" flexoID="363">
+            <ControlGraph2_Sequence id="SYL-377" ownerContext="controlGraph2" userID="SYL" flexoID="377">
+              <ControlGraph2_NotifyPropertyChangedAction id="SYL-374" propertyName="invalidate" object="conceptShape" ownerContext="controlGraph2" userID="SYL" flexoID="374" />
+              <ControlGraph1_FinalizeMatching id="SYL-359" container="this" flexoBehaviourURI="http://openflexo.org/fml-diagramming/FMLClassDiagram.fml#FlexoPropertyGR.delete()" matchingSet="matchingSet" flexoConceptTypeURI="http://openflexo.org/fml-diagramming/FMLClassDiagram.fml#FlexoPropertyGR" ownerContext="controlGraph1" userID="SYL" flexoID="359" />
+            </ControlGraph2_Sequence>
+            <ControlGraph1_IterationAction id="SYL-302" iteratorName="property" ownerContext="controlGraph1" userID="SYL" flexoID="302">
+              <Iteration_ExpressionAction id="SYL-303" expression="concept.declaredProperties" ownerContext="iterationControlGraph" userID="SYL" flexoID="303" />
+              <ControlGraph_Sequence id="SYL-319" ownerContext="controlGraph" userID="SYL" flexoID="319">
+                <ControlGraph2_MatchFlexoConceptInstance id="SYL-344" container="this" creationSchemeURI="http://openflexo.org/fml-diagramming/FMLClassDiagram.fml#FlexoPropertyGR.create(aProperty)" matchingSet="matchingSet" receiver="container" ownerContext="controlGraph2" userID="SYL" flexoID="344">
+                  <MatchingCriteria id="SYL-347" patternRoleName="propertyShape" userID="SYL" flexoID="347" />
+                  <MatchingCriteria id="SYL-346" patternRoleName="property" value="property" userID="SYL" flexoID="346" />
+                  <MatchingCriteria id="SYL-348" patternRoleName="conceptShape" userID="SYL" flexoID="348" />
+                  <MatchingCriteria id="SYL-349" patternRoleName="header" userID="SYL" flexoID="349" />
+                  <MatchingCriteria id="SYL-350" patternRoleName="icon" userID="SYL" flexoID="350" />
+                  <MatchingCriteria id="SYL-351" patternRoleName="title" userID="SYL" flexoID="351" />
+                  <MatchingCriteria id="SYL-352" patternRoleName="propertiesContainer" userID="SYL" flexoID="352" />
+                  <MatchingCriteria id="SYL-353" patternRoleName="behaviourContainer" userID="SYL" flexoID="353" />
+                  <MatchingCriteria id="SYL-354" patternRoleName="concept" userID="SYL" flexoID="354" />
+                  <MatchingCriteria id="SYL-355" patternRoleName="diagram" userID="SYL" flexoID="355" />
+                  <MatchingCriteria id="SYL-356" patternRoleName="virtualModel" userID="SYL" flexoID="356" />
+                  <CreateFlexoConceptInstanceParameter id="SYL-345" paramName="aProperty" value="property" userID="SYL" flexoID="345" />
+                </ControlGraph2_MatchFlexoConceptInstance>
+                <ControlGraph1_LogAction id="SYL-316" logLevel="INFO" logString="(&quot;Pour la property &quot; + property)" ownerContext="controlGraph1" userID="SYL" flexoID="316" />
+              </ControlGraph_Sequence>
+            </ControlGraph1_IterationAction>
+          </ControlGraph2_Sequence>
+          <ControlGraph1_DeclarationAction id="SYL-342" variable="matchingSet" ownerContext="controlGraph1" userID="SYL" flexoID="342">
+            <AssignableAction_InitiateMatching id="SYL-341" container="this" flexoConceptTypeURI="http://openflexo.org/fml-diagramming/FMLClassDiagram.fml#FlexoPropertyGR" userID="SYL" flexoID="341" />
+          </ControlGraph1_DeclarationAction>
+        </ControlGraph2_Sequence>
         <ControlGraph1_LogAction id="SYL-314" logLevel="INFO" logString="&quot;updateProperties()&quot;" ownerContext="controlGraph1" userID="SYL" flexoID="314" />
       </BehaviourControlGraph_Sequence>
     </ActionScheme>

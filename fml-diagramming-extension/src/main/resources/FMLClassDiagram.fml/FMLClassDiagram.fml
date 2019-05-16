@@ -65,10 +65,13 @@ public class FMLClassDiagram {
     @ActionScheme    
     public Void updateProperties() {    
       log "updateProperties()"      
+      MatchingSet matchingSet = this.initiateMatching(FlexoPropertyGR);      
       for (property : concept.declaredProperties) {      
         log ("Pour la property " + property)        
-        FlexoPropertyGR.create(property)      
-      }    
+        FML@RT::MatchFlexoConceptInstance as FlexoPropertyGR match=(property=property) using FlexoPropertyGR:create(property)      
+      }      
+      matchingSet.finalizeMatching()      
+      conceptShape.firePropertyChange invalidate    
     }    
   
   
