@@ -19,7 +19,7 @@ public class FMLClassDiagram {
 
 
   @FlexoConcept  
-  public class FlexoConceptGR {  
+  public class FlexoConceptGR extends ContainerGR  {  
   
     public DiagramShape conceptShape;  
     public DiagramShape header;  
@@ -74,32 +74,6 @@ public class FMLClassDiagram {
       conceptShape.firePropertyChange invalidate    
     }    
   
-  
-    @FlexoConcept    
-    public class FlexoPropertyGR {    
-      
-      public DiagramShape propertyShape;    
-      public FlexoProperty property;    
-      
-      @DeletionScheme      
-      Void delete() {      
-          
-      }      
-      
-      @DropScheme      
-      FlexoPropertyGR:dropProperty() {      
-          
-      }      
-      
-      @CreationScheme      
-      FlexoPropertyGR:create(FlexoProperty<Object> aProperty) {      
-        property = parameters.aProperty;        
-        log ("Coucou je cree la property " + parameters.aProperty)        
-        propertyShape = diagram.AddShape();      
-      }      
-      
-    }    
-  
   }  
 
   @FlexoConcept  
@@ -123,6 +97,158 @@ public class FMLClassDiagram {
       property = parameters.aProperty;      
       log ("Coucou je cree la property " + parameters.aProperty)      
       propertyShape = diagram.AddShape();    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class ContainerGR {  
+  
+    public PropertiesCompartmentGR propertyCompartment;  
+    public PropertiesCompartmentGR behaviourCompartment;  
+    public PropertiesCompartmentGR containmentCompartment;  
+    public boolean displayProperties;  
+    public boolean displayBehaviours;  
+    public String displayContainment;  
+  
+    @DeletionScheme    
+    Void delete() {    
+      
+    }    
+  
+    @ActionScheme    
+    Void initContainerGR(Boolean displayProperties, Boolean displayBehaviours, Boolean displayContainment) {    
+      displayProperties = parameters.displayProperties;      
+      if displayProperties {      
+          
+      }    
+    }    
+  
+  
+    @FlexoConcept    
+    public class CompartmentGR {    
+      
+          
+      abstract Integer requiredHeight;    
+      
+      @ActionScheme      
+      Void getY(int availableHeight) {      
+          
+      }      
+      
+      @ActionScheme      
+      Void getHeight(int availableHeight) {      
+          
+      }      
+      
+    }    
+  
+    @FlexoConcept    
+    public class PropertiesCompartmentGR extends CompartmentGR  {    
+      
+      @CreationScheme      
+      PropertiesCompartmentGR:create() {      
+          
+      }      
+      
+      @DeletionScheme      
+      Void delete() {      
+          
+      }      
+      
+    }    
+  
+    @FlexoConcept    
+    public class BehaviourCompartmentGR extends CompartmentGR  {    
+      
+      @CreationScheme      
+      BehaviourCompartmentGR:create() {      
+          
+      }      
+      
+      @DeletionScheme      
+      Void delete() {      
+          
+      }      
+      
+    }    
+  
+    @FlexoConcept    
+    public class ContainmentCompartmentGR extends CompartmentGR  {    
+      
+      @CreationScheme      
+      ContainmentCompartmentGR:create() {      
+          
+      }      
+      
+      @DeletionScheme      
+      Void delete() {      
+          
+      }      
+      
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class CompartmentGR {  
+  
+      
+    abstract Integer requiredHeight;  
+  
+    @ActionScheme    
+    Void getY(int availableHeight) {    
+      
+    }    
+  
+    @ActionScheme    
+    Void getHeight(int availableHeight) {    
+      
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class PropertiesCompartmentGR extends CompartmentGR  {  
+  
+    @CreationScheme    
+    PropertiesCompartmentGR:create() {    
+      
+    }    
+  
+    @DeletionScheme    
+    Void delete() {    
+      
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class BehaviourCompartmentGR extends CompartmentGR  {  
+  
+    @CreationScheme    
+    BehaviourCompartmentGR:create() {    
+      
+    }    
+  
+    @DeletionScheme    
+    Void delete() {    
+      
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class ContainmentCompartmentGR extends CompartmentGR  {  
+  
+    @CreationScheme    
+    ContainmentCompartmentGR:create() {    
+      
+    }    
+  
+    @DeletionScheme    
+    Void delete() {    
+      
     }    
   
   }  

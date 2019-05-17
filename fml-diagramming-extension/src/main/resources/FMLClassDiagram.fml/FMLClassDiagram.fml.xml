@@ -1,35 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <VirtualModel id="SYL-5" virtualModelClass="org.openflexo.foundation.fml.VirtualModel" modelVersion="2.0" uri="http://openflexo.org/fml-diagramming/FMLClassDiagram.fml" version="0.1" bigIconResource="../Icons/ClassDiagram_64x64.png" smallIconResource="../Icons/ClassDiagram_16x16.png" name="FMLClassDiagram" mediumIconResource="../Icons/ClassDiagram_32x32.png" userID="SYL" flexoID="5">
-  <FlexoConcept id="SYL-17" name="FlexoConceptGR" userID="SYL" flexoID="17">
+  <FlexoConcept id="SYL-17" parentFlexoConceptsList="http://openflexo.org/fml-diagramming/FMLClassDiagram.fml#ContainerGR" name="FlexoConceptGR" userID="SYL" flexoID="17">
     <Inspector id="SYL-13" inspectorTitle="FlexoConceptGR" userID="SYL" flexoID="13" />
-    <EmbeddedFlexoConcept id="SYL-202" name="FlexoPropertyGR" userID="SYL" flexoID="202">
-      <Inspector id="SYL-203" inspectorTitle="FlexoPropertyGR" userID="SYL" flexoID="203" />
-      <ShapeRole id="SYL-220" previewHeight="16.0" previewY="91.0" previewX="0.0" previewWidth="250.0" exampleLabel="property" metamodelElementReference="http://openflexo.org/fml-diagramming/FMLClassDiagram.diagramspecification/ExampleDiagram.diagram#SYL_12" cloningStrategy="Clone" cardinality="ZeroOne" name="propertyShape" userID="SYL" flexoID="220">
-        <GRSpec id="SYL-387" featureName="label" value="property.name" userID="SYL" flexoID="387" />
-      </ShapeRole>
-      <FlexoPropertyRole id="SYL-268" container="virtualModel" cloningStrategy="Reference" cardinality="ZeroOne" name="property" userID="SYL" flexoID="268" />
-      <DeletionScheme id="SYL-208" name="delete" width="800" label="delete" height="600" userID="SYL" flexoID="208">
-        <BehaviourControlGraph_EmptyControlGraph id="SYL-222" userID="SYL" flexoID="222" />
-      </DeletionScheme>
-      <DropScheme id="SYL-223" target="http://openflexo.org/fml-diagramming/FMLClassDiagram.fml#FlexoConceptGR" name="dropProperty" width="800" label="dropProperty" height="600" userID="SYL" flexoID="223">
-        <ShapeRole idref="SYL-18" />
-        <BehaviourControlGraph_EmptyControlGraph id="SYL-224" userID="SYL" flexoID="224" />
-      </DropScheme>
-      <CreationScheme id="SYL-225" name="create" width="800" label="create" height="600" userID="SYL" flexoID="225">
-        <BehaviourControlGraph_Sequence id="SYL-296" userID="SYL" flexoID="296">
-          <ControlGraph2_Sequence id="SYL-309" ownerContext="controlGraph2" userID="SYL" flexoID="309">
-            <ControlGraph2_AssignationAction id="SYL-273" assign="propertyShape" ownerContext="controlGraph2" userID="SYL" flexoID="273">
-              <AssignableAction_AddShape id="SYL-272" container="propertiesContainer" receiver="diagram" userID="SYL" flexoID="272" />
-            </ControlGraph2_AssignationAction>
-            <ControlGraph1_LogAction id="SYL-308" logLevel="INFO" logString="(&quot;Coucou je cree la property &quot; + parameters.aProperty)" ownerContext="controlGraph1" userID="SYL" flexoID="308" />
-          </ControlGraph2_Sequence>
-          <ControlGraph1_AssignationAction id="SYL-270" assign="property" ownerContext="controlGraph1" userID="SYL" flexoID="270">
-            <AssignableAction_ExpressionAction id="SYL-269" expression="parameters.aProperty" userID="SYL" flexoID="269" />
-          </ControlGraph1_AssignationAction>
-        </BehaviourControlGraph_Sequence>
-        <GenericBehaviourParameter id="SYL-297" widget="CUSTOM_WIDGET" name="aProperty" type="org.openflexo.foundation.fml.FlexoProperty&lt;java.lang.Object&gt;" userID="SYL" flexoID="297" />
-      </CreationScheme>
-    </EmbeddedFlexoConcept>
     <ShapeRole id="SYL-18" previewHeight="87.03481955060194" previewY="58.93342597342843" previewX="68.5793160371874" previewWidth="112.42757075620563" exampleLabel="" metamodelElementReference="http://openflexo.org/fml-diagramming/FMLClassDiagram.diagramspecification/ExampleDiagram.diagram#SYL_2" cloningStrategy="Clone" cardinality="ZeroOne" name="conceptShape" userID="SYL" flexoID="18" />
     <ShapeRole id="SYL-19" previewHeight="20.0" previewY="0.0" previewX="0.0" previewWidth="134.63855421686748" exampleLabel="" metamodelElementReference="http://openflexo.org/fml-diagramming/FMLClassDiagram.diagramspecification/ExampleDiagram.diagram#SYL_4" cloningStrategy="Clone" cardinality="ZeroOne" name="header" userID="SYL" flexoID="19">
       <ParentShapeRole idref="SYL-18" />
@@ -39,7 +11,7 @@
     </ShapeRole>
     <ShapeRole id="SYL-21" previewHeight="20.0" previewY="0.0" previewX="20.0" previewWidth="114.63855421686748" exampleLabel="Concept" metamodelElementReference="http://openflexo.org/fml-diagramming/FMLClassDiagram.diagramspecification/ExampleDiagram.diagram#SYL_6" cloningStrategy="Clone" cardinality="ZeroOne" name="title" userID="SYL" flexoID="21">
       <ParentShapeRole idref="SYL-19" />
-      <GRSpec id="SYL-398" featureName="label" value="concept.name" userID="SYL" flexoID="398" />
+      <GRSpec id="SYL-495" featureName="label" value="concept.name" userID="SYL" flexoID="495" />
     </ShapeRole>
     <ShapeRole id="SYL-22" previewHeight="54.96682663016557" previewY="20.0" previewX="0.0" previewWidth="134.63855421686748" exampleLabel="" metamodelElementReference="http://openflexo.org/fml-diagramming/FMLClassDiagram.diagramspecification/ExampleDiagram.diagram#SYL_7" cloningStrategy="Clone" cardinality="ZeroOne" name="propertiesContainer" userID="SYL" flexoID="22">
       <ParentShapeRole idref="SYL-18" />
@@ -177,7 +149,102 @@
       </BehaviourControlGraph_Sequence>
     </ActionScheme>
   </FlexoConcept>
-  <FlexoConcept idref="SYL-202" />
+  <FlexoConcept id="SYL-202" name="FlexoPropertyGR" userID="SYL" flexoID="202">
+    <Inspector id="SYL-203" inspectorTitle="FlexoPropertyGR" userID="SYL" flexoID="203" />
+    <ShapeRole id="SYL-220" previewHeight="16.0" previewY="91.0" previewX="0.0" previewWidth="250.0" exampleLabel="property" metamodelElementReference="http://openflexo.org/fml-diagramming/FMLClassDiagram.diagramspecification/ExampleDiagram.diagram#SYL_12" cloningStrategy="Clone" cardinality="ZeroOne" name="propertyShape" userID="SYL" flexoID="220">
+      <GRSpec id="SYL-496" featureName="label" value="property.name" userID="SYL" flexoID="496" />
+    </ShapeRole>
+    <FlexoPropertyRole id="SYL-268" container="virtualModel" cloningStrategy="Reference" cardinality="ZeroOne" name="property" userID="SYL" flexoID="268" />
+    <DeletionScheme id="SYL-208" name="delete" width="800" label="delete" height="600" userID="SYL" flexoID="208">
+      <BehaviourControlGraph_EmptyControlGraph id="SYL-222" userID="SYL" flexoID="222" />
+    </DeletionScheme>
+    <DropScheme id="SYL-223" target="http://openflexo.org/fml-diagramming/FMLClassDiagram.fml#FlexoConceptGR" name="dropProperty" width="800" label="dropProperty" height="600" userID="SYL" flexoID="223">
+      <ShapeRole idref="SYL-18" />
+      <BehaviourControlGraph_EmptyControlGraph id="SYL-224" userID="SYL" flexoID="224" />
+    </DropScheme>
+    <CreationScheme id="SYL-225" name="create" width="800" label="create" height="600" userID="SYL" flexoID="225">
+      <BehaviourControlGraph_Sequence id="SYL-296" userID="SYL" flexoID="296">
+        <ControlGraph2_Sequence id="SYL-309" ownerContext="controlGraph2" userID="SYL" flexoID="309">
+          <ControlGraph2_AssignationAction id="SYL-273" assign="propertyShape" ownerContext="controlGraph2" userID="SYL" flexoID="273">
+            <AssignableAction_AddShape id="SYL-272" container="propertiesContainer" receiver="diagram" userID="SYL" flexoID="272" />
+          </ControlGraph2_AssignationAction>
+          <ControlGraph1_LogAction id="SYL-308" logLevel="INFO" logString="(&quot;Coucou je cree la property &quot; + parameters.aProperty)" ownerContext="controlGraph1" userID="SYL" flexoID="308" />
+        </ControlGraph2_Sequence>
+        <ControlGraph1_AssignationAction id="SYL-270" assign="property" ownerContext="controlGraph1" userID="SYL" flexoID="270">
+          <AssignableAction_ExpressionAction id="SYL-269" expression="parameters.aProperty" userID="SYL" flexoID="269" />
+        </ControlGraph1_AssignationAction>
+      </BehaviourControlGraph_Sequence>
+      <GenericBehaviourParameter id="SYL-297" widget="CUSTOM_WIDGET" name="aProperty" type="org.openflexo.foundation.fml.FlexoProperty&lt;java.lang.Object&gt;" userID="SYL" flexoID="297" />
+    </CreationScheme>
+  </FlexoConcept>
+  <FlexoConcept id="SYL-408" isAbstract="true" name="ContainerGR" userID="SYL" flexoID="408">
+    <Inspector id="SYL-409" inspectorTitle="ContainerGR" userID="SYL" flexoID="409" />
+    <EmbeddedFlexoConcept id="SYL-414" isAbstract="true" name="CompartmentGR" userID="SYL" flexoID="414">
+      <Inspector id="SYL-415" inspectorTitle="CompartmentGR" userID="SYL" flexoID="415" />
+      <AbstractProperty id="SYL-450" type="java.lang.Integer" name="requiredHeight" userID="SYL" flexoID="450" />
+      <ActionScheme id="SYL-492" name="getY" width="800" label="getY" height="600" userID="SYL" flexoID="492">
+        <BehaviourControlGraph_EmptyControlGraph id="SYL-497" userID="SYL" flexoID="497" />
+        <GenericBehaviourParameter id="SYL-498" widget="INTEGER" name="availableHeight" type="int" userID="SYL" flexoID="498" />
+      </ActionScheme>
+      <ActionScheme id="SYL-494" name="getHeight" width="800" label="getHeight" height="600" userID="SYL" flexoID="494">
+        <BehaviourControlGraph_EmptyControlGraph id="SYL-499" userID="SYL" flexoID="499" />
+        <GenericBehaviourParameter id="SYL-500" widget="INTEGER" name="availableHeight" type="int" userID="SYL" flexoID="500" />
+      </ActionScheme>
+    </EmbeddedFlexoConcept>
+    <EmbeddedFlexoConcept id="SYL-423" isAbstract="true" parentFlexoConceptsList="http://openflexo.org/fml-diagramming/FMLClassDiagram.fml#CompartmentGR" name="PropertiesCompartmentGR" userID="SYL" flexoID="423">
+      <Inspector id="SYL-424" inspectorTitle="PropertiesCompartmentGR" userID="SYL" flexoID="424" />
+      <CreationScheme id="SYL-428" name="create" width="800" label="create" height="600" userID="SYL" flexoID="428">
+        <BehaviourControlGraph_EmptyControlGraph id="SYL-453" userID="SYL" flexoID="453" />
+      </CreationScheme>
+      <DeletionScheme id="SYL-429" name="delete" width="800" label="delete" height="600" userID="SYL" flexoID="429">
+        <BehaviourControlGraph_EmptyControlGraph id="SYL-454" userID="SYL" flexoID="454" />
+      </DeletionScheme>
+    </EmbeddedFlexoConcept>
+    <EmbeddedFlexoConcept id="SYL-433" isAbstract="true" parentFlexoConceptsList="http://openflexo.org/fml-diagramming/FMLClassDiagram.fml#CompartmentGR" name="BehaviourCompartmentGR" userID="SYL" flexoID="433">
+      <Inspector id="SYL-434" inspectorTitle="BehaviourCompartment" userID="SYL" flexoID="434" />
+      <CreationScheme id="SYL-438" name="create" width="800" label="create" height="600" userID="SYL" flexoID="438">
+        <BehaviourControlGraph_EmptyControlGraph id="SYL-455" userID="SYL" flexoID="455" />
+      </CreationScheme>
+      <DeletionScheme id="SYL-439" name="delete" width="800" label="delete" height="600" userID="SYL" flexoID="439">
+        <BehaviourControlGraph_EmptyControlGraph id="SYL-456" userID="SYL" flexoID="456" />
+      </DeletionScheme>
+    </EmbeddedFlexoConcept>
+    <EmbeddedFlexoConcept id="SYL-457" isAbstract="true" parentFlexoConceptsList="http://openflexo.org/fml-diagramming/FMLClassDiagram.fml#CompartmentGR" name="ContainmentCompartmentGR" userID="SYL" flexoID="457">
+      <Inspector id="SYL-458" inspectorTitle="ContainmentCompartmentGR" userID="SYL" flexoID="458" />
+      <CreationScheme id="SYL-459" name="create" width="800" label="create" height="600" userID="SYL" flexoID="459">
+        <BehaviourControlGraph_EmptyControlGraph id="SYL-460" userID="SYL" flexoID="460" />
+      </CreationScheme>
+      <DeletionScheme id="SYL-461" name="delete" width="800" label="delete" height="600" userID="SYL" flexoID="461">
+        <BehaviourControlGraph_EmptyControlGraph id="SYL-462" userID="SYL" flexoID="462" />
+      </DeletionScheme>
+    </EmbeddedFlexoConcept>
+    <FlexoConceptInstanceRole id="SYL-440" virtualModelInstance="container" flexoConceptTypeURI="http://openflexo.org/fml-diagramming/FMLClassDiagram.fml#PropertiesCompartmentGR" cloningStrategy="Reference" cardinality="ZeroOne" name="propertyCompartment" userID="SYL" flexoID="440" />
+    <FlexoConceptInstanceRole id="SYL-441" virtualModelInstance="container" flexoConceptTypeURI="http://openflexo.org/fml-diagramming/FMLClassDiagram.fml#PropertiesCompartmentGR" cloningStrategy="Reference" cardinality="ZeroOne" name="behaviourCompartment" userID="SYL" flexoID="441" />
+    <FlexoConceptInstanceRole id="SYL-442" virtualModelInstance="container" flexoConceptTypeURI="http://openflexo.org/fml-diagramming/FMLClassDiagram.fml#PropertiesCompartmentGR" cloningStrategy="Reference" cardinality="ZeroOne" name="containmentCompartment" userID="SYL" flexoID="442" />
+    <PrimitiveRole id="SYL-443" primitiveType="Boolean" cloningStrategy="Clone" cardinality="ZeroOne" name="displayProperties" userID="SYL" flexoID="443" />
+    <PrimitiveRole id="SYL-444" primitiveType="Boolean" cloningStrategy="Clone" cardinality="ZeroOne" name="displayBehaviours" userID="SYL" flexoID="444" />
+    <PrimitiveRole id="SYL-445" primitiveType="String" cloningStrategy="Clone" cardinality="ZeroOne" name="displayContainment" userID="SYL" flexoID="445" />
+    <DeletionScheme id="SYL-413" name="delete" width="800" label="delete" height="600" userID="SYL" flexoID="413">
+      <BehaviourControlGraph_EmptyControlGraph id="SYL-412" userID="SYL" flexoID="412" />
+    </DeletionScheme>
+    <ActionScheme id="SYL-446" name="initContainerGR" width="800" label="initContainerGR" height="600" userID="SYL" flexoID="446">
+      <BehaviourControlGraph_Sequence id="SYL-501" userID="SYL" flexoID="501">
+        <ControlGraph2_ConditionalAction id="SYL-491" condition="displayProperties" ownerContext="controlGraph2" userID="SYL" flexoID="491">
+          <ThenControlGraph_EmptyControlGraph id="SYL-502" ownerContext="thenControlGraph" userID="SYL" flexoID="502" />
+        </ControlGraph2_ConditionalAction>
+        <ControlGraph1_AssignationAction id="SYL-489" assign="displayProperties" ownerContext="controlGraph1" userID="SYL" flexoID="489">
+          <AssignableAction_ExpressionAction id="SYL-488" expression="parameters.displayProperties" userID="SYL" flexoID="488" />
+        </ControlGraph1_AssignationAction>
+      </BehaviourControlGraph_Sequence>
+      <GenericBehaviourParameter id="SYL-448" widget="CHECKBOX" name="displayProperties" type="java.lang.Boolean" userID="SYL" flexoID="448" />
+      <GenericBehaviourParameter id="SYL-447" widget="CHECKBOX" name="displayBehaviours" type="java.lang.Boolean" userID="SYL" flexoID="447" />
+      <GenericBehaviourParameter id="SYL-449" widget="CHECKBOX" name="displayContainment" type="java.lang.Boolean" userID="SYL" flexoID="449" />
+    </ActionScheme>
+  </FlexoConcept>
+  <FlexoConcept idref="SYL-414" />
+  <FlexoConcept idref="SYL-423" />
+  <FlexoConcept idref="SYL-433" />
+  <FlexoConcept idref="SYL-457" />
   <UseModelSlotDeclaration id="0" modelSlotClass="org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot" userID="SYL" flexoID="-1" />
   <UseModelSlotDeclaration id="1" modelSlotClass="org.openflexo.foundation.fml.ta.FMLModelSlot" userID="SYL" flexoID="-1" />
   <Inspector id="SYL-1" inspectorTitle="FMLClassDiagram" userID="SYL" flexoID="1" />
