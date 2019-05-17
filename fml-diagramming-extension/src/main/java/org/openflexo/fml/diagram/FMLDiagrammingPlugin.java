@@ -38,13 +38,20 @@
 
 package org.openflexo.fml.diagram;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.logging.Logger;
 
+import org.openflexo.connie.exception.InvalidBindingException;
+import org.openflexo.connie.exception.NullReferenceException;
+import org.openflexo.connie.exception.TypeMismatchException;
 import org.openflexo.fml.diagram.controller.CreateFMLClassDiagramInitializer;
+import org.openflexo.fml.diagram.controller.UpdateConceptPropertiesInitializer;
 import org.openflexo.fml.diagram.view.FMLClassDiagramModuleView;
 import org.openflexo.foundation.FlexoObject;
 import org.openflexo.foundation.fml.FMLTechnologyAdapter;
+import org.openflexo.foundation.fml.FlexoConcept;
 import org.openflexo.foundation.fml.rt.FMLRTVirtualModelInstance;
+import org.openflexo.foundation.fml.rt.FlexoConceptInstance;
 import org.openflexo.module.FlexoModule;
 import org.openflexo.technologyadapter.diagram.controller.DiagramTechnologyAdapterController;
 import org.openflexo.technologyadapter.diagram.controller.diagrameditor.FMLControlledDiagramEditor;
@@ -88,78 +95,8 @@ public class FMLDiagrammingPlugin extends TechnologyAdapterPluginController<FMLT
 		System.out.println("initializeActions for FMLDiagrammingPlugin");
 
 		new CreateFMLClassDiagramInitializer(actionInitializer);
+		new UpdateConceptPropertiesInitializer(actionInitializer);
 
-		/*WindowMenu viewMenu = actionInitializer.getController().getMenuBar().getWindowMenu();
-		viewMenu.addSeparator();
-		
-		WindowMenuItem foregroundInspectorItem = viewMenu.new WindowMenuItem(getLocales().localizedForKey("foreground_inspector"),
-				dialogInspectors.getForegroundStyleInspector());
-		WindowMenuItem backgroundInspectorItem = viewMenu.new WindowMenuItem(getLocales().localizedForKey("background_inspector"),
-				dialogInspectors.getBackgroundStyleInspector());
-		WindowMenuItem textInspectorItem = viewMenu.new WindowMenuItem(getLocales().localizedForKey("text_inspector"),
-				dialogInspectors.getTextPropertiesInspector());
-		WindowMenuItem shapeInspectorItem = viewMenu.new WindowMenuItem(getLocales().localizedForKey("shape_inspector"),
-				dialogInspectors.getShapeInspector());
-		WindowMenuItem connectorInspectorItem = viewMenu.new WindowMenuItem(getLocales().localizedForKey("connector_inspector"),
-				dialogInspectors.getConnectorInspector());
-		WindowMenuItem shadowInspectorItem = viewMenu.new WindowMenuItem(getLocales().localizedForKey("shadow_inspector"),
-				dialogInspectors.getShadowStyleInspector());
-		WindowMenuItem locationSizeInspectorItem = viewMenu.new WindowMenuItem(getLocales().localizedForKey("location_size_inspector"),
-				dialogInspectors.getLocationSizeInspector());
-		
-		viewMenu.add(foregroundInspectorItem);
-		viewMenu.add(backgroundInspectorItem);
-		viewMenu.add(textInspectorItem);
-		viewMenu.add(shapeInspectorItem);
-		viewMenu.add(connectorInspectorItem);
-		viewMenu.add(shadowInspectorItem);
-		viewMenu.add(locationSizeInspectorItem);
-		
-		// Set the screenshot builders
-		getTechnologyAdapter().setScreenshotBuilder(new DiagramScreenshotBuilder());
-		getTechnologyAdapter().setDiagramPaletteScreenshotBuilder(new DiagramPaletteScreenshotBuilder());
-		getTechnologyAdapter().setDiagramShapeScreenshotBuilder(new DiagramShapeScreenshotBuilder());
-		getTechnologyAdapter().setFMLControlledDiagramScreenshotBuilder(new FMLControlledDiagramScreenshotBuilder());
-		
-		// Add paste handlers
-		diagramElementPasteHandler = new DiagramElementPasteHandler(actionInitializer.getController().getSelectionManager());
-		actionInitializer.getEditingContext().registerPasteHandler(diagramElementPasteHandler);
-		
-		// Diagram edition
-		new CreateDiagramSpecificationInitializer(actionInitializer);
-		new DeleteDiagramSpecificationInitializer(actionInitializer);
-		new CreateExampleDiagramInitializer(actionInitializer);
-		new DeleteExampleDiagramInitializer(actionInitializer);
-		new CreatePaletteElementFromShapeInitializer(actionInitializer);
-		new DeleteExampleDiagramElementsInitializer(actionInitializer);
-		new CreateDiagramFromPPTSlideInitializer(actionInitializer);
-		new CreateExampleDiagramFromPPTSlideInitializer(actionInitializer);
-		
-		// DiagramPalette edition
-		new CreateDiagramPaletteInitializer(actionInitializer);
-		new DeleteDiagramPaletteInitializer(actionInitializer);
-		new CreateDiagramPaletteElementInitializer(actionInitializer);
-		new DeleteDiagramPaletteElementInitializer(actionInitializer);
-		
-		new CreateFMLControlledDiagramVirtualModelInitializer(actionInitializer);
-		
-		new CreateFMLControlledDiagramVirtualModelInstanceInitializer(actionInitializer);
-		new OpenFMLControlledDiagramVirtualModelInstanceInitializer(actionInitializer);
-		new CreateDiagramInitializer(actionInitializer);
-		new DeleteDiagramInitializer(actionInitializer);
-		new AddShapeInitializer(actionInitializer);
-		new AddConnectorInitializer(actionInitializer);
-		new DeleteDiagramElementsInitializer(actionInitializer);
-		new DropSchemeActionInitializer(actionInitializer);
-		new DrawRectangleSchemeActionInitializer(actionInitializer);
-		new LinkSchemeActionInitializer(actionInitializer);
-		new ResetGraphicalRepresentationInitializer(actionInitializer);
-		new CreatePaletteElementFromFlexoConceptInitializer(actionInitializer);
-		new CreatePaletteElementFromShapeInitializer(actionInitializer);
-		new ExportDiagramToImageInitializer(actionInitializer);
-		new ExportFMLControlledDiagramToImageInitializer(actionInitializer);
-		new DeleteDiagramElementsAndFlexoConceptInstancesInitializer(actionInitializer);
-		*/
 	}
 
 	@Override
@@ -187,16 +124,16 @@ public class FMLDiagrammingPlugin extends TechnologyAdapterPluginController<FMLT
 
 	@Override
 	public boolean handleObject(FlexoObject object) {
-		/*if (object instanceof FlexoConceptInstance
+		if (object instanceof FlexoConceptInstance
 				&& ((FlexoConceptInstance) object).getFlexoConcept().getName().equals("FlexoConceptGR")) {
 			return true;
-		}*/
+		}
 		return false;
 	}
 
 	@Override
 	public FlexoObject getRelevantObject(FlexoObject object) {
-		/*if (object instanceof FlexoConceptInstance
+		if (object instanceof FlexoConceptInstance
 				&& ((FlexoConceptInstance) object).getFlexoConcept().getName().equals("FlexoConceptGR")) {
 			try {
 				return (FlexoConcept) ((FlexoConceptInstance) object).execute("concept");
@@ -213,7 +150,7 @@ public class FMLDiagrammingPlugin extends TechnologyAdapterPluginController<FMLT
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}*/
+		}
 		return object;
 	}
 

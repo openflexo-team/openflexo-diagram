@@ -148,6 +148,7 @@ to_shape=To shape
 top_level=top level
 type=Type
 type_of_selected_objects=Type of selected objects
+update_properties=Update properties
 uri=URI
 use_this_shape_to_create_a_palette_element=Use this shape to create a palette element
 value=Value
