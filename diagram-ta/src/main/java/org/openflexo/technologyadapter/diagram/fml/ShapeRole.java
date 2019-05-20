@@ -358,7 +358,8 @@ public interface ShapeRole extends GraphicalElementRole<DiagramShape, ShapeGraph
 				}
 
 				// center the shape in the parent
-				if (parentShapeRole != null && getGraphicalRepresentation() != null) {
+				if (parentShapeRole != null && getGraphicalRepresentation() != null
+						&& parentShapeRole.getGraphicalRepresentation() != null) {
 					getGraphicalRepresentation()
 							.setX((parentShapeRole.getGraphicalRepresentation().getWidth() - getGraphicalRepresentation().getWidth()) / 2);
 					getGraphicalRepresentation().setY(
