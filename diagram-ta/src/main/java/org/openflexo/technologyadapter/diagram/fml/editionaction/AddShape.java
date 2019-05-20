@@ -136,8 +136,9 @@ public interface AddShape extends AddDiagramElementAction<DiagramShape> {
 		}*/
 
 		public DiagramContainerElement<?> getContainer(RunTimeEvaluationContext evaluationContext) {
-			if (evaluationContext instanceof FlexoBehaviourAction && getAssignedFlexoProperty() != null
-					&& !getAssignedFlexoProperty().getParentShapeAsDefinedInAction()) {
+			if (evaluationContext instanceof FlexoBehaviourAction
+					&& ((FlexoBehaviourAction<?, ?, ?>) evaluationContext).getFlexoConceptInstance() != null
+					&& getAssignedFlexoProperty() != null && !getAssignedFlexoProperty().getParentShapeAsDefinedInAction()) {
 				return ((FlexoBehaviourAction<?, ?, ?>) evaluationContext).getFlexoConceptInstance()
 						.getFlexoActor(getAssignedFlexoProperty().getParentShapeRole());
 			}
