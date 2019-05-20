@@ -21,43 +21,32 @@ public class FMLClassDiagram {
   @FlexoConcept  
   public class FlexoConceptGR extends ContainerGR  {  
   
-    public DiagramShape conceptShape;  
     public DiagramShape header;  
     public DiagramShape icon;  
     public DiagramShape title;  
-    public DiagramShape propertiesContainer;  
-    public DiagramShape behaviourContainer;  
-    public FlexoConcept concept;  
   
     @DropScheme    
     FlexoConceptGR:dropFlexoConceptGRAtTopLevel() {    
       concept = virtualModel.CreateFlexoConcept();      
-      conceptShape = diagram.AddShape();      
+      this.initContainerGR(true,true,false)      
       header = diagram.AddShape();      
       icon = diagram.AddShape();      
-      title = diagram.AddShape();      
-      propertiesContainer = diagram.AddShape();      
-      behaviourContainer = diagram.AddShape();    
+      title = diagram.AddShape();    
     }    
   
     @DeletionScheme    
     Void delete() {    
-      delete conceptShape;      
       delete header;      
       delete icon;      
-      delete title;      
-      delete propertiesContainer;      
-      delete behaviourContainer;    
+      delete title;    
     }    
   
     @DropScheme    
     FlexoConceptGR:representFlexoConceptGRAtTopLevel(FlexoConcept aConcept) {    
-      conceptShape = diagram.AddShape();      
+      this.initContainerGR(true,true,false)      
       header = diagram.AddShape();      
       icon = diagram.AddShape();      
       title = diagram.AddShape();      
-      propertiesContainer = diagram.AddShape();      
-      behaviourContainer = diagram.AddShape();      
       concept = parameters.aConcept;      
       this.updateProperties()    
     }    
@@ -110,6 +99,8 @@ public class FMLClassDiagram {
     public boolean displayProperties;  
     public boolean displayBehaviours;  
     public String displayContainment;  
+    public DiagramShape topLevelShape;  
+    public FlexoConcept concept;  
   
     @DeletionScheme    
     Void delete() {    
@@ -118,7 +109,7 @@ public class FMLClassDiagram {
   
     @ActionScheme    
     Void initContainerGR(Boolean displayProperties, Boolean displayBehaviours, Boolean displayContainment) {    
-      displayProperties = parameters.displayProperties;      
+      topLevelShape = diagram.AddShape();      
       if displayProperties {      
           
       }    
@@ -132,19 +123,19 @@ public class FMLClassDiagram {
       abstract Integer requiredHeight;    
       
       @ActionScheme      
-      Void getY(int availableHeight) {      
+      Void getY(Integer availableHeight) {      
           
       }      
       
       @ActionScheme      
-      Void getHeight(int availableHeight) {      
+      Void getHeight(Integer availableHeight) {      
           
       }      
       
     }    
   
     @FlexoConcept    
-    public class PropertiesCompartmentGR extends CompartmentGR  {    
+    public class PropertiesCompartmentGR {    
       
       @CreationScheme      
       PropertiesCompartmentGR:create() {      
@@ -159,7 +150,7 @@ public class FMLClassDiagram {
     }    
   
     @FlexoConcept    
-    public class BehaviourCompartmentGR extends CompartmentGR  {    
+    public class BehaviourCompartmentGR {    
       
       @CreationScheme      
       BehaviourCompartmentGR:create() {      
@@ -174,7 +165,7 @@ public class FMLClassDiagram {
     }    
   
     @FlexoConcept    
-    public class ContainmentCompartmentGR extends CompartmentGR  {    
+    public class ContainmentCompartmentGR {    
       
       @CreationScheme      
       ContainmentCompartmentGR:create() {      
@@ -197,19 +188,19 @@ public class FMLClassDiagram {
     abstract Integer requiredHeight;  
   
     @ActionScheme    
-    Void getY(int availableHeight) {    
+    Void getY(Integer availableHeight) {    
       
     }    
   
     @ActionScheme    
-    Void getHeight(int availableHeight) {    
+    Void getHeight(Integer availableHeight) {    
       
     }    
   
   }  
 
   @FlexoConcept  
-  public class PropertiesCompartmentGR extends CompartmentGR  {  
+  public class PropertiesCompartmentGR {  
   
     @CreationScheme    
     PropertiesCompartmentGR:create() {    
@@ -224,7 +215,7 @@ public class FMLClassDiagram {
   }  
 
   @FlexoConcept  
-  public class BehaviourCompartmentGR extends CompartmentGR  {  
+  public class BehaviourCompartmentGR {  
   
     @CreationScheme    
     BehaviourCompartmentGR:create() {    
@@ -239,7 +230,7 @@ public class FMLClassDiagram {
   }  
 
   @FlexoConcept  
-  public class ContainmentCompartmentGR extends CompartmentGR  {  
+  public class ContainmentCompartmentGR {  
   
     @CreationScheme    
     ContainmentCompartmentGR:create() {    

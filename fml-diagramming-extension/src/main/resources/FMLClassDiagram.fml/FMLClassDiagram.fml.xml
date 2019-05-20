@@ -2,53 +2,31 @@
 <VirtualModel id="SYL-5" virtualModelClass="org.openflexo.foundation.fml.VirtualModel" modelVersion="2.0" uri="http://openflexo.org/fml-diagramming/FMLClassDiagram.fml" version="0.1" bigIconResource="../Icons/ClassDiagram_64x64.png" smallIconResource="../Icons/ClassDiagram_16x16.png" name="FMLClassDiagram" mediumIconResource="../Icons/ClassDiagram_32x32.png" userID="SYL" flexoID="5">
   <FlexoConcept id="SYL-17" parentFlexoConceptsList="http://openflexo.org/fml-diagramming/FMLClassDiagram.fml#ContainerGR" name="FlexoConceptGR" userID="SYL" flexoID="17">
     <Inspector id="SYL-13" inspectorTitle="FlexoConceptGR" userID="SYL" flexoID="13" />
-    <ShapeRole id="SYL-18" previewHeight="87.03481955060194" previewY="58.93342597342843" previewX="68.5793160371874" previewWidth="112.42757075620563" exampleLabel="" metamodelElementReference="http://openflexo.org/fml-diagramming/FMLClassDiagram.diagramspecification/ExampleDiagram.diagram#SYL_2" cloningStrategy="Clone" cardinality="ZeroOne" name="conceptShape" userID="SYL" flexoID="18" />
-    <ShapeRole id="SYL-19" previewHeight="20.0" previewY="0.0" previewX="0.0" previewWidth="134.63855421686748" exampleLabel="" metamodelElementReference="http://openflexo.org/fml-diagramming/FMLClassDiagram.diagramspecification/ExampleDiagram.diagram#SYL_4" cloningStrategy="Clone" cardinality="ZeroOne" name="header" userID="SYL" flexoID="19">
-      <ParentShapeRole idref="SYL-18" />
-    </ShapeRole>
+    <ShapeRole id="SYL-19" previewHeight="20.0" previewY="0.0" previewX="0.0" previewWidth="118.79052796552062" exampleLabel="" metamodelElementReference="http://openflexo.org/fml-diagramming/FMLClassDiagram.diagramspecification/ExampleDiagram.diagram#SYL_4" cloningStrategy="Clone" cardinality="ZeroOne" name="header" userID="SYL" flexoID="19" />
     <ShapeRole id="SYL-20" previewHeight="16.0" previewY="2.0" previewX="2.0" previewWidth="16.0" exampleLabel="" metamodelElementReference="http://openflexo.org/fml-diagramming/FMLClassDiagram.diagramspecification/ExampleDiagram.diagram#SYL_5" cloningStrategy="Clone" cardinality="ZeroOne" name="icon" userID="SYL" flexoID="20">
       <ParentShapeRole idref="SYL-19" />
     </ShapeRole>
-    <ShapeRole id="SYL-21" previewHeight="20.0" previewY="0.0" previewX="20.0" previewWidth="114.63855421686748" exampleLabel="Concept" metamodelElementReference="http://openflexo.org/fml-diagramming/FMLClassDiagram.diagramspecification/ExampleDiagram.diagram#SYL_6" cloningStrategy="Clone" cardinality="ZeroOne" name="title" userID="SYL" flexoID="21">
+    <ShapeRole id="SYL-21" previewHeight="20.0" previewY="0.0" previewX="20.0" previewWidth="98.79052796552062" exampleLabel="Concept" metamodelElementReference="http://openflexo.org/fml-diagramming/FMLClassDiagram.diagramspecification/ExampleDiagram.diagram#SYL_6" cloningStrategy="Clone" cardinality="ZeroOne" name="title" userID="SYL" flexoID="21">
       <ParentShapeRole idref="SYL-19" />
-      <GRSpec id="SYL-495" featureName="label" value="concept.name" userID="SYL" flexoID="495" />
+      <GRSpec id="SYL-821" featureName="label" value="concept.name" userID="SYL" flexoID="821" />
     </ShapeRole>
-    <ShapeRole id="SYL-22" previewHeight="54.96682663016557" previewY="20.0" previewX="0.0" previewWidth="134.63855421686748" exampleLabel="" metamodelElementReference="http://openflexo.org/fml-diagramming/FMLClassDiagram.diagramspecification/ExampleDiagram.diagram#SYL_7" cloningStrategy="Clone" cardinality="ZeroOne" name="propertiesContainer" userID="SYL" flexoID="22">
-      <ParentShapeRole idref="SYL-18" />
-    </ShapeRole>
-    <ShapeRole id="SYL-23" previewHeight="54.96682663016557" previewY="32.06799292043637" previewX="-22.21098346066185" previewWidth="134.63855421686748" exampleLabel="" metamodelElementReference="http://openflexo.org/fml-diagramming/FMLClassDiagram.diagramspecification/ExampleDiagram.diagram#SYL_8" cloningStrategy="Clone" cardinality="ZeroOne" name="behaviourContainer" userID="SYL" flexoID="23">
-      <ParentShapeRole idref="SYL-18" />
-    </ShapeRole>
-    <FlexoConceptRole id="SYL-60" container="virtualModel" cloningStrategy="Reference" cardinality="ZeroOne" name="concept" userID="SYL" flexoID="60" />
     <DropScheme id="SYL-41" target="top" name="dropFlexoConceptGRAtTopLevel" width="800" label="dropFlexoConceptGRAtTopLevel" height="600" userID="SYL" flexoID="41">
       <BehaviourControlGraph_Sequence id="SYL-107" ownerContext="controlGraph2" userID="SYL" flexoID="107">
-        <ControlGraph2_Sequence id="SYL-92" ownerContext="controlGraph2" userID="SYL" flexoID="92">
+        <ControlGraph2_Sequence id="SYL-745" ownerContext="controlGraph2" userID="SYL" flexoID="745">
           <ControlGraph2_Sequence id="SYL-93" ownerContext="controlGraph2" userID="SYL" flexoID="93">
             <ControlGraph2_Sequence id="SYL-94" ownerContext="controlGraph2" userID="SYL" flexoID="94">
-              <ControlGraph2_Sequence id="SYL-95" ownerContext="controlGraph2" userID="SYL" flexoID="95">
-                <ControlGraph2_Sequence id="SYL-96" ownerContext="controlGraph2" userID="SYL" flexoID="96">
-                  <ControlGraph2_AssignationAction id="SYL-25" assign="behaviourContainer" ownerContext="controlGraph2" userID="SYL" flexoID="25">
-                    <AssignableAction_AddShape id="SYL-24" container="shape" receiver="diagram" userID="SYL" flexoID="24" />
-                  </ControlGraph2_AssignationAction>
-                  <ControlGraph1_AssignationAction id="SYL-27" assign="propertiesContainer" ownerContext="controlGraph1" userID="SYL" flexoID="27">
-                    <AssignableAction_AddShape id="SYL-26" container="shape" receiver="diagram" userID="SYL" flexoID="26" />
-                  </ControlGraph1_AssignationAction>
-                </ControlGraph2_Sequence>
-                <ControlGraph1_AssignationAction id="SYL-30" assign="title" ownerContext="controlGraph1" userID="SYL" flexoID="30">
-                  <AssignableAction_AddShape id="SYL-29" container="header" receiver="diagram" userID="SYL" flexoID="29" />
-                </ControlGraph1_AssignationAction>
-              </ControlGraph2_Sequence>
+              <ControlGraph2_AssignationAction id="SYL-30" assign="title" ownerContext="controlGraph2" userID="SYL" flexoID="30">
+                <AssignableAction_AddShape id="SYL-29" container="header" receiver="diagram" userID="SYL" flexoID="29" />
+              </ControlGraph2_AssignationAction>
               <ControlGraph1_AssignationAction id="SYL-33" assign="icon" ownerContext="controlGraph1" userID="SYL" flexoID="33">
-                <AssignableAction_AddShape id="SYL-32" container="header" receiver="diagram" userID="SYL" flexoID="32" />
+                <AssignableAction_AddShape id="SYL-32" container="topLevelShape" receiver="diagram" userID="SYL" flexoID="32" />
               </ControlGraph1_AssignationAction>
             </ControlGraph2_Sequence>
             <ControlGraph1_AssignationAction id="SYL-36" assign="header" ownerContext="controlGraph1" userID="SYL" flexoID="36">
-              <AssignableAction_AddShape id="SYL-35" container="shape" receiver="diagram" userID="SYL" flexoID="35" />
+              <AssignableAction_AddShape id="SYL-35" container="topLevelShape" receiver="diagram" userID="SYL" flexoID="35" />
             </ControlGraph1_AssignationAction>
           </ControlGraph2_Sequence>
-          <ControlGraph1_AssignationAction id="SYL-39" assign="conceptShape" ownerContext="controlGraph1" userID="SYL" flexoID="39">
-            <AssignableAction_AddShape id="SYL-38" container="topLevel" receiver="diagram" userID="SYL" flexoID="38" />
-          </ControlGraph1_AssignationAction>
+          <ControlGraph1_ExpressionAction id="SYL-708" expression="this.initContainerGR(true,true,false)" ownerContext="controlGraph1" userID="SYL" flexoID="708" />
         </ControlGraph2_Sequence>
         <ControlGraph1_AssignationAction id="SYL-105" assign="concept" ownerContext="controlGraph1" userID="SYL" flexoID="105">
           <AssignableAction_CreateFlexoConcept id="SYL-104" container="virtualModel" conceptName="&quot;Concept&quot;" receiver="virtualModel" userID="SYL" flexoID="104" />
@@ -56,42 +34,23 @@
       </BehaviourControlGraph_Sequence>
     </DropScheme>
     <DeletionScheme id="SYL-115" name="delete" width="800" label="delete" height="600" userID="SYL" flexoID="115">
-      <BehaviourControlGraph_Sequence id="SYL-116" userID="SYL" flexoID="116">
-        <ControlGraph2_Sequence id="SYL-117" ownerContext="controlGraph2" userID="SYL" flexoID="117">
-          <ControlGraph2_Sequence id="SYL-118" ownerContext="controlGraph2" userID="SYL" flexoID="118">
-            <ControlGraph2_Sequence id="SYL-119" ownerContext="controlGraph2" userID="SYL" flexoID="119">
-              <ControlGraph2_Sequence id="SYL-120" ownerContext="controlGraph2" userID="SYL" flexoID="120">
-                <ControlGraph2_DeleteAction id="SYL-121" object="behaviourContainer" ownerContext="controlGraph2" userID="SYL" flexoID="121" />
-                <ControlGraph1_DeleteAction id="SYL-122" object="propertiesContainer" ownerContext="controlGraph1" userID="SYL" flexoID="122" />
-              </ControlGraph2_Sequence>
-              <ControlGraph1_DeleteAction id="SYL-123" object="title" ownerContext="controlGraph1" userID="SYL" flexoID="123" />
-            </ControlGraph2_Sequence>
-            <ControlGraph1_DeleteAction id="SYL-124" object="icon" ownerContext="controlGraph1" userID="SYL" flexoID="124" />
-          </ControlGraph2_Sequence>
-          <ControlGraph1_DeleteAction id="SYL-125" object="header" ownerContext="controlGraph1" userID="SYL" flexoID="125" />
+      <BehaviourControlGraph_Sequence id="SYL-117" ownerContext="controlGraph2" userID="SYL" flexoID="117">
+        <ControlGraph2_Sequence id="SYL-118" ownerContext="controlGraph2" userID="SYL" flexoID="118">
+          <ControlGraph2_DeleteAction id="SYL-123" object="title" ownerContext="controlGraph2" userID="SYL" flexoID="123" />
+          <ControlGraph1_DeleteAction id="SYL-124" object="icon" ownerContext="controlGraph1" userID="SYL" flexoID="124" />
         </ControlGraph2_Sequence>
-        <ControlGraph1_DeleteAction id="SYL-126" object="conceptShape" ownerContext="controlGraph1" userID="SYL" flexoID="126" />
+        <ControlGraph1_DeleteAction id="SYL-125" object="header" ownerContext="controlGraph1" userID="SYL" flexoID="125" />
       </BehaviourControlGraph_Sequence>
     </DeletionScheme>
     <DropScheme id="SYL-147" target="top" name="representFlexoConceptGRAtTopLevel" width="800" label="dropFlexoConceptGRAtTopLevel" height="600" userID="SYL" flexoID="147">
-      <BehaviourControlGraph_Sequence id="SYL-164" ownerContext="controlGraph2" userID="SYL" flexoID="164">
-        <ControlGraph2_Sequence id="SYL-161" ownerContext="controlGraph2" userID="SYL" flexoID="161">
+      <BehaviourControlGraph_Sequence id="SYL-746" ownerContext="controlGraph2" userID="SYL" flexoID="746">
+        <ControlGraph2_Sequence id="SYL-747" ownerContext="controlGraph2" userID="SYL" flexoID="747">
           <ControlGraph2_Sequence id="SYL-158" ownerContext="controlGraph2" userID="SYL" flexoID="158">
             <ControlGraph2_Sequence id="SYL-155" ownerContext="controlGraph2" userID="SYL" flexoID="155">
-              <ControlGraph2_Sequence id="SYL-152" ownerContext="controlGraph2" userID="SYL" flexoID="152">
-                <ControlGraph2_Sequence id="SYL-172" ownerContext="controlGraph2" userID="SYL" flexoID="172">
-                  <ControlGraph2_Sequence id="SYL-311" ownerContext="controlGraph2" userID="SYL" flexoID="311">
-                    <ControlGraph2_ExpressionAction id="SYL-310" expression="this.updateProperties()" ownerContext="controlGraph2" userID="SYL" flexoID="310" />
-                    <ControlGraph1_AssignationAction id="SYL-170" assign="concept" ownerContext="controlGraph1" userID="SYL" flexoID="170">
-                      <AssignableAction_ExpressionAction id="SYL-169" expression="parameters.aConcept" userID="SYL" flexoID="169" />
-                    </ControlGraph1_AssignationAction>
-                  </ControlGraph2_Sequence>
-                  <ControlGraph1_AssignationAction id="SYL-149" assign="behaviourContainer" ownerContext="controlGraph1" userID="SYL" flexoID="149">
-                    <AssignableAction_AddShape id="SYL-148" container="shape" receiver="diagram" userID="SYL" flexoID="148" />
-                  </ControlGraph1_AssignationAction>
-                </ControlGraph2_Sequence>
-                <ControlGraph1_AssignationAction id="SYL-151" assign="propertiesContainer" ownerContext="controlGraph1" userID="SYL" flexoID="151">
-                  <AssignableAction_AddShape id="SYL-150" container="shape" receiver="diagram" userID="SYL" flexoID="150" />
+              <ControlGraph2_Sequence id="SYL-311" ownerContext="controlGraph2" userID="SYL" flexoID="311">
+                <ControlGraph2_ExpressionAction id="SYL-310" expression="this.updateProperties()" ownerContext="controlGraph2" userID="SYL" flexoID="310" />
+                <ControlGraph1_AssignationAction id="SYL-170" assign="concept" ownerContext="controlGraph1" userID="SYL" flexoID="170">
+                  <AssignableAction_ExpressionAction id="SYL-169" expression="parameters.aConcept" userID="SYL" flexoID="169" />
                 </ControlGraph1_AssignationAction>
               </ControlGraph2_Sequence>
               <ControlGraph1_AssignationAction id="SYL-154" assign="title" ownerContext="controlGraph1" userID="SYL" flexoID="154">
@@ -102,13 +61,11 @@
               <AssignableAction_AddShape id="SYL-156" container="header" receiver="diagram" userID="SYL" flexoID="156" />
             </ControlGraph1_AssignationAction>
           </ControlGraph2_Sequence>
-          <ControlGraph1_AssignationAction id="SYL-160" assign="header" ownerContext="controlGraph1" userID="SYL" flexoID="160">
-            <AssignableAction_AddShape id="SYL-159" container="shape" receiver="diagram" userID="SYL" flexoID="159" />
+          <ControlGraph1_AssignationAction id="SYL-710" assign="header" ownerContext="controlGraph1" userID="SYL" flexoID="710">
+            <AssignableAction_AddShape id="SYL-711" container="topLevel" receiver="diagram" userID="SYL" flexoID="711" />
           </ControlGraph1_AssignationAction>
         </ControlGraph2_Sequence>
-        <ControlGraph1_AssignationAction id="SYL-163" assign="conceptShape" ownerContext="controlGraph1" userID="SYL" flexoID="163">
-          <AssignableAction_AddShape id="SYL-162" container="topLevel" receiver="diagram" userID="SYL" flexoID="162" />
-        </ControlGraph1_AssignationAction>
+        <ControlGraph1_ExpressionAction id="SYL-709" expression="this.initContainerGR(true,true,false)" ownerContext="controlGraph1" userID="SYL" flexoID="709" />
       </BehaviourControlGraph_Sequence>
       <GenericBehaviourParameter id="SYL-168" widget="CUSTOM_WIDGET" name="aConcept" type="org.openflexo.foundation.fml.FlexoConcept" userID="SYL" flexoID="168" />
     </DropScheme>
@@ -152,14 +109,14 @@
   <FlexoConcept id="SYL-202" name="FlexoPropertyGR" userID="SYL" flexoID="202">
     <Inspector id="SYL-203" inspectorTitle="FlexoPropertyGR" userID="SYL" flexoID="203" />
     <ShapeRole id="SYL-220" previewHeight="16.0" previewY="91.0" previewX="0.0" previewWidth="250.0" exampleLabel="property" metamodelElementReference="http://openflexo.org/fml-diagramming/FMLClassDiagram.diagramspecification/ExampleDiagram.diagram#SYL_12" cloningStrategy="Clone" cardinality="ZeroOne" name="propertyShape" userID="SYL" flexoID="220">
-      <GRSpec id="SYL-496" featureName="label" value="property.name" userID="SYL" flexoID="496" />
+      <GRSpec id="SYL-832" featureName="label" value="property.name" userID="SYL" flexoID="832" />
     </ShapeRole>
     <FlexoPropertyRole id="SYL-268" container="virtualModel" cloningStrategy="Reference" cardinality="ZeroOne" name="property" userID="SYL" flexoID="268" />
     <DeletionScheme id="SYL-208" name="delete" width="800" label="delete" height="600" userID="SYL" flexoID="208">
       <BehaviourControlGraph_EmptyControlGraph id="SYL-222" userID="SYL" flexoID="222" />
     </DeletionScheme>
     <DropScheme id="SYL-223" target="http://openflexo.org/fml-diagramming/FMLClassDiagram.fml#FlexoConceptGR" name="dropProperty" width="800" label="dropProperty" height="600" userID="SYL" flexoID="223">
-      <ShapeRole idref="SYL-18" />
+      <ShapeRole id="SYL-18" previewHeight="87.03481955060194" previewY="58.93342597342843" previewX="68.5793160371874" previewWidth="112.42757075620563" cloningStrategy="Clone" cardinality="ZeroOne" userID="SYL" flexoID="18" />
       <BehaviourControlGraph_EmptyControlGraph id="SYL-224" userID="SYL" flexoID="224" />
     </DropScheme>
     <CreationScheme id="SYL-225" name="create" width="800" label="create" height="600" userID="SYL" flexoID="225">
@@ -184,14 +141,14 @@
       <AbstractProperty id="SYL-450" type="java.lang.Integer" name="requiredHeight" userID="SYL" flexoID="450" />
       <ActionScheme id="SYL-492" name="getY" width="800" label="getY" height="600" userID="SYL" flexoID="492">
         <BehaviourControlGraph_EmptyControlGraph id="SYL-497" userID="SYL" flexoID="497" />
-        <GenericBehaviourParameter id="SYL-498" widget="INTEGER" name="availableHeight" type="int" userID="SYL" flexoID="498" />
+        <GenericBehaviourParameter id="SYL-498" widget="INTEGER" name="availableHeight" type="java.lang.Integer" userID="SYL" flexoID="498" />
       </ActionScheme>
       <ActionScheme id="SYL-494" name="getHeight" width="800" label="getHeight" height="600" userID="SYL" flexoID="494">
         <BehaviourControlGraph_EmptyControlGraph id="SYL-499" userID="SYL" flexoID="499" />
-        <GenericBehaviourParameter id="SYL-500" widget="INTEGER" name="availableHeight" type="int" userID="SYL" flexoID="500" />
+        <GenericBehaviourParameter id="SYL-500" widget="INTEGER" name="availableHeight" type="java.lang.Integer" userID="SYL" flexoID="500" />
       </ActionScheme>
     </EmbeddedFlexoConcept>
-    <EmbeddedFlexoConcept id="SYL-423" isAbstract="true" parentFlexoConceptsList="http://openflexo.org/fml-diagramming/FMLClassDiagram.fml#CompartmentGR" name="PropertiesCompartmentGR" userID="SYL" flexoID="423">
+    <EmbeddedFlexoConcept id="SYL-423" isAbstract="true" name="PropertiesCompartmentGR" userID="SYL" flexoID="423">
       <Inspector id="SYL-424" inspectorTitle="PropertiesCompartmentGR" userID="SYL" flexoID="424" />
       <CreationScheme id="SYL-428" name="create" width="800" label="create" height="600" userID="SYL" flexoID="428">
         <BehaviourControlGraph_EmptyControlGraph id="SYL-453" userID="SYL" flexoID="453" />
@@ -200,7 +157,7 @@
         <BehaviourControlGraph_EmptyControlGraph id="SYL-454" userID="SYL" flexoID="454" />
       </DeletionScheme>
     </EmbeddedFlexoConcept>
-    <EmbeddedFlexoConcept id="SYL-433" isAbstract="true" parentFlexoConceptsList="http://openflexo.org/fml-diagramming/FMLClassDiagram.fml#CompartmentGR" name="BehaviourCompartmentGR" userID="SYL" flexoID="433">
+    <EmbeddedFlexoConcept id="SYL-433" isAbstract="true" name="BehaviourCompartmentGR" userID="SYL" flexoID="433">
       <Inspector id="SYL-434" inspectorTitle="BehaviourCompartment" userID="SYL" flexoID="434" />
       <CreationScheme id="SYL-438" name="create" width="800" label="create" height="600" userID="SYL" flexoID="438">
         <BehaviourControlGraph_EmptyControlGraph id="SYL-455" userID="SYL" flexoID="455" />
@@ -209,7 +166,7 @@
         <BehaviourControlGraph_EmptyControlGraph id="SYL-456" userID="SYL" flexoID="456" />
       </DeletionScheme>
     </EmbeddedFlexoConcept>
-    <EmbeddedFlexoConcept id="SYL-457" isAbstract="true" parentFlexoConceptsList="http://openflexo.org/fml-diagramming/FMLClassDiagram.fml#CompartmentGR" name="ContainmentCompartmentGR" userID="SYL" flexoID="457">
+    <EmbeddedFlexoConcept id="SYL-457" isAbstract="true" name="ContainmentCompartmentGR" userID="SYL" flexoID="457">
       <Inspector id="SYL-458" inspectorTitle="ContainmentCompartmentGR" userID="SYL" flexoID="458" />
       <CreationScheme id="SYL-459" name="create" width="800" label="create" height="600" userID="SYL" flexoID="459">
         <BehaviourControlGraph_EmptyControlGraph id="SYL-460" userID="SYL" flexoID="460" />
@@ -224,16 +181,18 @@
     <PrimitiveRole id="SYL-443" primitiveType="Boolean" cloningStrategy="Clone" cardinality="ZeroOne" name="displayProperties" userID="SYL" flexoID="443" />
     <PrimitiveRole id="SYL-444" primitiveType="Boolean" cloningStrategy="Clone" cardinality="ZeroOne" name="displayBehaviours" userID="SYL" flexoID="444" />
     <PrimitiveRole id="SYL-445" primitiveType="String" cloningStrategy="Clone" cardinality="ZeroOne" name="displayContainment" userID="SYL" flexoID="445" />
+    <ShapeRole id="SYL-538" previewHeight="110.3380992430614" previewY="53.0" previewX="60.0" previewWidth="118.79052796552062" exampleLabel="" metamodelElementReference="http://openflexo.org/fml-diagramming/FMLClassDiagram.diagramspecification/ExampleDiagram.diagram#SYL_2" cloningStrategy="Clone" cardinality="ZeroOne" name="topLevelShape" userID="SYL" flexoID="538" />
+    <FlexoConceptRole id="SYL-705" container="virtualModel" cloningStrategy="Reference" cardinality="ZeroOne" name="concept" userID="SYL" flexoID="705" />
     <DeletionScheme id="SYL-413" name="delete" width="800" label="delete" height="600" userID="SYL" flexoID="413">
       <BehaviourControlGraph_EmptyControlGraph id="SYL-412" userID="SYL" flexoID="412" />
     </DeletionScheme>
     <ActionScheme id="SYL-446" name="initContainerGR" width="800" label="initContainerGR" height="600" userID="SYL" flexoID="446">
-      <BehaviourControlGraph_Sequence id="SYL-501" userID="SYL" flexoID="501">
+      <BehaviourControlGraph_Sequence id="SYL-613" ownerContext="controlGraph2" userID="SYL" flexoID="613">
         <ControlGraph2_ConditionalAction id="SYL-491" condition="displayProperties" ownerContext="controlGraph2" userID="SYL" flexoID="491">
           <ThenControlGraph_EmptyControlGraph id="SYL-502" ownerContext="thenControlGraph" userID="SYL" flexoID="502" />
         </ControlGraph2_ConditionalAction>
-        <ControlGraph1_AssignationAction id="SYL-489" assign="displayProperties" ownerContext="controlGraph1" userID="SYL" flexoID="489">
-          <AssignableAction_ExpressionAction id="SYL-488" expression="parameters.displayProperties" userID="SYL" flexoID="488" />
+        <ControlGraph1_AssignationAction id="SYL-590" assign="topLevelShape" ownerContext="controlGraph1" userID="SYL" flexoID="590">
+          <AssignableAction_AddShape id="SYL-589" container="diagram" receiver="diagram" userID="SYL" flexoID="589" />
         </ControlGraph1_AssignationAction>
       </BehaviourControlGraph_Sequence>
       <GenericBehaviourParameter id="SYL-448" widget="CHECKBOX" name="displayProperties" type="java.lang.Boolean" userID="SYL" flexoID="448" />
@@ -248,7 +207,7 @@
   <UseModelSlotDeclaration id="0" modelSlotClass="org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot" userID="SYL" flexoID="-1" />
   <UseModelSlotDeclaration id="1" modelSlotClass="org.openflexo.foundation.fml.ta.FMLModelSlot" userID="SYL" flexoID="-1" />
   <Inspector id="SYL-1" inspectorTitle="FMLClassDiagram" userID="SYL" flexoID="1" />
-  <TypedDiagramModelSlot id="SYL-7" metaModelURI="http://openflexo.org/fml-diagramming/FMLClassDiagram.diagramspecification" isRequired="true" cloningStrategy="Reference" cardinality="ZeroOne" name="diagram" userID="SYL" flexoID="7">
+  <TypedDiagramModelSlot id="SYL-7" templateDiagramReference="http://openflexo.org/fml-diagramming/FMLClassDiagram.diagramspecification/ExampleDiagram.diagram#SYL_1" metaModelURI="http://openflexo.org/fml-diagramming/FMLClassDiagram.diagramspecification" isRequired="true" cloningStrategy="Reference" cardinality="ZeroOne" name="diagram" userID="SYL" flexoID="7">
     <FMLDiagramPaletteElementBinding id="SYL-42" paletteElementId="http://openflexo.org/fml-diagramming/FMLClassDiagram.diagramspecification/Palette.palette#FlexoConceptGR" userID="SYL" flexoID="42">
       <DropScheme idref="SYL-41" />
     </FMLDiagramPaletteElementBinding>
