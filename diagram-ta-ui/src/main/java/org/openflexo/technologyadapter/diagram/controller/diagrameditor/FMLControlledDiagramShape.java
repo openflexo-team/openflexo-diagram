@@ -97,6 +97,13 @@ public interface FMLControlledDiagramShape extends FMLControlledDiagramElement<D
 	 */
 	public void listenFloatingPaletteChanges();
 
+	@Override
+	public ShapeRole getRole();
+
+	// public Double getHeight();
+
+	// public void setHeight(Double height);
+
 	/**
 	 * Represents the concatenation of a DropScheme and a LinkScheme, together compatible
 	 * 
@@ -117,6 +124,11 @@ public interface FMLControlledDiagramShape extends FMLControlledDiagramElement<D
 
 	public abstract class FMLControlledDiagramShapeImpl extends FMLControlledDiagramElementImpl<DiagramShape, ShapeGraphicalRepresentation>
 			implements FMLControlledDiagramShape {
+
+		@Override
+		public ShapeRole getRole() {
+			return (ShapeRole) performSuperGetter(ROLE_KEY);
+		}
 
 		/**
 		 * Build and return a new list of available DropAndLinkScheme where this {@link FMLControlledDiagramShape} may plays the property of
@@ -254,6 +266,52 @@ public interface FMLControlledDiagramShape extends FMLControlledDiagramElement<D
 			}
 			super.propertyChange(evt);
 		}
+
+		// TODO: do it generically for all GRSpecs
+		/*@Override
+		public Double getHeight() {
+			if (getRole() != null && getRole().getHeight() != null && getRole().getHeight().isValid()) {
+				try {
+					System.out.println("on evalue " + getRole().getHeight());
+					// Thread.dumpStack();
+					Double newHeight = ((Number) getRole().getHeight().getBindingValue(getFlexoConceptInstance())).doubleValue();
+					// We force the name of the DiagramElement to be last computed name
+					// getDiagramElement().setText(newLabel);
+					return newHeight;
+				} catch (TypeMismatchException e) {
+					e.printStackTrace();
+				} catch (NullReferenceException e) {
+					e.printStackTrace();
+				} catch (InvocationTargetException e) {
+					e.printStackTrace();
+				}
+			}
+			if (getDiagramElement() != null && getDiagramElement().getGraphicalRepresentation() != null) {
+				return getDiagramElement().getGraphicalRepresentation().getHeight();
+			}
+			return null;
+		}
+		
+		// TODO: to it generically for all GRSpecs
+		@Override
+		public void setHeight(Double height) {
+			if (getRole() != null && getRole().getHeight() != null && getRole().getHeight().isValid()) {
+				try {
+					getRole().getHeight().setBindingValue(height, getFlexoConceptInstance());
+				} catch (TypeMismatchException e) {
+					e.printStackTrace();
+				} catch (NullReferenceException e) {
+					e.printStackTrace();
+				} catch (NotSettableContextException e) {
+					e.printStackTrace();
+				} catch (InvocationTargetException e) {
+					e.printStackTrace();
+				}
+			}
+			else if (getDiagramElement() != null && getDiagramElement().getGraphicalRepresentation() != null) {
+				getDiagramElement().getGraphicalRepresentation().setHeight(height);
+			}
+		}*/
 
 	}
 

@@ -245,6 +245,12 @@ public interface ShapeRole extends GraphicalElementRole<DiagramShape, ShapeGraph
 	@Override
 	public void bindTo(DiagramShape metaModelShape);
 
+	// Convenient method to access spec for height feature
+	//public DataBinding<Double> getHeight();
+
+	// Convenient method to access spec for height feature
+	//public void setHeight(DataBinding<Double> height);
+
 	public static abstract class ShapeRoleImpl extends GraphicalElementRoleImpl<DiagramShape, ShapeGraphicalRepresentation>
 			implements ShapeRole {
 
@@ -474,6 +480,24 @@ public interface ShapeRole extends GraphicalElementRole<DiagramShape, ShapeGraph
 			setPreviewY((200 - getPreviewHeight()) / 2);
 
 		}
+
+		// Convenient method to access spec for height feature
+		/*@Override
+		public DataBinding<Double> getHeight() {
+			if (getGraphicalElementSpecification(HEIGHT_FEATURE) != null) {
+				// System.out.println("Je retourne height=" + getGraphicalElementSpecification(HEIGHT_FEATURE).getValue());
+				return getGraphicalElementSpecification(HEIGHT_FEATURE).getValue();
+			}
+			return null;
+		}
+
+		// Convenient method to access spec for height feature
+		@Override
+		public void setHeight(DataBinding<Double> height) {
+			if (getGraphicalElementSpecification(HEIGHT_FEATURE) != null) {
+				getGraphicalElementSpecification(HEIGHT_FEATURE).setValue(height);
+			}
+		}*/
 
 	}
 

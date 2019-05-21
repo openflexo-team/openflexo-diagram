@@ -457,6 +457,9 @@ public class FMLControlledDiagramDrawing extends AbstractDiagramDrawing {
 		});
 
 		fmlControlledShapeBinding.setDynamicPropertyValue(GraphicalRepresentation.TEXT, new DataBinding<String>("drawable.label"), true);
+		//fmlControlledShapeBinding.setDynamicPropertyValue(ShapeGraphicalRepresentation.HEIGHT, new DataBinding<Double>("drawable.height"),
+		//		true);
+
 		fmlControlledConnectorBinding.setDynamicPropertyValue(GraphicalRepresentation.TEXT, new DataBinding<String>("drawable.label"),
 				true);
 
