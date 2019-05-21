@@ -8,7 +8,7 @@
     </ShapeRole>
     <ShapeRole id="SYL-21" previewHeight="20.0" previewY="0.0" previewX="20.0" previewWidth="98.79052796552062" exampleLabel="Concept" metamodelElementReference="http://openflexo.org/fml-diagramming/FMLClassDiagram.diagramspecification/ExampleDiagram.diagram#SYL_6" cloningStrategy="Clone" cardinality="ZeroOne" name="title" userID="SYL" flexoID="21">
       <ParentShapeRole idref="SYL-19" />
-      <GRSpec id="SYL-1440" featureName="label" value="concept.name" userID="SYL" flexoID="1440" />
+      <GRSpec id="SYL-1480" featureName="label" value="concept.name" userID="SYL" flexoID="1480" />
     </ShapeRole>
     <DropScheme id="SYL-41" target="top" name="dropFlexoConceptGRAtTopLevel" width="800" label="dropFlexoConceptGRAtTopLevel" height="600" userID="SYL" flexoID="41">
       <BehaviourControlGraph_Sequence id="SYL-107" ownerContext="controlGraph2" userID="SYL" flexoID="107">
@@ -112,7 +112,7 @@
   <FlexoConcept id="SYL-202" name="FlexoPropertyGR" userID="SYL" flexoID="202">
     <Inspector id="SYL-203" inspectorTitle="FlexoPropertyGR" userID="SYL" flexoID="203" />
     <ShapeRole id="SYL-220" previewHeight="16.0" previewY="91.0" previewX="0.0" previewWidth="250.0" exampleLabel="property" metamodelElementReference="http://openflexo.org/fml-diagramming/FMLClassDiagram.diagramspecification/ExampleDiagram.diagram#SYL_12" cloningStrategy="Clone" cardinality="ZeroOne" name="propertyShape" userID="SYL" flexoID="220">
-      <GRSpec id="SYL-1441" featureName="label" value="property.name" userID="SYL" flexoID="1441" />
+      <GRSpec id="SYL-1481" featureName="label" value="property.name" userID="SYL" flexoID="1481" />
     </ShapeRole>
     <FlexoPropertyRole id="SYL-268" container="virtualModel" cloningStrategy="Reference" cardinality="ZeroOne" name="property" userID="SYL" flexoID="268" />
     <DeletionScheme id="SYL-208" name="delete" width="800" label="delete" height="600" userID="SYL" flexoID="208">
@@ -144,8 +144,8 @@
       <AbstractProperty id="SYL-450" type="java.lang.Double" name="requiredHeight" userID="SYL" flexoID="450" />
       <AbstractProperty id="SYL-857" type="java.lang.Double" name="heightSpan" userID="SYL" flexoID="857" />
       <ShapeRole id="SYL-1088" previewX="0.0" metamodelElementReference="http://openflexo.org/fml-diagramming/FMLClassDiagram.diagramspecification/ExampleDiagram.diagram#SYL_15" container="diagram" cloningStrategy="Clone" cardinality="ZeroOne" name="compartmentShape" userID="SYL" flexoID="1088">
-        <GRSpec id="SYL-1442" featureName="y" readOnly="true" value="this.getY(this.containerHeight)" userID="SYL" flexoID="1442" />
-        <GRSpec id="SYL-1443" featureName="height" readOnly="true" value="this.getHeight(this.containerHeight)" userID="SYL" flexoID="1443" />
+        <GRSpec id="SYL-1482" featureName="y" readOnly="true" value="this.getY(this.containerHeight)" userID="SYL" flexoID="1482" />
+        <GRSpec id="SYL-1483" featureName="height" readOnly="true" value="this.getHeight(this.containerHeight)" userID="SYL" flexoID="1483" />
       </ShapeRole>
       <ActionScheme id="SYL-492" name="getY" width="800" label="getY" height="600" userID="SYL" flexoID="492">
         <BehaviourControlGraph_Sequence id="SYL-1009" userID="SYL" flexoID="1009">
@@ -214,7 +214,7 @@
               <AssignableAction_ExpressionAction id="SYL-900" expression="(requiredHeight + ((extraSpace * heightSpan) / totalHeightSpan))" userID="SYL" flexoID="900" />
             </ControlGraph2_ReturnStatement>
             <ControlGraph1_DeclarationAction id="SYL-898" variable="extraSpace" ownerContext="controlGraph1" userID="SYL" flexoID="898">
-              <AssignableAction_ExpressionAction id="SYL-897" expression="(parameters.availableHeight - requiredHeight)" userID="SYL" flexoID="897" />
+              <AssignableAction_ExpressionAction id="SYL-897" expression="(parameters.availableHeight - totalRequiredHeight)" userID="SYL" flexoID="897" />
             </ControlGraph1_DeclarationAction>
           </ControlGraph2_Sequence>
           <ControlGraph1_ConditionalAction id="SYL-1342" condition="(concept = null)" ownerContext="controlGraph1" userID="SYL" flexoID="1342">
@@ -282,7 +282,7 @@
     <PrimitiveRole id="SYL-444" primitiveType="Boolean" cloningStrategy="Clone" cardinality="ZeroOne" name="displayBehaviours" userID="SYL" flexoID="444" />
     <PrimitiveRole id="SYL-445" primitiveType="Boolean" cloningStrategy="Clone" cardinality="ZeroOne" name="displayContainment" userID="SYL" flexoID="445" />
     <ShapeRole id="SYL-538" previewHeight="110.3380992430614" previewY="53.0" previewX="60.0" previewWidth="118.79052796552062" exampleLabel="" metamodelElementReference="http://openflexo.org/fml-diagramming/FMLClassDiagram.diagramspecification/ExampleDiagram.diagram#SYL_2" cloningStrategy="Clone" cardinality="ZeroOne" name="topLevelShape" userID="SYL" flexoID="538">
-      <GRSpec id="SYL-1444" featureName="height" value="containerHeight" userID="SYL" flexoID="1444" />
+      <GRSpec id="SYL-1475" featureName="height" value="containerHeight" userID="SYL" flexoID="1475" />
     </ShapeRole>
     <FlexoConceptRole id="SYL-705" container="virtualModel" cloningStrategy="Reference" cardinality="ZeroOne" name="concept" userID="SYL" flexoID="705" />
     <GetSetProperty id="SYL-930" name="totalRequiredHeight" userID="SYL" flexoID="930">

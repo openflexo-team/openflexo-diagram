@@ -194,7 +194,7 @@ public class FMLClassDiagram {
         if (concept = null) {        
           return parameters.availableHeight;        
         }        
-        Double extraSpace = (parameters.availableHeight - requiredHeight);        
+        Double extraSpace = (parameters.availableHeight - totalRequiredHeight);        
         return (requiredHeight + ((extraSpace * heightSpan) / totalHeightSpan));      
       }      
       
@@ -311,7 +311,7 @@ public class FMLClassDiagram {
       if (concept = null) {      
         return parameters.availableHeight;      
       }      
-      Double extraSpace = (parameters.availableHeight - requiredHeight);      
+      Double extraSpace = (parameters.availableHeight - totalRequiredHeight);      
       return (requiredHeight + ((extraSpace * heightSpan) / totalHeightSpan));    
     }    
   
