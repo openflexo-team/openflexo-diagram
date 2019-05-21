@@ -28,10 +28,11 @@ public class FMLClassDiagram {
     @DropScheme    
     FlexoConceptGR:dropFlexoConceptGRAtTopLevel() {    
       concept = virtualModel.CreateFlexoConcept();      
-      this.initContainerGR(true,true,false)      
+      this.initContainerGR(true,false,false)      
       header = diagram.AddShape();      
       icon = diagram.AddShape();      
-      title = diagram.AddShape();    
+      title = diagram.AddShape();      
+      topLevelShape.firePropertyChange invalidate    
     }    
   
     @DeletionScheme    
@@ -98,9 +99,40 @@ public class FMLClassDiagram {
     public PropertiesCompartmentGR containmentCompartment;  
     public boolean displayProperties;  
     public boolean displayBehaviours;  
-    public String displayContainment;  
+    public boolean displayContainment;  
     public DiagramShape topLevelShape;  
     public FlexoConcept concept;  
+    @GetSetProperty(value="totalRequiredHeight", access=get)    
+    public Double getTotalRequiredHeight {    
+      log "Compute required height"      
+      Double returned = 20.0;      
+      if displayProperties {      
+        returned = (returned + propertyCompartment.requiredHeight);      
+      }      
+      if displayBehaviours {      
+        returned = (returned + behaviourCompartment.requiredHeight);      
+      }      
+      if displayContainment {      
+        returned = (returned + containmentCompartment.requiredHeight);      
+      }      
+      return returned;    
+    }  
+    @GetSetProperty(value="totalHeightSpan", access=get)    
+    public Double getTotalHeightSpan {    
+      log "Compute height span"      
+      Double returned = 0.0;      
+      if displayProperties {      
+        returned = (returned + propertyCompartment.heightSpan);      
+      }      
+      if displayBehaviours {      
+        returned = (returned + behaviourCompartment.heightSpan);      
+      }      
+      if displayContainment {      
+        returned = (returned + containmentCompartment.heightSpan);      
+      }      
+      return returned;    
+    }  
+    public double containerHeight;  
   
     @DeletionScheme    
     Void delete() {    
@@ -109,9 +141,14 @@ public class FMLClassDiagram {
   
     @ActionScheme    
     Void initContainerGR(Boolean displayProperties, Boolean displayBehaviours, Boolean displayContainment) {    
+      containerHeight = 50.0;      
       topLevelShape = diagram.AddShape();      
+      displayProperties = parameters.displayProperties;      
+      displayBehaviours = parameters.displayBehaviours;      
+      displayContainment = parameters.displayContainment;      
       if displayProperties {      
-          
+        log "Je cree le compartiment properties"        
+        propertyCompartment = PropertiesCompartmentGR.create(topLevelShape);      
       }    
     }    
   
@@ -120,26 +157,68 @@ public class FMLClassDiagram {
     public class CompartmentGR {    
       
           
-      abstract Integer requiredHeight;    
+      abstract Double requiredHeight;    
+          
+      abstract Double heightSpan;    
+      public DiagramShape compartmentShape;    
       
       @ActionScheme      
-      Void getY(Integer availableHeight) {      
-          
+      Double getY(Double availableHeight) {      
+        Double returned = 20.0;        
+        if (concept = null) {        
+          return returned;        
+        }        
+        if (this = propertyCompartment) {        
+          return returned;        
+        }        
+        if (displayProperties & (propertyCompartment != null)) {        
+          returned = (returned + propertyCompartment.getHeight(parameters.availableHeight));        
+        }        
+        if (this = behaviourCompartment) {        
+          return returned;        
+        }        
+        if (displayBehaviours & (behaviourCompartment != null)) {        
+          returned = (returned + behaviourCompartment.getHeight(parameters.availableHeight));        
+        }        
+        if (this = containmentCompartment) {        
+          return returned;        
+        }        
+        if (displayContainment & (displayContainment != null)) {        
+          returned = (returned + containmentCompartment.getHeight(parameters.availableHeight));        
+        }        
+        return returned;      
       }      
       
       @ActionScheme      
-      Void getHeight(Integer availableHeight) {      
-          
+      Double getHeight(Double availableHeight) {      
+        if (concept = null) {        
+          return parameters.availableHeight;        
+        }        
+        Double extraSpace = (parameters.availableHeight - requiredHeight);        
+        return (requiredHeight + ((extraSpace * heightSpan) / totalHeightSpan));      
+      }      
+      
+      @ActionScheme      
+      Void init(DiagramShape topLevelShape) {      
+        log "Jusque ici ca va"        
+        log ("y=" + this.getY(100))        
+        log ("height=" + this.getHeight(100))        
+        compartmentShape = diagram.AddShape();      
       }      
       
     }    
   
     @FlexoConcept    
-    public class PropertiesCompartmentGR {    
+    public class PropertiesCompartmentGR extends CompartmentGR  {    
+      
+          
+      public Double requiredHeight = ((concept != null) ? ((concept.declaredProperties.size * 16) + 10.0) : 10.0);    
+          
+      public Double heightSpan = 10.0;    
       
       @CreationScheme      
-      PropertiesCompartmentGR:create() {      
-          
+      PropertiesCompartmentGR:create(DiagramShape topLevelShape) {      
+        this.init(parameters.topLevelShape)      
       }      
       
       @DeletionScheme      
@@ -150,7 +229,12 @@ public class FMLClassDiagram {
     }    
   
     @FlexoConcept    
-    public class BehaviourCompartmentGR {    
+    public class BehaviourCompartmentGR extends CompartmentGR  {    
+      
+          
+      public Double requiredHeight = ((concept != null) ? ((concept.declaredFlexoBehaviours.size * 16) + 10.0) : 10.0);    
+          
+      public Double heightSpan = 10.0;    
       
       @CreationScheme      
       BehaviourCompartmentGR:create() {      
@@ -165,7 +249,12 @@ public class FMLClassDiagram {
     }    
   
     @FlexoConcept    
-    public class ContainmentCompartmentGR {    
+    public class ContainmentCompartmentGR extends CompartmentGR  {    
+      
+          
+      public Double requiredHeight = 10.0;    
+          
+      public Double heightSpan = 80.0;    
       
       @CreationScheme      
       ContainmentCompartmentGR:create() {      
@@ -185,26 +274,68 @@ public class FMLClassDiagram {
   public class CompartmentGR {  
   
       
-    abstract Integer requiredHeight;  
+    abstract Double requiredHeight;  
+      
+    abstract Double heightSpan;  
+    public DiagramShape compartmentShape;  
   
     @ActionScheme    
-    Void getY(Integer availableHeight) {    
-      
+    Double getY(Double availableHeight) {    
+      Double returned = 20.0;      
+      if (concept = null) {      
+        return returned;      
+      }      
+      if (this = propertyCompartment) {      
+        return returned;      
+      }      
+      if (displayProperties & (propertyCompartment != null)) {      
+        returned = (returned + propertyCompartment.getHeight(parameters.availableHeight));      
+      }      
+      if (this = behaviourCompartment) {      
+        return returned;      
+      }      
+      if (displayBehaviours & (behaviourCompartment != null)) {      
+        returned = (returned + behaviourCompartment.getHeight(parameters.availableHeight));      
+      }      
+      if (this = containmentCompartment) {      
+        return returned;      
+      }      
+      if (displayContainment & (displayContainment != null)) {      
+        returned = (returned + containmentCompartment.getHeight(parameters.availableHeight));      
+      }      
+      return returned;    
     }    
   
     @ActionScheme    
-    Void getHeight(Integer availableHeight) {    
-      
+    Double getHeight(Double availableHeight) {    
+      if (concept = null) {      
+        return parameters.availableHeight;      
+      }      
+      Double extraSpace = (parameters.availableHeight - requiredHeight);      
+      return (requiredHeight + ((extraSpace * heightSpan) / totalHeightSpan));    
+    }    
+  
+    @ActionScheme    
+    Void init(DiagramShape topLevelShape) {    
+      log "Jusque ici ca va"      
+      log ("y=" + this.getY(100))      
+      log ("height=" + this.getHeight(100))      
+      compartmentShape = diagram.AddShape();    
     }    
   
   }  
 
   @FlexoConcept  
-  public class PropertiesCompartmentGR {  
+  public class PropertiesCompartmentGR extends CompartmentGR  {  
+  
+      
+    public Double requiredHeight = ((concept != null) ? ((concept.declaredProperties.size * 16) + 10.0) : 10.0);  
+      
+    public Double heightSpan = 10.0;  
   
     @CreationScheme    
-    PropertiesCompartmentGR:create() {    
-      
+    PropertiesCompartmentGR:create(DiagramShape topLevelShape) {    
+      this.init(parameters.topLevelShape)    
     }    
   
     @DeletionScheme    
@@ -215,7 +346,12 @@ public class FMLClassDiagram {
   }  
 
   @FlexoConcept  
-  public class BehaviourCompartmentGR {  
+  public class BehaviourCompartmentGR extends CompartmentGR  {  
+  
+      
+    public Double requiredHeight = ((concept != null) ? ((concept.declaredFlexoBehaviours.size * 16) + 10.0) : 10.0);  
+      
+    public Double heightSpan = 10.0;  
   
     @CreationScheme    
     BehaviourCompartmentGR:create() {    
@@ -230,7 +366,12 @@ public class FMLClassDiagram {
   }  
 
   @FlexoConcept  
-  public class ContainmentCompartmentGR {  
+  public class ContainmentCompartmentGR extends CompartmentGR  {  
+  
+      
+    public Double requiredHeight = 10.0;  
+      
+    public Double heightSpan = 80.0;  
   
     @CreationScheme    
     ContainmentCompartmentGR:create() {    
