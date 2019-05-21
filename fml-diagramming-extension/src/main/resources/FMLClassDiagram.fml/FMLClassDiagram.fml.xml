@@ -143,7 +143,7 @@
       <Inspector id="SYL-415" inspectorTitle="CompartmentGR" userID="SYL" flexoID="415" />
       <AbstractProperty id="SYL-450" type="java.lang.Double" name="requiredHeight" userID="SYL" flexoID="450" />
       <AbstractProperty id="SYL-857" type="java.lang.Double" name="heightSpan" userID="SYL" flexoID="857" />
-      <ShapeRole id="SYL-1088" previewX="0.0" metamodelElementReference="http://openflexo.org/fml-diagramming/FMLClassDiagram.diagramspecification/ExampleDiagram.diagram#SYL_15" container="diagram" cloningStrategy="Clone" cardinality="ZeroOne" name="compartmentShape" userID="SYL" flexoID="1088">
+      <ShapeRole id="SYL-1088" previewX="0.0" metamodelElementReference="http://openflexo.org/fml-diagramming/FMLClassDiagram.diagramspecification/ExampleDiagram.diagram#SYL_7" container="diagram" cloningStrategy="Clone" cardinality="ZeroOne" name="compartmentShape" userID="SYL" flexoID="1088">
         <GRSpec id="SYL-1482" featureName="y" readOnly="true" value="this.getY(this.containerHeight)" userID="SYL" flexoID="1482" />
         <GRSpec id="SYL-1483" featureName="height" readOnly="true" value="this.getHeight(this.containerHeight)" userID="SYL" flexoID="1483" />
       </ShapeRole>
