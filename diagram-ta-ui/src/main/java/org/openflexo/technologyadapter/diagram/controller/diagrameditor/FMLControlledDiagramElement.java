@@ -48,6 +48,7 @@ import org.openflexo.connie.binding.BindingValueChangeListener;
 import org.openflexo.connie.exception.NotSettableContextException;
 import org.openflexo.connie.exception.NullReferenceException;
 import org.openflexo.connie.exception.TypeMismatchException;
+import org.openflexo.connie.type.TypeUtils;
 import org.openflexo.diana.GraphicalRepresentation;
 import org.openflexo.foundation.FlexoObject;
 import org.openflexo.foundation.fml.rt.FlexoConceptInstance;
@@ -194,9 +195,17 @@ public interface FMLControlledDiagramElement<E extends DiagramElement<GR>, GR ex
 			if (getDiagramElement() != null && grSpec != null && grSpec.getValue() != null && grSpec.getValue().isValid()) {
 				T initValue;
 				try {
-					initValue = grSpec.getValue().getBindingValue(getFlexoConceptInstance());
-					grSpec.getFeature().applyToGraphicalRepresentation(getDiagramElement().getGraphicalRepresentation(), initValue);
-					getPropertyChangeSupport().firePropertyChange(grSpec.getFeatureName(), null, initValue);
+					try {
+						initValue = grSpec.getValue().getBindingValue(getFlexoConceptInstance());
+						grSpec.getFeature().applyToGraphicalRepresentation(getDiagramElement().getGraphicalRepresentation(), initValue);
+						getPropertyChangeSupport().firePropertyChange(grSpec.getFeatureName(), null, initValue);
+					} catch (ClassCastException e) {
+						// Attempt to fix a ClassCastException by applying automatic cast operation
+						Object computedValue = grSpec.getValue().getBindingValue(getFlexoConceptInstance());
+						initValue = (T) TypeUtils.castTo(computedValue, grSpec.getFeature().getType());
+						grSpec.getFeature().applyToGraphicalRepresentation(getDiagramElement().getGraphicalRepresentation(), initValue);
+						getPropertyChangeSupport().firePropertyChange(grSpec.getFeatureName(), null, initValue);
+					}
 				} catch (TypeMismatchException e) {
 					e.printStackTrace();
 				} catch (NullReferenceException e) {
@@ -277,18 +286,18 @@ public interface FMLControlledDiagramElement<E extends DiagramElement<GR>, GR ex
 				try {
 
 					/*if (getRole().getLabel().toString().equals("company.companyName")) {
-						System.out.println("OK, faut que je calcule le label pour " + getFlexoConceptInstance().getStringRepresentation());
-						System.out.println("Je tombe sur " + getRole().getLabel().getBindingValue(getFlexoConceptInstance()));
-						System.out.println("value=" + getRole().getLabel());*/
+					System.out.println("OK, faut que je calcule le label pour " + getFlexoConceptInstance().getStringRepresentation());
+					System.out.println("Je tombe sur " + getRole().getLabel().getBindingValue(getFlexoConceptInstance()));
+					System.out.println("value=" + getRole().getLabel());*/
 					// System.out.println("valid=" + getRole().getLabel().isValid());
 					// System.out.println("reason=" + getRole().getLabel().invalidBindingReason());
 					// Thread.dumpStack();
 
 					/*if (!getRole().getLabel().isValid()) {
-						getRole().getLabel().markedAsToBeReanalized();
-						System.out.println("et maintenant pour value=" + getRole().getLabel());
-						System.out.println("valid=" + getRole().getLabel().isValid());
-						System.out.println("reason=" + getRole().getLabel().invalidBindingReason());
+					getRole().getLabel().markedAsToBeReanalized();
+					System.out.println("et maintenant pour value=" + getRole().getLabel());
+					System.out.println("valid=" + getRole().getLabel().isValid());
+					System.out.println("reason=" + getRole().getLabel().invalidBindingReason());
 					}*/
 
 					// }
