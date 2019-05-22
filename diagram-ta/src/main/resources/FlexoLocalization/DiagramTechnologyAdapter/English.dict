@@ -38,6 +38,7 @@ configure_new_diagram=Configure new diagram
 configure_new_palette=Configure new palette
 configure_palette_element=Configure palette element
 connector_inspector=Connector inspector
+control_inspector=Control inspector
 create_a_new_connector_role=Create a new connector role
 create_a_new_shape_role=Create a new shape role
 create_diagram_virtual_model=Create diagram virtual model
