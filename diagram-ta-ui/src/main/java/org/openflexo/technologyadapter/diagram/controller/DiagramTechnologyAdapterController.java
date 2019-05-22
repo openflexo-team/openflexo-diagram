@@ -158,7 +158,8 @@ public class DiagramTechnologyAdapterController extends TechnologyAdapterControl
 		dialogInspectors.getBackgroundStyleInspector().setLocation(1000, 500);
 		dialogInspectors.getShapeInspector().setLocation(1000, 600);
 		dialogInspectors.getConnectorInspector().setLocation(1000, 700);
-		dialogInspectors.getLocationSizeInspector().setLocation(1000, 50);
+		dialogInspectors.getLocationSizeInspector().setLocation(1000, 200);
+		dialogInspectors.getControlInspector().setLocation(1000, 50);
 
 		diagramInspectorGroup = controller.loadInspectorGroup("Diagram", getTechnologyAdapter().getLocales(),
 				getFMLTechnologyAdapterInspectorGroup());
@@ -191,6 +192,8 @@ public class DiagramTechnologyAdapterController extends TechnologyAdapterControl
 				dialogInspectors.getShadowStyleInspector());
 		WindowMenuItem locationSizeInspectorItem = viewMenu.new WindowMenuItem(getLocales().localizedForKey("location_size_inspector"),
 				dialogInspectors.getLocationSizeInspector());
+		WindowMenuItem controlInspectorItem = viewMenu.new WindowMenuItem(getLocales().localizedForKey("control_inspector"),
+				dialogInspectors.getControlInspector());
 
 		viewMenu.add(foregroundInspectorItem);
 		viewMenu.add(backgroundInspectorItem);
@@ -199,6 +202,7 @@ public class DiagramTechnologyAdapterController extends TechnologyAdapterControl
 		viewMenu.add(connectorInspectorItem);
 		viewMenu.add(shadowInspectorItem);
 		viewMenu.add(locationSizeInspectorItem);
+		viewMenu.add(controlInspectorItem);
 
 		// Set the screenshot builders
 		getTechnologyAdapter().setScreenshotBuilder(new DiagramScreenshotBuilder());
