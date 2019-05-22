@@ -3,7 +3,7 @@
   <Shape id="1" name="Shape" userID="SYL" flexoID="2">
     <Shape id="2" name="Header" userID="SYL" flexoID="4">
       <Shape id="3" name="Icon" userID="SYL" flexoID="5">
-        <ShapeGraphicalRepresentation id="4" relativeTextY="0.5" locationConstraints="UNMOVABLE" isFloatingLabel="false" allowToLeaveBounds="false" adaptBoundsToContents="false" yConstraints="2" xConstraints="2" x="51.39526398276031" y="2.0" relativeTextX="0.5" dimensionConstraints="FREELY_RESIZABLE" width="16.0" height="16.0" identifier="1022a69f" layer="1" isSelectable="false" isFocusable="false">
+        <ShapeGraphicalRepresentation id="4" relativeTextY="0.5" locationConstraints="UNMOVABLE" isFloatingLabel="false" allowToLeaveBounds="false" adaptBoundsToContents="false" yConstraints="2" xConstraints="2" x="2.0" y="2.0" relativeTextX="0.5" dimensionConstraints="FREELY_RESIZABLE" width="16.0" height="16.0" identifier="1022a69f" layer="1" isSelectable="false" isFocusable="false">
           <SelectedColorBackgroundStyle id="5" color="254,247,217" transparencyLevel="0.5" />
           <ForegroundStyle id="6" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" noStroke="true" capStyle="CAP_SQUARE" />
           <FocusedColorBackgroundStyle id="7" color="254,247,217" transparencyLevel="0.5" />
@@ -16,7 +16,7 @@
         </ShapeGraphicalRepresentation>
       </Shape>
       <Shape id="14" name="Title" text="Concept" userID="SYL" flexoID="6">
-        <ShapeGraphicalRepresentation id="15" relativeTextY="0.5" locationConstraints="UNMOVABLE" isFloatingLabel="false" widthConstraints="(parent.width - 20)" allowToLeaveBounds="false" adaptBoundsToContents="false" yConstraints="0" heightConstraints="20" xConstraints="20" x="10.0" relativeTextX="0.5" dimensionConstraints="UNRESIZABLE" width="98.79052796552062" height="20.0" identifier="79f1f1f2" layer="1" text="Concept">
+        <ShapeGraphicalRepresentation id="15" relativeTextY="0.5" locationConstraints="UNMOVABLE" isFloatingLabel="false" widthConstraints="(parent.width - 20)" allowToLeaveBounds="false" adaptBoundsToContents="false" yConstraints="0" heightConstraints="20" xConstraints="20" x="20.0" relativeTextX="0.5" dimensionConstraints="UNRESIZABLE" width="98.79052796552062" height="20.0" identifier="79f1f1f2" layer="1" text="Concept">
           <SelectedColorBackgroundStyle id="16" color="254,247,217" transparencyLevel="0.5" />
           <ForegroundStyle id="17" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" noStroke="true" capStyle="CAP_SQUARE" />
           <FocusedColorBackgroundStyle id="18" color="254,247,217" transparencyLevel="0.5" />
@@ -118,7 +118,7 @@
       <TextStyle id="100" backgroundColor="255,255,255" color="0,0,0" font="Lucida Sans,0,11" />
     </ShapeGraphicalRepresentation>
   </Shape>
-  <DrawingGraphicalRepresentation id="112" drawWorkingArea="false" backgroundColor="255,255,255" focusColor="255,0,0" selectionColor="0,0,255" rectangleSelectingSelectionColor="0,0,255" dimensionConstraints="FREELY_RESIZABLE" identifier="1095ff67">
-    <TextStyle id="113" backgroundColor="255,255,255" color="0,0,0" font="Lucida Sans,0,11" />
+  <DrawingGraphicalRepresentation id="101" backgroundColor="255,255,255" drawWorkingArea="false" focusColor="255,0,0" selectionColor="0,0,255" rectangleSelectingSelectionColor="0,0,255" dimensionConstraints="FREELY_RESIZABLE" identifier="1095ff67">
+    <TextStyle id="102" backgroundColor="255,255,255" color="0,0,0" font="Lucida Sans,0,11" />
   </DrawingGraphicalRepresentation>
 </Diagram>

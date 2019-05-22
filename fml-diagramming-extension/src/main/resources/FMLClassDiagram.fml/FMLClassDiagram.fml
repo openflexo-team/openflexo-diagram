@@ -28,7 +28,7 @@ public class FMLClassDiagram {
     @DropScheme    
     FlexoConceptGR:dropFlexoConceptGRAtTopLevel() {    
       concept = virtualModel.CreateFlexoConcept();      
-      this.initContainerGR(true,false,false)      
+      this.initContainerGR(true,true,false)      
       header = diagram.AddShape();      
       icon = diagram.AddShape();      
       title = diagram.AddShape();      

@@ -118,20 +118,7 @@
       <TextStyle id="100" backgroundColor="255,255,255" color="0,0,0" font="Lucida Sans,0,11" />
     </ShapeGraphicalRepresentation>
   </Shape>
-  <Shape id="101" name="Shape" userID="SYL" flexoID="15">
-    <ShapeGraphicalRepresentation id="102" relativeTextY="0.5" locationConstraints="UNMOVABLE" adaptBoundsToContents="false" xConstraints="0" y="3.14" relativeTextX="0.5" dimensionConstraints="FREELY_RESIZABLE" identifier="337ba328" layer="1">
-      <SelectedColorBackgroundStyle id="103" color="255,255,255" transparencyLevel="0.5" />
-      <ForegroundStyle id="104" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
-      <FocusedColorBackgroundStyle id="105" color="255,255,255" transparencyLevel="0.5" />
-      <ShadowStyle id="106" />
-      <FocusedForegroundStyle id="107" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
-      <SelectedForegroundStyle id="108" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
-      <ColorBackgroundStyle id="109" color="255,255,255" transparencyLevel="0.5" />
-      <RectangleShape id="110" />
-      <TextStyle id="111" backgroundColor="255,255,255" color="0,0,0" font="Lucida Sans,0,11" />
-    </ShapeGraphicalRepresentation>
-  </Shape>
-  <DrawingGraphicalRepresentation id="112" drawWorkingArea="false" backgroundColor="255,255,255" focusColor="255,0,0" selectionColor="0,0,255" rectangleSelectingSelectionColor="0,0,255" dimensionConstraints="FREELY_RESIZABLE" identifier="1095ff67">
-    <TextStyle id="113" backgroundColor="255,255,255" color="0,0,0" font="Lucida Sans,0,11" />
+  <DrawingGraphicalRepresentation id="101" backgroundColor="255,255,255" drawWorkingArea="false" focusColor="255,0,0" selectionColor="0,0,255" rectangleSelectingSelectionColor="0,0,255" dimensionConstraints="FREELY_RESIZABLE" identifier="1095ff67">
+    <TextStyle id="102" backgroundColor="255,255,255" color="0,0,0" font="Lucida Sans,0,11" />
   </DrawingGraphicalRepresentation>
 </Diagram>
