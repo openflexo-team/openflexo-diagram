@@ -32,6 +32,7 @@ cannot_rename_resource=Cannot rename resource
 cardinality=Cardinality
 choose_a_creation_strategy=Choose a creation strategy
 choose_an_option=Choose an option
+choose_which_connector_you_want_to_set_or_replace=Choose which connector you want to set or replace
 choose_which_shape_you_want_to_set_or_replace=Choose which shape you want to set or replace
 conditional=Conditional
 configure_new_diagram=Configure new diagram

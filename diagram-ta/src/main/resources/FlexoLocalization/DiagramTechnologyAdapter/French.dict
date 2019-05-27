@@ -32,6 +32,7 @@ cannot_rename_resource=Impossible de renommer la resource
 cardinality=Cardinalit\u00E9
 choose_a_creation_strategy=Choisir une strat\u00E9gie de cr\u00E9ation
 choose_an_option=Votre choix
+choose_which_connector_you_want_to_set_or_replace=choose_which_connector_you_want_to_set_or_replace
 choose_which_shape_you_want_to_set_or_replace=Choisir la forme \u00E0 modifier ou \u00E0 remplacer
 conditional=conditional
 configure_new_diagram=Configurer le nouveau diagramme
