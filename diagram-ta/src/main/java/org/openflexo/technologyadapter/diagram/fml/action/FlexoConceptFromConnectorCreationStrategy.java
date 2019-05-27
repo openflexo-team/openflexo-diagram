@@ -230,13 +230,14 @@ public abstract class FlexoConceptFromConnectorCreationStrategy
 			AssignationAction<DiagramConnector> assignationAction = getTransformationAction().getFactory()
 					.newAssignationAction(newAddConnector);
 			assignationAction.setAssignation(new DataBinding<>(newConnectorRole.getRoleName()));
-			ShapeRole fromPatternRole = null;
-			ShapeRole toPatternRole = null;
+			// TODO: work with FlexoProperty<Shape>
+			ShapeRole fromShapeRole = null;
+			ShapeRole toShapeRole = null;
 			if (fromFlexoConcept.getDeclaredProperties(ShapeRole.class).size() > 0) {
-				fromPatternRole = fromFlexoConcept.getDeclaredProperties(ShapeRole.class).get(0);
+				fromShapeRole = fromFlexoConcept.getDeclaredProperties(ShapeRole.class).get(0);
 			}
 			if (toFlexoConcept.getDeclaredProperties(ShapeRole.class).size() > 0) {
-				toPatternRole = toFlexoConcept.getDeclaredProperties(ShapeRole.class).get(0);
+				toShapeRole = toFlexoConcept.getDeclaredProperties(ShapeRole.class).get(0);
 			}
 
 			List<TypedDiagramModelSlot> msList = newConnectorRole.getFlexoConcept().getAccessibleProperties(TypedDiagramModelSlot.class);
@@ -244,10 +245,20 @@ public abstract class FlexoConceptFromConnectorCreationStrategy
 				newAddConnector.setReceiver(new DataBinding<>(msList.get(0).getName()));
 			}
 
-			newAddConnector
-					.setFromShape(new DataBinding<DiagramShape>(LinkSchemeBindingModel.FROM_TARGET + "." + fromPatternRole.getRoleName()));
-			newAddConnector.setToShape(new DataBinding<DiagramShape>(LinkSchemeBindingModel.TO_TARGET + "." + toPatternRole.getRoleName()));
-
+			if (fromShapeRole != null) {
+				newAddConnector.setFromShape(
+						new DataBinding<DiagramShape>(LinkSchemeBindingModel.FROM_TARGET + "." + fromShapeRole.getRoleName()));
+			}
+			else {
+				newAddConnector.setFromShape(new DataBinding<DiagramShape>(LinkSchemeBindingModel.FROM_TARGET + ".?"));
+			}
+			if (toShapeRole != null) {
+				newAddConnector
+						.setToShape(new DataBinding<DiagramShape>(LinkSchemeBindingModel.TO_TARGET + "." + toShapeRole.getRoleName()));
+			}
+			else {
+				newAddConnector.setToShape(new DataBinding<DiagramShape>(LinkSchemeBindingModel.TO_TARGET + ".?"));
+			}
 			newLinkScheme.getControlGraph().sequentiallyAppend(assignationAction);
 		}
 
