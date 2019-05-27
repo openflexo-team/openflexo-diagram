@@ -277,7 +277,7 @@ public interface FMLDiagramPaletteElementBinding extends FlexoConceptObject {
 
 		@Override
 		public String getPaletteElementId() {
-			if (getPaletteElement() != null) {
+			if (getPaletteElement() != null && getPaletteElement().getPalette() != null) {
 				return getPaletteElement().getPalette().getURI() + "#" + getPaletteElement().getName();
 			}
 			return paletteElementId;
@@ -414,7 +414,7 @@ public interface FMLDiagramPaletteElementBinding extends FlexoConceptObject {
 		public FMLModelFactory getFMLModelFactory() {
 			return getDiagramModelSlot().getFMLModelFactory();
 		}
-		
+
 		/*@Override
 		public FMLModelFactory getFMLModelFactory() {
 			if (getOwningVirtualModel() != null) {
