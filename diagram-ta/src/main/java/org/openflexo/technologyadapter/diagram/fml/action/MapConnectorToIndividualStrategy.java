@@ -49,7 +49,7 @@ import org.openflexo.foundation.fml.FlexoBehaviourParameter;
 import org.openflexo.foundation.fml.FlexoBehaviourParameter.WidgetType;
 import org.openflexo.foundation.fml.FlexoConcept;
 import org.openflexo.foundation.fml.binding.ModelSlotBindingVariable;
-import org.openflexo.foundation.fml.binding.VirtualModelModelSlotPathElement;
+import org.openflexo.foundation.fml.binding.ModelSlotPathElement;
 import org.openflexo.foundation.fml.editionaction.AssignableAction;
 import org.openflexo.foundation.fml.editionaction.AssignationAction;
 import org.openflexo.foundation.ontology.IFlexoOntology;
@@ -128,8 +128,8 @@ public class MapConnectorToIndividualStrategy extends FlexoConceptFromConnectorC
 				if (bpe instanceof ModelSlotBindingVariable) {
 					ms = ((ModelSlotBindingVariable) bpe).getModelSlot();
 				}
-				else if (bpe instanceof VirtualModelModelSlotPathElement) {
-					ms = ((VirtualModelModelSlotPathElement<?>) bpe).getModelSlot();
+				else if (bpe instanceof ModelSlotPathElement) {
+					ms = ((ModelSlotPathElement<?>) bpe).getModelSlot();
 				}
 				if (ms instanceof FlexoOntologyModelSlot) {
 					return (FlexoOntologyModelSlot<?, ?, ?>) ms;
