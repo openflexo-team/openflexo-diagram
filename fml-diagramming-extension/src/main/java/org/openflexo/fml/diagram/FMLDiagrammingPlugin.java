@@ -124,7 +124,7 @@ public class FMLDiagrammingPlugin extends TechnologyAdapterPluginController<FMLT
 
 	@Override
 	public boolean handleObject(FlexoObject object) {
-		if (object instanceof FlexoConceptInstance
+		if (object instanceof FlexoConceptInstance && ((FlexoConceptInstance) object).getFlexoConcept() != null
 				&& ((FlexoConceptInstance) object).getFlexoConcept().getName().equals("FlexoConceptGR")) {
 			return true;
 		}
@@ -133,7 +133,7 @@ public class FMLDiagrammingPlugin extends TechnologyAdapterPluginController<FMLT
 
 	@Override
 	public FlexoObject getRelevantObject(FlexoObject object) {
-		if (object instanceof FlexoConceptInstance
+		if (object instanceof FlexoConceptInstance && ((FlexoConceptInstance) object).getFlexoConcept() != null
 				&& ((FlexoConceptInstance) object).getFlexoConcept().getName().equals("FlexoConceptGR")) {
 			try {
 				return (FlexoConcept) ((FlexoConceptInstance) object).execute("concept");
