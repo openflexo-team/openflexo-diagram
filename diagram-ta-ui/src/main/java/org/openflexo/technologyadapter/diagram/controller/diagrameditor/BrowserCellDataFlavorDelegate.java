@@ -87,6 +87,12 @@ public class BrowserCellDataFlavorDelegate extends DataFlavorDelegate {
 			// System.out.println("getDianaEditor()=" + getDianaEditor());
 			// System.out.println("getDianaEditor().getDragSourceContext()=" + getDianaEditor().getDragSourceContext());
 
+			if (getDiagramEditor().getDragSourceContext() == null && getDiagramEditor().getObjectBeingTransfered() instanceof BrowserCell) {
+				// Happen sometimes in some OS, see FOR-62, https://bugs.openflexo.org/browse/FOR-62
+				Object representedObject = ((BrowserCell) getDianaEditor().getObjectBeingTransfered()).getRepresentedObject();
+				return getApplicableDropSchemes(representedObject, focused).size() > 0;
+			}
+
 			if (getDianaEditor().getDragSourceContext().getTransferable() instanceof BrowserCell) {
 				Object representedObject = ((BrowserCell) getDianaEditor().getDragSourceContext().getTransferable()).getRepresentedObject();
 				return getApplicableDropSchemes(representedObject, focused).size() > 0;
@@ -206,12 +212,12 @@ public class BrowserCellDataFlavorDelegate extends DataFlavorDelegate {
 		}
 		VirtualModel diagramVirtualModel = getFMLControlledDiagram().getVirtualModel();
 		for (FlexoConcept concept : diagramVirtualModel.getFlexoConcepts()) {
-			System.out.println("on regarde le concept " + concept);
+			// System.out.println("on regarde le concept " + concept);
 			for (DropScheme ds : concept.getFlexoBehaviours(DropScheme.class)) {
-				System.out.println("ds=" + ds);
+				// System.out.println("ds=" + ds);
 				if (ds.getParameters().size() == 1) {
-					System.out.println("isOfType " + ds.getParameters().get(0).getType() + " : " + object + " ? -> "
-							+ TypeUtils.isOfType(object, ds.getParameters().get(0).getType()));
+					// System.out.println("isOfType " + ds.getParameters().get(0).getType() + " : " + object + " ? -> "
+					// + TypeUtils.isOfType(object, ds.getParameters().get(0).getType()));
 					if (TypeUtils.isOfType(object, ds.getParameters().get(0).getType())) {
 						returned.add(ds);
 					}
@@ -232,7 +238,7 @@ public class BrowserCellDataFlavorDelegate extends DataFlavorDelegate {
 			container = (DiagramContainerElement<?>) ((FMLControlledDiagramElement<?, ?>) target.getDrawable()).getDiagramElement();
 		}
 		if (target.getDrawable() instanceof FMLControlledDiagramShape) {
-			parentShapeRole = (ShapeRole) ((FMLControlledDiagramShape) target.getDrawable()).getRole();
+			parentShapeRole = ((FMLControlledDiagramShape) target.getDrawable()).getRole();
 			container = (DiagramContainerElement<?>) ((FMLControlledDiagramElement<?, ?>) target.getDrawable()).getDiagramElement();
 		}
 		if (target.getDrawable() instanceof Diagram) {
