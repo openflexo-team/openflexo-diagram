@@ -314,7 +314,7 @@ public class DrawRectangleControl extends MouseDragControlImpl<DiagramEditor> {
 			List<DrawRectangleScheme> returned = new ArrayList<>();
 
 			for (FlexoConcept concept : virtualModel.getFlexoConcepts()) {
-				for (DrawRectangleScheme drScheme : concept.getAccessibleFlexoBehaviours(DrawRectangleScheme.class)) {
+				for (DrawRectangleScheme drScheme : concept.getAccessibleFlexoBehaviours(DrawRectangleScheme.class, false)) {
 					if (container instanceof RootNode && drScheme.getTopTarget()) {
 						returned.add(drScheme);
 					}
