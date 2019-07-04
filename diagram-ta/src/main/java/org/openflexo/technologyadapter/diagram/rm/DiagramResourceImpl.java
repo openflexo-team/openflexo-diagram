@@ -88,6 +88,10 @@ public abstract class DiagramResourceImpl extends PamelaResourceImpl<Diagram, Di
 			DiagramSpecificationResource oldValue = this.diagramSpecificationResource;
 			this.diagramSpecificationResource = (DiagramSpecificationResource) diagramSpecificationResource;
 			getPropertyChangeSupport().firePropertyChange("metaModelResource", oldValue, diagramSpecificationResource);
+			if (diagramSpecificationResource != null) {
+				getFactory().getRelativePathResourceConverter().setAlternativeContainerResource(
+						diagramSpecificationResource.getIODelegate().getSerializationArtefactAsResource().getContainer());
+			}
 		}
 	}
 

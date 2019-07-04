@@ -84,6 +84,10 @@ public class DiagramFactory extends DianaModelFactoryImpl implements PamelaResou
 		}
 	}
 
+	public RelativePathResourceConverter getRelativePathResourceConverter() {
+		return relativePathResourceConverter;
+	}
+
 	@Override
 	public DiagramResource getResource() {
 		return resource;
