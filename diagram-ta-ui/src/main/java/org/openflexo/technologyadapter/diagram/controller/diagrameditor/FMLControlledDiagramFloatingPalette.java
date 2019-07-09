@@ -328,29 +328,15 @@ public class FMLControlledDiagramFloatingPalette extends ControlArea<DianaRoundR
 				if (focused == null) {
 					focused = getNode().getDrawing().getRoot();
 				}
-				SimplifiedCardinalDirection direction = DianaPoint.getSimplifiedOrientation(
-						new DianaPoint(getNode().convertLocalNormalizedPointToRemoteViewCoordinates(this.normalizedStartPoint,
-								getNode().getDrawing().getRoot(), controller.getScale())),
-						new DianaPoint(currentDraggingLocationInDrawingView));
-				Point dropPoint = currentDraggingLocationInDrawingView;
-				if (dropPoint.x < 0) {
-					dropPoint.x = 0;
-				}
-				if (dropPoint.y < 0) {
-					dropPoint.y = 0;
-				}
 
-				Point p = DianaUtils.convertPoint(getNode().getDrawing().getRoot(), dropPoint, focused, controller.getScale());
-				DianaPoint dropLocation = new DianaPoint(p.x / controller.getScale(), p.y / controller.getScale());
-				// ShapeNode<?> to = null;
-
+				DianaPoint dropLocation = new DianaPoint(currentDraggingLocationInDrawingView.getX(),currentDraggingLocationInDrawingView.getY());
+				
 				switch (mode) {
 					case CREATE_SHAPE_AND_LINK:
 						askAndApplyDropAndLinkScheme(dropLocation, focused);
 						break;
 					case LINK_ONLY:
 						if (to != null) {
-							// to = this.to.getDrawable();
 							askAndApplyLinkScheme(dropLocation, to);
 						}
 						break;
@@ -498,6 +484,7 @@ public class FMLControlledDiagramFloatingPalette extends ControlArea<DianaRoundR
 					menuItem.setToolTipText(linkScheme.getDescription());
 					popup.add(menuItem);
 				}
+				System.out.println("dropLocation="+dropLocation);
 				popup.show((Component) controller.getDrawingView().viewForNode(getNode().getParentNode()), (int) dropLocation.x,
 						(int) dropLocation.y);
 			}
