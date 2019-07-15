@@ -57,22 +57,22 @@ import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
 
 import org.openflexo.diana.BackgroundStyle;
+import org.openflexo.diana.ColorGradientBackgroundStyle.ColorGradientDirection;
 import org.openflexo.diana.DianaCoreUtils;
 import org.openflexo.diana.DianaUtils;
-import org.openflexo.diana.ForegroundStyle;
-import org.openflexo.diana.ShapeGraphicalRepresentation;
-import org.openflexo.diana.ColorGradientBackgroundStyle.ColorGradientDirection;
 import org.openflexo.diana.Drawing.DrawingTreeNode;
 import org.openflexo.diana.Drawing.RootNode;
 import org.openflexo.diana.Drawing.ShapeNode;
+import org.openflexo.diana.ForegroundStyle;
+import org.openflexo.diana.ShapeGraphicalRepresentation;
 import org.openflexo.diana.control.DianaEditor;
 import org.openflexo.diana.cp.ControlArea;
+import org.openflexo.diana.geom.DianaGeometricObject.Filling;
+import org.openflexo.diana.geom.DianaGeometricObject.SimplifiedCardinalDirection;
 import org.openflexo.diana.geom.DianaPoint;
 import org.openflexo.diana.geom.DianaRectangle;
 import org.openflexo.diana.geom.DianaRoundRectangle;
 import org.openflexo.diana.geom.DianaShape;
-import org.openflexo.diana.geom.DianaGeometricObject.Filling;
-import org.openflexo.diana.geom.DianaGeometricObject.SimplifiedCardinalDirection;
 import org.openflexo.diana.graphics.DianaGraphics;
 import org.openflexo.diana.swing.paint.DianaPaintManager;
 import org.openflexo.diana.swing.view.JShapeView;
@@ -122,8 +122,8 @@ public class FMLControlledDiagramFloatingPalette extends ControlArea<DianaRoundR
 	private static final BackgroundStyle DEFAULT = DianaCoreUtils.TOOLS_FACTORY.makeColoredBackground(Color.WHITE);
 	private static final ForegroundStyle NODE_FOREGROUND = DianaCoreUtils.TOOLS_FACTORY.makeForegroundStyle(Color.RED, 1.0f);
 	private static final ForegroundStyle EDGE_FOREGROUND = DianaCoreUtils.TOOLS_FACTORY.makeForegroundStyle(DianaUtils.NICE_BROWN, 1.0f);
-	private static final BackgroundStyle NODE_BACKGROUND = DianaCoreUtils.TOOLS_FACTORY.makeColorGradientBackground(Color.ORANGE, Color.WHITE,
-			ColorGradientDirection.NORTH_WEST_SOUTH_EAST);
+	private static final BackgroundStyle NODE_BACKGROUND = DianaCoreUtils.TOOLS_FACTORY.makeColorGradientBackground(Color.ORANGE,
+			Color.WHITE, ColorGradientDirection.NORTH_WEST_SOUTH_EAST);
 
 	static {
 		DEFAULT.setUseTransparency(true);
@@ -232,6 +232,9 @@ public class FMLControlledDiagramFloatingPalette extends ControlArea<DianaRoundR
 
 	@Override
 	public void startDragging(DianaEditor<?> controller, DianaPoint startPoint) {
+		/*if (!getNode().getIsLongTimeFocused()) {
+			return;
+		}*/
 		mode = null;
 		if (roleRect.contains(startPoint)) {
 			mode = Mode.CREATE_SHAPE_AND_LINK;
@@ -329,8 +332,9 @@ public class FMLControlledDiagramFloatingPalette extends ControlArea<DianaRoundR
 					focused = getNode().getDrawing().getRoot();
 				}
 
-				DianaPoint dropLocation = new DianaPoint(currentDraggingLocationInDrawingView.getX(),currentDraggingLocationInDrawingView.getY());
-				
+				DianaPoint dropLocation = new DianaPoint(currentDraggingLocationInDrawingView.getX(),
+						currentDraggingLocationInDrawingView.getY());
+
 				switch (mode) {
 					case CREATE_SHAPE_AND_LINK:
 						askAndApplyDropAndLinkScheme(dropLocation, focused);
@@ -372,7 +376,7 @@ public class FMLControlledDiagramFloatingPalette extends ControlArea<DianaRoundR
 			parentFlexoConceptInstance = ((FMLControlledDiagramElement<?, ?>) focused.getDrawable()).getFlexoConceptInstance();
 		}
 		if (focused.getDrawable() instanceof FMLControlledDiagramShape) {
-			parentShapeRole = (ShapeRole) ((FMLControlledDiagramShape) focused.getDrawable()).getRole();
+			parentShapeRole = ((FMLControlledDiagramShape) focused.getDrawable()).getRole();
 		}
 
 		/*if (parentFlexoConceptInstance == null || parentShapeRole == null) {
@@ -484,7 +488,6 @@ public class FMLControlledDiagramFloatingPalette extends ControlArea<DianaRoundR
 					menuItem.setToolTipText(linkScheme.getDescription());
 					popup.add(menuItem);
 				}
-				System.out.println("dropLocation="+dropLocation);
 				popup.show((Component) controller.getDrawingView().viewForNode(getNode().getParentNode()), (int) dropLocation.x,
 						(int) dropLocation.y);
 			}
@@ -574,6 +577,11 @@ public class FMLControlledDiagramFloatingPalette extends ControlArea<DianaRoundR
 		if (!getNode().getDrawing().isEditable()) {
 			return null;
 		}
+
+		if (!getNode().getIsLongTimeFocused()) {
+			return null;
+		}
+
 		AffineTransform at = DianaUtils.convertNormalizedCoordinatesAT(getNode(), getNode().getDrawing().getRoot());
 
 		// Graphics2D oldGraphics = drawingGraphics.cloneGraphics();
