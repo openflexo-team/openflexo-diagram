@@ -136,6 +136,11 @@ public class DiagramTechnologyAdapterController extends TechnologyAdapterControl
 	}
 
 	@Override
+	public Class<DiagramPreferences> getPreferencesClass() {
+		return DiagramPreferences.class;
+	}
+
+	@Override
 	public void activate() {
 		super.activate();
 		getServiceManager().getScreenshotService().registerDelegate(new FMLControlledDiagramScreenshotServiceDelegate());
