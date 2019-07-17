@@ -80,7 +80,7 @@ public class DrawRectangleControl extends MouseDragControlImpl<DiagramEditor> {
 	protected boolean drawRectangle = false;
 
 	public DrawRectangleControl(DiagramFactory factory) {
-		super("Draw rectangle", MouseButton.LEFT, new DrawRectangleAction(factory), false, false, false, true, factory.getEditingContext()); // SHIFT-DRAG
+		super("Draw rectangle", MouseButton.LEFT, new DrawRectangleAction(factory), true, true, false, false, factory.getEditingContext()); // SHIFT-DRAG
 	}
 
 	protected static class DrawRectangleAction extends MouseDragControlActionImpl<DiagramEditor> {
