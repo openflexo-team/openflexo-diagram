@@ -140,7 +140,13 @@ public class DiagramType implements TechnologySpecificType<DiagramTechnologyAdap
 	}
 
 	@Override
-	public void resolve(CustomTypeFactory<?> factory) {
+	public void resolve() {
+		if (customTypeFactory != null) {
+			resolve(customTypeFactory);
+		}
+	}
+
+	private void resolve(CustomTypeFactory<?> factory) {
 		// System.out.println("******* resolve " + getSerializationRepresentation() + " with " + factory);
 		if (factory instanceof DiagramTypeFactory) {
 			DiagramSpecificationResource dsSpecResource = null;
