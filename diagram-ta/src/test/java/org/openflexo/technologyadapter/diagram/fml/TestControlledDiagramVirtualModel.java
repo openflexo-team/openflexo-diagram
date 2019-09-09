@@ -56,8 +56,8 @@ import org.openflexo.foundation.fml.action.AddUseDeclaration;
 import org.openflexo.foundation.fml.action.CreateEditionAction;
 import org.openflexo.foundation.fml.action.CreateFlexoBehaviour;
 import org.openflexo.foundation.fml.action.CreateTechnologyRole;
-import org.openflexo.foundation.fml.rm.VirtualModelResource;
-import org.openflexo.foundation.fml.rm.VirtualModelResourceFactory;
+import org.openflexo.foundation.fml.rm.CompilationUnitResource;
+import org.openflexo.foundation.fml.rm.CompilationUnitResourceFactory;
 import org.openflexo.foundation.resource.DirectoryResourceCenter;
 import org.openflexo.foundation.resource.SaveResourceException;
 import org.openflexo.pamela.exceptions.ModelDefinitionException;
@@ -102,7 +102,7 @@ public class TestControlledDiagramVirtualModel extends DiagramTestCase {
 	public static DiagramPaletteElement diagramPaletteElement;
 
 	public static VirtualModel viewPoint;
-	public static VirtualModelResource viewPointResource;
+	public static CompilationUnitResource viewPointResource;
 	public static TypedDiagramModelSlot typedDiagramModelSlot;
 	public static VirtualModel virtualModel;
 	public static DropScheme dropScheme;
@@ -208,9 +208,9 @@ public class TestControlledDiagramVirtualModel extends DiagramTestCase {
 
 		FMLTechnologyAdapter fmlTechnologyAdapter = serviceManager.getTechnologyAdapterService()
 				.getTechnologyAdapter(FMLTechnologyAdapter.class);
-		VirtualModelResourceFactory factory = fmlTechnologyAdapter.getVirtualModelResourceFactory();
+		CompilationUnitResourceFactory factory = fmlTechnologyAdapter.getCompilationUnitResourceFactory();
 
-		viewPointResource = factory.makeTopLevelVirtualModelResource(VIEWPOINT_NAME, VIEWPOINT_URI,
+		viewPointResource = factory.makeTopLevelCompilationUnitResource(VIEWPOINT_NAME, VIEWPOINT_URI,
 				fmlTechnologyAdapter.getGlobalRepository(newResourceCenter).getRootFolder(), true);
 		viewPoint = viewPointResource.getLoadedResourceData();
 
@@ -236,15 +236,15 @@ public class TestControlledDiagramVirtualModel extends DiagramTestCase {
 
 		FMLTechnologyAdapter fmlTechnologyAdapter = serviceManager.getTechnologyAdapterService()
 				.getTechnologyAdapter(FMLTechnologyAdapter.class);
-		VirtualModelResourceFactory vmFactory = fmlTechnologyAdapter.getVirtualModelResourceFactory();
-		VirtualModelResource newVMResource = vmFactory.makeContainedVirtualModelResource(VIRTUAL_MODEL_NAME,
-				viewPoint.getVirtualModelResource(), true);
+		CompilationUnitResourceFactory vmFactory = fmlTechnologyAdapter.getCompilationUnitResourceFactory();
+		CompilationUnitResource newVMResource = vmFactory.makeContainedCompilationUnitResource(VIRTUAL_MODEL_NAME,
+				viewPoint.getCompilationUnitResource(), true);
 		virtualModel = newVMResource.getLoadedResourceData();
 
 		// virtualModel = VirtualModelImpl.newVirtualModel("TestVirtualModel",
 		// viewPoint);
-		assertTrue(ResourceLocator.retrieveResourceAsFile(((VirtualModelResource) virtualModel.getResource()).getDirectory()).exists());
-		assertTrue(((VirtualModelResource) virtualModel.getResource()).getIODelegate().exists());
+		assertTrue(ResourceLocator.retrieveResourceAsFile(((CompilationUnitResource) virtualModel.getResource()).getDirectory()).exists());
+		assertTrue(((CompilationUnitResource) virtualModel.getResource()).getIODelegate().exists());
 
 		AddUseDeclaration useDeclarationAction = AddUseDeclaration.actionType.makeNewAction(virtualModel, null, editor);
 		useDeclarationAction.setModelSlotClass(TypedDiagramModelSlot.class);
@@ -332,16 +332,16 @@ public class TestControlledDiagramVirtualModel extends DiagramTestCase {
 		assertNotNull(retrievedDSResource);
 		assertEquals(1, retrievedDSResource.getDiagramSpecification().getPalettes().size());
 
-		VirtualModelResource retrievedVPResource = serviceManager.getVirtualModelLibrary().getVirtualModelResource(VIEWPOINT_URI);
+		CompilationUnitResource retrievedVPResource = serviceManager.getVirtualModelLibrary().getCompilationUnitResource(VIEWPOINT_URI);
 		assertNotNull(retrievedVPResource);
 
 		assertEquals(1, retrievedVPResource.getContainedVirtualModelResources().size());
-		VirtualModelResource retrievedVMResource = retrievedVPResource.getContainedVirtualModelResources().get(0);
+		CompilationUnitResource retrievedVMResource = retrievedVPResource.getContainedVirtualModelResources().get(0);
 
-		assertTrue(FMLControlledDiagramVirtualModelNature.INSTANCE.hasNature(retrievedVMResource.getVirtualModel()));
+		assertTrue(FMLControlledDiagramVirtualModelNature.INSTANCE.hasNature(retrievedVMResource.getCompilationUnit()));
 
 		TypedDiagramModelSlot retrievedDiagramMS = FMLControlledDiagramVirtualModelNature
-				.getTypedDiagramModelSlot(retrievedVMResource.getVirtualModel());
+				.getTypedDiagramModelSlot(retrievedVMResource.getCompilationUnit());
 		assertNotNull(retrievedDiagramMS);
 		assertEquals(1, retrievedDiagramMS.getPaletteElementBindings().size());
 

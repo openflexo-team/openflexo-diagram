@@ -39,22 +39,18 @@
 package org.openflexo.technologyadapter.diagram.rm;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.logging.Logger;
 
 import org.openflexo.foundation.DataModification;
 import org.openflexo.foundation.FlexoException;
-import org.openflexo.foundation.IOFlexoException;
-import org.openflexo.foundation.InconsistentDataException;
-import org.openflexo.foundation.InvalidModelDefinitionException;
-import org.openflexo.foundation.InvalidXMLException;
-import org.openflexo.foundation.resource.FlexoFileNotFoundException;
-import org.openflexo.foundation.resource.PamelaResourceImpl;
+import org.openflexo.foundation.resource.PamelaXMLSerializableResourceImpl;
 import org.openflexo.foundation.resource.ResourceLoadingCancelledException;
 import org.openflexo.technologyadapter.diagram.DiagramTechnologyAdapter;
 import org.openflexo.technologyadapter.diagram.metamodel.DiagramPalette;
 import org.openflexo.technologyadapter.diagram.metamodel.DiagramPaletteFactory;
 
-public abstract class DiagramPaletteResourceImpl extends PamelaResourceImpl<DiagramPalette, DiagramPaletteFactory>
+public abstract class DiagramPaletteResourceImpl extends PamelaXMLSerializableResourceImpl<DiagramPalette, DiagramPaletteFactory>
 		implements DiagramPaletteResource {
 
 	static final Logger logger = Logger.getLogger(DiagramPaletteResourceImpl.class.getPackage().getName());
@@ -96,23 +92,9 @@ public abstract class DiagramPaletteResourceImpl extends PamelaResourceImpl<Diag
 		return null;
 	}
 
-	/**
-	 * Load the &quot;real&quot; load resource data of this resource.
-	 * 
-	 * @param progress
-	 *            a progress monitor in case the resource data is not immediately available.
-	 * @return the resource data.
-	 * @throws ResourceLoadingCancelledException
-	 * @throws ResourceDependencyLoopException
-	 * @throws FileNotFoundException
-	 */
 	@Override
-	public DiagramPalette loadResourceData() throws FlexoFileNotFoundException, IOFlexoException, InvalidXMLException,
-			InconsistentDataException, InvalidModelDefinitionException {
-
-		DiagramPalette returned = super.loadResourceData();
-		// returned.setName(getFile().getName().substring(0, getFile().getName().length() - 8));
-		// returned.init(getContainer().getDiagramSpecification(), getFile().getName().substring(0, getFile().getName().length() - 8));
+	protected DiagramPalette performLoad() throws IOException, Exception {
+		DiagramPalette returned = super.performLoad();
 		if (getContainer() != null && getContainer().getDiagramSpecification() != null
 				&& !getContainer().getDiagramSpecification().getPalettes().contains(returned)) {
 			getContainer().getDiagramSpecification().addToPalettes(returned);
@@ -121,7 +103,6 @@ public abstract class DiagramPaletteResourceImpl extends PamelaResourceImpl<Diag
 		}
 		setChanged();
 		notifyObservers(new DataModification("loadedDiagramPalette", null, returned));
-		returned.clearIsModified();
 		return returned;
 	}
 

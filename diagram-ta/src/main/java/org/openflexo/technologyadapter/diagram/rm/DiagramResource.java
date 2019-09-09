@@ -39,7 +39,7 @@
 package org.openflexo.technologyadapter.diagram.rm;
 
 import org.openflexo.foundation.resource.FlexoResource;
-import org.openflexo.foundation.resource.PamelaResource;
+import org.openflexo.foundation.resource.PamelaXMLSerializableResource;
 import org.openflexo.foundation.technologyadapter.FlexoModelResource;
 import org.openflexo.foundation.technologyadapter.TechnologyAdapterResource;
 import org.openflexo.pamela.annotations.ImplementationClass;
@@ -60,7 +60,7 @@ import org.openflexo.technologyadapter.diagram.model.DiagramFactory;
 @ImplementationClass(DiagramResourceImpl.class)
 @XMLElement
 public interface DiagramResource
-		extends PamelaResource<Diagram, DiagramFactory>, TechnologyAdapterResource<Diagram, DiagramTechnologyAdapter>,
+		extends PamelaXMLSerializableResource<Diagram, DiagramFactory>, TechnologyAdapterResource<Diagram, DiagramTechnologyAdapter>,
 		FlexoModelResource<Diagram, DiagramSpecification, DiagramTechnologyAdapter, DiagramTechnologyAdapter> {
 
 	public Diagram getDiagram();

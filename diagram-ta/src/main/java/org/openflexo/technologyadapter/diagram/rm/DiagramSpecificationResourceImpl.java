@@ -46,7 +46,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.openflexo.foundation.FlexoException;
 import org.openflexo.foundation.resource.FileIODelegate;
 import org.openflexo.foundation.resource.InJarIODelegate;
-import org.openflexo.foundation.resource.PamelaResourceImpl;
+import org.openflexo.foundation.resource.PamelaXMLSerializableResourceImpl;
 import org.openflexo.foundation.resource.ResourceLoadingCancelledException;
 import org.openflexo.rm.BasicResourceImpl;
 import org.openflexo.rm.ClasspathResourceLocatorImpl;
@@ -59,8 +59,8 @@ import org.openflexo.technologyadapter.diagram.metamodel.DiagramSpecification;
 import org.openflexo.technologyadapter.diagram.metamodel.DiagramSpecificationFactory;
 import org.openflexo.xml.XMLRootElementReader;
 
-public abstract class DiagramSpecificationResourceImpl extends PamelaResourceImpl<DiagramSpecification, DiagramSpecificationFactory>
-		implements DiagramSpecificationResource {
+public abstract class DiagramSpecificationResourceImpl extends
+		PamelaXMLSerializableResourceImpl<DiagramSpecification, DiagramSpecificationFactory> implements DiagramSpecificationResource {
 
 	static final Logger logger = Logger.getLogger(DiagramSpecificationResourceImpl.class.getPackage().getName());
 

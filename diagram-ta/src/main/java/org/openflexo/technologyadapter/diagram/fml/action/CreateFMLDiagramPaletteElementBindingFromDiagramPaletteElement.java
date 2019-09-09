@@ -52,7 +52,7 @@ import org.openflexo.foundation.action.FlexoActionFactory;
 import org.openflexo.foundation.action.NotImplementedException;
 import org.openflexo.foundation.fml.FlexoConcept;
 import org.openflexo.foundation.fml.VirtualModel;
-import org.openflexo.foundation.fml.rm.VirtualModelResource;
+import org.openflexo.foundation.fml.rm.CompilationUnitResource;
 import org.openflexo.foundation.resource.SaveResourceException;
 import org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
 import org.openflexo.technologyadapter.diagram.fml.DropScheme;
@@ -129,7 +129,7 @@ public class CreateFMLDiagramPaletteElementBindingFromDiagramPaletteElement
 	private FlexoConcept flexoConcept;
 	private List<FMLDiagramPaletteElementBindingParameter> paletteElementBindingParameter;
 	private DiagramPalette diagramPalette;
-	private VirtualModelResource virtualModelResource;
+	private CompilationUnitResource virtualModelResource;
 	private VirtualModel virtualModel;
 	private List<DropScheme> dropSchemes;
 	private List<FlexoConcept> flexoConcepts;
@@ -217,14 +217,14 @@ public class CreateFMLDiagramPaletteElementBindingFromDiagramPaletteElement
 		return getFocusedObject().getDiagramSpecification();
 	}
 
-	public VirtualModelResource getVirtualModelResource() {
+	public CompilationUnitResource getVirtualModelResource() {
 		return virtualModelResource;
 	}
 
-	public void setVirtualModelResource(VirtualModelResource virtualModelResource) {
+	public void setVirtualModelResource(CompilationUnitResource virtualModelResource) {
 		this.virtualModelResource = virtualModelResource;
 		if (virtualModelResource != null) {
-			setVirtualModel(virtualModelResource.getVirtualModel());
+			setVirtualModel(virtualModelResource.getCompilationUnit());
 		}
 	}
 

@@ -283,7 +283,7 @@ public class ContextualPalette extends DiagramEditorPaletteModel implements Prop
 		else if (availableDropSchemes.size() > 1) {
 			JPopupMenu popup = new JPopupMenu();
 			for (final DropScheme dropScheme : availableDropSchemes) {
-				JMenuItem menuItem = new JMenuItem(dropScheme.getDeclaringVirtualModel().getLocalizedDictionary()
+				JMenuItem menuItem = new JMenuItem(dropScheme.getDeclaringCompilationUnit().getLocalizedDictionary()
 						.localizedForKey(dropScheme.getLabel() != null ? dropScheme.getLabel() : dropScheme.getName()));
 				menuItem.addActionListener(new DrawingShapeActionListener(editor, dropScheme, container, parentFlexoConceptInstance,
 						parentShapeRole, paletteElement, dropLocation));

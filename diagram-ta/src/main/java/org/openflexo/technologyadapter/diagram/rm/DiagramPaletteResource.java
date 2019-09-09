@@ -38,7 +38,7 @@
 
 package org.openflexo.technologyadapter.diagram.rm;
 
-import org.openflexo.foundation.resource.PamelaResource;
+import org.openflexo.foundation.resource.PamelaXMLSerializableResource;
 import org.openflexo.foundation.technologyadapter.TechnologyAdapterResource;
 import org.openflexo.pamela.annotations.ImplementationClass;
 import org.openflexo.pamela.annotations.ModelEntity;
@@ -50,8 +50,8 @@ import org.openflexo.technologyadapter.diagram.metamodel.DiagramPaletteFactory;
 @ModelEntity
 @ImplementationClass(DiagramPaletteResourceImpl.class)
 @XMLElement
-public interface DiagramPaletteResource
-		extends PamelaResource<DiagramPalette, DiagramPaletteFactory>, TechnologyAdapterResource<DiagramPalette, DiagramTechnologyAdapter> {
+public interface DiagramPaletteResource extends PamelaXMLSerializableResource<DiagramPalette, DiagramPaletteFactory>,
+		TechnologyAdapterResource<DiagramPalette, DiagramTechnologyAdapter> {
 
 	/**
 	 * Return diagram palette stored by this resource<br>

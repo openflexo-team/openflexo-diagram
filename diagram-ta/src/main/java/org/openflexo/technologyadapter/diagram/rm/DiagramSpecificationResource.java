@@ -42,7 +42,7 @@ import java.util.List;
 
 import org.openflexo.foundation.resource.DirectoryContainerResource;
 import org.openflexo.foundation.resource.FlexoResource;
-import org.openflexo.foundation.resource.PamelaResource;
+import org.openflexo.foundation.resource.PamelaXMLSerializableResource;
 import org.openflexo.foundation.technologyadapter.FlexoMetaModelResource;
 import org.openflexo.foundation.technologyadapter.TechnologyAdapterResource;
 import org.openflexo.pamela.annotations.ImplementationClass;
@@ -62,7 +62,7 @@ import org.openflexo.technologyadapter.diagram.model.Diagram;
 @ModelEntity
 @ImplementationClass(DiagramSpecificationResourceImpl.class)
 @XMLElement
-public interface DiagramSpecificationResource extends PamelaResource<DiagramSpecification, DiagramSpecificationFactory>,
+public interface DiagramSpecificationResource extends PamelaXMLSerializableResource<DiagramSpecification, DiagramSpecificationFactory>,
 		TechnologyAdapterResource<DiagramSpecification, DiagramTechnologyAdapter>,
 		FlexoMetaModelResource<Diagram, DiagramSpecification, DiagramTechnologyAdapter>, DirectoryContainerResource<DiagramSpecification> {
 

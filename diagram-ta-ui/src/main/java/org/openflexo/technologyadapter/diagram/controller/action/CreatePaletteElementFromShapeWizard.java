@@ -47,7 +47,7 @@ import org.openflexo.components.wizard.FlexoActionWizard;
 import org.openflexo.components.wizard.WizardStep;
 import org.openflexo.foundation.fml.FlexoConcept;
 import org.openflexo.foundation.fml.VirtualModel;
-import org.openflexo.foundation.fml.rm.VirtualModelResource;
+import org.openflexo.foundation.fml.rm.CompilationUnitResource;
 import org.openflexo.gina.annotation.FIBPanel;
 import org.openflexo.icon.IconFactory;
 import org.openflexo.icon.IconLibrary;
@@ -223,13 +223,13 @@ public class CreatePaletteElementFromShapeWizard extends FlexoActionWizard<Creat
 			}
 		}
 
-		public VirtualModelResource getVirtualModelResource() {
+		public CompilationUnitResource getVirtualModelResource() {
 			return getAction().getVirtualModelResource();
 		}
 
-		public void setVirtualModelResource(VirtualModelResource virtualModelResource) {
+		public void setVirtualModelResource(CompilationUnitResource virtualModelResource) {
 			if (virtualModelResource != getVirtualModelResource()) {
-				VirtualModelResource oldValue = getVirtualModelResource();
+				CompilationUnitResource oldValue = getVirtualModelResource();
 				getAction().setVirtualModelResource(virtualModelResource);
 				getPropertyChangeSupport().firePropertyChange("virtualModelResource", oldValue, virtualModelResource);
 				checkValidity();

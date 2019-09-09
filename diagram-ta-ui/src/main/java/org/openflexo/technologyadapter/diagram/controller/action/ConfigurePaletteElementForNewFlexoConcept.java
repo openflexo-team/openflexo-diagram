@@ -11,7 +11,7 @@ import org.openflexo.foundation.action.FlexoAction;
 import org.openflexo.foundation.action.FlexoAction.PostProcessing;
 import org.openflexo.foundation.fml.FlexoConcept;
 import org.openflexo.foundation.fml.VirtualModel;
-import org.openflexo.foundation.fml.rm.VirtualModelResource;
+import org.openflexo.foundation.fml.rm.CompilationUnitResource;
 import org.openflexo.gina.annotation.FIBPanel;
 import org.openflexo.technologyadapter.diagram.fml.DropScheme;
 import org.openflexo.technologyadapter.diagram.fml.FMLControlledDiagramVirtualModelNature;
@@ -198,9 +198,9 @@ public abstract class ConfigurePaletteElementForNewFlexoConcept<A extends FlexoA
 		}
 	}
 
-	public VirtualModelResource getVirtualModelResource() {
-		if (getVirtualModel() != null && getVirtualModel().getResource() instanceof VirtualModelResource) {
-			return (VirtualModelResource) getVirtualModel().getResource();
+	public CompilationUnitResource getVirtualModelResource() {
+		if (getVirtualModel() != null && getVirtualModel().getResource() instanceof CompilationUnitResource) {
+			return (CompilationUnitResource) getVirtualModel().getResource();
 		}
 		return null;
 	}

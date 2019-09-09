@@ -47,7 +47,7 @@ import org.openflexo.components.wizard.WizardDialog;
 import org.openflexo.foundation.action.FlexoActionFactory;
 import org.openflexo.foundation.action.FlexoActionRunnable;
 import org.openflexo.foundation.action.transformation.AbstractDeclareInFlexoConcept.DeclareInFlexoConceptChoices;
-import org.openflexo.foundation.fml.rm.VirtualModelResource;
+import org.openflexo.foundation.fml.rm.CompilationUnitResource;
 import org.openflexo.gina.controller.FIBController.Status;
 import org.openflexo.icon.FMLIconLibrary;
 import org.openflexo.technologyadapter.diagram.controller.diagrameditor.FMLControlledDiagramModuleView;
@@ -74,14 +74,14 @@ public class DeclareConnectorInFlexoConceptInitializer
 
 			if (getController().getCurrentModuleView() instanceof FMLControlledDiagramModuleView) {
 				FMLControlledDiagramModuleView moduleView = (FMLControlledDiagramModuleView) getController().getCurrentModuleView();
-				action.setVirtualModelResource(
-						(VirtualModelResource) moduleView.getEditor().getVirtualModelInstance().getVirtualModel().getResource());
+				action.setCompilationUnitResource(
+						(CompilationUnitResource) moduleView.getEditor().getVirtualModelInstance().getVirtualModel().getResource());
 			}
 
 			if (getController().getCurrentModuleView() instanceof FMLControlledDiagramVirtualModelView) {
 				FMLControlledDiagramVirtualModelView moduleView = (FMLControlledDiagramVirtualModelView) getController()
 						.getCurrentModuleView();
-				action.setVirtualModelResource((VirtualModelResource) moduleView.getRepresentedObject().getResource());
+				action.setCompilationUnitResource((CompilationUnitResource) moduleView.getRepresentedObject().getResource());
 			}
 
 			Wizard wizard = new DeclareConnectorInFlexoConceptWizard(action, getController());

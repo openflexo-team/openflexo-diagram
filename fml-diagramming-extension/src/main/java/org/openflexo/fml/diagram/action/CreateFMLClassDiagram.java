@@ -55,8 +55,8 @@ import org.openflexo.foundation.fml.CreationScheme;
 import org.openflexo.foundation.fml.FMLObject;
 import org.openflexo.foundation.fml.InconsistentFlexoConceptHierarchyException;
 import org.openflexo.foundation.fml.VirtualModel;
-import org.openflexo.foundation.fml.rm.VirtualModelResource;
-import org.openflexo.foundation.fml.rm.VirtualModelResourceFactory;
+import org.openflexo.foundation.fml.rm.CompilationUnitResource;
+import org.openflexo.foundation.fml.rm.CompilationUnitResourceFactory;
 import org.openflexo.foundation.fml.rt.FMLRTVirtualModelInstance;
 import org.openflexo.foundation.fml.rt.action.CreateBasicVirtualModelInstance;
 import org.openflexo.foundation.fml.rt.rm.FMLRTVirtualModelInstanceResource;
@@ -114,12 +114,12 @@ public class CreateFMLClassDiagram extends FlexoAction<CreateFMLClassDiagram, Vi
 		super(actionType, focusedObject, globalSelection, editor);
 	}
 
-	private <I> RepositoryFolder<?, I> getRepositoryFolder(VirtualModelResource resource, FlexoResourceCenter<I> rc) throws IOException {
+	private <I> RepositoryFolder<?, I> getRepositoryFolder(CompilationUnitResource resource, FlexoResourceCenter<I> rc) throws IOException {
 		RepositoryFolder<FlexoResource<?>, I> vmFolder = rc.getRepositoryFolder(resource);
 		I vmContainerDirectory = vmFolder.getSerializationArtefact();
 		String directoryName = resource.getName();
-		if (!directoryName.endsWith(VirtualModelResourceFactory.FML_SUFFIX)) {
-			directoryName = directoryName + VirtualModelResourceFactory.FML_SUFFIX;
+		if (!directoryName.endsWith(CompilationUnitResourceFactory.FML_SUFFIX)) {
+			directoryName = directoryName + CompilationUnitResourceFactory.FML_SUFFIX;
 		}
 		I vmDirectory = rc.getDirectory(directoryName, vmContainerDirectory);
 		RepositoryFolder<FlexoResource<?>, I> returned = rc.getRepositoryFolder(vmDirectory, true);
@@ -130,9 +130,9 @@ public class CreateFMLClassDiagram extends FlexoAction<CreateFMLClassDiagram, Vi
 	protected void doAction(Object context)
 			throws NotImplementedException, InvalidParameterException, InconsistentFlexoConceptHierarchyException, IOFlexoException {
 
-		VirtualModelResource classDiagramVirtualModelResource = getServiceManager().getVirtualModelLibrary()
-				.getVirtualModelResource(FMLDiagrammingPlugin.FML_CLASS_DIAGRAM_VIRTUAL_MODEL_URI);
-		VirtualModel classDiagramVirtualModel = classDiagramVirtualModelResource.getVirtualModel();
+		CompilationUnitResource classDiagramVirtualModelResource = getServiceManager().getVirtualModelLibrary()
+				.getCompilationUnitResource(FMLDiagrammingPlugin.FML_CLASS_DIAGRAM_VIRTUAL_MODEL_URI);
+		VirtualModel classDiagramVirtualModel = classDiagramVirtualModelResource.getCompilationUnit();
 
 		FlexoResourceCenter<?> resourceCenter = getFocusedObject().getResource().getResourceCenter();
 
@@ -204,7 +204,7 @@ public class CreateFMLClassDiagram extends FlexoAction<CreateFMLClassDiagram, Vi
 	}
 
 	public boolean isDuplicated() {
-		for (FMLRTVirtualModelInstanceResource vmiRes : ((VirtualModelResource) getFocusedObject().getResource()).getContainedVMI()) {
+		for (FMLRTVirtualModelInstanceResource vmiRes : ((CompilationUnitResource) getFocusedObject().getResource()).getContainedVMI()) {
 			if (vmiRes.getName().equals(getClassDiagramName())) {
 				return true;
 			}

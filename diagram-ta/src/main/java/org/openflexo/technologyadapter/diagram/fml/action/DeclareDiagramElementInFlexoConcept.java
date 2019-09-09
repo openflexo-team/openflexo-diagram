@@ -51,7 +51,7 @@ import org.openflexo.foundation.action.transformation.FlexoRoleSettingStrategy;
 import org.openflexo.foundation.fml.FlexoConcept;
 import org.openflexo.foundation.fml.FlexoRole;
 import org.openflexo.foundation.fml.VirtualModel;
-import org.openflexo.foundation.fml.rm.VirtualModelResource;
+import org.openflexo.foundation.fml.rm.CompilationUnitResource;
 import org.openflexo.foundation.technologyadapter.TechnologyObject;
 import org.openflexo.technologyadapter.diagram.DiagramTechnologyAdapter;
 import org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
@@ -73,7 +73,7 @@ import org.openflexo.toolbox.JavaUtils;
  * </ul>
  * Some strategies should be implemented for each of that choices, defined as primary choices<br>
  * 
- * Note that to be valid, this class must be externally set with {@link VirtualModelResource}
+ * Note that to be valid, this class must be externally set with {@link CompilationUnitResource}
  * 
  * @author Sylvain, Vincent
  * 

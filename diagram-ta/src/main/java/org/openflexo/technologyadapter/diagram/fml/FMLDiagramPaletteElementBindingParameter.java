@@ -178,7 +178,7 @@ public interface FMLDiagramPaletteElementBindingParameter extends FlexoConceptOb
 
 		@Override
 		public BindingModel getBindingModel() {
-			return getDeclaringVirtualModel().getBindingModel();
+			return getDeclaringCompilationUnit().getBindingModel();
 		}
 
 		@Override

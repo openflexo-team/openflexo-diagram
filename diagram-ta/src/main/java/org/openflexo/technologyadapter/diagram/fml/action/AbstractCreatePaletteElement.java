@@ -61,7 +61,7 @@ import org.openflexo.foundation.action.FlexoActionFactory;
 import org.openflexo.foundation.fml.FMLModelFactory;
 import org.openflexo.foundation.fml.FlexoConcept;
 import org.openflexo.foundation.fml.VirtualModel;
-import org.openflexo.foundation.fml.rm.VirtualModelResource;
+import org.openflexo.foundation.fml.rm.CompilationUnitResource;
 import org.openflexo.rm.BasicResourceImpl.LocatorNotFoundException;
 import org.openflexo.rm.FileResourceImpl;
 import org.openflexo.rm.Resource;
@@ -100,7 +100,7 @@ public abstract class AbstractCreatePaletteElement<A extends FlexoAction<A, T1, 
 
 	private VirtualModel virtualModel;
 
-	private VirtualModelResource virtualModelResource;
+	private CompilationUnitResource virtualModelResource;
 
 	private GraphicalRepresentation paletteElementGraphicalRepresentation;
 	private DiagramPalette palette;
@@ -485,13 +485,13 @@ public abstract class AbstractCreatePaletteElement<A extends FlexoAction<A, T1, 
 		return null;
 	}
 
-	public VirtualModelResource getVirtualModelResource() {
+	public CompilationUnitResource getVirtualModelResource() {
 		return virtualModelResource;
 	}
 
-	public void setVirtualModelResource(VirtualModelResource virtualModelResource) {
+	public void setVirtualModelResource(CompilationUnitResource virtualModelResource) {
 		this.virtualModelResource = virtualModelResource;
-		setVirtualModel(virtualModelResource.getVirtualModel());
+		setVirtualModel(virtualModelResource.getCompilationUnit());
 	}
 
 	public Image getImage() {

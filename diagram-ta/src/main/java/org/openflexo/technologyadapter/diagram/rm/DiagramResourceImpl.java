@@ -42,12 +42,7 @@ import java.io.FileNotFoundException;
 import java.util.logging.Logger;
 
 import org.openflexo.foundation.FlexoException;
-import org.openflexo.foundation.IOFlexoException;
-import org.openflexo.foundation.InconsistentDataException;
-import org.openflexo.foundation.InvalidModelDefinitionException;
-import org.openflexo.foundation.InvalidXMLException;
-import org.openflexo.foundation.resource.FlexoFileNotFoundException;
-import org.openflexo.foundation.resource.PamelaResourceImpl;
+import org.openflexo.foundation.resource.PamelaXMLSerializableResourceImpl;
 import org.openflexo.foundation.resource.ResourceLoadingCancelledException;
 import org.openflexo.foundation.technologyadapter.FlexoMetaModelResource;
 import org.openflexo.technologyadapter.diagram.DiagramTechnologyAdapter;
@@ -63,7 +58,7 @@ import org.openflexo.toolbox.StringUtils;
  * @author Sylvain
  * 
  */
-public abstract class DiagramResourceImpl extends PamelaResourceImpl<Diagram, DiagramFactory> implements DiagramResource {
+public abstract class DiagramResourceImpl extends PamelaXMLSerializableResourceImpl<Diagram, DiagramFactory> implements DiagramResource {
 
 	static final Logger logger = Logger.getLogger(DiagramResourceImpl.class.getPackage().getName());
 
@@ -122,14 +117,6 @@ public abstract class DiagramResourceImpl extends PamelaResourceImpl<Diagram, Di
 	@Override
 	public Class<Diagram> getResourceDataClass() {
 		return Diagram.class;
-	}
-
-	@Override
-	public Diagram loadResourceData() throws FlexoFileNotFoundException, IOFlexoException, InvalidXMLException, InconsistentDataException,
-			InvalidModelDefinitionException {
-		Diagram returned = super.loadResourceData();
-		returned.clearIsModified();
-		return returned;
 	}
 
 	@Override
