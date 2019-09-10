@@ -45,6 +45,7 @@ import static org.junit.Assert.fail;
 import java.awt.Color;
 
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.openflexo.diana.geom.DianaPoint;
 import org.openflexo.diana.shapes.ShapeSpecification.ShapeType;
@@ -53,6 +54,7 @@ import org.openflexo.pamela.ModelEntity;
 import org.openflexo.pamela.exceptions.ModelDefinitionException;
 import org.openflexo.test.OrderedRunner;
 import org.openflexo.test.TestOrder;
+import org.openflexo.test.UITest;
 
 /**
  * Test Diagram model
@@ -68,6 +70,7 @@ public class TestDiagram extends OpenflexoTestCase {
 	 */
 	@Test
 	@TestOrder(1)
+	@Category(UITest.class)
 	public void testDiagramFactory() {
 
 		try {
@@ -92,6 +95,7 @@ public class TestDiagram extends OpenflexoTestCase {
 	 */
 	@Test
 	@TestOrder(2)
+	@Category(UITest.class)
 	public void testInstanciateDiagram() throws Exception {
 
 		DiagramFactory factory = new DiagramFactory(null, null);

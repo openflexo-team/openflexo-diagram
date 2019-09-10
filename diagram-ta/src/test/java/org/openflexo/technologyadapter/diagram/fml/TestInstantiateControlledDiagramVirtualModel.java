@@ -49,6 +49,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.openflexo.diana.geom.DianaPoint;
 import org.openflexo.foundation.FlexoEditor;
@@ -82,6 +83,7 @@ import org.openflexo.technologyadapter.diagram.rm.DiagramSpecificationRepository
 import org.openflexo.technologyadapter.diagram.rm.DiagramSpecificationResource;
 import org.openflexo.test.OrderedRunner;
 import org.openflexo.test.TestOrder;
+import org.openflexo.test.UITest;
 
 /**
  * Test the instantiation of a VirtualModel whose instances have {@link FMLControlledDiagramVirtualModelNature}
@@ -116,6 +118,7 @@ public class TestInstantiateControlledDiagramVirtualModel extends OpenflexoProje
 	 */
 	@Test
 	@TestOrder(1)
+	@Category(UITest.class)
 	public void testLoadViewPoint() throws FileNotFoundException, ResourceLoadingCancelledException, FlexoException {
 		instanciateTestServiceManager(DiagramTechnologyAdapter.class);
 		VirtualModelLibrary vpLib = serviceManager.getVirtualModelLibrary();
@@ -153,6 +156,7 @@ public class TestInstantiateControlledDiagramVirtualModel extends OpenflexoProje
 
 	@Test
 	@TestOrder(2)
+	@Category(UITest.class)
 	public void testCreateProject() {
 		editor = createStandaloneProject("TestProject");
 		project = (FlexoProject<File>) editor.getProject();
@@ -165,6 +169,7 @@ public class TestInstantiateControlledDiagramVirtualModel extends OpenflexoProje
 	 */
 	@Test
 	@TestOrder(3)
+	@Category(UITest.class)
 	public void testCreateView() {
 
 		CreateBasicVirtualModelInstance action = CreateBasicVirtualModelInstance.actionType
@@ -188,6 +193,7 @@ public class TestInstantiateControlledDiagramVirtualModel extends OpenflexoProje
 	 */
 	@Test
 	@TestOrder(4)
+	@Category(UITest.class)
 	public void testCreateVirtualModelInstance() {
 
 		log("testCreateVirtualModelInstance()");
@@ -245,6 +251,7 @@ public class TestInstantiateControlledDiagramVirtualModel extends OpenflexoProje
 	 */
 	@Test
 	@TestOrder(5)
+	@Category(UITest.class)
 	public void testPopulateVirtualModelInstance() throws SaveResourceException {
 
 		log("testPopulateVirtualModelInstance()");
@@ -319,6 +326,7 @@ public class TestInstantiateControlledDiagramVirtualModel extends OpenflexoProje
 	 */
 	@Test
 	@TestOrder(6)
+	@Category(UITest.class)
 	public void testReloadProject() throws FileNotFoundException, ResourceLoadingCancelledException, FlexoException {
 
 		log("testReloadProject()");

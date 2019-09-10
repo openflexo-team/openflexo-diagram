@@ -46,6 +46,7 @@ import java.awt.Color;
 import java.io.IOException;
 
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.openflexo.diana.geom.DianaPoint;
 import org.openflexo.diana.shapes.ShapeSpecification.ShapeType;
@@ -72,6 +73,7 @@ import org.openflexo.technologyadapter.diagram.rm.DiagramSpecificationRepository
 import org.openflexo.technologyadapter.diagram.rm.DiagramSpecificationResource;
 import org.openflexo.test.OrderedRunner;
 import org.openflexo.test.TestOrder;
+import org.openflexo.test.UITest;
 
 /**
  * Test DiagramSpecification features using {@link FlexoAction} primitives
@@ -105,6 +107,7 @@ public class TestDiagramSpecification extends OpenflexoTestCase {
 	 */
 	@Test
 	@TestOrder(1)
+	@Category(UITest.class)
 	public void testInitialize() throws IOException {
 
 		log("testInitialize()");
@@ -130,6 +133,7 @@ public class TestDiagramSpecification extends OpenflexoTestCase {
 	 */
 	@Test
 	@TestOrder(2)
+	@Category(UITest.class)
 	public void testCreateDiagramSpecification() {
 
 		log("testCreateDiagramSpecification()");
@@ -159,6 +163,7 @@ public class TestDiagramSpecification extends OpenflexoTestCase {
 	 */
 	@Test
 	@TestOrder(3)
+	@Category(UITest.class)
 	public void testPalette() {
 
 		log("testPalette()");
@@ -188,6 +193,7 @@ public class TestDiagramSpecification extends OpenflexoTestCase {
 	 */
 	@Test
 	@TestOrder(5)
+	@Category(UITest.class)
 	public void testExampleDiagrams() throws SaveResourceException {
 
 		log("testExampleDiagrams()");
@@ -235,6 +241,7 @@ public class TestDiagramSpecification extends OpenflexoTestCase {
 	 */
 	@Test
 	@TestOrder(6)
+	@Category(UITest.class)
 	public void testReloadDiagramSpecification() throws IOException {
 
 		log("testReloadDiagramSpecification()");
