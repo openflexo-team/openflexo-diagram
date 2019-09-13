@@ -45,6 +45,7 @@ import static org.junit.Assert.assertTrue;
 import java.io.FileNotFoundException;
 
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.openflexo.diana.ConnectorGraphicalRepresentation;
 import org.openflexo.diana.connectors.ConnectorSymbol.EndSymbolType;
@@ -64,6 +65,7 @@ import org.openflexo.technologyadapter.diagram.model.DiagramType;
 import org.openflexo.technologyadapter.diagram.rm.DiagramSpecificationRepository;
 import org.openflexo.test.OrderedRunner;
 import org.openflexo.test.TestOrder;
+import org.openflexo.test.UITest;
 
 /**
  * Test the BindingModel management of some diagram-specific features
@@ -98,6 +100,7 @@ public class TestDiagramConnectorRoles extends OpenflexoTestCase {
 	 */
 	@Test
 	@TestOrder(1)
+	@Category(UITest.class)
 	public void testInitialize() {
 
 		log("testInitialize()");
@@ -126,6 +129,7 @@ public class TestDiagramConnectorRoles extends OpenflexoTestCase {
 	 */
 	@Test
 	@TestOrder(2)
+	@Category(UITest.class)
 	public void testLoadViewPointAndVirtualModel() throws FileNotFoundException, ResourceLoadingCancelledException, FlexoException {
 		instanciateTestServiceManager(DiagramTechnologyAdapter.class);
 		VirtualModelLibrary vpLib = serviceManager.getVirtualModelLibrary();
@@ -155,6 +159,7 @@ public class TestDiagramConnectorRoles extends OpenflexoTestCase {
 	 */
 	@Test
 	@TestOrder(3)
+	@Category(UITest.class)
 	public void testVirtualModelBindingModel() {
 
 		assertNotNull(virtualModel.getBindingModel());
@@ -175,6 +180,7 @@ public class TestDiagramConnectorRoles extends OpenflexoTestCase {
 	 */
 	@Test
 	@TestOrder(4)
+	@Category(UITest.class)
 	public void testRetrieveConcept() {
 
 		flexoConcept = virtualModel.getFlexoConcepts().get(0);
@@ -197,6 +203,7 @@ public class TestDiagramConnectorRoles extends OpenflexoTestCase {
 	 */
 	@Test
 	@TestOrder(5)
+	@Category(UITest.class)
 	public void testConnectorRole() {
 
 		FlexoRole<?> role = linkConcept.getAccessibleRole(CONNECTOR_ROLE_NAME);

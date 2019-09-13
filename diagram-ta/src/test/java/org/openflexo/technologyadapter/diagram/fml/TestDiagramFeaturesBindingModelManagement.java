@@ -49,6 +49,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.openflexo.diana.ShapeGraphicalRepresentation;
 import org.openflexo.diana.shapes.ShapeSpecification.ShapeType;
@@ -92,6 +93,7 @@ import org.openflexo.technologyadapter.diagram.rm.DiagramSpecificationRepository
 import org.openflexo.technologyadapter.diagram.rm.DiagramSpecificationResource;
 import org.openflexo.test.OrderedRunner;
 import org.openflexo.test.TestOrder;
+import org.openflexo.test.UITest;
 
 /**
  * Test the BindingModel management of some diagram-specific features
@@ -135,6 +137,7 @@ public class TestDiagramFeaturesBindingModelManagement extends DiagramTestCase {
 	 */
 	@Test
 	@TestOrder(2)
+	@Category(UITest.class)
 	public void testCreateDiagramSpecification() {
 
 		log("testCreateDiagramSpecification()");
@@ -167,6 +170,7 @@ public class TestDiagramFeaturesBindingModelManagement extends DiagramTestCase {
 	 */
 	@Test
 	@TestOrder(3)
+	@Category(UITest.class)
 	public void testCreatePalette() throws SaveResourceException {
 
 		log("testCreatePalette()");
@@ -217,6 +221,7 @@ public class TestDiagramFeaturesBindingModelManagement extends DiagramTestCase {
 	 */
 	@Test
 	@TestOrder(4)
+	@Category(UITest.class)
 	public void testCreateViewPoint() throws SaveResourceException, ModelDefinitionException, IOException {
 
 		log("testCreateViewPoint()");
@@ -243,6 +248,7 @@ public class TestDiagramFeaturesBindingModelManagement extends DiagramTestCase {
 	 */
 	@Test
 	@TestOrder(5)
+	@Category(UITest.class)
 	public void testCreateVirtualModel() throws SaveResourceException, ModelDefinitionException {
 
 		log("testCreateVirtualModel()");
@@ -307,6 +313,7 @@ public class TestDiagramFeaturesBindingModelManagement extends DiagramTestCase {
 	 */
 	@Test
 	@TestOrder(6)
+	@Category(UITest.class)
 	public void testCreateDropScheme() throws SaveResourceException {
 
 		log("testCreateDropScheme()");
@@ -393,6 +400,7 @@ public class TestDiagramFeaturesBindingModelManagement extends DiagramTestCase {
 	 */
 	@Test
 	@TestOrder(7)
+	@Category(UITest.class)
 	public void testCreateLinkScheme() throws SaveResourceException {
 
 		log("testCreateLinkScheme()");
@@ -457,6 +465,7 @@ public class TestDiagramFeaturesBindingModelManagement extends DiagramTestCase {
 	 */
 	@Test
 	@TestOrder(8)
+	@Category(UITest.class)
 	public void testReloadDiagramSpecificationAndVirtualModel() throws IOException {
 
 		log("testReloadDiagramSpecification()");
@@ -541,6 +550,7 @@ public class TestDiagramFeaturesBindingModelManagement extends DiagramTestCase {
 	 */
 	@Test
 	@TestOrder(9)
+	@Category(UITest.class)
 	public void testLoadViewPointAndVirtualModel() throws FileNotFoundException, ResourceLoadingCancelledException, FlexoException {
 		instanciateTestServiceManager(DiagramTechnologyAdapter.class);
 		VirtualModelLibrary vpLib = serviceManager.getVirtualModelLibrary();
@@ -575,6 +585,7 @@ public class TestDiagramFeaturesBindingModelManagement extends DiagramTestCase {
 	 */
 	@Test
 	@TestOrder(10)
+	@Category(UITest.class)
 	public void testLoadViewPointAndVirtualModelFromJar() throws ResourceLoadingCancelledException, FlexoException, IOException {
 		instanciateTestServiceManager(DiagramTechnologyAdapter.class);
 		JarResourceCenter.addNamedJarFromClassPath(getFlexoServiceManager().getResourceCenterService(), "testdiagram_vp-1.1");
@@ -605,6 +616,7 @@ public class TestDiagramFeaturesBindingModelManagement extends DiagramTestCase {
 	 */
 	@Test
 	@TestOrder(11)
+	@Category(UITest.class)
 	public void testSchemeFromExistingVirtualModel() {
 
 		log("testLoadExistingVirtualModel()");
@@ -652,6 +664,7 @@ public class TestDiagramFeaturesBindingModelManagement extends DiagramTestCase {
 	 */
 	@Test
 	@TestOrder(12)
+	@Category(UITest.class)
 	public void testSchemeFromExistingVirtualModelFromJar() {
 
 		log("testLoadExistingVirtualModel()");

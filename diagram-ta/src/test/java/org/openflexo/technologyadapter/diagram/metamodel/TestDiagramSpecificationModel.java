@@ -45,6 +45,7 @@ import static org.junit.Assert.fail;
 import java.awt.Color;
 
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.openflexo.diana.geom.DianaPoint;
 import org.openflexo.diana.shapes.ShapeSpecification.ShapeType;
@@ -57,6 +58,7 @@ import org.openflexo.technologyadapter.diagram.model.DiagramFactory;
 import org.openflexo.technologyadapter.diagram.model.DiagramShape;
 import org.openflexo.test.OrderedRunner;
 import org.openflexo.test.TestOrder;
+import org.openflexo.test.UITest;
 
 /**
  * Test Diagram Specification model
@@ -76,6 +78,7 @@ public class TestDiagramSpecificationModel extends OpenflexoTestCase {
 	 */
 	@Test
 	@TestOrder(1)
+	@Category(UITest.class)
 	public void testDiagramSpecificationFactory() {
 
 		log("testDiagramSpecificationFactory()");
@@ -99,6 +102,7 @@ public class TestDiagramSpecificationModel extends OpenflexoTestCase {
 	 */
 	@Test
 	@TestOrder(2)
+	@Category(UITest.class)
 	public void testInstanciateDiagramSpecfication() throws Exception {
 
 		log("testInstanciateDiagramSpecfication()");
@@ -112,6 +116,7 @@ public class TestDiagramSpecificationModel extends OpenflexoTestCase {
 	 */
 	@Test
 	@TestOrder(3)
+	@Category(UITest.class)
 	public void testInstanciatePalette() throws Exception {
 
 		log("testInstanciatePalette()");
@@ -132,6 +137,7 @@ public class TestDiagramSpecificationModel extends OpenflexoTestCase {
 	 */
 	@Test
 	@TestOrder(4)
+	@Category(UITest.class)
 	public void testFillDiagramSpecification() throws Exception {
 
 		log("testFillDiagramSpecification()");

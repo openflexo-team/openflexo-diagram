@@ -46,6 +46,7 @@ import java.awt.Color;
 import java.io.IOException;
 
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.openflexo.diana.ShapeGraphicalRepresentation;
 import org.openflexo.diana.shapes.ShapeSpecification.ShapeType;
@@ -76,6 +77,7 @@ import org.openflexo.technologyadapter.diagram.rm.DiagramSpecificationRepository
 import org.openflexo.technologyadapter.diagram.rm.DiagramSpecificationResource;
 import org.openflexo.test.OrderedRunner;
 import org.openflexo.test.TestOrder;
+import org.openflexo.test.UITest;
 
 /**
  * Test the creation of a VirtualModel whose instances have {@link FMLControlledDiagramVirtualModelNature}
@@ -116,6 +118,7 @@ public class TestControlledDiagramVirtualModel extends DiagramTestCase {
 	 */
 	@Test
 	@TestOrder(2)
+	@Category(UITest.class)
 	public void testCreateDiagramSpecification() throws SaveResourceException {
 
 		log("testCreateDiagramSpecification()");
@@ -152,6 +155,7 @@ public class TestControlledDiagramVirtualModel extends DiagramTestCase {
 	 */
 	@Test
 	@TestOrder(3)
+	@Category(UITest.class)
 	public void testCreatePalette() throws SaveResourceException {
 
 		log("testCreatePalette()");
@@ -202,6 +206,7 @@ public class TestControlledDiagramVirtualModel extends DiagramTestCase {
 	 */
 	@Test
 	@TestOrder(4)
+	@Category(UITest.class)
 	public void testCreateViewPoint() throws SaveResourceException, ModelDefinitionException, IOException {
 
 		log("testCreateViewPoint()");
@@ -230,6 +235,7 @@ public class TestControlledDiagramVirtualModel extends DiagramTestCase {
 	 */
 	@Test
 	@TestOrder(5)
+	@Category(UITest.class)
 	public void testCreateVirtualModel() throws SaveResourceException, ModelDefinitionException {
 
 		log("testCreateVirtualModel()");
@@ -309,6 +315,7 @@ public class TestControlledDiagramVirtualModel extends DiagramTestCase {
 	 */
 	@Test
 	@TestOrder(6)
+	@Category(UITest.class)
 	public void testReloadDiagramSpecificationAndVirtualModel() throws IOException {
 
 		log("testReloadDiagramSpecification()");
