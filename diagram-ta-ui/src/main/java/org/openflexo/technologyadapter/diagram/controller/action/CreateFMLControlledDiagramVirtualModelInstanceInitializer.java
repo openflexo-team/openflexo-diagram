@@ -79,7 +79,7 @@ public class CreateFMLControlledDiagramVirtualModelInstanceInitializer
 					&& ((FMLRTVirtualModelInstance) action.getFocusedObject()).getVirtualModel().getContainerVirtualModel() != null) {
 				// @Brutal
 				// TODO: Instead of doing this, it would be better to handle resources in wizard FIB
-				((FMLRTVirtualModelInstance) action.getFocusedObject()).getVirtualModel().getContainerVirtualModel()
+				((FMLRTVirtualModelInstance) action.getFocusedObject()).getVirtualModel().getContainerVirtualModel().getCompilationUnit()
 						.loadContainedVirtualModelsWhenUnloaded();
 			}
 			Wizard wizard = new CreateFMLControlledDiagramVirtualModelInstanceWizard(action, getController());

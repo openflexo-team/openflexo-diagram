@@ -74,8 +74,8 @@ public class CreateFMLControlledDiagramFlexoConceptInitializer
 			action.setDefineSomeBehaviours(true);
 			Wizard wizard;
 
-			if (getController().getCurrentModuleView() instanceof FMLControlledDiagramVirtualModelView
-					&& action.getFocusedObject().getDeclaringCompilationUnit().hasNature(FMLControlledDiagramVirtualModelNature.INSTANCE)) {
+			if (getController().getCurrentModuleView() instanceof FMLControlledDiagramVirtualModelView && action.getFocusedObject()
+					.getDeclaringCompilationUnit().getVirtualModel().hasNature(FMLControlledDiagramVirtualModelNature.INSTANCE)) {
 				// FMLControlledDiagramVirtualModelView moduleView = (FMLControlledDiagramVirtualModelView) getController()
 				// .getCurrentModuleView();
 				wizard = new CreateFMLControlledDiagramFlexoConceptWizard(action, getController());
@@ -99,7 +99,8 @@ public class CreateFMLControlledDiagramFlexoConceptInitializer
 	protected FlexoActionRunnable<CreateFlexoConcept, FlexoConceptObject, FMLObject> getDefaultFinalizer() {
 		return (e, action) -> {
 			if (action.switchNewlyCreatedFlexoConcept) {
-				if (action.getFocusedObject().getDeclaringCompilationUnit().hasNature(FMLControlledDiagramVirtualModelNature.INSTANCE)) {
+				if (action.getFocusedObject().getDeclaringCompilationUnit().getVirtualModel()
+						.hasNature(FMLControlledDiagramVirtualModelNature.INSTANCE)) {
 					getController().focusOnTechnologyAdapter(getController().getTechnologyAdapter(DiagramTechnologyAdapter.class));
 				}
 				getController().setCurrentEditedObjectAsModuleView(action.getNewFlexoConcept());

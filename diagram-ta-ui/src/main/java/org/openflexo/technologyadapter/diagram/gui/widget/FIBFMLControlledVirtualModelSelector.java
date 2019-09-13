@@ -96,7 +96,7 @@ public class FIBFMLControlledVirtualModelSelector extends FIBVirtualModelSelecto
 
 	public boolean hasDiagramSpecification(CompilationUnitResource virtualModelResource) {
 		if (virtualModelResource != null) {
-			VirtualModel virtualModel = virtualModelResource.getCompilationUnit();
+			VirtualModel virtualModel = virtualModelResource.getCompilationUnit().getVirtualModel();
 			if (virtualModel.hasNature(FMLControlledDiagramVirtualModelNature.INSTANCE)
 					&& FMLControlledDiagramVirtualModelNature.hasDiagramSpecification(virtualModel, getDiagramSpecification())) {
 				return true;
@@ -107,7 +107,7 @@ public class FIBFMLControlledVirtualModelSelector extends FIBVirtualModelSelecto
 
 	public boolean isFMLControlledVirtualModel(CompilationUnitResource virtualModelResource) {
 		if (virtualModelResource != null) {
-			VirtualModel virtualModel = virtualModelResource.getCompilationUnit();
+			VirtualModel virtualModel = virtualModelResource.getCompilationUnit().getVirtualModel();
 			if (virtualModel.hasNature(FMLControlledDiagramVirtualModelNature.INSTANCE)) {
 				return true;
 			}

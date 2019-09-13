@@ -212,7 +212,7 @@ public class TestControlledDiagramVirtualModel extends DiagramTestCase {
 
 		viewPointResource = factory.makeTopLevelCompilationUnitResource(VIEWPOINT_NAME, VIEWPOINT_URI,
 				fmlTechnologyAdapter.getGlobalRepository(newResourceCenter).getRootFolder(), true);
-		viewPoint = viewPointResource.getLoadedResourceData();
+		viewPoint = viewPointResource.getLoadedResourceData().getVirtualModel();
 
 		// viewPoint = ViewPointImpl.newViewPoint(VIEWPOINT_NAME, VIEWPOINT_URI,
 		// ((FileSystemBasedResourceCenter) resourceCenter).getDirectory(),
@@ -239,12 +239,12 @@ public class TestControlledDiagramVirtualModel extends DiagramTestCase {
 		CompilationUnitResourceFactory vmFactory = fmlTechnologyAdapter.getCompilationUnitResourceFactory();
 		CompilationUnitResource newVMResource = vmFactory.makeContainedCompilationUnitResource(VIRTUAL_MODEL_NAME,
 				viewPoint.getCompilationUnitResource(), true);
-		virtualModel = newVMResource.getLoadedResourceData();
+		virtualModel = newVMResource.getLoadedResourceData().getVirtualModel();
 
 		// virtualModel = VirtualModelImpl.newVirtualModel("TestVirtualModel",
 		// viewPoint);
-		assertTrue(ResourceLocator.retrieveResourceAsFile(((CompilationUnitResource) virtualModel.getResource()).getDirectory()).exists());
-		assertTrue(((CompilationUnitResource) virtualModel.getResource()).getIODelegate().exists());
+		assertTrue(ResourceLocator.retrieveResourceAsFile(virtualModel.getResource().getDirectory()).exists());
+		assertTrue(virtualModel.getResource().getIODelegate().exists());
 
 		AddUseDeclaration useDeclarationAction = AddUseDeclaration.actionType.makeNewAction(virtualModel, null, editor);
 		useDeclarationAction.setModelSlotClass(TypedDiagramModelSlot.class);
@@ -338,10 +338,10 @@ public class TestControlledDiagramVirtualModel extends DiagramTestCase {
 		assertEquals(1, retrievedVPResource.getContainedVirtualModelResources().size());
 		CompilationUnitResource retrievedVMResource = retrievedVPResource.getContainedVirtualModelResources().get(0);
 
-		assertTrue(FMLControlledDiagramVirtualModelNature.INSTANCE.hasNature(retrievedVMResource.getCompilationUnit()));
+		assertTrue(FMLControlledDiagramVirtualModelNature.INSTANCE.hasNature(retrievedVMResource.getCompilationUnit().getVirtualModel()));
 
 		TypedDiagramModelSlot retrievedDiagramMS = FMLControlledDiagramVirtualModelNature
-				.getTypedDiagramModelSlot(retrievedVMResource.getCompilationUnit());
+				.getTypedDiagramModelSlot(retrievedVMResource.getCompilationUnit().getVirtualModel());
 		assertNotNull(retrievedDiagramMS);
 		assertEquals(1, retrievedDiagramMS.getPaletteElementBindings().size());
 

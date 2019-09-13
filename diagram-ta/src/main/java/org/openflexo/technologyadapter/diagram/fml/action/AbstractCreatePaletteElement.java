@@ -491,7 +491,7 @@ public abstract class AbstractCreatePaletteElement<A extends FlexoAction<A, T1, 
 
 	public void setVirtualModelResource(CompilationUnitResource virtualModelResource) {
 		this.virtualModelResource = virtualModelResource;
-		setVirtualModel(virtualModelResource.getCompilationUnit());
+		setVirtualModel(virtualModelResource.getCompilationUnit().getVirtualModel());
 	}
 
 	public Image getImage() {

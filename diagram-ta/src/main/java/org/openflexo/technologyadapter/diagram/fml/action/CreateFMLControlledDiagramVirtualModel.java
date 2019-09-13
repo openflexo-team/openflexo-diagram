@@ -153,7 +153,7 @@ public class CreateFMLControlledDiagramVirtualModel extends AbstractCreateNature
 
 		try {
 			CompilationUnitResource vmResource = makeVirtualModelResource();
-			newVirtualModel = vmResource.getLoadedResourceData();
+			newVirtualModel = vmResource.getLoadedResourceData().getVirtualModel();
 			newVirtualModel.setDescription(getNewVirtualModelDescription());
 		} catch (SaveResourceException e) {
 			throw new SaveResourceException(null);
@@ -316,7 +316,7 @@ public class CreateFMLControlledDiagramVirtualModel extends AbstractCreateNature
 				rc = ((RepositoryFolder) getFocusedObject()).getResourceRepository().getResourceCenter();
 			}
 			else if (getFocusedObject() instanceof VirtualModel) {
-				FlexoResource<VirtualModel> resource = ((VirtualModel) getFocusedObject()).getResource();
+				CompilationUnitResource resource = ((VirtualModel) getFocusedObject()).getCompilationUnitResource();
 				rc = resource.getResourceCenter();
 			}
 			if (rc != null) {

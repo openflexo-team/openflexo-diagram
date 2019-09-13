@@ -224,7 +224,7 @@ public class CreateFMLDiagramPaletteElementBindingFromDiagramPaletteElement
 	public void setVirtualModelResource(CompilationUnitResource virtualModelResource) {
 		this.virtualModelResource = virtualModelResource;
 		if (virtualModelResource != null) {
-			setVirtualModel(virtualModelResource.getCompilationUnit());
+			setVirtualModel(virtualModelResource.getCompilationUnit().getVirtualModel());
 		}
 	}
 
