@@ -132,13 +132,13 @@ public class CreateFMLClassDiagram extends FlexoAction<CreateFMLClassDiagram, Vi
 
 		CompilationUnitResource classDiagramVirtualModelResource = getServiceManager().getVirtualModelLibrary()
 				.getCompilationUnitResource(FMLDiagrammingPlugin.FML_CLASS_DIAGRAM_VIRTUAL_MODEL_URI);
-		VirtualModel classDiagramVirtualModel = classDiagramVirtualModelResource.getCompilationUnit();
+		VirtualModel classDiagramVirtualModel = classDiagramVirtualModelResource.getCompilationUnit().getVirtualModel();
 
 		FlexoResourceCenter<?> resourceCenter = getFocusedObject().getResource().getResourceCenter();
 
 		RepositoryFolder<?, ?> vmFolder;
 		try {
-			vmFolder = getRepositoryFolder(getFocusedObject().getVirtualModelResource(), resourceCenter);
+			vmFolder = getRepositoryFolder(getFocusedObject().getCompilationUnitResource(), resourceCenter);
 		} catch (IOException e) {
 			throw new IOFlexoException(e);
 		}
@@ -204,7 +204,7 @@ public class CreateFMLClassDiagram extends FlexoAction<CreateFMLClassDiagram, Vi
 	}
 
 	public boolean isDuplicated() {
-		for (FMLRTVirtualModelInstanceResource vmiRes : ((CompilationUnitResource) getFocusedObject().getResource()).getContainedVMI()) {
+		for (FMLRTVirtualModelInstanceResource vmiRes : getFocusedObject().getResource().getContainedVMI()) {
 			if (vmiRes.getName().equals(getClassDiagramName())) {
 				return true;
 			}
