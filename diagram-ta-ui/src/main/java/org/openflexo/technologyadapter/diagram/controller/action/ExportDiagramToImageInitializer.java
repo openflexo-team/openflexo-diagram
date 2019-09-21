@@ -38,17 +38,24 @@
 
 package org.openflexo.technologyadapter.diagram.controller.action;
 
+import java.io.File;
 import java.util.logging.Logger;
 
 import javax.swing.Icon;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileFilter;
 
 import org.openflexo.foundation.action.FlexoActionFactory;
 import org.openflexo.foundation.action.FlexoActionRunnable;
 import org.openflexo.icon.IconLibrary;
+import org.openflexo.localization.FlexoLocalization;
+import org.openflexo.swing.FlexoFileChooser;
 import org.openflexo.technologyadapter.diagram.model.DiagramElement;
 import org.openflexo.technologyadapter.diagram.model.action.ExportDiagramToImageAction;
+import org.openflexo.technologyadapter.diagram.model.action.FileIsNotAnImageFileExtension;
 import org.openflexo.view.controller.ActionInitializer;
 import org.openflexo.view.controller.ControllerActionInitializer;
+import org.openflexo.view.controller.FlexoController;
 
 public class ExportDiagramToImageInitializer extends ActionInitializer<ExportDiagramToImageAction, DiagramElement<?>, DiagramElement<?>> {
 
@@ -60,12 +67,55 @@ public class ExportDiagramToImageInitializer extends ActionInitializer<ExportDia
 
 	@Override
 	protected FlexoActionRunnable<ExportDiagramToImageAction, DiagramElement<?>, DiagramElement<?>> getDefaultInitializer() {
-		return (e, action) -> action.saveAsImage();
+
+		return (e, action) -> {
+			FlexoFileChooser fileChooser;
+			fileChooser = new FlexoFileChooser(getController().getFlexoFrame());
+			fileChooser.setCurrentDirectory(getController().getApplicationContext().getAdvancedPrefs().getLastVisitedDirectory());
+			fileChooser.setDialogTitle(getController().getFlexoLocales().localizedForKey("enter_file_to_export_(png,gif,jpg)"));
+			fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+			fileChooser.setFileFilter(new ImageFileFilter());
+			if (fileChooser.showSaveDialog() == JFileChooser.APPROVE_OPTION) {
+				try {
+					action.setFileToExport(fileChooser.getSelectedFile());
+				} catch (FileIsNotAnImageFileExtension e1) {
+					FlexoController.showError("Invalid file name", e1.getMessage());
+					return false;
+				}
+				return true;
+			}
+
+			return false;
+		};
+	}
+
+	@Override
+	protected FlexoActionRunnable<ExportDiagramToImageAction, DiagramElement<?>, DiagramElement<?>> getDefaultFinalizer() {
+		return (e, action) -> {
+			return action.saveScreenshot();
+		};
 	}
 
 	@Override
 	protected Icon getEnabledIcon(FlexoActionFactory<ExportDiagramToImageAction, DiagramElement<?>, DiagramElement<?>> actionType) {
 		return IconLibrary.EXPORT_ICON;
+	}
+
+	public static class ImageFileFilter extends FileFilter {
+
+		@Override
+		public boolean accept(File f) {
+			if (f.isDirectory()) {
+				return false;
+			}
+			return f.getName().endsWith(".png") || f.getName().endsWith(".jpg") || f.getName().endsWith(".gif");
+		}
+
+		@Override
+		public String getDescription() {
+			return FlexoLocalization.getMainLocalizer().localizedForKey("flexo_projects");
+		}
+
 	}
 
 }

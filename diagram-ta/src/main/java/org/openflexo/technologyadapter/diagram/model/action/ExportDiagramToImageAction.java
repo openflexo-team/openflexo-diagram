@@ -43,10 +43,6 @@ import java.io.IOException;
 import java.util.Vector;
 import java.util.logging.Logger;
 
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileNameExtensionFilter;
-
 import org.openflexo.diana.ContainerGraphicalRepresentation;
 import org.openflexo.diana.ScreenshotBuilder.ScreenshotImage;
 import org.openflexo.foundation.FlexoEditor;
@@ -62,7 +58,7 @@ import org.openflexo.technologyadapter.diagram.model.DiagramElement;
 import org.openflexo.technologyadapter.diagram.model.DiagramShape;
 
 /**
- * @author vincent leilde
+ * @author vincent, sylvain
  * 
  */
 public class ExportDiagramToImageAction extends FlexoGUIAction<ExportDiagramToImageAction, DiagramElement<?>, DiagramElement<?>>
@@ -71,7 +67,7 @@ public class ExportDiagramToImageAction extends FlexoGUIAction<ExportDiagramToIm
 	private static final Logger logger = Logger.getLogger(ExportDiagramToImageAction.class.getPackage().getName());
 
 	public static final FlexoActionFactory<ExportDiagramToImageAction, DiagramElement<?>, DiagramElement<?>> actionType = new FlexoActionFactory<ExportDiagramToImageAction, DiagramElement<?>, DiagramElement<?>>(
-			"export_diagram_to_image", FlexoActionFactory.docGroup) {
+			"export_diagram_to_image", FlexoActionFactory.exportMenu, FlexoActionFactory.defaultGroup) {
 
 		@Override
 		public boolean isEnabledForSelection(DiagramElement<?> object, Vector<DiagramElement<?>> globalSelection) {
@@ -112,79 +108,45 @@ public class ExportDiagramToImageAction extends FlexoGUIAction<ExportDiagramToIm
 
 	private ScreenshotImage<? extends DiagramElement<? extends ContainerGraphicalRepresentation>> screenshot;
 
-	private File dest;
+	private File fileToExport;
 
-	private ImageType imageType;
-
-	public boolean saveAsImage() {
-		dest = null;
-		JFileChooser chooser = new JFileChooser() {
-			@Override
-			public void approveSelection() {
-				File f = getSelectedFile();
-				if (f.exists() && getDialogType() == SAVE_DIALOG) {
-					int result = JOptionPane.showConfirmDialog(this, "The file exists, overwrite?", "Existing file",
-							JOptionPane.YES_NO_CANCEL_OPTION);
-					switch (result) {
-						case JOptionPane.YES_OPTION:
-							super.approveSelection();
-							return;
-						case JOptionPane.NO_OPTION:
-							return;
-						case JOptionPane.CLOSED_OPTION:
-							return;
-						case JOptionPane.CANCEL_OPTION:
-							cancelSelection();
-							return;
-					}
-				}
-				if (!f.exists() && getDialogType() == SAVE_DIALOG) {
-					super.approveSelection();
-					return;
-				}
-			}
-		};
-		chooser.setDialogType(JFileChooser.SAVE_DIALOG);
-		chooser.setDialogTitle(getLocales().localizedForKey("save_as_image", chooser));
-
-		for (ImageType type : ImageType.values()) {
-			FileNameExtensionFilter filter = new FileNameExtensionFilter(type.name(), type.getExtension());
-			chooser.addChoosableFileFilter(filter);
-		}
-
-		int returnVal = chooser.showSaveDialog(null);
-		if (returnVal == JFileChooser.CANCEL_OPTION) {
-			return false;
-		}
-		if (returnVal == JFileChooser.APPROVE_OPTION) {
-			for (ImageType type : ImageType.values()) {
-				if (type.getExtension().toUpperCase().equals(chooser.getFileFilter().getDescription().toUpperCase())) {
-					dest = new File(chooser.getSelectedFile().getAbsolutePath() + "." + type.getExtension());
-					imageType = type;
-				}
-				/*if (!chooser.getSelectedFile().getName().toLowerCase().endsWith("."+type.getExtension())) {
-					dest = new File(chooser.getSelectedFile().getAbsolutePath() + "."+type.getExtension());
-					imageType = type;
-				}*/
-			}
-
-			/*if(imageType!=null){
-				chooser.getFileFilter()
-			}
-			if(imageType==null){
-				dest = chooser.getSelectedFile();
-			}	*/
-		}
-		if (dest == null) {
-			return false;
-		}
-		if (saveScreenshot() != null) {
-			return true;
-		}
-		return false;
+	public File getFileToExport() {
+		return fileToExport;
 	}
 
-	public ScreenshotImage<? extends DiagramElement<? extends ContainerGraphicalRepresentation>> getScreenshot() {
+	public void setFileToExport(File fileToExport) throws FileIsNotAnImageFileExtension {
+		this.fileToExport = fileToExport;
+		if (getImageType() == null) {
+			throw new FileIsNotAnImageFileExtension(this, fileToExport);
+		}
+	}
+
+	public ImageType getImageType() {
+		if (fileToExport == null) {
+			return null;
+		}
+		for (ImageType type : ImageType.values()) {
+			if (fileToExport.getName().toUpperCase().endsWith(type.getExtension().toUpperCase())) {
+				return type;
+			}
+		}
+		return null;
+	}
+
+	public boolean saveScreenshot() {
+		logger.info("Saving " + fileToExport);
+
+		try {
+			ImageUtils.saveImageToFile(getScreenshot().image, fileToExport, getImageType());
+			return true;
+		} catch (IOException e) {
+			e.printStackTrace();
+			logger.warning("Could not save " + fileToExport.getAbsolutePath());
+			return false;
+		}
+	}
+
+	private ScreenshotImage<? extends DiagramElement<? extends ContainerGraphicalRepresentation>> getScreenshot() {
 		if (getFocusedObject() instanceof DiagramShape) {
 			if (this.screenshot == null || this.screenshot != ((DiagramShape) getFocusedObject()).getScreenshotImage()) {
 				setScreenshot(((DiagramShape) getFocusedObject()).getScreenshotImage());
@@ -198,20 +160,8 @@ public class ExportDiagramToImageAction extends FlexoGUIAction<ExportDiagramToIm
 		return this.screenshot;
 	}
 
-	public void setScreenshot(ScreenshotImage<? extends DiagramElement<? extends ContainerGraphicalRepresentation>> screenshot) {
+	private void setScreenshot(ScreenshotImage<? extends DiagramElement<? extends ContainerGraphicalRepresentation>> screenshot) {
 		this.screenshot = screenshot;
-	}
-
-	public File saveScreenshot() {
-		logger.info("Saving " + dest);
-		try {
-			ImageUtils.saveImageToFile(getScreenshot().image, dest, imageType);
-			return dest;
-		} catch (IOException e) {
-			e.printStackTrace();
-			logger.warning("Could not save " + dest.getAbsolutePath());
-			return null;
-		}
 	}
 
 }
