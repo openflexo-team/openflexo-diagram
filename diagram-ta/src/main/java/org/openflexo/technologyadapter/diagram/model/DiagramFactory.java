@@ -133,7 +133,14 @@ public class DiagramFactory extends DianaModelFactoryImpl implements PamelaResou
 
 	public DiagramConnector makeNewConnector(String name, DiagramShape startShape, DiagramShape endShape,
 			DiagramContainerElement<?> container) {
-		ConnectorGraphicalRepresentation gr = makeConnectorGraphicalRepresentation(ConnectorType.LINE);
+		return makeNewConnector(name, startShape, endShape, container, null);
+	}
+
+	public DiagramConnector makeNewConnector(String name, DiagramShape startShape, DiagramShape endShape,
+			DiagramContainerElement<?> container, ConnectorGraphicalRepresentation gr) {
+		if (gr == null) {
+			gr = makeConnectorGraphicalRepresentation(ConnectorType.LINE);
+		}
 		DiagramConnector returned = newInstance(DiagramConnector.class);
 		returned.setGraphicalRepresentation(gr);
 		returned.setName(name);

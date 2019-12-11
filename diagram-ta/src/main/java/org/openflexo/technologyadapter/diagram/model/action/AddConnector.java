@@ -121,11 +121,11 @@ public class AddConnector extends FlexoAction<AddConnector, DiagramShape, Diagra
 				throw new IllegalArgumentException("No common ancestor");
 			}
 			newConnector = getFocusedObject().getDiagram().getDiagramFactory().makeNewConnector(getNewConnectorName(), getFromShape(),
-					getToShape(), parent);
+					getToShape(), parent, getGraphicalRepresentation());
 
-			if (getGraphicalRepresentation() != null) {
+			/*if (getGraphicalRepresentation() != null) {
 				newConnector.setGraphicalRepresentation(getGraphicalRepresentation());
-			}
+			}*/
 
 			// newConnector.setDescription(annotation);
 			parent.addToConnectors(newConnector);
