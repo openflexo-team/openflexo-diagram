@@ -212,6 +212,8 @@ public interface ConnectorRole extends GraphicalElementRole<DiagramConnector, Co
 			if (getFlexoConcept() != null) {
 				getFlexoConcept().getPropertyChangeSupport().firePropertyChange(START_SHAPE_ROLE_KEY, oldValue, startShapeRole);
 			}
+			getPropertyChangeSupport().firePropertyChange("startShapeAsDefinedInAction", !getStartShapeAsDefinedInAction(),
+					getStartShapeAsDefinedInAction());
 		}
 
 		@Override
@@ -221,6 +223,8 @@ public interface ConnectorRole extends GraphicalElementRole<DiagramConnector, Co
 			if (getFlexoConcept() != null) {
 				getFlexoConcept().getPropertyChangeSupport().firePropertyChange(END_SHAPE_ROLE_KEY, oldValue, endShapeRole);
 			}
+			getPropertyChangeSupport().firePropertyChange("endShapeAsDefinedInAction", !getEndShapeAsDefinedInAction(),
+					getEndShapeAsDefinedInAction());
 		}
 
 		@Override
