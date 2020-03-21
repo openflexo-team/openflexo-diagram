@@ -56,7 +56,6 @@ import org.openflexo.diana.ConnectorGraphicalRepresentation;
 import org.openflexo.diana.DianaConstants;
 import org.openflexo.diana.Drawing.DrawingTreeNode;
 import org.openflexo.diana.Drawing.ShapeNode;
-import org.openflexo.diana.connectors.ConnectorSpecification.ConnectorType;
 import org.openflexo.diana.control.AbstractDianaEditor;
 import org.openflexo.diana.control.MouseControlContext;
 import org.openflexo.diana.control.actions.MouseDragControlActionImpl;
@@ -174,7 +173,7 @@ public class DrawEdgeControl extends MouseDragControlImpl<DiagramEditor> {
 			action.setToShape(endShape);
 			action.setAutomaticallyCreateConnector(true);
 			ConnectorGraphicalRepresentation connectorGR = factory.makeConnectorGraphicalRepresentation();
-			connectorGR.setConnectorType(ConnectorType.LINE);
+			connectorGR.setConnectorType(controller.getDrawConnectorToolOption().getConnectorType());
 			connectorGR.setIsSelectable(true);
 			connectorGR.setIsFocusable(true);
 			connectorGR.setIsReadOnly(false);
