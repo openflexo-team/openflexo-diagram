@@ -50,6 +50,7 @@ import org.openflexo.connie.exception.NullReferenceException;
 import org.openflexo.connie.exception.TypeMismatchException;
 import org.openflexo.diana.ConnectorGraphicalRepresentation;
 import org.openflexo.diana.connectors.ConnectorSpecification.ConnectorType;
+import org.openflexo.diana.connectors.CurveConnectorSpecification;
 import org.openflexo.foundation.fml.FlexoConcept;
 import org.openflexo.foundation.fml.FlexoRole;
 import org.openflexo.foundation.fml.annotations.FML;
@@ -307,6 +308,15 @@ public interface AddConnector extends AddDiagramElementAction<DiagramConnector> 
 					if (newGR.getConnectorSpecification() == null) {
 						newGR.setConnectorSpecification(factory.makeConnector(ConnectorType.LINE));
 					}
+
+					// For CurveConnector, clear geometry
+					// TODO: something better will be to declare a keepGeometry property, allowing to choose if
+					// we keep existing geometry or not
+					if (newGR.getConnectorSpecification() instanceof CurveConnectorSpecification) {
+						((CurveConnectorSpecification) newGR.getConnectorSpecification()).setCp1Position(null);
+						((CurveConnectorSpecification) newGR.getConnectorSpecification()).setCp2Position(null);
+					}
+
 					// Handle default Foreground when not set
 					if (newGR.getForeground() == null) {
 						newGR.setForeground(factory.makeDefaultForegroundStyle());
