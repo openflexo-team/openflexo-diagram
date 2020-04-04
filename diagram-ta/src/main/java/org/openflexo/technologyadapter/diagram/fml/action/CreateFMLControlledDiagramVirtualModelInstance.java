@@ -58,7 +58,7 @@ public class CreateFMLControlledDiagramVirtualModelInstance
 	private static final Logger logger = Logger.getLogger(CreateFMLControlledDiagramVirtualModelInstance.class.getPackage().getName());
 
 	public static FlexoActionFactory<CreateFMLControlledDiagramVirtualModelInstance, FlexoObject, FlexoObject> actionType = new FlexoActionFactory<CreateFMLControlledDiagramVirtualModelInstance, FlexoObject, FlexoObject>(
-			"create_fml_controlled_diagram", FlexoActionFactory.newMenu, FlexoActionFactory.defaultGroup,
+			"fml_controlled_diagram", FlexoActionFactory.newMenu, FlexoActionFactory.defaultGroup,
 			FlexoActionFactory.ADD_ACTION_TYPE) {
 
 		/**
