@@ -110,8 +110,7 @@ public class DiagramSpecificationResourceFactory extends
 	}
 
 	@Override
-	protected <I> DiagramSpecificationResource registerResource(DiagramSpecificationResource resource,
-			FlexoResourceCenter<I> resourceCenter) {
+	public <I> DiagramSpecificationResource registerResource(DiagramSpecificationResource resource, FlexoResourceCenter<I> resourceCenter) {
 		super.registerResource(resource, resourceCenter);
 
 		// Register the resource in the VirtualModelRepository of supplied resource center

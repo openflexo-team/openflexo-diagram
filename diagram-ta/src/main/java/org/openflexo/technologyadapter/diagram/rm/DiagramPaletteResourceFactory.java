@@ -117,7 +117,7 @@ public class DiagramPaletteResourceFactory extends
 	}
 
 	@Override
-	protected <I> DiagramPaletteResource registerResource(DiagramPaletteResource resource, FlexoResourceCenter<I> resourceCenter) {
+	public <I> DiagramPaletteResource registerResource(DiagramPaletteResource resource, FlexoResourceCenter<I> resourceCenter) {
 		super.registerResource(resource, resourceCenter);
 
 		// Register the resource in the DiagramRepository of supplied resource center

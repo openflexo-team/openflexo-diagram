@@ -89,7 +89,7 @@ public class DiagramResourceFactory
 	}
 
 	@Override
-	protected <I> DiagramResource registerResource(DiagramResource resource, FlexoResourceCenter<I> resourceCenter) {
+	public <I> DiagramResource registerResource(DiagramResource resource, FlexoResourceCenter<I> resourceCenter) {
 		super.registerResource(resource, resourceCenter);
 
 		// Register the resource in the DiagramRepository of supplied resource center
