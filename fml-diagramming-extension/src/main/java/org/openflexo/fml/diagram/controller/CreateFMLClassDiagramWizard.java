@@ -71,7 +71,7 @@ public class CreateFMLClassDiagramWizard extends FlexoActionWizard<CreateFMLClas
 
 	@Override
 	public Image getDefaultPageImage() {
-		return IconFactory.getImageIcon(FMLDiagrammingIconLibrary.CLASS_DIAGRAM_BIG_ICON, IconLibrary.NEW_32_32).getImage();
+		return IconFactory.getImageIcon(FMLDiagrammingIconLibrary.CLASS_DIAGRAM_BIG_ICON, IconLibrary.BIG_NEW_MARKER).getImage();
 	}
 
 	public DescribeClassDiagram getDescribeClassDiagram() {

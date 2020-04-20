@@ -78,7 +78,7 @@ public class CreatePaletteElementFromShapeWizard extends FlexoActionWizard<Creat
 
 	@Override
 	public Image getDefaultPageImage() {
-		return IconFactory.getImageIcon(DiagramIconLibrary.DIAGRAM_PALETTE_BIG_ICON, IconLibrary.NEW_32_32).getImage();
+		return IconFactory.getImageIcon(DiagramIconLibrary.DIAGRAM_PALETTE_BIG_ICON, IconLibrary.BIG_NEW_MARKER).getImage();
 	}
 
 	public PutToPaletteOptions getConfigureNewConcept() {

@@ -41,13 +41,26 @@ package org.openflexo.technologyadapter.diagram.controller.action;
 import java.util.logging.Logger;
 
 import javax.swing.Icon;
+import javax.swing.JFileChooser;
 
+import org.openflexo.diana.ScreenshotBuilder.ScreenshotImage;
 import org.openflexo.foundation.action.FlexoActionFactory;
 import org.openflexo.foundation.action.FlexoActionRunnable;
+import org.openflexo.foundation.fml.rt.FMLRTVirtualModelInstance;
 import org.openflexo.foundation.fml.rt.FlexoConceptInstance;
 import org.openflexo.icon.IconLibrary;
+import org.openflexo.swing.FlexoFileChooser;
+import org.openflexo.technologyadapter.diagram.controller.FMLControlledDiagramScreenshotBuilder;
+import org.openflexo.technologyadapter.diagram.controller.action.ExportDiagramToImageInitializer.ImageFileFilter;
+import org.openflexo.technologyadapter.diagram.controller.diagrameditor.FMLControlledDiagramEditor;
+import org.openflexo.technologyadapter.diagram.controller.diagrameditor.FMLControlledDiagramElement;
+import org.openflexo.technologyadapter.diagram.fml.FMLControlledDiagramVirtualModelInstanceNature;
+import org.openflexo.technologyadapter.diagram.model.DiagramElement;
+import org.openflexo.technologyadapter.diagram.model.action.ExportFMLControlledDiagramToImageAction;
+import org.openflexo.technologyadapter.diagram.model.action.FileIsNotAnImageFileExtension;
 import org.openflexo.view.controller.ActionInitializer;
 import org.openflexo.view.controller.ControllerActionInitializer;
+import org.openflexo.view.controller.FlexoController;
 
 public class ExportFMLControlledDiagramToImageInitializer
 		extends ActionInitializer<ExportFMLControlledDiagramToImageAction, FlexoConceptInstance, FlexoConceptInstance> {
@@ -60,7 +73,54 @@ public class ExportFMLControlledDiagramToImageInitializer
 
 	@Override
 	protected FlexoActionRunnable<ExportFMLControlledDiagramToImageAction, FlexoConceptInstance, FlexoConceptInstance> getDefaultInitializer() {
-		return (e, action) -> action.saveAsImage();
+		return (e, action) -> {
+			FlexoFileChooser fileChooser;
+			fileChooser = new FlexoFileChooser(getController().getFlexoFrame());
+			fileChooser.setCurrentDirectory(getController().getApplicationContext().getAdvancedPrefs().getLastVisitedDirectory());
+			fileChooser.setDialogTitle(getController().getFlexoLocales().localizedForKey("enter_file_to_export_(png,gif,jpg)"));
+			fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+			fileChooser.setFileFilter(new ImageFileFilter());
+			if (fileChooser.showSaveDialog() == JFileChooser.APPROVE_OPTION) {
+				try {
+					action.setFileToExport(fileChooser.getSelectedFile());
+				} catch (FileIsNotAnImageFileExtension e1) {
+					FlexoController.showError("Invalid file name", e1.getMessage());
+					return false;
+				}
+				return true;
+			}
+
+			return false;
+		};
+	}
+
+	@Override
+	protected FlexoActionRunnable<ExportFMLControlledDiagramToImageAction, FlexoConceptInstance, FlexoConceptInstance> getDefaultFinalizer() {
+		return (e, action) -> {
+
+			ScreenshotImage<DiagramElement<?>> screenshotImage = null;
+			FMLControlledDiagramEditor editor = null;
+			FMLControlledDiagramScreenshotBuilder builder = (FMLControlledDiagramScreenshotBuilder) action.getDiagramTechnologyAdapter()
+					.getFMLControlledDiagramElementScreenshotBuilder();
+			FlexoConceptInstance focusedObject = action.getFocusedObject();
+			if (focusedObject instanceof FMLRTVirtualModelInstance) {
+				builder.setDrawing(new FMLControlledDiagramEditor((FMLRTVirtualModelInstance) focusedObject, true, null, null));
+				screenshotImage = builder
+						.getImage(FMLControlledDiagramVirtualModelInstanceNature.getDiagram((FMLRTVirtualModelInstance) focusedObject));
+			}
+			else if (focusedObject != null) {
+				editor = new FMLControlledDiagramEditor((FMLRTVirtualModelInstance) focusedObject.getVirtualModelInstance(), true, null,
+						null);
+				FMLControlledDiagramElement<?, ?> element = editor.getDrawing().getFMLControlledDiagramElements(focusedObject).get(0);
+				builder.setDrawing(editor);
+				screenshotImage = builder.getImage(element.getDiagramElement());
+			}
+			else {
+				logger.warning("Could not create a screenshot");
+				return false;
+			}
+			return action.saveScreenshot(screenshotImage);
+		};
 	}
 
 	@Override

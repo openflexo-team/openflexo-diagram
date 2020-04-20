@@ -246,10 +246,10 @@ public interface ShapeRole extends GraphicalElementRole<DiagramShape, ShapeGraph
 	public void bindTo(DiagramShape metaModelShape);
 
 	// Convenient method to access spec for height feature
-	//public DataBinding<Double> getHeight();
+	// public DataBinding<Double> getHeight();
 
 	// Convenient method to access spec for height feature
-	//public void setHeight(DataBinding<Double> height);
+	// public void setHeight(DataBinding<Double> height);
 
 	public static abstract class ShapeRoleImpl extends GraphicalElementRoleImpl<DiagramShape, ShapeGraphicalRepresentation>
 			implements ShapeRole {
@@ -381,7 +381,8 @@ public interface ShapeRole extends GraphicalElementRole<DiagramShape, ShapeGraph
 				// setChanged();
 				// notifyObservers();
 				getPropertyChangeSupport().firePropertyChange(PARENT_SHAPE_ROLE_KEY, oldParentShapeRole, parentShapeRole);
-				getPropertyChangeSupport().firePropertyChange("parentShapeAsDefinedInAction", oldParentShapeRole, parentShapeRole);
+				getPropertyChangeSupport().firePropertyChange("parentShapeAsDefinedInAction", !getParentShapeAsDefinedInAction(),
+						getParentShapeAsDefinedInAction());
 				if (getFlexoConcept() != null) {
 					getFlexoConcept().getPropertyChangeSupport().firePropertyChange(PARENT_SHAPE_ROLE_KEY, oldParentShapeRole,
 							parentShapeRole);
@@ -490,7 +491,7 @@ public interface ShapeRole extends GraphicalElementRole<DiagramShape, ShapeGraph
 			}
 			return null;
 		}
-
+		
 		// Convenient method to access spec for height feature
 		@Override
 		public void setHeight(DataBinding<Double> height) {

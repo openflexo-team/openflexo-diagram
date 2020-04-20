@@ -186,11 +186,6 @@ public class DiagramElementPasteHandler extends FlexoPasteHandler<DiagramContain
 		}
 	}
 
-	@Override
-	public void finalizePasting(FlexoClipboard clipboard, PastingContext<DiagramContainerElement> pastingContext) {
-		// Nothing to do
-	}
-
 	private static String translateName(DiagramElement<?> diagramElement) {
 		String oldName = diagramElement.getName();
 		if (StringUtils.isEmpty(oldName)) {

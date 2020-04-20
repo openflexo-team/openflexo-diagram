@@ -87,7 +87,9 @@ import org.openflexo.technologyadapter.diagram.controller.action.DiagramElementP
 import org.openflexo.technologyadapter.diagram.controller.action.DrawRectangleSchemeActionInitializer;
 import org.openflexo.technologyadapter.diagram.controller.action.DropSchemeActionInitializer;
 import org.openflexo.technologyadapter.diagram.controller.action.ExportDiagramToImageInitializer;
+import org.openflexo.technologyadapter.diagram.controller.action.ExportDiagramToSVGInitializer;
 import org.openflexo.technologyadapter.diagram.controller.action.ExportFMLControlledDiagramToImageInitializer;
+import org.openflexo.technologyadapter.diagram.controller.action.ExportFMLControlledDiagramToSVGInitializer;
 import org.openflexo.technologyadapter.diagram.controller.action.LinkSchemeActionInitializer;
 import org.openflexo.technologyadapter.diagram.controller.action.OpenFMLControlledDiagramVirtualModelInstanceInitializer;
 import org.openflexo.technologyadapter.diagram.controller.action.ResetGraphicalRepresentationInitializer;
@@ -251,7 +253,9 @@ public class DiagramTechnologyAdapterController extends TechnologyAdapterControl
 		new CreatePaletteElementFromFlexoConceptInitializer(actionInitializer);
 		new CreatePaletteElementFromShapeInitializer(actionInitializer);
 		new ExportDiagramToImageInitializer(actionInitializer);
+		new ExportDiagramToSVGInitializer(actionInitializer);
 		new ExportFMLControlledDiagramToImageInitializer(actionInitializer);
+		new ExportFMLControlledDiagramToSVGInitializer(actionInitializer);
 		new DeleteDiagramElementsAndFlexoConceptInstancesInitializer(actionInitializer);
 
 	}
