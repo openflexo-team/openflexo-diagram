@@ -142,11 +142,6 @@ public interface GraphicalElementSpecification<T, GR extends GraphicalRepresenta
 		}
 
 		@Override
-		public String getURI() {
-			return null;
-		}
-
-		@Override
 		public Collection<Validable> getEmbeddedValidableObjects() {
 			return null;
 		}

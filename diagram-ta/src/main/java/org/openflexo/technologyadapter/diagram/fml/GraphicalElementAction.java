@@ -118,11 +118,6 @@ public interface GraphicalElementAction extends FlexoConceptObject {
 		}
 
 		@Override
-		public String getURI() {
-			return null;
-		}
-
-		@Override
 		public Collection<Validable> getEmbeddedValidableObjects() {
 			return null;
 		}

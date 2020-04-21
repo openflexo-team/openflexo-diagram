@@ -208,11 +208,6 @@ public interface FMLDiagramPaletteElementBinding extends FlexoConceptObject {
 		}
 
 		@Override
-		public String getURI() {
-			return null;
-		}
-
-		@Override
 		public FlexoConcept getFlexoConcept() {
 			if (getDiagramModelSlot() != null) {
 				return getDiagramModelSlot().getFlexoConcept();

@@ -121,20 +121,6 @@ public interface OverridingGraphicalRepresentation<GR extends GraphicalRepresent
 			return null;
 		}
 
-		/*public FMLDiagramPaletteElementBinding getPaletteElementBinding() {
-			return paletteElementBinding;
-		}*/
-
-		/*@Override
-		public String getPatternRoleName() {
-			return patternRoleName;
-		}
-		
-		@Override
-		public void setPatternRoleName(String patternRoleName) {
-			this.patternRoleName = patternRoleName;
-		}*/
-
 		@Override
 		public String getFMLRepresentation(FMLRepresentationContext context) {
 			return "<not_implemented:" + getStringRepresentation() + ">";
@@ -144,21 +130,17 @@ public interface OverridingGraphicalRepresentation<GR extends GraphicalRepresent
 			return getDiagramPaletteElementBinding().getPaletteElement().getPalette();
 		}
 
-		@Override
-		public String getURI() {
-			return null;
-		}
-
 	}
 
 	@ModelEntity
 	@XMLElement
-	public static interface ShapeOverridingGraphicalRepresentation
-			extends OverridingGraphicalRepresentation<ShapeGraphicalRepresentation> {}
+	public static interface ShapeOverridingGraphicalRepresentation extends OverridingGraphicalRepresentation<ShapeGraphicalRepresentation> {
+	}
 
 	@ModelEntity
 	@XMLElement
 	public static interface ConnectorOverridingGraphicalRepresentation
-			extends OverridingGraphicalRepresentation<ConnectorGraphicalRepresentation> {}
+			extends OverridingGraphicalRepresentation<ConnectorGraphicalRepresentation> {
+	}
 
 }
