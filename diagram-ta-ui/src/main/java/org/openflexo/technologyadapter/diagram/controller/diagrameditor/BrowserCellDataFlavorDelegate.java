@@ -151,7 +151,7 @@ public class BrowserCellDataFlavorDelegate extends DataFlavorDelegate {
 						JPopupMenu popup = new JPopupMenu();
 						for (final DropScheme dropScheme : applicableDropSchemes) {
 							JMenuItem menuItem = new JMenuItem(dropScheme.getDeclaringCompilationUnit().getLocalizedDictionary()
-									.localizedForKey(dropScheme.getLabel() != null ? dropScheme.getLabel() : dropScheme.getName()));
+									.localizedForKey(dropScheme.getName() != null ? dropScheme.getName() : dropScheme.getName()));
 							menuItem.addActionListener(new DropSchemeActionListener(focused, dropScheme, representedObject, modelLocation));
 							popup.add(menuItem);
 						}

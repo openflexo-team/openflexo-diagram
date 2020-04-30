@@ -252,7 +252,7 @@ public class DrawEdgeControl extends MouseDragControlImpl<DiagramEditor> {
 					JPopupMenu popup = new JPopupMenu();
 					for (final LinkScheme linkScheme : availableConnectors) {
 						JMenuItem menuItem = new JMenuItem(linkScheme.getDeclaringCompilationUnit().getLocalizedDictionary()
-								.localizedForKey(linkScheme.getLabel() != null ? linkScheme.getLabel() : linkScheme.getName()));
+								.localizedForKey(linkScheme.getName() != null ? linkScheme.getName() : linkScheme.getName()));
 						menuItem.addActionListener(
 								new DrawingEdgeActionListener((FMLControlledDiagramEditor) controller, startShape, endShape, linkScheme));
 						popup.add(menuItem);

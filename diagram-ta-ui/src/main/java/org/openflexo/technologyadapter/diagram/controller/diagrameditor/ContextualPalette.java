@@ -267,7 +267,7 @@ public class ContextualPalette extends DiagramEditorPaletteModel implements Prop
 			container = (DiagramContainerElement<?>) ((FMLControlledDiagramElement<?, ?>) target.getDrawable()).getDiagramElement();
 		}
 		if (target.getDrawable() instanceof FMLControlledDiagramShape) {
-			parentShapeRole = (ShapeRole) ((FMLControlledDiagramShape) target.getDrawable()).getRole();
+			parentShapeRole = ((FMLControlledDiagramShape) target.getDrawable()).getRole();
 			container = (DiagramContainerElement<?>) ((FMLControlledDiagramElement<?, ?>) target.getDrawable()).getDiagramElement();
 		}
 		if (target.getDrawable() instanceof Diagram) {
@@ -284,7 +284,7 @@ public class ContextualPalette extends DiagramEditorPaletteModel implements Prop
 			JPopupMenu popup = new JPopupMenu();
 			for (final DropScheme dropScheme : availableDropSchemes) {
 				JMenuItem menuItem = new JMenuItem(dropScheme.getDeclaringCompilationUnit().getLocalizedDictionary()
-						.localizedForKey(dropScheme.getLabel() != null ? dropScheme.getLabel() : dropScheme.getName()));
+						.localizedForKey(dropScheme.getName() != null ? dropScheme.getName() : dropScheme.getName()));
 				menuItem.addActionListener(new DrawingShapeActionListener(editor, dropScheme, container, parentFlexoConceptInstance,
 						parentShapeRole, paletteElement, dropLocation));
 				popup.add(menuItem);
