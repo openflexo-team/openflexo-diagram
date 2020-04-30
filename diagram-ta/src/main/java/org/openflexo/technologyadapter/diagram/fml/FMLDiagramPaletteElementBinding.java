@@ -47,7 +47,6 @@ import org.openflexo.diana.GraphicalRepresentation;
 import org.openflexo.diana.control.PaletteElement;
 import org.openflexo.foundation.DataModification;
 import org.openflexo.foundation.fml.FMLModelFactory;
-import org.openflexo.foundation.fml.FMLRepresentationContext;
 import org.openflexo.foundation.fml.FlexoBehaviour;
 import org.openflexo.foundation.fml.FlexoBehaviourParameter;
 import org.openflexo.foundation.fml.FlexoConcept;
@@ -529,11 +528,6 @@ public interface FMLDiagramPaletteElementBinding extends FlexoConceptObject {
 				setChanged();
 				notifyObservers(new DataModification("boundLabelToElementName", !boundLabelToElementName, boundLabelToElementName));
 			}
-		}
-
-		@Override
-		public String getFMLRepresentation(FMLRepresentationContext context) {
-			return "<not_implemented:" + getStringRepresentation() + ">";
 		}
 
 	}

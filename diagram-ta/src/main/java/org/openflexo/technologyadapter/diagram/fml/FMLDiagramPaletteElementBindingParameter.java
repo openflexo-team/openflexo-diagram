@@ -41,7 +41,6 @@ package org.openflexo.technologyadapter.diagram.fml;
 import java.security.URIParameter;
 
 import org.openflexo.connie.BindingModel;
-import org.openflexo.foundation.fml.FMLRepresentationContext;
 import org.openflexo.foundation.fml.FlexoBehaviourParameter;
 import org.openflexo.foundation.fml.FlexoConcept;
 import org.openflexo.foundation.fml.FlexoConceptObject;
@@ -174,11 +173,6 @@ public interface FMLDiagramPaletteElementBindingParameter extends FlexoConceptOb
 		@Override
 		public BindingModel getBindingModel() {
 			return getDeclaringCompilationUnit().getBindingModel();
-		}
-
-		@Override
-		public String getFMLRepresentation(FMLRepresentationContext context) {
-			return "<not_implemented:" + getStringRepresentation() + ">";
 		}
 
 	}

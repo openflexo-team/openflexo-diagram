@@ -42,7 +42,6 @@ import org.openflexo.connie.BindingModel;
 import org.openflexo.diana.ConnectorGraphicalRepresentation;
 import org.openflexo.diana.GraphicalRepresentation;
 import org.openflexo.diana.ShapeGraphicalRepresentation;
-import org.openflexo.foundation.fml.FMLRepresentationContext;
 import org.openflexo.foundation.fml.FlexoConcept;
 import org.openflexo.foundation.fml.FlexoConceptObject.FlexoConceptObjectImpl;
 import org.openflexo.pamela.annotations.Getter;
@@ -119,11 +118,6 @@ public interface OverridingGraphicalRepresentation<GR extends GraphicalRepresent
 				return getDiagramPaletteElementBinding().getBindingModel();
 			}
 			return null;
-		}
-
-		@Override
-		public String getFMLRepresentation(FMLRepresentationContext context) {
-			return "<not_implemented:" + getStringRepresentation() + ">";
 		}
 
 		public DiagramPalette getPalette() {

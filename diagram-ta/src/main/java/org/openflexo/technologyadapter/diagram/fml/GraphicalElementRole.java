@@ -51,7 +51,6 @@ import org.openflexo.diana.ConnectorGraphicalRepresentation;
 import org.openflexo.diana.GraphicalRepresentation;
 import org.openflexo.diana.ShapeGraphicalRepresentation;
 import org.openflexo.foundation.FlexoException;
-import org.openflexo.foundation.fml.FMLRepresentationContext;
 import org.openflexo.foundation.fml.FlexoRole;
 import org.openflexo.foundation.fml.rt.AbstractVirtualModelInstanceModelFactory;
 import org.openflexo.foundation.fml.rt.FlexoConceptInstance;
@@ -77,7 +76,6 @@ import org.openflexo.technologyadapter.diagram.fml.GraphicalElementAction.Action
 import org.openflexo.technologyadapter.diagram.metamodel.DiagramSpecification;
 import org.openflexo.technologyadapter.diagram.model.Diagram;
 import org.openflexo.technologyadapter.diagram.model.DiagramElement;
-import org.openflexo.toolbox.StringUtils;
 
 @ModelEntity(isAbstract = true)
 @ImplementationClass(GraphicalElementRole.GraphicalElementRoleImpl.class)
@@ -589,21 +587,6 @@ public abstract interface GraphicalElementRole<T extends DiagramElement<GR>, GR 
 		@Override
 		public Class<? extends TechnologyAdapter> getRoleTechnologyAdapterClass() {
 			return DiagramTechnologyAdapter.class;
-		}
-
-		@Override
-		public String detailedFMLSpecifications(FMLRepresentationContext context) {
-
-			if (getGrSpecifications() != null && getGrSpecifications().size() > 0) {
-				StringBuffer sb = new StringBuffer();
-				for (GraphicalElementSpecification ges : getGrSpecifications()) {
-					if (ges.getValue().isSet()) {
-						sb.append("  " + ges.getFeatureName() + " = " + ges.getValue().toString() + ";" + StringUtils.LINE_SEPARATOR);
-					}
-				}
-				return sb.toString();
-			}
-			return null;
 		}
 
 	}
