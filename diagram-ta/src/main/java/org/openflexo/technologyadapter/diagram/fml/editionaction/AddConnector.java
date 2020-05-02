@@ -54,6 +54,7 @@ import org.openflexo.diana.connectors.CurveConnectorSpecification;
 import org.openflexo.foundation.fml.FlexoConcept;
 import org.openflexo.foundation.fml.FlexoRole;
 import org.openflexo.foundation.fml.annotations.FML;
+import org.openflexo.foundation.fml.annotations.FMLAttribute;
 import org.openflexo.foundation.fml.editionaction.AssignationAction;
 import org.openflexo.foundation.fml.rt.RunTimeEvaluationContext;
 import org.openflexo.foundation.fml.rt.action.FlexoBehaviourAction;
@@ -100,6 +101,7 @@ public interface AddConnector extends AddDiagramElementAction<DiagramConnector> 
 
 	@Getter(value = FROM_SHAPE_KEY)
 	@XMLAttribute
+	@FMLAttribute(value = FROM_SHAPE_KEY, required = true)
 	public DataBinding<DiagramShape> getFromShape();
 
 	@Setter(FROM_SHAPE_KEY)
@@ -107,6 +109,7 @@ public interface AddConnector extends AddDiagramElementAction<DiagramConnector> 
 
 	@Getter(value = TO_SHAPE_KEY)
 	@XMLAttribute
+	@FMLAttribute(value = TO_SHAPE_KEY, required = true)
 	public DataBinding<DiagramShape> getToShape();
 
 	@Setter(TO_SHAPE_KEY)

@@ -41,6 +41,7 @@ package org.openflexo.technologyadapter.diagram.fml;
 import org.openflexo.foundation.fml.AbstractCreationScheme;
 import org.openflexo.foundation.fml.FlexoConcept;
 import org.openflexo.foundation.fml.annotations.FML;
+import org.openflexo.foundation.fml.annotations.FMLAttribute;
 import org.openflexo.gina.annotation.FIBPanel;
 import org.openflexo.pamela.annotations.Getter;
 import org.openflexo.pamela.annotations.ImplementationClass;
@@ -89,6 +90,7 @@ public interface LinkScheme extends AbstractCreationScheme, DiagramFlexoBehaviou
 
 	@Getter(value = FROM_TARGET_KEY)
 	@XMLAttribute
+	@FMLAttribute(value = FROM_TARGET_KEY, required = false)
 	public String _getFromTarget();
 
 	@Setter(FROM_TARGET_KEY)
@@ -96,6 +98,7 @@ public interface LinkScheme extends AbstractCreationScheme, DiagramFlexoBehaviou
 
 	@Getter(value = TO_TARGET_KEY)
 	@XMLAttribute
+	@FMLAttribute(value = TO_TARGET_KEY, required = false)
 	public String _getToTarget();
 
 	@Setter(TO_TARGET_KEY)

@@ -334,6 +334,12 @@ public interface ShapeRole extends GraphicalElementRole<DiagramShape, ShapeGraph
 			return DiagramShape.class;
 		}
 
+		@Override
+		public void setType(Type type) {
+			// TODO Auto-generated method stub
+
+		}
+
 		private boolean detectLoopInParentShapePatternRoleDefinition() {
 			List<ShapeRole> list = new ArrayList<>();
 			ShapeRole current = this;

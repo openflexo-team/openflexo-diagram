@@ -44,11 +44,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+import org.openflexo.foundation.fml.FMLCompilationUnit;
 import org.openflexo.foundation.fml.annotations.DeclareEditionActions;
 import org.openflexo.foundation.fml.annotations.DeclareFetchRequests;
 import org.openflexo.foundation.fml.annotations.DeclareFlexoBehaviours;
 import org.openflexo.foundation.fml.annotations.DeclareFlexoRoles;
 import org.openflexo.foundation.fml.annotations.FML;
+import org.openflexo.foundation.fml.annotations.FMLAttribute;
 import org.openflexo.foundation.resource.FlexoResourceCenter;
 import org.openflexo.foundation.resource.SaveResourceException;
 import org.openflexo.foundation.technologyadapter.FlexoMetaModelResource;
@@ -99,11 +101,11 @@ import org.openflexo.technologyadapter.diagram.rm.DiagramResourceFactory;
 @ModelEntity
 @ImplementationClass(TypedDiagramModelSlot.TypedDiagramModelSlotImpl.class)
 @XMLElement
-@FML("TypedDiagramModelSlot")
+@FML("TypedDiagram")
 public interface TypedDiagramModelSlot extends TypeAwareModelSlot<Diagram, DiagramSpecification>, DiagramModelSlot {
 
-	// @PropertyIdentifier(type = DrawingGraphicalRepresentation.class)
-	// public static final String GRAPHICAL_REPRESENTATION_KEY = "graphicalRepresentation";
+	@PropertyIdentifier(type = DiagramSpecification.class)
+	public static final String DIAGRAM_SPECIFICATION_KEY = "diagramSpecification";
 	@PropertyIdentifier(type = List.class)
 	public static final String PALETTE_ELEMENTS_BINDING_KEY = "paletteElementBindings";
 	@PropertyIdentifier(type = Diagram.class)
@@ -144,7 +146,12 @@ public interface TypedDiagramModelSlot extends TypeAwareModelSlot<Diagram, Diagr
 
 	public FMLDiagramPaletteElementBinding addFMLDiagramPaletteElementBinding();
 
+	@Getter(value = DIAGRAM_SPECIFICATION_KEY, ignoreType = true)
+	@FMLAttribute(value = DIAGRAM_SPECIFICATION_KEY, required = false)
 	public DiagramSpecification getDiagramSpecification();
+
+	@Setter(DIAGRAM_SPECIFICATION_KEY)
+	public void setDiagramSpecification(DiagramSpecification aDiagramSpecification);
 
 	@Getter(value = TEMPLATE_DIAGRAM_KEY, ignoreType = true)
 	public Diagram getTemplateDiagram();
@@ -297,6 +304,12 @@ public interface TypedDiagramModelSlot extends TypeAwareModelSlot<Diagram, Diagr
 		}
 
 		@Override
+		public void setType(Type type) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
 		public String getTypeDescription() {
 			return "Diagram Specification";
 		}
@@ -314,6 +327,11 @@ public interface TypedDiagramModelSlot extends TypeAwareModelSlot<Diagram, Diagr
 				return getMetaModelResource().getMetaModelData();
 			}
 			return null;
+		}
+
+		@Override
+		public void setDiagramSpecification(DiagramSpecification aDiagramSpecification) {
+			setMetaModelResource(aDiagramSpecification != null ? aDiagramSpecification.getResource() : null);
 		}
 
 		private FlexoObjectReference<Diagram> templateDiagramReference;
@@ -346,6 +364,14 @@ public interface TypedDiagramModelSlot extends TypeAwareModelSlot<Diagram, Diagr
 		@Override
 		public void setTemplateDiagramReference(FlexoObjectReference<Diagram> anElementReference) {
 			this.templateDiagramReference = anElementReference;
+		}
+
+		@Override
+		public void handleRequiredImports(FMLCompilationUnit compilationUnit) {
+			super.handleRequiredImports(compilationUnit);
+			if (compilationUnit != null && getDiagramSpecification() != null) {
+				compilationUnit.ensureResourceImport(getDiagramSpecification());
+			}
 		}
 
 	}

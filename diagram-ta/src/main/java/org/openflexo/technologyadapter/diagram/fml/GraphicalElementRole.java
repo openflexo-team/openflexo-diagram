@@ -51,7 +51,9 @@ import org.openflexo.diana.ConnectorGraphicalRepresentation;
 import org.openflexo.diana.GraphicalRepresentation;
 import org.openflexo.diana.ShapeGraphicalRepresentation;
 import org.openflexo.foundation.FlexoException;
+import org.openflexo.foundation.fml.FMLCompilationUnit;
 import org.openflexo.foundation.fml.FlexoRole;
+import org.openflexo.foundation.fml.annotations.FMLAttribute;
 import org.openflexo.foundation.fml.rt.AbstractVirtualModelInstanceModelFactory;
 import org.openflexo.foundation.fml.rt.FlexoConceptInstance;
 import org.openflexo.foundation.fml.rt.ModelObjectActorReference;
@@ -190,6 +192,7 @@ public abstract interface GraphicalElementRole<T extends DiagramElement<GR>, GR 
 	public void _removeFromDeclaredGRSpecifications(GraphicalElementSpecification<?, GR> aDeclaredGRSpecification);
 
 	@Getter(value = METAMODEL_ELEMENT_KEY, ignoreType = true)
+	@FMLAttribute(value = METAMODEL_ELEMENT_KEY, required = true)
 	public T getMetamodelElement();
 
 	@Setter(METAMODEL_ELEMENT_KEY)
@@ -587,6 +590,14 @@ public abstract interface GraphicalElementRole<T extends DiagramElement<GR>, GR 
 		@Override
 		public Class<? extends TechnologyAdapter> getRoleTechnologyAdapterClass() {
 			return DiagramTechnologyAdapter.class;
+		}
+
+		@Override
+		public void handleRequiredImports(FMLCompilationUnit compilationUnit) {
+			super.handleRequiredImports(compilationUnit);
+			if (compilationUnit != null && getMetamodelElement() != null) {
+				compilationUnit.ensureElementImport(getMetamodelElement());
+			}
 		}
 
 	}

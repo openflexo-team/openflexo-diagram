@@ -265,6 +265,11 @@ public interface ConnectorRole extends GraphicalElementRole<DiagramConnector, Co
 		}
 
 		@Override
+		public void setType(Type type) {
+			// TODO Auto-generated method stub
+		}
+
+		@Override
 		public List<ShapeRole> getAvailableShapeRoles() {
 			if (getFlexoConcept() != null) {
 				return getFlexoConcept().getDeclaredProperties(ShapeRole.class);
