@@ -9,10 +9,18 @@ import ["http://some_uri/ADiagSpecification.diagramspecification"] as DIAGRAM_SP
 import [DIAGRAM_SPECIFICATION+"/ExampleDiagram.diagram"] as EXAMPLE_DIAGRAM;
 import [EXAMPLE_DIAGRAM:"SYL_56"] as RED_SHAPE;
 import [EXAMPLE_DIAGRAM:"SYL_78"] as BLUE_ARC;
+import [EXAMPLE_DIAGRAM:"SYL_56"] as RED_SHAPE2;
 
 model MyModel {
 	
-	Diagram diagram with DIAGRAM::TypedDiagramModelSlot(diagramSpecification = DIAGRAM_SPECIFICATION);	
+	Diagram diagram with DIAGRAM::TypedDiagramModelSlot(
+		diagramSpecification = DIAGRAM_SPECIFICATION,
+		foo = Toto:(p1="toto",p2=TUTU, p3=3),
+		paletteElementBindings = {
+			FMLDiagramPaletteElementBinding:(elementId="MyPaletteElement",dropAction="MyConcept.drop()",overridingGR=RED_SHAPE2),
+			FMLDiagramPaletteElementBinding:(elementId="MyPaletteElement2",dropAction="MyConcept.drop()")
+		});
+
 	ConceptualModel conceptualModel;
 	
 	concept MyConceptGR {
