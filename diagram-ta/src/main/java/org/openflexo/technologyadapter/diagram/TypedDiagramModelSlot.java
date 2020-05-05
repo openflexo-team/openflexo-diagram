@@ -51,6 +51,7 @@ import org.openflexo.foundation.fml.annotations.DeclareFlexoBehaviours;
 import org.openflexo.foundation.fml.annotations.DeclareFlexoRoles;
 import org.openflexo.foundation.fml.annotations.FML;
 import org.openflexo.foundation.fml.annotations.FMLAttribute;
+import org.openflexo.foundation.fml.annotations.FMLAttribute.AttributeKind;
 import org.openflexo.foundation.resource.FlexoResourceCenter;
 import org.openflexo.foundation.resource.SaveResourceException;
 import org.openflexo.foundation.technologyadapter.FlexoMetaModelResource;
@@ -129,6 +130,7 @@ public interface TypedDiagramModelSlot extends TypeAwareModelSlot<Diagram, Diagr
 			cardinality = Cardinality.LIST,
 			inverse = FMLDiagramPaletteElementBinding.DIAGRAM_MODEL_SLOT_KEY)
 	@XMLElement
+	@FMLAttribute(value = PALETTE_ELEMENTS_BINDING_KEY, kind = AttributeKind.InstanceList)
 	public List<FMLDiagramPaletteElementBinding> getPaletteElementBindings();
 
 	@Setter(PALETTE_ELEMENTS_BINDING_KEY)

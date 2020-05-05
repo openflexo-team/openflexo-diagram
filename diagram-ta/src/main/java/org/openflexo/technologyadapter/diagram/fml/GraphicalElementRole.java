@@ -158,8 +158,9 @@ public abstract interface GraphicalElementRole<T extends DiagramElement<GR>, GR 
 	@PropertyIdentifier(type = FlexoObjectReference.class)
 	String METAMODEL_ELEMENT_REFERENCE_KEY = "metamodelElementReference";
 
-	@Getter(value = EXAMPLE_LABEL_KEY)
+	@Getter(EXAMPLE_LABEL_KEY)
 	@XMLAttribute
+	@FMLAttribute(EXAMPLE_LABEL_KEY)
 	public String getExampleLabel();
 
 	@Setter(EXAMPLE_LABEL_KEY)
