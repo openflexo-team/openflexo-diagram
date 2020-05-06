@@ -130,7 +130,7 @@ public interface TypedDiagramModelSlot extends TypeAwareModelSlot<Diagram, Diagr
 			cardinality = Cardinality.LIST,
 			inverse = FMLDiagramPaletteElementBinding.DIAGRAM_MODEL_SLOT_KEY)
 	@XMLElement
-	@FMLAttribute(value = PALETTE_ELEMENTS_BINDING_KEY, kind = AttributeKind.InstanceList)
+	@FMLAttribute(value = PALETTE_ELEMENTS_BINDING_KEY, kind = AttributeKind.InstancesList)
 	public List<FMLDiagramPaletteElementBinding> getPaletteElementBindings();
 
 	@Setter(PALETTE_ELEMENTS_BINDING_KEY)

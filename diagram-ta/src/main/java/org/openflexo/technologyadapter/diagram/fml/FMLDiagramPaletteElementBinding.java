@@ -38,11 +38,15 @@
 
 package org.openflexo.technologyadapter.diagram.fml;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
 import org.openflexo.connie.BindingModel;
+import org.openflexo.connie.DataBinding;
+import org.openflexo.connie.DataBinding.BindingDefinitionType;
 import org.openflexo.diana.GraphicalRepresentation;
 import org.openflexo.diana.control.PaletteElement;
 import org.openflexo.foundation.DataModification;
@@ -52,6 +56,8 @@ import org.openflexo.foundation.fml.FlexoBehaviourParameter;
 import org.openflexo.foundation.fml.FlexoConcept;
 import org.openflexo.foundation.fml.FlexoConceptObject;
 import org.openflexo.foundation.fml.VirtualModel;
+import org.openflexo.foundation.fml.annotations.FML;
+import org.openflexo.foundation.fml.annotations.FMLAttribute;
 import org.openflexo.pamela.annotations.Adder;
 import org.openflexo.pamela.annotations.Finder;
 import org.openflexo.pamela.annotations.Getter;
@@ -68,6 +74,7 @@ import org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
 import org.openflexo.technologyadapter.diagram.metamodel.DiagramPalette;
 import org.openflexo.technologyadapter.diagram.metamodel.DiagramPaletteElement;
 import org.openflexo.technologyadapter.diagram.metamodel.DiagramSpecification;
+import org.openflexo.toolbox.StringUtils;
 
 /**
  * Encodes the binding between {@link DiagramPaletteElement} (part of {@link DiagramSpecification}) and the current {@link VirtualModel}<br>
@@ -80,6 +87,7 @@ import org.openflexo.technologyadapter.diagram.metamodel.DiagramSpecification;
 @ModelEntity
 @ImplementationClass(FMLDiagramPaletteElementBinding.FMLDiagramPaletteElementBindingImpl.class)
 @XMLElement
+@FML("PaletteElementBinding")
 public interface FMLDiagramPaletteElementBinding extends FlexoConceptObject {
 
 	@PropertyIdentifier(type = TypedDiagramModelSlot.class)
@@ -94,6 +102,11 @@ public interface FMLDiagramPaletteElementBinding extends FlexoConceptObject {
 	public static final String PARAMETERS_KEY = "parameters";
 	@PropertyIdentifier(type = List.class)
 	public static final String OVERRIDING_GRAPHICAL_REPRESENTATIONS_KEY = "overridingGraphicalRepresentations";
+
+	@PropertyIdentifier(type = String.class)
+	public static final String SERIALIZED_PALETTE_ELEMENT_KEY = "serializedPaletteElement";
+	@PropertyIdentifier(type = String.class)
+	public static final String SERIALIZED_CALL_KEY = "serializedCall";
 
 	@Getter(value = DIAGRAM_MODEL_SLOT_KEY, inverse = TypedDiagramModelSlot.PALETTE_ELEMENTS_BINDING_KEY)
 	public TypedDiagramModelSlot getDiagramModelSlot();
@@ -114,6 +127,20 @@ public interface FMLDiagramPaletteElementBinding extends FlexoConceptObject {
 	@Setter(PALETTE_ELEMENT_ID_KEY)
 	public void setPaletteElementId(String aPaletteElementId);
 
+	@Getter(SERIALIZED_PALETTE_ELEMENT_KEY)
+	@FMLAttribute(SERIALIZED_PALETTE_ELEMENT_KEY)
+	public String getSerializedPaletteElement();
+
+	@Setter(SERIALIZED_PALETTE_ELEMENT_KEY)
+	public void setSerializedPaletteElement(String serializedPaletteElement);
+
+	@Getter(SERIALIZED_CALL_KEY)
+	@FMLAttribute(SERIALIZED_CALL_KEY)
+	public String getSerializedCall();
+
+	@Setter(SERIALIZED_CALL_KEY)
+	public void setSerializedCall(String serializedCall);
+
 	@Getter(value = DROP_SCHEME_KEY)
 	@XMLElement(primary = false)
 	public DropScheme getDropScheme();
@@ -121,10 +148,7 @@ public interface FMLDiagramPaletteElementBinding extends FlexoConceptObject {
 	@Setter(DROP_SCHEME_KEY)
 	public void setDropScheme(DropScheme aDropScheme);
 
-	@Getter(
-			value = PARAMETERS_KEY,
-			cardinality = Cardinality.LIST,
-			inverse = FMLDiagramPaletteElementBindingParameter.PALETTE_ELEMENT_BINDING_KEY)
+	@Getter(value = PARAMETERS_KEY, cardinality = Cardinality.LIST, inverse = FMLDiagramPaletteElementBindingParameter.OWNER_KEY)
 	@XMLElement
 	public List<FMLDiagramPaletteElementBindingParameter> getParameters();
 
@@ -146,17 +170,22 @@ public interface FMLDiagramPaletteElementBinding extends FlexoConceptObject {
 			inverse = OverridingGraphicalRepresentation.PALETTE_ELEMENT_BINDING_KEY,
 			ignoreType = true)
 	// @XMLElement
+	@Deprecated
 	public List<OverridingGraphicalRepresentation<?>> getOverridingGraphicalRepresentations();
 
 	@Setter(OVERRIDING_GRAPHICAL_REPRESENTATIONS_KEY)
+	@Deprecated
 	public void setOverridingGraphicalRepresentations(List<OverridingGraphicalRepresentation<?>> overridingGraphicalRepresentations);
 
 	@Adder(OVERRIDING_GRAPHICAL_REPRESENTATIONS_KEY)
+	@Deprecated
 	public void addToOverridingGraphicalRepresentations(OverridingGraphicalRepresentation<?> anOverridingGraphicalRepresentation);
 
 	@Remover(OVERRIDING_GRAPHICAL_REPRESENTATIONS_KEY)
+	@Deprecated
 	public void removeFromOverridingGraphicalRepresentations(OverridingGraphicalRepresentation<?> anOverridingGraphicalRepresentation);
 
+	@Deprecated
 	public GraphicalRepresentation getOverridingGraphicalRepresentation(GraphicalElementRole<?, ?> patternRole);
 
 	public FlexoConcept getBoundFlexoConcept();
@@ -284,8 +313,6 @@ public interface FMLDiagramPaletteElementBinding extends FlexoConceptObject {
 		}
 
 		private void decodePaletteElementId() {
-			if (paletteElementId != null) {
-			}
 			if (paletteElement == null && getDiagramModelSlot() != null && paletteElementId != null && paletteElementId.indexOf("#") > 0) {
 				String paletteURI = paletteElementId.substring(0, paletteElementId.indexOf("#"));
 				String elementName = paletteElementId.substring(paletteElementId.indexOf("#") + 1);
@@ -295,6 +322,20 @@ public interface FMLDiagramPaletteElementBinding extends FlexoConceptObject {
 						DiagramPalette palette = ds.getPalette(paletteURI);
 						if (palette != null) {
 							paletteElement = palette.getPaletteElement(elementName);
+						}
+					}
+				}
+			}
+			if (paletteElement == null && getDiagramModelSlot() != null && serializedPaletteElementName != null) {
+				if (getDiagramModelSlot().getMetaModelResource() != null) {
+					DiagramSpecification ds = getDiagramModelSlot().getMetaModelResource().getMetaModelData();
+					if (ds != null) {
+						for (DiagramPalette diagramPalette : ds.getPalettes()) {
+							paletteElement = diagramPalette.getPaletteElement(serializedPaletteElementName);
+							if (paletteElement != null) {
+								// System.out.println("Found palette element");
+								break;
+							}
 						}
 					}
 				}
@@ -324,11 +365,27 @@ public interface FMLDiagramPaletteElementBinding extends FlexoConceptObject {
 			}
 		}
 
+		/*@Override
+		public List<FMLDiagramPaletteElementBindingParameter> getParameters() {
+			if (StringUtils.isNotEmpty(serializedCall) && getDeclaringCompilationUnit() != null) {
+				decodeSerializedCall();
+			}
+			return (List<FMLDiagramPaletteElementBindingParameter>) performSuperGetter(PARAMETERS_KEY);
+		}*/
+
 		@Override
 		public DropScheme getDropScheme() {
 			if (dropScheme != null) {
 				return dropScheme;
 			}
+
+			if (StringUtils.isNotEmpty(serializedCall) && getDeclaringCompilationUnit() != null) {
+				decodeSerializedCall();
+				if (dropScheme != null) {
+					return dropScheme;
+				}
+			}
+
 			if (_dropSchemeName != null && getBoundFlexoConcept() != null
 					&& getBoundFlexoConcept().getFlexoBehaviour(_dropSchemeName) instanceof DropScheme) {
 				dropScheme = (DropScheme) getBoundFlexoConcept().getFlexoBehaviour(_dropSchemeName);
@@ -388,12 +445,12 @@ public interface FMLDiagramPaletteElementBinding extends FlexoConceptObject {
 					FMLDiagramPaletteElementBindingParameter parameterInstance = getParameter(parameter.getName());
 					if (parameterInstance != null) {
 						unusedParameterInstances.remove(parameterInstance);
-						parameterInstance.setParameter(parameter);
+						parameterInstance.setParam(parameter);
 					}
 					else if (getOwningVirtualModel() != null && getFMLModelFactory() != null) {
 						FMLModelFactory factory = getFMLModelFactory();
 						parameterInstance = factory.newInstance(FMLDiagramPaletteElementBindingParameter.class);
-						parameterInstance.setParameter(parameter);
+						parameterInstance.setParam(parameter);
 						addToParameters(parameterInstance);
 					}
 				}
@@ -528,6 +585,107 @@ public interface FMLDiagramPaletteElementBinding extends FlexoConceptObject {
 				setChanged();
 				notifyObservers(new DataModification("boundLabelToElementName", !boundLabelToElementName, boundLabelToElementName));
 			}
+		}
+
+		@Override
+		public String getSerializedPaletteElement() {
+			if (getPaletteElement() != null) {
+				return getPaletteElement().getName();
+			}
+			return null;
+		}
+
+		private String serializedPaletteElementName;
+
+		@Override
+		public void setSerializedPaletteElement(String serializedPaletteElement) {
+			serializedPaletteElementName = serializedPaletteElement;
+		}
+
+		@Override
+		public String getSerializedCall() {
+			StringBuffer sb = new StringBuffer();
+			if (getDropScheme() != null) {
+				sb.append(getDropScheme().getName());
+				sb.append("(");
+				sb.append(getParametersFMLRepresentation());
+				sb.append(")");
+			}
+			else {
+				return serializedCall;
+			}
+			return sb.toString();
+		}
+
+		private String serializedCall;
+
+		@Override
+		public void setSerializedCall(String serializedCall) {
+			this.serializedCall = serializedCall;
+		}
+
+		private boolean isDecodingSerializedCall = false;
+
+		private void decodeSerializedCall() {
+
+			if (isDecodingSerializedCall) {
+				return;
+			}
+
+			if (getDeclaringCompilationUnit() != null && serializedCall != null && serializedCall.indexOf("(") > -1
+					&& serializedCall.lastIndexOf(")") > -1) {
+
+				isDecodingSerializedCall = true;
+
+				try {
+					System.out.println("Hop, decodingSerializedCall from " + serializedCall);
+
+					String dropSchemeName = serializedCall.substring(0, serializedCall.indexOf("("));
+					String parametersAsString = serializedCall.substring(serializedCall.indexOf("(") + 1, serializedCall.lastIndexOf(")"));
+
+					StringTokenizer st = new StringTokenizer(parametersAsString, ",");
+					List<DataBinding<?>> params = new ArrayList<>();
+					while (st.hasMoreTokens()) {
+						String next = st.nextToken();
+						DataBinding<?> param = new DataBinding<Object>(next, this, Object.class, BindingDefinitionType.GET);
+						params.add(param);
+					}
+					Type[] argTypes = new Type[params.size()];
+					for (int i = 0; i < params.size(); i++) {
+						argTypes[i] = params.get(i).getAnalyzedType();
+					}
+
+					System.out.println("dropSchemeName=" + dropSchemeName);
+					System.out.println("parametersAsString=" + parametersAsString);
+
+					for (FlexoConcept flexoConcept : getDeclaringCompilationUnit().getVirtualModel().getFlexoConcepts()) {
+						FlexoBehaviour foundScheme = flexoConcept.getFlexoBehaviour(dropSchemeName, argTypes);
+						if (foundScheme instanceof DropScheme) {
+							setDropScheme((DropScheme) foundScheme);
+							for (int i = 0; i < getParameters().size(); i++) {
+								getParameters().get(i).setValue((DataBinding) params.get(i));
+							}
+							System.out.println("Lookep-up " + serializedCall);
+							serializedCall = null;
+						}
+					}
+				} finally {
+					isDecodingSerializedCall = false;
+				}
+			}
+		}
+
+		protected String getParametersFMLRepresentation() {
+			if (getParameters().size() > 0) {
+				StringBuffer sb = new StringBuffer();
+				boolean isFirst = true;
+				for (FMLDiagramPaletteElementBindingParameter p : getParameters()) {
+					sb.append((isFirst ? "" : ",") + p.getValue().toString());
+					isFirst = false;
+				}
+				return sb.toString();
+			}
+			return "";
 		}
 
 	}

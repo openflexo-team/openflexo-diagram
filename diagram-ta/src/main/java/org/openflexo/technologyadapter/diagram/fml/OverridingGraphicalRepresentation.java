@@ -59,6 +59,7 @@ import org.openflexo.technologyadapter.diagram.metamodel.DiagramPalette;
 @ImplementationClass(OverridingGraphicalRepresentation.OverridingGraphicalRepresentationImpl.class)
 @Imports({ @Import(OverridingGraphicalRepresentation.ShapeOverridingGraphicalRepresentation.class),
 		@Import(OverridingGraphicalRepresentation.ConnectorOverridingGraphicalRepresentation.class) })
+@Deprecated
 public interface OverridingGraphicalRepresentation<GR extends GraphicalRepresentation> {
 
 	@PropertyIdentifier(type = FMLDiagramPaletteElementBinding.class)

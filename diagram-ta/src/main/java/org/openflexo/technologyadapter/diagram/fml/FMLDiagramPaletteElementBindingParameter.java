@@ -38,20 +38,10 @@
 
 package org.openflexo.technologyadapter.diagram.fml;
 
-import java.security.URIParameter;
-
-import org.openflexo.connie.BindingModel;
-import org.openflexo.foundation.fml.FlexoBehaviourParameter;
-import org.openflexo.foundation.fml.FlexoConcept;
-import org.openflexo.foundation.fml.FlexoConceptObject;
-import org.openflexo.pamela.annotations.Getter;
+import org.openflexo.foundation.fml.rt.editionaction.BehaviourCallArgument;
 import org.openflexo.pamela.annotations.ImplementationClass;
 import org.openflexo.pamela.annotations.ModelEntity;
-import org.openflexo.pamela.annotations.PropertyIdentifier;
-import org.openflexo.pamela.annotations.Setter;
-import org.openflexo.pamela.annotations.XMLAttribute;
 import org.openflexo.pamela.annotations.XMLElement;
-import org.openflexo.technologyadapter.diagram.metamodel.DiagramPalette;
 
 /**
  * Represents a valued parameter in the context of a {@link FMLDiagramPaletteElementBinding}
@@ -62,95 +52,95 @@ import org.openflexo.technologyadapter.diagram.metamodel.DiagramPalette;
 @ModelEntity
 @ImplementationClass(FMLDiagramPaletteElementBindingParameter.FMLDiagramPaletteElementBindingParameterImpl.class)
 @XMLElement
-public interface FMLDiagramPaletteElementBindingParameter extends FlexoConceptObject {
+public interface FMLDiagramPaletteElementBindingParameter extends BehaviourCallArgument<FMLDiagramPaletteElementBinding> {
 
-	@PropertyIdentifier(type = FMLDiagramPaletteElementBinding.class)
-	public static final String PALETTE_ELEMENT_BINDING_KEY = "paletteElementBinding";
-	@PropertyIdentifier(type = FlexoBehaviourParameter.class)
+	// @PropertyIdentifier(type = FMLDiagramPaletteElementBinding.class)
+	// public static final String PALETTE_ELEMENT_BINDING_KEY = "paletteElementBinding";
+	/*@PropertyIdentifier(type = FlexoBehaviourParameter.class)
 	public static final String PARAMETER_KEY = "parameter";
-	@PropertyIdentifier(type = String.class)
-	public static final String VALUE_KEY = "value";
+	@PropertyIdentifier(type = DataBinding.class)
+	public static final String VALUE_KEY = "value";*/
 
 	// TODO: remove inverse
-	@Getter(value = PALETTE_ELEMENT_BINDING_KEY, inverse = FMLDiagramPaletteElementBinding.PARAMETERS_KEY)
+	/*@Getter(value = PALETTE_ELEMENT_BINDING_KEY, inverse = FMLDiagramPaletteElementBinding.PARAMETERS_KEY)
 	public FMLDiagramPaletteElementBinding getDiagramPaletteElementBinding();
-
+	
 	@Setter(PALETTE_ELEMENT_BINDING_KEY)
-	public void setDiagramPaletteElementBinding(FMLDiagramPaletteElementBinding diagramPaletteElementBinding);
+	public void setDiagramPaletteElementBinding(FMLDiagramPaletteElementBinding diagramPaletteElementBinding);*/
 
-	@Getter(PARAMETER_KEY)
+	/*@Getter(PARAMETER_KEY)
 	public FlexoBehaviourParameter getParameter();
-
+	
 	@Setter(PARAMETER_KEY)
 	public void setParameter(FlexoBehaviourParameter parameter);
-
-	@Getter(VALUE_KEY)
+	
+	@Override
+	@Getter(value = VALUE_KEY)
 	@XMLAttribute
-	public String getValue();
-
+	public DataBinding<Object> getValue();
+	
+	@Override
 	@Setter(VALUE_KEY)
-	public void setValue(String value);
+	public void setValue(DataBinding<Object> value);*/
 
-	public boolean isEditable();
+	// public boolean isEditable();
 
-	public abstract class FMLDiagramPaletteElementBindingParameterImpl extends FlexoConceptObjectImpl
+	public abstract class FMLDiagramPaletteElementBindingParameterImpl extends BehaviourCallArgumentImpl<FMLDiagramPaletteElementBinding>
 			implements FMLDiagramPaletteElementBindingParameter {
 
-		private FlexoBehaviourParameter _parameter;
+		/*private FlexoBehaviourParameter _parameter;
 		// private FMLDiagramPaletteElementBinding elementBinding;
 		private String value;
-
+		
 		public FMLDiagramPaletteElementBindingParameterImpl() {
 			super();
 		}
-
+		
 		public FMLDiagramPaletteElementBindingParameterImpl(FlexoBehaviourParameter p) {
 			super();
 			_parameter = p;
 			setName(p.getName());
 			setValue(p.getDefaultValue().toString());
-		}
+		}*/
 
-		@Override
+		/*@Override
 		public FlexoConcept getFlexoConcept() {
 			if (getDiagramPaletteElementBinding() != null) {
 				return getDiagramPaletteElementBinding().getFlexoConcept();
 			}
 			return null;
-		}
+		}*/
 
-		@Override
+		/*@Override
 		public String getValue() {
 			if (getParameter() != null) {
-				/*if (getParameter() instanceof URIParameter) {
-					return "< Computed URI >";
-				}*/
-				/*if (getParameter().getUsePaletteLabelAsDefaultValue()) {
-					return "< Takes palette element label >";
-				}*/
-			}
-			return value;
-		}
-
+				//if (getParameter() instanceof URIParameter) {
+				//	return "< Computed URI >";
+				//}
+				//if (getParameter().getUsePaletteLabelAsDefaultValue()) {
+				//	return "< Takes palette element label >";
+				//}
+			}return value;}
+		
 		@Override
 		public void setValue(String value) {
 			this.value = value;
-		}
+		}*/
 
-		@Override
+		/*@Override
 		public boolean isEditable() {
 			if (getParameter() != null) {
-				return !(getParameter() instanceof URIParameter) /*&& !getParameter().getUsePaletteLabelAsDefaultValue()*/;
+				return !(getParameter() instanceof URIParameter) && !getParameter().getUsePaletteLabelAsDefaultValue();
 			}
 			return true;
-		}
+		}*/
 
-		public DiagramPalette getPalette() {
-			if (getDiagramPaletteElementBinding() != null) {
-				return getDiagramPaletteElementBinding().getPaletteElement().getPalette();
-			}
-			return null;
-		}
+		/*public DiagramPalette getPalette() {
+				if (getDiagramPaletteElementBinding() != null) {
+					return getDiagramPaletteElementBinding().getPaletteElement().getPalette();
+				}
+				return null;
+			}*/
 
 		/*public void setElementBinding(FMLDiagramPaletteElementBinding elementBinding) {
 			this.elementBinding = elementBinding;
@@ -160,21 +150,21 @@ public interface FMLDiagramPaletteElementBindingParameter extends FlexoConceptOb
 			return elementBinding;
 		}*/
 
+		/*@Override
+			public FlexoBehaviourParameter getParameter() {
+				return _parameter;
+			}
+		
 		@Override
-		public FlexoBehaviourParameter getParameter() {
-			return _parameter;
-		}
-
+			public void setParameter(FlexoBehaviourParameter parameter) {
+				_parameter = parameter;
+			}
+		
 		@Override
-		public void setParameter(FlexoBehaviourParameter parameter) {
-			_parameter = parameter;
-		}
-
-		@Override
-		public BindingModel getBindingModel() {
-			return getDeclaringCompilationUnit().getBindingModel();
-		}
-
+			public BindingModel getBindingModel() {
+				return getDiagramPaletteElementBinding().getBindingModel();
+			}
+		*/
 	}
 
 }
