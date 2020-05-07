@@ -42,6 +42,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.openflexo.connie.DataBinding;
+import org.openflexo.foundation.InvalidNameException;
 import org.openflexo.foundation.fml.FlexoConcept;
 import org.openflexo.foundation.fml.editionaction.AssignationAction;
 import org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
@@ -200,7 +201,7 @@ public abstract class FlexoConceptFromConnectorCreationStrategy
 	}
 
 	@Override
-	public FlexoConcept performStrategy() {
+	public FlexoConcept performStrategy() throws InvalidNameException {
 		FlexoConcept newFlexoConcept = super.performStrategy();
 
 		newLinkScheme = getTransformationAction().getFactory().newInstance(LinkScheme.class);

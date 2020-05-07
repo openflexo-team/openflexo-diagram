@@ -50,6 +50,7 @@ import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.openflexo.diana.ShapeGraphicalRepresentation;
 import org.openflexo.diana.shapes.ShapeSpecification.ShapeType;
+import org.openflexo.foundation.InvalidNameException;
 import org.openflexo.foundation.fml.FMLTechnologyAdapter;
 import org.openflexo.foundation.fml.FlexoConcept;
 import org.openflexo.foundation.fml.VirtualModel;
@@ -232,11 +233,12 @@ public class TestControlledDiagramVirtualModel extends DiagramTestCase {
 	 * Test the VirtualModel creation
 	 * 
 	 * @throws ModelDefinitionException
+	 * @throws InvalidNameException
 	 */
 	@Test
 	@TestOrder(5)
 	@Category(UITest.class)
-	public void testCreateVirtualModel() throws SaveResourceException, ModelDefinitionException {
+	public void testCreateVirtualModel() throws SaveResourceException, ModelDefinitionException, InvalidNameException {
 
 		log("testCreateVirtualModel()");
 

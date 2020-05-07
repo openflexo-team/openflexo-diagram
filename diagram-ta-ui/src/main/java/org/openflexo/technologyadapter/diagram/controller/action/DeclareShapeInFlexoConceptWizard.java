@@ -44,8 +44,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import org.openflexo.diana.ShapeGraphicalRepresentation;
 import org.openflexo.diana.ScreenshotBuilder.ScreenshotImage;
+import org.openflexo.diana.ShapeGraphicalRepresentation;
+import org.openflexo.foundation.InvalidNameException;
 import org.openflexo.foundation.action.transformation.AbstractDeclareInFlexoConcept.DeclareInFlexoConceptChoices;
 import org.openflexo.foundation.fml.FlexoConcept;
 import org.openflexo.foundation.fml.VirtualModel;
@@ -326,7 +327,12 @@ public class DeclareShapeInFlexoConceptWizard extends AbstractDeclareDiagramElem
 
 			// We always create new role
 			// when wizard is cancelled, dismiss new flexo role
-			getStrategy().createNewFlexoRole();
+			try {
+				getStrategy().createNewFlexoRole();
+			} catch (InvalidNameException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		@Override
@@ -354,7 +360,12 @@ public class DeclareShapeInFlexoConceptWizard extends AbstractDeclareDiagramElem
 				FlexoConcept oldValue = getFlexoConcept();
 				getStrategy().dismissNewFlexoRole();
 				getAction().setFlexoConcept(flexoConcept);
-				getStrategy().createNewFlexoRole();
+				try {
+					getStrategy().createNewFlexoRole();
+				} catch (InvalidNameException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				getPropertyChangeSupport().firePropertyChange("flexoConcept", oldValue, flexoConcept);
 				getPropertyChangeSupport().firePropertyChange("newShapeRoleName", null, getNewShapeRoleName());
 				checkValidity();

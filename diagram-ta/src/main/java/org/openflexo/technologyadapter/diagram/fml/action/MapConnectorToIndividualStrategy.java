@@ -45,6 +45,7 @@ import org.openflexo.connie.DataBinding;
 import org.openflexo.connie.binding.IBindingPathElement;
 import org.openflexo.connie.expr.BindingValue;
 import org.openflexo.foundation.FlexoException;
+import org.openflexo.foundation.InvalidNameException;
 import org.openflexo.foundation.fml.FlexoBehaviourParameter;
 import org.openflexo.foundation.fml.FlexoBehaviourParameter.WidgetType;
 import org.openflexo.foundation.fml.FlexoConcept;
@@ -192,7 +193,7 @@ public class MapConnectorToIndividualStrategy extends FlexoConceptFromConnectorC
 	}
 
 	@Override
-	public FlexoConcept performStrategy() {
+	public FlexoConcept performStrategy() throws InvalidNameException {
 
 		FlexoConcept newFlexoConcept = super.performStrategy();
 
@@ -220,7 +221,12 @@ public class MapConnectorToIndividualStrategy extends FlexoConceptFromConnectorC
 		if (flexoOntologyModelSlot != null) {
 			FlexoBehaviourParameter uriParameter = getTransformationAction().getFactory().newParameter(newLinkScheme);
 			uriParameter.setWidget(WidgetType.TEXT_FIELD);
-			uriParameter.setName("uri");
+			try {
+				uriParameter.setName("uri");
+			} catch (InvalidNameException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			newLinkScheme.addToParameters(uriParameter);
 
 			// Add individual action

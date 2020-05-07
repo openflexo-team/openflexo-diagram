@@ -41,6 +41,7 @@ package org.openflexo.technologyadapter.diagram.fml.action;
 import java.util.List;
 
 import org.openflexo.connie.DataBinding;
+import org.openflexo.foundation.InvalidNameException;
 import org.openflexo.foundation.fml.FlexoConcept;
 import org.openflexo.foundation.fml.editionaction.AssignationAction;
 import org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
@@ -152,7 +153,7 @@ public abstract class FlexoConceptFromShapeCreationStrategy
 	}
 
 	@Override
-	public FlexoConcept performStrategy() {
+	public FlexoConcept performStrategy() throws InvalidNameException {
 		FlexoConcept newFlexoConcept = super.performStrategy();
 
 		// Create new drop scheme

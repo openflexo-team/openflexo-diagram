@@ -54,6 +54,7 @@ import org.junit.runner.RunWith;
 import org.openflexo.diana.ShapeGraphicalRepresentation;
 import org.openflexo.diana.shapes.ShapeSpecification.ShapeType;
 import org.openflexo.foundation.FlexoException;
+import org.openflexo.foundation.InvalidNameException;
 import org.openflexo.foundation.fml.FMLTechnologyAdapter;
 import org.openflexo.foundation.fml.FlexoConcept;
 import org.openflexo.foundation.fml.FlexoConceptInstanceType;
@@ -245,11 +246,12 @@ public class TestDiagramFeaturesBindingModelManagement extends DiagramTestCase {
 	 * Test the VirtualModel creation, check BindingModel management
 	 * 
 	 * @throws ModelDefinitionException
+	 * @throws InvalidNameException
 	 */
 	@Test
 	@TestOrder(5)
 	@Category(UITest.class)
-	public void testCreateVirtualModel() throws SaveResourceException, ModelDefinitionException {
+	public void testCreateVirtualModel() throws SaveResourceException, ModelDefinitionException, InvalidNameException {
 
 		log("testCreateVirtualModel()");
 
@@ -310,11 +312,13 @@ public class TestDiagramFeaturesBindingModelManagement extends DiagramTestCase {
 
 	/**
 	 * Test the DropScheme creation, check BindingModel management
+	 * 
+	 * @throws InvalidNameException
 	 */
 	@Test
 	@TestOrder(6)
 	@Category(UITest.class)
-	public void testCreateDropScheme() throws SaveResourceException {
+	public void testCreateDropScheme() throws SaveResourceException, InvalidNameException {
 
 		log("testCreateDropScheme()");
 

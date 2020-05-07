@@ -39,6 +39,7 @@
 package org.openflexo.technologyadapter.diagram.fml.action;
 
 import org.openflexo.diana.GraphicalRepresentation;
+import org.openflexo.foundation.InvalidNameException;
 import org.openflexo.foundation.action.transformation.FlexoRoleCreationStrategy;
 import org.openflexo.technologyadapter.diagram.fml.GraphicalElementRole;
 import org.openflexo.technologyadapter.diagram.model.DiagramElement;
@@ -62,7 +63,7 @@ public abstract class GraphicalElementRoleCreationStrategy<A extends DeclareDiag
 	// public abstract void bindTo(R role, T diagramElement);
 
 	@Override
-	public R createNewFlexoRole() {
+	public R createNewFlexoRole() throws InvalidNameException {
 		String newRoleName = getNewRoleName();
 		newRole = getTransformationAction().getFactory().newInstance(getRoleType());
 		newRole.setRoleName(newRoleName);

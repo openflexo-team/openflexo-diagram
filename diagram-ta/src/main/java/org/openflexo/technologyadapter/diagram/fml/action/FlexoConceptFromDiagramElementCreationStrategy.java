@@ -44,6 +44,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import org.openflexo.connie.DataBinding;
+import org.openflexo.foundation.InvalidNameException;
 import org.openflexo.foundation.action.transformation.FlexoConceptCreationStrategy;
 import org.openflexo.foundation.fml.FlexoBehaviour;
 import org.openflexo.foundation.fml.FlexoConcept;
@@ -81,7 +82,7 @@ public abstract class FlexoConceptFromDiagramElementCreationStrategy<A extends D
 	protected GraphicalElementRole<?, ?> primaryRepresentationRole = null;
 
 	@Override
-	public FlexoConcept performStrategy() {
+	public FlexoConcept performStrategy() throws InvalidNameException {
 		FlexoConcept newFlexoConcept = super.performStrategy();
 
 		// Create graphical elements pattern property
@@ -196,7 +197,7 @@ public abstract class FlexoConceptFromDiagramElementCreationStrategy<A extends D
 		this.flexoBehaviours = editionSchemes;
 	}
 
-	public List<FlexoBehaviourConfiguration> getFlexoBehaviours() {
+	public List<FlexoBehaviourConfiguration> getFlexoBehaviours() throws InvalidNameException {
 		if (flexoBehaviours == null) {
 			flexoBehaviours = new ArrayList<>();
 
@@ -223,21 +224,21 @@ public abstract class FlexoConceptFromDiagramElementCreationStrategy<A extends D
 		return true;
 	}*/
 
-	public void addFlexoBehaviourConfigurationDeleteGROnly() {
+	public void addFlexoBehaviourConfigurationDeleteGROnly() throws InvalidNameException {
 		FlexoBehaviourConfiguration editionSchemeConfiguration = new FlexoBehaviourConfiguration(FlexoBehaviourChoice.DELETE_GR_ONLY);
 		getFlexoBehaviours().add(editionSchemeConfiguration);
 	}
 
-	public void addFlexoBehaviourConfigurationDeleteGRAndModel() {
+	public void addFlexoBehaviourConfigurationDeleteGRAndModel() throws InvalidNameException {
 		FlexoBehaviourConfiguration editionSchemeConfiguration = new FlexoBehaviourConfiguration(FlexoBehaviourChoice.DELETE_GR_AND_MODEL);
 		getFlexoBehaviours().add(editionSchemeConfiguration);
 	}
 
-	public void removeFlexoBehaviourConfiguration(FlexoBehaviourConfiguration editionSchemeConfiguration) {
+	public void removeFlexoBehaviourConfiguration(FlexoBehaviourConfiguration editionSchemeConfiguration) throws InvalidNameException {
 		getFlexoBehaviours().remove(editionSchemeConfiguration);
 	}
 
-	public void updateEditionSchemesName(String name) {
+	public void updateEditionSchemesName(String name) throws InvalidNameException {
 		for (FlexoBehaviourConfiguration editionSchemeConfiguration : getFlexoBehaviours()) {
 			if (editionSchemeConfiguration.getType() == FlexoBehaviourChoice.DELETE_GR_ONLY) {
 				editionSchemeConfiguration.getFlexoBehaviour().setName("deleteGR");
@@ -268,7 +269,7 @@ public abstract class FlexoConceptFromDiagramElementCreationStrategy<A extends D
 
 		private FlexoBehaviour flexoBehaviour;
 
-		public FlexoBehaviourConfiguration(FlexoBehaviourChoice type) {
+		public FlexoBehaviourConfiguration(FlexoBehaviourChoice type) throws InvalidNameException {
 			this.type = type;
 			this.isValid = true;
 			if (getTransformationAction().getFactory() != null) {

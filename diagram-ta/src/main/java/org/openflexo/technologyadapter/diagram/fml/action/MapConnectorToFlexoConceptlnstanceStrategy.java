@@ -41,6 +41,7 @@ package org.openflexo.technologyadapter.diagram.fml.action;
 import java.lang.reflect.Type;
 
 import org.openflexo.connie.DataBinding;
+import org.openflexo.foundation.InvalidNameException;
 import org.openflexo.foundation.fml.FMLModelFactory;
 import org.openflexo.foundation.fml.FlexoConcept;
 import org.openflexo.foundation.fml.FlexoConceptInstanceRole;
@@ -167,7 +168,7 @@ public class MapConnectorToFlexoConceptlnstanceStrategy extends FlexoConceptFrom
 	}
 
 	@Override
-	public FlexoConcept performStrategy() {
+	public FlexoConcept performStrategy() throws InvalidNameException {
 		FlexoConcept newFlexoConcept = super.performStrategy();
 
 		FMLModelFactory factory = getTransformationAction().getFactory();

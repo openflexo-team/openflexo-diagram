@@ -40,6 +40,7 @@ package org.openflexo.technologyadapter.diagram.fml.action;
 
 import org.openflexo.diana.ConnectorGraphicalRepresentation;
 import org.openflexo.diana.GraphicalRepresentation;
+import org.openflexo.foundation.InvalidNameException;
 import org.openflexo.foundation.fml.FlexoConcept;
 import org.openflexo.technologyadapter.diagram.fml.ConnectorRole;
 import org.openflexo.technologyadapter.diagram.fml.ShapeRole;
@@ -75,7 +76,7 @@ public class ConnectorRoleCreationStrategy extends
 	}
 
 	@Override
-	public ConnectorRole createNewFlexoRole() {
+	public ConnectorRole createNewFlexoRole() throws InvalidNameException {
 		ConnectorRole returned = super.createNewFlexoRole();
 		return returned;
 	}

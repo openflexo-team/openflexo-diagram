@@ -43,6 +43,7 @@ import java.util.List;
 import java.util.Vector;
 
 import org.openflexo.foundation.FlexoEditor;
+import org.openflexo.foundation.InvalidNameException;
 import org.openflexo.foundation.action.FlexoActionFactory;
 import org.openflexo.foundation.action.transformation.AbstractDeclareInFlexoConcept;
 import org.openflexo.foundation.action.transformation.FlexoConceptCreationStrategy;
@@ -104,7 +105,8 @@ public abstract class DeclareDiagramElementInFlexoConcept<A extends DeclareDiagr
 		drawingObjectEntries = new Vector<>();
 
 		List<? extends DiagramElement<?>> elements = (getFocusedObject() instanceof DiagramContainerElement
-				? ((DiagramContainerElement<?>) getFocusedObject()).getDescendants() : Collections.singletonList(getFocusedObject()));
+				? ((DiagramContainerElement<?>) getFocusedObject()).getDescendants()
+				: Collections.singletonList(getFocusedObject()));
 
 		for (DiagramElement<?> o : elements) {
 			if (o instanceof DiagramShape) {
@@ -177,7 +179,7 @@ public abstract class DeclareDiagramElementInFlexoConcept<A extends DeclareDiagr
 		return getFocusedObject().getDiagram().getDiagramSpecification();
 	}
 
-	public TypedDiagramModelSlot getTypedDiagramModelSlot() {
+	public TypedDiagramModelSlot getTypedDiagramModelSlot() throws InvalidNameException {
 		if (getVirtualModel().getModelSlots(TypedDiagramModelSlot.class) != null
 				&& getVirtualModel().getModelSlots(TypedDiagramModelSlot.class).size() > 0) {
 			return getVirtualModel().getModelSlots(TypedDiagramModelSlot.class).get(0);

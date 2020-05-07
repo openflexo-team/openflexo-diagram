@@ -45,6 +45,7 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 import org.openflexo.diana.ConnectorGraphicalRepresentation;
+import org.openflexo.foundation.InvalidNameException;
 import org.openflexo.foundation.fml.FlexoConcept;
 import org.openflexo.foundation.ontology.IFlexoOntologyClass;
 import org.openflexo.foundation.technologyadapter.ModelSlot;
@@ -251,7 +252,12 @@ public class DeclareConnectorInFlexoConceptWizard
 
 			// We always create new role
 			// when wizard is cancelled, dismiss new flexo role
-			getStrategy().createNewFlexoRole();
+			try {
+				getStrategy().createNewFlexoRole();
+			} catch (InvalidNameException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 		}
 
@@ -280,7 +286,12 @@ public class DeclareConnectorInFlexoConceptWizard
 				FlexoConcept oldValue = getFlexoConcept();
 				getStrategy().dismissNewFlexoRole();
 				getAction().setFlexoConcept(flexoConcept);
-				getStrategy().createNewFlexoRole();
+				try {
+					getStrategy().createNewFlexoRole();
+				} catch (InvalidNameException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				getPropertyChangeSupport().firePropertyChange("flexoConcept", oldValue, flexoConcept);
 				getPropertyChangeSupport().firePropertyChange("newConnectorRoleName", null, getNewConnectorRoleName());
 				checkValidity();
