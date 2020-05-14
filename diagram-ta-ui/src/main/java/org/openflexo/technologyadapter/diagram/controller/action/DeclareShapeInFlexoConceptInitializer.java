@@ -51,7 +51,7 @@ import org.openflexo.gina.controller.FIBController.Status;
 import org.openflexo.icon.FMLIconLibrary;
 import org.openflexo.technologyadapter.diagram.controller.diagrameditor.FMLControlledDiagramModuleView;
 import org.openflexo.technologyadapter.diagram.fml.action.DeclareShapeInFlexoConcept;
-import org.openflexo.technologyadapter.diagram.gui.view.FMLControlledDiagramVirtualModelView;
+import org.openflexo.technologyadapter.diagram.gui.view.FMLControlledDiagramCompilationUnitView;
 import org.openflexo.technologyadapter.diagram.model.DiagramElement;
 import org.openflexo.technologyadapter.diagram.model.DiagramShape;
 import org.openflexo.view.controller.ActionInitializer;
@@ -76,8 +76,8 @@ public class DeclareShapeInFlexoConceptInitializer extends ActionInitializer<Dec
 						(CompilationUnitResource) moduleView.getEditor().getVirtualModelInstance().getVirtualModel().getResource());
 			}
 
-			if (getController().getCurrentModuleView() instanceof FMLControlledDiagramVirtualModelView) {
-				FMLControlledDiagramVirtualModelView moduleView = (FMLControlledDiagramVirtualModelView) getController()
+			if (getController().getCurrentModuleView() instanceof FMLControlledDiagramCompilationUnitView) {
+				FMLControlledDiagramCompilationUnitView moduleView = (FMLControlledDiagramCompilationUnitView) getController()
 						.getCurrentModuleView();
 				action.setCompilationUnitResource((CompilationUnitResource) moduleView.getRepresentedObject().getResource());
 			}

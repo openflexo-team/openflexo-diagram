@@ -54,18 +54,13 @@ public class TestDiagramFibs extends GenericFIBTestCase {
 	}
 
 	@Test
-	public void testDiagramFlexoConceptView() {
-		validateFIB("Fib/DiagramFlexoConceptView.fib");
-	}
-
-	@Test
 	public void testDiagramSpecificationView() {
 		validateFIB("Fib/DiagramSpecificationView.fib");
 	}
 
 	@Test
-	public void testFMLControlledDiagramVirtualModelView() {
-		validateFIB("Fib/FMLControlledDiagramVirtualModelView.fib");
+	public void testFMLControlledDiagramCompilationUnitView() {
+		validateFIB("Fib/FMLControlledDiagramCompilationUnitView.fib");
 	}
 
 }

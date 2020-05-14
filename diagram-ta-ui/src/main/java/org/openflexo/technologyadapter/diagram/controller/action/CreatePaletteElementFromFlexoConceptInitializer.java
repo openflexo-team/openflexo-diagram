@@ -54,7 +54,7 @@ import org.openflexo.technologyadapter.diagram.DiagramTechnologyAdapter;
 import org.openflexo.technologyadapter.diagram.controller.diagrameditor.FMLControlledDiagramModuleView;
 import org.openflexo.technologyadapter.diagram.fml.action.CreatePaletteElementFromFlexoConcept;
 import org.openflexo.technologyadapter.diagram.gui.DiagramIconLibrary;
-import org.openflexo.technologyadapter.diagram.gui.view.FMLControlledDiagramVirtualModelView;
+import org.openflexo.technologyadapter.diagram.gui.view.FMLControlledDiagramCompilationUnitView;
 import org.openflexo.view.controller.ActionInitializer;
 import org.openflexo.view.controller.ControllerActionInitializer;
 
@@ -78,8 +78,8 @@ public class CreatePaletteElementFromFlexoConceptInitializer
 						(CompilationUnitResource) moduleView.getEditor().getVirtualModelInstance().getVirtualModel().getResource());
 			}
 
-			if (getController().getCurrentModuleView() instanceof FMLControlledDiagramVirtualModelView) {
-				FMLControlledDiagramVirtualModelView moduleView = (FMLControlledDiagramVirtualModelView) getController()
+			if (getController().getCurrentModuleView() instanceof FMLControlledDiagramCompilationUnitView) {
+				FMLControlledDiagramCompilationUnitView moduleView = (FMLControlledDiagramCompilationUnitView) getController()
 						.getCurrentModuleView();
 				action.setVirtualModelResource((CompilationUnitResource) moduleView.getRepresentedObject().getResource());
 			}

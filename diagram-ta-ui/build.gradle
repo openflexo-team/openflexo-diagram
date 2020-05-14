@@ -1,14 +1,18 @@
 dependencies {
    compile project(":diagram-ta")
 
-  // openflexo dep
+   // openflexo dep
    compile flexoUi()
    compile fmlTechnologyAdapterUi()
    compile fmlRtTechnologyAdapterUi()
-  // external dep
-  // testing dep
+   // external dep
+   // testing dep
    testCompile testUtils()
    testCompile ginaTest()
    testCompile flexoUiTest()
    testRuntime flexoOntologyUi()
+   
+   // Test resource center
+   testRuntime project(':diagram-ta-test-rc')
+   
 }

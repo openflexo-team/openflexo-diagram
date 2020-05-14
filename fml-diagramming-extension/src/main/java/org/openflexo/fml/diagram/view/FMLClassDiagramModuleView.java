@@ -58,7 +58,7 @@ import org.openflexo.connie.exception.NullReferenceException;
 import org.openflexo.connie.exception.TypeMismatchException;
 import org.openflexo.diana.swing.view.JDrawingView;
 import org.openflexo.fml.controller.FMLTechnologyAdapterController;
-import org.openflexo.fml.controller.widget.FIBVirtualModelBrowser;
+import org.openflexo.fml.controller.widget.FIBCompilationUnitBrowser;
 import org.openflexo.foundation.fml.FMLTechnologyAdapter;
 import org.openflexo.foundation.fml.VirtualModel;
 import org.openflexo.foundation.fml.rt.FMLRTVirtualModelInstance;
@@ -80,7 +80,7 @@ public class FMLClassDiagramModuleView extends FMLControlledDiagramModuleView {
 
 	public FMLClassDiagramModuleView(FMLControlledDiagramEditor editor, FlexoPerspective perspective) {
 		super(editor, perspective);
-		dgListener = new DGListener(getVirtualModelBrowser().getFIBBrowserWidget().getTechnologyComponent().getJTree());
+		dgListener = new DGListener(getCompilationUnitBrowser().getFIBBrowserWidget().getTechnologyComponent().getJTree());
 		dsListener = new DSListener();
 	}
 
@@ -94,10 +94,10 @@ public class FMLClassDiagramModuleView extends FMLControlledDiagramModuleView {
 		super.deleteModuleView();
 	}
 
-	public FIBVirtualModelBrowser getVirtualModelBrowser() {
+	public FIBCompilationUnitBrowser getCompilationUnitBrowser() {
 		FMLTechnologyAdapterController technologyAdapterController = (FMLTechnologyAdapterController) getFlexoController()
 				.getTechnologyAdapterController(FMLTechnologyAdapter.class);
-		return technologyAdapterController.getVirtualModelBrowser();
+		return technologyAdapterController.getCompilationUnitBrowser();
 	}
 
 	@Override
@@ -119,9 +119,9 @@ public class FMLClassDiagramModuleView extends FMLControlledDiagramModuleView {
 		try {
 			virtualModel = fmlControlledDiagram.execute("virtualModel");
 			System.out.println("Trouve le VM: " + virtualModel);
-			getVirtualModelBrowser().setVirtualModel(virtualModel);
+			getCompilationUnitBrowser().setCompilationUnit(virtualModel.getCompilationUnit());
 			// Activate drag&drop between browser and diagram
-			getVirtualModelBrowser().getFIBBrowserWidget().registerDragGestureListener(dgListener);
+			getCompilationUnitBrowser().getFIBBrowserWidget().registerDragGestureListener(dgListener);
 		} catch (TypeMismatchException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -136,7 +136,7 @@ public class FMLClassDiagramModuleView extends FMLControlledDiagramModuleView {
 			e.printStackTrace();
 		}
 
-		getPerspective().setBottomLeftView(getVirtualModelBrowser());
+		getPerspective().setBottomLeftView(getCompilationUnitBrowser());
 
 		// getVirtualModelBrowser().setVirtualModel(getRepresentedObject());
 		// getPerspective().setBottomLeftView(getVirtualModelBrowser());

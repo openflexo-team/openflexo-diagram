@@ -40,11 +40,11 @@ package org.openflexo.technologyadapter.diagram.controller;
 
 import java.util.logging.Logger;
 
+import org.openflexo.fml.controller.view.StandardCompilationUnitView;
 import org.openflexo.fml.controller.view.StandardFlexoConceptView;
-import org.openflexo.fml.controller.view.StandardVirtualModelView;
 import org.openflexo.fml.rt.controller.view.VirtualModelInstanceView;
+import org.openflexo.foundation.fml.FMLCompilationUnit;
 import org.openflexo.foundation.fml.FlexoConcept;
-import org.openflexo.foundation.fml.VirtualModel;
 import org.openflexo.foundation.fml.rt.FMLRTVirtualModelInstance;
 import org.openflexo.foundation.fml.rt.FlexoConceptInstance;
 import org.openflexo.foundation.fml.rt.VirtualModelInstance;
@@ -56,7 +56,7 @@ import org.openflexo.technologyadapter.diagram.fml.FMLControlledDiagramFlexoConc
 import org.openflexo.technologyadapter.diagram.fml.FMLControlledDiagramVirtualModelInstanceNature;
 import org.openflexo.technologyadapter.diagram.fml.FMLControlledDiagramVirtualModelNature;
 import org.openflexo.technologyadapter.diagram.gui.view.DiagramFlexoConceptView;
-import org.openflexo.technologyadapter.diagram.gui.view.FMLControlledDiagramVirtualModelView;
+import org.openflexo.technologyadapter.diagram.gui.view.FMLControlledDiagramCompilationUnitView;
 import org.openflexo.view.ModuleView;
 import org.openflexo.view.controller.FlexoController;
 import org.openflexo.view.controller.SpecificNaturePerspective;
@@ -95,11 +95,11 @@ public class FMLControlledDiagramNaturePerspective extends SpecificNaturePerspec
 	}
 
 	@Override
-	protected ModuleView<VirtualModel> createModuleViewForVirtualModel(VirtualModel virtualModel) {
-		if (virtualModel.hasNature(getVirtualModelNature())) {
-			return new FMLControlledDiagramVirtualModelView(virtualModel, getController(), this);
+	protected ModuleView<FMLCompilationUnit> createModuleViewForCompilationUnit(FMLCompilationUnit compilationUnit) {
+		if (compilationUnit.getVirtualModel().hasNature(getVirtualModelNature())) {
+			return new FMLControlledDiagramCompilationUnitView(compilationUnit, getController(), this);
 		}
-		return new StandardVirtualModelView(virtualModel, getController(), this);
+		return new StandardCompilationUnitView(compilationUnit, getController(), this);
 	}
 
 	@Override

@@ -42,7 +42,7 @@ package org.openflexo.technologyadapter.diagram.gui.view;
 import java.util.logging.Logger;
 
 import org.openflexo.fml.controller.FMLFIBController;
-import org.openflexo.foundation.fml.VirtualModel;
+import org.openflexo.foundation.fml.FMLCompilationUnit;
 import org.openflexo.gina.model.FIBComponent;
 import org.openflexo.gina.view.GinaViewFactory;
 import org.openflexo.gina.view.widget.FIBCustomWidget;
@@ -71,16 +71,19 @@ public class FMLControlledDiagramFMLFIBController extends FMLFIBController {
 
 	private Diagram selectedDiagram;
 	private DiagramPalette selectedPalette;
-	private FMLControlledDiagramVirtualModelView moduleView;
+	private FMLControlledDiagramCompilationUnitView moduleView;
 
 	public FMLControlledDiagramFMLFIBController(FIBComponent component, GinaViewFactory<?> viewFactory) {
 		super(component, viewFactory);
 	}
 
-	public DiagramSpecification getDiagramSpecification(VirtualModel virtualModel) {
-		TypedDiagramModelSlot typedDiagramModelSlot = FMLControlledDiagramVirtualModelNature.getTypedDiagramModelSlot(virtualModel);
-		if (typedDiagramModelSlot != null) {
-			return typedDiagramModelSlot.getDiagramSpecification();
+	public DiagramSpecification getDiagramSpecification(FMLCompilationUnit compilationUnit) {
+		if (compilationUnit != null) {
+			TypedDiagramModelSlot typedDiagramModelSlot = FMLControlledDiagramVirtualModelNature
+					.getTypedDiagramModelSlot(compilationUnit.getVirtualModel());
+			if (typedDiagramModelSlot != null) {
+				return typedDiagramModelSlot.getDiagramSpecification();
+			}
 		}
 		return null;
 	}
@@ -238,11 +241,11 @@ public class FMLControlledDiagramFMLFIBController extends FMLFIBController {
 		return null;
 	}
 
-	public FMLControlledDiagramVirtualModelView getModuleView() {
+	public FMLControlledDiagramCompilationUnitView getModuleView() {
 		return moduleView;
 	}
 
-	public void setModuleView(FMLControlledDiagramVirtualModelView moduleView) {
+	public void setModuleView(FMLControlledDiagramCompilationUnitView moduleView) {
 		this.moduleView = moduleView;
 	}
 

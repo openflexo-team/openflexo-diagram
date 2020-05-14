@@ -38,7 +38,8 @@
 
 package org.openflexo.technologyadapter.diagram.gui.view;
 
-import org.openflexo.fml.controller.view.VirtualModelView;
+import org.openflexo.fml.controller.view.CompilationUnitView;
+import org.openflexo.foundation.fml.FMLCompilationUnit;
 import org.openflexo.foundation.fml.VirtualModel;
 import org.openflexo.technologyadapter.diagram.controller.DiagramCst;
 import org.openflexo.technologyadapter.diagram.controller.DiagramTechnologyAdapterController;
@@ -52,12 +53,13 @@ import org.openflexo.view.controller.model.FlexoPerspective;
  * @author sguerin
  * 
  */
-public class FMLControlledDiagramVirtualModelView extends VirtualModelView {
+public class FMLControlledDiagramCompilationUnitView extends CompilationUnitView {
 
 	// private final FlexoConceptPreviewComponent previewComponent;
 
-	public FMLControlledDiagramVirtualModelView(VirtualModel virtualModel, FlexoController controller, FlexoPerspective perspective) {
-		super(virtualModel, DiagramCst.FML_CONTROLLED_DIAGRAM_VIRTUAL_MODEL_VIEW_FIB, controller, perspective);
+	public FMLControlledDiagramCompilationUnitView(FMLCompilationUnit compilationUnit, FlexoController controller,
+			FlexoPerspective perspective) {
+		super(compilationUnit, DiagramCst.FML_CONTROLLED_DIAGRAM_COMPILATION_UNIT_VIEW_FIB, controller, perspective);
 		// previewComponent = new FlexoConceptPreviewComponent(flexoConcept);
 		// previewComponent.setSelectionManager(controller.getSelectionManager());
 	}

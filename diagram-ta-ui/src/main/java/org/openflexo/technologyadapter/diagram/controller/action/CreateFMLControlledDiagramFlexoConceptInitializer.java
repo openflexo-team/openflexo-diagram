@@ -54,7 +54,7 @@ import org.openflexo.gina.controller.FIBController.Status;
 import org.openflexo.icon.FMLIconLibrary;
 import org.openflexo.technologyadapter.diagram.DiagramTechnologyAdapter;
 import org.openflexo.technologyadapter.diagram.fml.FMLControlledDiagramVirtualModelNature;
-import org.openflexo.technologyadapter.diagram.gui.view.FMLControlledDiagramVirtualModelView;
+import org.openflexo.technologyadapter.diagram.gui.view.FMLControlledDiagramCompilationUnitView;
 import org.openflexo.view.controller.ActionInitializer;
 import org.openflexo.view.controller.ControllerActionInitializer;
 
@@ -74,7 +74,7 @@ public class CreateFMLControlledDiagramFlexoConceptInitializer
 			action.setDefineSomeBehaviours(true);
 			Wizard wizard;
 
-			if (getController().getCurrentModuleView() instanceof FMLControlledDiagramVirtualModelView && action.getFocusedObject()
+			if (getController().getCurrentModuleView() instanceof FMLControlledDiagramCompilationUnitView && action.getFocusedObject()
 					.getDeclaringCompilationUnit().getVirtualModel().hasNature(FMLControlledDiagramVirtualModelNature.INSTANCE)) {
 				// FMLControlledDiagramVirtualModelView moduleView = (FMLControlledDiagramVirtualModelView) getController()
 				// .getCurrentModuleView();

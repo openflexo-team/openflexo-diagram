@@ -49,8 +49,8 @@ import org.openflexo.rm.ResourceLocator;
 public class DiagramCst {
 	// UI components
 	public static Resource DIAGRAM_SPECIFICATION_VIEW_FIB = ResourceLocator.locateResource("Fib/DiagramSpecificationView.fib");
-	public static Resource FML_CONTROLLED_DIAGRAM_VIRTUAL_MODEL_VIEW_FIB = ResourceLocator
-			.locateResource("Fib/FMLControlledDiagramVirtualModelView.fib");
+	public static Resource FML_CONTROLLED_DIAGRAM_COMPILATION_UNIT_VIEW_FIB = ResourceLocator
+			.locateResource("Fib/FMLControlledDiagramCompilationUnitView.fib");
 
 	// Dialog components
 	// Unused private static Resource CREATE_EXAMPLE_DIAGRAM_DIALOG_FIB =

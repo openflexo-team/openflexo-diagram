@@ -54,7 +54,8 @@ import org.openflexo.view.controller.model.FlexoPerspective;
  * @author sguerin
  * 
  */
-public class DiagramFlexoConceptView extends FlexoConceptView<FlexoConcept> {
+@SuppressWarnings("serial")
+public class DiagramFlexoConceptView extends FlexoConceptView {
 
 	private final FlexoConceptPreviewComponent previewComponent;
 
