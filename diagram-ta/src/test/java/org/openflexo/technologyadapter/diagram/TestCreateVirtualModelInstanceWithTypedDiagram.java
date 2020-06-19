@@ -133,7 +133,8 @@ public class TestCreateVirtualModelInstanceWithTypedDiagram extends OpenflexoPro
 		// newViewPoint.getResource()).getFile().exists());
 		assertTrue(newViewPoint.getResource().getDirectory() != null);
 		assertTrue(newViewPoint.getResource().getIODelegate().exists());
-		CreateContainedVirtualModel action = CreateContainedVirtualModel.actionType.makeNewAction(newViewPoint, null, editor);
+		CreateContainedVirtualModel action = CreateContainedVirtualModel.actionType.makeNewAction(newViewPoint.getCompilationUnit(), null,
+				editor);
 		action.setNewVirtualModelName("TestVirtualModel");
 		action.doAction();
 		assertTrue(action.hasActionExecutionSucceeded());
@@ -147,7 +148,8 @@ public class TestCreateVirtualModelInstanceWithTypedDiagram extends OpenflexoPro
 	@Test
 	@TestOrder(2)
 	public void testCreateVirtualModel() throws SaveResourceException {
-		CreateContainedVirtualModel action = CreateContainedVirtualModel.actionType.makeNewAction(newViewPoint, null, editor);
+		CreateContainedVirtualModel action = CreateContainedVirtualModel.actionType.makeNewAction(newViewPoint.getCompilationUnit(), null,
+				editor);
 		action.setNewVirtualModelName(VIRTUAL_MODEL_NAME);
 		action.doAction();
 		assertTrue(action.hasActionExecutionSucceeded());

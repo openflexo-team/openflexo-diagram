@@ -95,7 +95,10 @@ public class TestFMLParser {
 		System.out.println("Parsing FML resource " + fmlResource);
 		FMLModelFactory fmlModelFactory = new FMLModelFactory(null, serviceManager);
 		FMLParser parser = new FMLParser();
-		FMLCompilationUnit compilationUnit = parser.parse(fmlResource.openInputStream(), fmlModelFactory);
+		FMLCompilationUnit compilationUnit = parser.parse(fmlResource.openInputStream(), fmlModelFactory, (modelSlotClasses) -> {
+			// We dont expect to have particular ModelSlots in this context, but be aware of that
+			return null;
+		});
 		FMLCompilationUnitNode rootNode = (FMLCompilationUnitNode) compilationUnit.getPrettyPrintDelegate();
 		debug(rootNode, 0);
 

@@ -49,11 +49,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.junit.runners.Parameterized;
 import org.openflexo.foundation.fml.FMLCompilationUnit;
+import org.openflexo.foundation.fml.FMLPrettyPrintable;
 import org.openflexo.foundation.fml.parser.ParseException;
 import org.openflexo.foundation.fml.rm.CompilationUnitResource;
 import org.openflexo.foundation.fml.rm.CompilationUnitResourceImpl;
@@ -64,11 +66,14 @@ import org.openflexo.foundation.test.OpenflexoTestCase;
 import org.openflexo.pamela.exceptions.ModelDefinitionException;
 
 /**
- * This unit test is intended to test ViewPoint loading
+ * This unit test is intended to test XML to FML format migration
+ * 
+ * VERY IMPORTANT: uncomment "ignoreForEquality = true" in {@link FMLPrettyPrintable} to run that tests
  * 
  * @author sylvain
  * 
  */
+@Ignore
 @RunWith(Parameterized.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestFMLMigration extends OpenflexoTestCase {
