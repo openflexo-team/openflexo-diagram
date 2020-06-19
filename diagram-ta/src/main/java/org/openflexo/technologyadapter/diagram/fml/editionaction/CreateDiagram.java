@@ -70,7 +70,7 @@ import org.openflexo.toolbox.StringUtils;
 @ModelEntity
 @ImplementationClass(CreateDiagram.CreateDiagramImpl.class)
 @XMLElement
-@FML("AddDiagram")
+@FML("CreateDiagram")
 public interface CreateDiagram extends AbstractCreateResource<DiagramModelSlot, Diagram, DiagramTechnologyAdapter> {
 
 	@PropertyIdentifier(type = String.class)

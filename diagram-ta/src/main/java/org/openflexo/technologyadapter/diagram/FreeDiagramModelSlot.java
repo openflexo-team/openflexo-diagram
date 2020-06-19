@@ -79,7 +79,7 @@ import org.openflexo.technologyadapter.diagram.model.Diagram;
 @ModelEntity
 @ImplementationClass(FreeDiagramModelSlot.FreeDiagramModelSlotImpl.class)
 @XMLElement
-@FML("FreeDiagramModelSlot")
+@FML("FreeDiagram")
 public interface FreeDiagramModelSlot extends FreeModelSlot<Diagram>, DiagramModelSlot {
 
 	public abstract class FreeDiagramModelSlotImpl extends FreeModelSlotImpl<Diagram> implements FreeDiagramModelSlot {
