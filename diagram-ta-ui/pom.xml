@@ -32,7 +32,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.openflexo</groupId>
-			<artifactId>flexodiagram</artifactId>
+			<artifactId>diagram-ta</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
