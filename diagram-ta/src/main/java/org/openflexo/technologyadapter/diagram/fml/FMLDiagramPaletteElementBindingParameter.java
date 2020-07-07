@@ -38,6 +38,7 @@
 
 package org.openflexo.technologyadapter.diagram.fml;
 
+import org.openflexo.foundation.fml.FlexoBehaviour;
 import org.openflexo.foundation.fml.rt.editionaction.BehaviourCallArgument;
 import org.openflexo.pamela.annotations.ImplementationClass;
 import org.openflexo.pamela.annotations.ModelEntity;
@@ -87,6 +88,12 @@ public interface FMLDiagramPaletteElementBindingParameter extends BehaviourCallA
 
 	public abstract class FMLDiagramPaletteElementBindingParameterImpl extends BehaviourCallArgumentImpl<FMLDiagramPaletteElementBinding>
 			implements FMLDiagramPaletteElementBindingParameter {
+
+		@Override
+		public FlexoBehaviour getAccessedBehaviour() {
+			// TODO Auto-generated method stub
+			return null;
+		}
 
 		/*private FlexoBehaviourParameter _parameter;
 		// private FMLDiagramPaletteElementBinding elementBinding;
