@@ -1,21 +1,19 @@
 dependencies {
   // openflexo dep
-  compile flexoFoundation()
-  compile flexoOntology()
-  compile pamela()
-  compile connie()
-  compile diana()
+  implementation flexoFoundation()
+  api flexoOntology()
+  implementation pamela()
+  implementation connie()
+  api diana()
 
   // external dep
-  compile group: 'org.apache.poi', name: 'poi-scratchpad', version: '3.12'
+  implementation group: 'org.apache.poi', name: 'poi-scratchpad', version: '3.12'
 
   // testing dep
-  testCompile testUtils()
-  testCompile flexoFoundationTest()
+  testImplementation flexoFoundationTest()
 
-  // testRuntime group: "org.openflexo", name: "testdiagram_vp", version: "1.1"
-  
+  // testRuntimeOnly group: "org.openflexo", name: "testdiagram_vp", version: "1.1"
+
    // Test resource center
-  testRuntime project(':diagram-ta-test-rc')
-  
+  testRuntimeOnly project(':diagram-ta-test-rc')
 }

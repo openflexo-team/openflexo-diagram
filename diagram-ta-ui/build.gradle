@@ -1,18 +1,19 @@
 dependencies {
-   compile project(":diagram-ta")
+   api project(":diagram-ta")
+   api dianaSwing()
 
    // openflexo dep
-   compile flexoUi()
-   compile fmlTechnologyAdapterUi()
-   compile fmlRtTechnologyAdapterUi()
+   implementation flexoUi()
+   implementation fmlTechnologyAdapterUi()
+   implementation fmlRtTechnologyAdapterUi()
    // external dep
    // testing dep
-   testCompile testUtils()
-   testCompile ginaTest()
-   testCompile flexoUiTest()
-   testRuntime flexoOntologyUi()
-   
+   testImplementation flexoFoundationTest()
+   testImplementation ginaTest()
+   testImplementation flexoUiTest()
+   testRuntimeOnly flexoOntologyUi()
+
    // Test resource center
-   testRuntime project(':diagram-ta-test-rc')
-   
+   testRuntimeOnly project(':diagram-ta-test-rc')
+
 }

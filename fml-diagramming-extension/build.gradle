@@ -1,12 +1,11 @@
 dependencies {
-   compile project(":diagram-ta-ui")
+   implementation project(":diagram-ta-ui")
 
   // openflexo dep
-   compile flexoUi()
-   compile fmlTechnologyAdapterUi()
+   implementation flexoUi()
+   implementation fmlTechnologyAdapterUi()
   // external dep
   // testing dep
-   testCompile testUtils()
-   testCompile ginaTest()
-   testCompile flexoUiTest()
+   testImplementation ginaTest()
+   testImplementation flexoUiTest()
 }
