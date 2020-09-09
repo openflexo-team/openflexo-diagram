@@ -13,14 +13,13 @@ dependencies {
    testImplementation flexoUiTest()
    testRuntimeOnly flexoOntologyUi()
 
-   /*implementation group: 'org.apache.xmlgraphics', name: 'batik-codec', version: '1.13',  {
+   implementation group: 'org.apache.xmlgraphics', name: 'batik-svggen', version: '1.13',  {
        exclude group: "xml-apis", module: "xml-apis"
-   }*/
+   }
+   implementation group: 'org.apache.xmlgraphics', name: 'batik-dom', version: '1.13',  {
+       exclude group: "xml-apis", module: "xml-apis"
+   }
 
-   /* implementation group: 'org.apache.xmlgraphics', name: 'batik-dom', version: '1.13',  {
-       exclude group: "xml-apis", module: "xml-apis"
-   } */
-   
    // Test resource center
    testRuntimeOnly project(':diagram-ta-test-rc')
 
