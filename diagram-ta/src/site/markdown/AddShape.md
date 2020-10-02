@@ -4,6 +4,8 @@
 
 This edition primitive addresses the creation of a new shape in a diagram.
 
+---
+
 ## Usage
 
 ```java
@@ -22,9 +24,11 @@ where
 - \<container_path\> adresses a `DiagramContainerElement`
 - \<diagram_path\> adresses a `Diagram`
 
+---
+
 ## Configuration
 
-| Property        | Type                    | Required  |
+| Property        | Type                    | &nbsp;Required&nbsp;  |
 | --------------- |-------------------------| :--------:|
 | `container`&nbsp;&nbsp;&nbsp;| `DiagramContainerElement` | yes       | 
 | `extendParentBoundsToHostThisShape`&nbsp;&nbsp;&nbsp; | `boolean` | no  |
@@ -34,13 +38,9 @@ where
 - `container`: Container for newly created shape
 - `extendParentBoundsToHostThisShape` : Flag indicating if parent container should be extended in order to fully contain newly created shape
 
+---
+
 ## Examples
-
-```java
-myShape = DIAGRAM::AddShape(container=myContainerShape) in (myDiagram);
-```
-
-Creates a new shape in Diagram identified by 'myDiagram' expression, inside shape identified by 'myContainerShape' expression, and assign this new shape to 'myShape'
 
 ```java
 myShape = DIAGRAM::AddShape(container=topLevel) in (myDiagram);
@@ -48,10 +48,21 @@ myShape = DIAGRAM::AddShape(container=topLevel) in (myDiagram);
 
 Creates a new shape in Diagram identified by 'myDiagram' expression, at top-level, and assign this new shape to 'myShape'
 
+```java
+myShape = DIAGRAM::AddShape(
+	container=myContainerShape,
+	extendParentBoundsToHostThisShape=true) in (myDiagram);
+```
+
+Creates a new shape in Diagram identified by 'myDiagram' expression, inside shape identified by 'myContainerShape' expression, and assign this new shape to 'myShape'
+
+---
 
 ## Javadoc
 
 Java class: [AddShape](./flexodiagram/apidocs/org/openflexo/technologyadapter/diagram/model/action/AddShape.html)
+
+---
 
 ## See also
 
