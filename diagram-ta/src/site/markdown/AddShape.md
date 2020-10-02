@@ -5,18 +5,18 @@ This edition primitive addresses the creation of a new shape in a diagram.
 ## Usage
 
 ```java
-[DiagramShape <value> =] DIAGRAM::AddShape(container=<container_path>[,options]) in (<diagram_path>);
+[DiagramShape \<value\> =] DIAGRAM::AddShape(container=\<container_path\>[,options]) in (\<diagram_path\>);
 ```
 or 
 
 ```java
-[DiagramShape <value> =] AddShape(container=<container_path>[,options]) in (<diagram_path>);
+[DiagramShape \<value\> =] AddShape(container=\<container_path\>[,options]) in (\<diagram_path\>);
 ```
 
 where 
 
-- <container_path> adresses a `DiagramContainerElement`
-- <diagram_path> adresses a `Diagram`
+- \<container_path\> adresses a `DiagramContainerElement`
+- \<diagram_path\> adresses a `Diagram`
 
 ## Configuration
 
