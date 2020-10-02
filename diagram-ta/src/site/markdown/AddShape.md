@@ -1,6 +1,4 @@
-# `AddShape`
-
-![Diagram20x20](https://support.openflexo.org/images/components/ta/diagram_ta/Diagram20x20.png)
+<h1><tt>AddShape</tt> <img src="https://support.openflexo.org/images/components/ta/diagram_ta/Diagram20x20.png" alt="Diagram20x20" /></h1>
 
 This edition primitive addresses the creation of a new shape in a diagram.
 
@@ -28,7 +26,7 @@ where
 | --------------- |-------------------------| :--------:|
 | `container`      | `DiagramContainerElement` | yes       | 
 | `extendParentBoundsToHostThisShape`      | `boolean` | no  |
-
+   
 - `container`: Container for newly created shape
 - `extendParentBoundsToHostThisShape` : Flag indicating if parent container should be extended in order to fully contain newly created shape
 
