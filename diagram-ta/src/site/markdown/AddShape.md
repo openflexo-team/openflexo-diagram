@@ -1,16 +1,20 @@
 # `AddShape`
 
+![Diagram20x20](https://support.openflexo.org/images/components/ta/diagram_ta/Diagram20x20.png)
+
 This edition primitive addresses the creation of a new shape in a diagram.
 
 ## Usage
 
 ```java
-[DiagramShape \<value\> =] DIAGRAM::AddShape(container=\<container_path\>[,options]) in (\<diagram_path\>);
+[DiagramShape <value> =] 
+DIAGRAM::AddShape(container=<container_path>[,options]) in (<diagram_path>);
 ```
 or 
 
 ```java
-[DiagramShape \<value\> =] AddShape(container=\<container_path\>[,options]) in (\<diagram_path\>);
+[DiagramShape <value> =] 
+AddShape(container=<container_path>[,options]) in (<diagram_path>);
 ```
 
 where 
@@ -20,11 +24,13 @@ where
 
 ## Configuration
 
-| Property        | Type                    | Required  | Description |
-| --------------- |:-----------------------:| ---------:| -----------:|
-| `container`      | `DiagramContainerElement` | yes       | Container for newly created shape |
-| `extendParentBoundsToHostThisShape`      | `boolean` | no       | Flag indicating if parent container should be extended in order to fully contain newly created shape |
+| Property        | Type                    | Required  |
+| --------------- |-------------------------| :--------:|
+| `container`      | `DiagramContainerElement` | yes       | 
+| `extendParentBoundsToHostThisShape`      | `boolean` | no  |
 
+- `container`: Container for newly created shape
+- `extendParentBoundsToHostThisShape` : Flag indicating if parent container should be extended in order to fully contain newly created shape
 
 ## Javadoc
 
