@@ -37,13 +37,37 @@
 
 		<menu name="Openflexo-Diagram">
 			<item name="Home" href="index.html" />
-			<item name="Model layer" href="ModelLayer.html">
-				<item name="Diagram" href="diagram-ta/index.html" />
+			<item name="Model" href="model.html" />
+			<item name="Tooling" href="tooling.html" />
+			<item name="F.A.Q." href="faq.html" />
+		</menu>
+
+		<menu name="FML / Usage">
+			<item name="Model slots" href="model_slots.html">
+				<item name="TypedDiagramModelSlot" href="TypedDiagramModelSlot.html" />
+				<item name="FreeDiagramModelSlot" href="FreeDiagramModelSlot.html" />
 			</item>
-			<item name="UI layer" href="openflexo-technology-adapters-ui/index.html">
-				<item name="Diagram-UI" href="diagram-ta-ui/index.html" />
+			<item name="TypedDiagramModelSlot" href="TypedDiagramModelSlot.html">
+				<item name="Roles" href="roles.html">
+					<item name="ShapeRole" href="ShapeRole.html" />
+					<item name="ConnectorRole" href="ConnectorRole.html" />
+					<item name="DiagramRole" href="DiagramRole.html" />
+				</item>
+				<item name="Behaviours" href="behaviours.html">
+					<item name="DropScheme" href="DropScheme.html" />
+					<item name="LinkScheme" href="LinkScheme.html" />
+					<item name="DiagramNavigationScheme" href="DiagramNavigationScheme.html" />
+					<item name="DrawRectangleScheme" href="DrawRectangleScheme.html" />
+				</item>
+				<item name="Edition actions" href="edition_actions.html">
+					<item name="CreateDiagram" href="CreateDiagram.html" />
+					<item name="AddShape" href="AddShape.html" />
+					<item name="AddConnector" href="AddConnector.html" />
+					<item name="GraphicalAction" href="GraphicalAction.html" />
+				</item>
+				<item name="Fetch requests" href="fetch_requests.html">
+				</item>
 			</item>
-			<item name="FAQ" href="faq.html" />
 		</menu>
 
 		<menu ref="modules" />
