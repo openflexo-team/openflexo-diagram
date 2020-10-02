@@ -43,30 +43,30 @@
 		</menu>
 
 		<menu name="FML / Usage">
-			<item name="Model slots" href="model_slots.html">
-				<item name="TypedDiagramModelSlot" href="TypedDiagramModelSlot.html" />
-				<item name="FreeDiagramModelSlot" href="FreeDiagramModelSlot.html" />
+			<item name="TypedDiagramModelSlot" href="TypedDiagramModelSlot.html" />
+			<item name="FreeDiagramModelSlot" href="FreeDiagramModelSlot.html" />
+		</menu>
+
+
+		<menu name="TypedDiagramModelSlot">
+			<item name="Roles" href="flexodiagram/TypedDiagramModelSlot_roles.html">
+				<item name="ShapeRole" href="flexodiagram/ShapeRole.html" />
+				<item name="ConnectorRole" href="flexodiagram/ConnectorRole.html" />
+				<item name="DiagramRole" href="flexodiagram/DiagramRole.html" />
 			</item>
-			<item name="TypedDiagramModelSlot" href="TypedDiagramModelSlot.html">
-				<item name="Roles" href="roles.html">
-					<item name="ShapeRole" href="ShapeRole.html" />
-					<item name="ConnectorRole" href="ConnectorRole.html" />
-					<item name="DiagramRole" href="DiagramRole.html" />
-				</item>
-				<item name="Behaviours" href="behaviours.html">
-					<item name="DropScheme" href="DropScheme.html" />
-					<item name="LinkScheme" href="LinkScheme.html" />
-					<item name="DiagramNavigationScheme" href="DiagramNavigationScheme.html" />
-					<item name="DrawRectangleScheme" href="DrawRectangleScheme.html" />
-				</item>
-				<item name="Edition actions" href="edition_actions.html">
-					<item name="CreateDiagram" href="CreateDiagram.html" />
-					<item name="AddShape" href="AddShape.html" />
-					<item name="AddConnector" href="AddConnector.html" />
-					<item name="GraphicalAction" href="GraphicalAction.html" />
-				</item>
-				<item name="Fetch requests" href="fetch_requests.html">
-				</item>
+			<item name="Behaviours" href="flexodiagram/TypedDiagramModelSlot_behaviours.html">
+				<item name="DropScheme" href="flexodiagram/DropScheme.html" />
+				<item name="LinkScheme" href="flexodiagram/LinkScheme.html" />
+				<item name="DiagramNavigationScheme" href="flexodiagram/DiagramNavigationScheme.html" />
+				<item name="DrawRectangleScheme" href="flexodiagram/DrawRectangleScheme.html" />
+			</item>
+			<item name="Edition actions" href="flexodiagram/TypedDiagramModelSlot_edition_actions.html">
+				<item name="CreateDiagram" href="flexodiagram/CreateDiagram.html" />
+				<item name="AddShape" href="flexodiagram/AddShape.html" />
+				<item name="AddConnector" href="flexodiagram/AddConnector.html" />
+				<item name="GraphicalAction" href="flexodiagram/GraphicalAction.html" />
+			</item>
+			<item name="Fetch requests" href="flexodiagram/TypedDiagramModelSlot_fetch_requests.html">
 			</item>
 		</menu>
 
