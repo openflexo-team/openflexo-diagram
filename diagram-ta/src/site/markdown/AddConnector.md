@@ -1,5 +1,3 @@
-# AddConnector
-
-<img src="./images/AddConnector_BIG.png" alt="AddConnector"/>
+# AddConnector <img src="./images/AddConnector_BIG.png" alt="AddConnector"/>
 
 Prout
