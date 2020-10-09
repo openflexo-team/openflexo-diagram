@@ -24,10 +24,61 @@
 			img="https://support.openflexo.org/images/components/ta/diagram_ta/Diagram128x128.png">
 	</menu>
   
-    <menu name="FlexoDiagram connector">
-      <item name="Home" 		href="index.html" />
-      <item name="Javadoc"    	href="./apidocs/index.html" />
+    <menu name="Openflexo-Diagram">
+		<item name="Home" href="../index.html" />
+		<item name="Model" href="../model.html" />
+		<item name="Tooling" href="../tooling.html" />
+		<item name="F.A.Q." href="../faq.html" />
     </menu>
+    
+<!-- BEGIN GENERATED -->
+<menu name="FML / Usage">
+    <item name="TypedDiagramModelSlot" href="./TypedDiagramModelSlot.html"/>
+    <item name="FreeDiagramModelSlot" href="./FreeDiagramModelSlot.html"/>
+</menu>
+
+<menu name="TypedDiagramModelSlot">
+    <item name="Roles" href="diagram-ta/TypedDiagramModelSlot_roles.html">
+        <item name="ShapeRole" href="./ShapeRole.html"/>
+        <item name="ConnectorRole" href="./ConnectorRole.html"/>
+        <item name="DiagramRole" href="./DiagramRole.html"/>
+    </item>
+    <item name="Behaviours" href="diagram-ta/TypedDiagramModelSlot_behaviours.html">
+        <item name="DropScheme" href="./DropScheme.html"/>
+        <item name="DrawRectangleScheme" href="./DrawRectangleScheme.html"/>
+        <item name="LinkScheme" href="./LinkScheme.html"/>
+        <item name="DiagramNavigationScheme" href="./DiagramNavigationScheme.html"/>
+    </item>
+    <item name="Edition actions" href="diagram-ta/TypedDiagramModelSlot_edition_actions.html">
+        <item name="CreateDiagram" href="./CreateDiagram.html"/>
+        <item name="AddShape" href="./AddShape.html"/>
+        <item name="AddConnector" href="./AddConnector.html"/>
+        <item name="GraphicalAction" href="./GraphicalAction.html"/>
+    </item>
+</menu>
+
+<menu name="FreeDiagramModelSlot">
+    <item name="Roles" href="diagram-ta/FreeDiagramModelSlot_roles.html">
+        <item name="ShapeRole" href="./ShapeRole.html"/>
+        <item name="ConnectorRole" href="./ConnectorRole.html"/>
+        <item name="DiagramRole" href="./DiagramRole.html"/>
+    </item>
+    <item name="Behaviours" href="diagram-ta/FreeDiagramModelSlot_behaviours.html">
+        <item name="DropScheme" href="./DropScheme.html"/>
+        <item name="DrawRectangleScheme" href="./DrawRectangleScheme.html"/>
+        <item name="LinkScheme" href="./LinkScheme.html"/>
+        <item name="DiagramNavigationScheme" href="./DiagramNavigationScheme.html"/>
+    </item>
+    <item name="Edition actions" href="diagram-ta/FreeDiagramModelSlot_edition_actions.html">
+        <item name="CreateDiagram" href="./CreateDiagram.html"/>
+        <item name="AddShape" href="./AddShape.html"/>
+        <item name="AddConnector" href="./AddConnector.html"/>
+        <item name="GraphicalAction" href="./GraphicalAction.html"/>
+    </item>
+</menu>
+
+<!-- END GENERATED -->
+    
     <menu ref="parent" />
     <menu ref="modules" />
     <menu ref="reports" />
