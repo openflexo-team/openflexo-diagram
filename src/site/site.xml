@@ -44,47 +44,47 @@
 
 <!-- BEGIN GENERATED -->
 <menu name="FML / Usage">
-    <item name="TypedDiagramModelSlot" href="diagram-ta/TypedDiagramModelSlot.html"/>
-    <item name="FreeDiagramModelSlot" href="diagram-ta/FreeDiagramModelSlot.html"/>
+    <item name="TypedDiagramModelSlot" href="flexodiagram/TypedDiagramModelSlot.html"/>
+    <item name="FreeDiagramModelSlot" href="flexodiagram/FreeDiagramModelSlot.html"/>
 </menu>
 
 <menu name="TypedDiagramModelSlot">
-    <item name="Roles" href="diagram-ta/TypedDiagramModelSlot_roles.html">
-        <item name="ShapeRole" href="diagram-ta/ShapeRole.html"/>
-        <item name="ConnectorRole" href="diagram-ta/ConnectorRole.html"/>
-        <item name="DiagramRole" href="diagram-ta/DiagramRole.html"/>
+    <item name="Roles" href="flexodiagram/TypedDiagramModelSlot_roles.html">
+        <item name="ShapeRole" href="flexodiagram/ShapeRole.html"/>
+        <item name="ConnectorRole" href="flexodiagram/ConnectorRole.html"/>
+        <item name="DiagramRole" href="flexodiagram/DiagramRole.html"/>
     </item>
-    <item name="Behaviours" href="diagram-ta/TypedDiagramModelSlot_behaviours.html">
-        <item name="DropScheme" href="diagram-ta/DropScheme.html"/>
-        <item name="DrawRectangleScheme" href="diagram-ta/DrawRectangleScheme.html"/>
-        <item name="LinkScheme" href="diagram-ta/LinkScheme.html"/>
-        <item name="DiagramNavigationScheme" href="diagram-ta/DiagramNavigationScheme.html"/>
+    <item name="Behaviours" href="flexodiagram/TypedDiagramModelSlot_behaviours.html">
+        <item name="DropScheme" href="flexodiagram/DropScheme.html"/>
+        <item name="DrawRectangleScheme" href="flexodiagram/DrawRectangleScheme.html"/>
+        <item name="LinkScheme" href="flexodiagram/LinkScheme.html"/>
+        <item name="DiagramNavigationScheme" href="flexodiagram/DiagramNavigationScheme.html"/>
     </item>
-    <item name="Edition actions" href="diagram-ta/TypedDiagramModelSlot_edition_actions.html">
-        <item name="CreateDiagram" href="diagram-ta/CreateDiagram.html"/>
-        <item name="AddShape" href="diagram-ta/AddShape.html"/>
-        <item name="AddConnector" href="diagram-ta/AddConnector.html"/>
-        <item name="GraphicalAction" href="diagram-ta/GraphicalAction.html"/>
+    <item name="Edition actions" href="flexodiagram/TypedDiagramModelSlot_edition_actions.html">
+        <item name="CreateDiagram" href="flexodiagram/CreateDiagram.html"/>
+        <item name="AddShape" href="flexodiagram/AddShape.html"/>
+        <item name="AddConnector" href="flexodiagram/AddConnector.html"/>
+        <item name="GraphicalAction" href="flexodiagram/GraphicalAction.html"/>
     </item>
 </menu>
 
 <menu name="FreeDiagramModelSlot">
-    <item name="Roles" href="diagram-ta/FreeDiagramModelSlot_roles.html">
-        <item name="ShapeRole" href="diagram-ta/ShapeRole.html"/>
-        <item name="ConnectorRole" href="diagram-ta/ConnectorRole.html"/>
-        <item name="DiagramRole" href="diagram-ta/DiagramRole.html"/>
+    <item name="Roles" href="flexodiagram/FreeDiagramModelSlot_roles.html">
+        <item name="ShapeRole" href="flexodiagram/ShapeRole.html"/>
+        <item name="ConnectorRole" href="flexodiagram/ConnectorRole.html"/>
+        <item name="DiagramRole" href="flexodiagram/DiagramRole.html"/>
     </item>
-    <item name="Behaviours" href="diagram-ta/FreeDiagramModelSlot_behaviours.html">
-        <item name="DropScheme" href="diagram-ta/DropScheme.html"/>
-        <item name="DrawRectangleScheme" href="diagram-ta/DrawRectangleScheme.html"/>
-        <item name="LinkScheme" href="diagram-ta/LinkScheme.html"/>
-        <item name="DiagramNavigationScheme" href="diagram-ta/DiagramNavigationScheme.html"/>
+    <item name="Behaviours" href="flexodiagram/FreeDiagramModelSlot_behaviours.html">
+        <item name="DropScheme" href="flexodiagram/DropScheme.html"/>
+        <item name="DrawRectangleScheme" href="flexodiagram/DrawRectangleScheme.html"/>
+        <item name="LinkScheme" href="flexodiagram/LinkScheme.html"/>
+        <item name="DiagramNavigationScheme" href="flexodiagram/DiagramNavigationScheme.html"/>
     </item>
-    <item name="Edition actions" href="diagram-ta/FreeDiagramModelSlot_edition_actions.html">
-        <item name="CreateDiagram" href="diagram-ta/CreateDiagram.html"/>
-        <item name="AddShape" href="diagram-ta/AddShape.html"/>
-        <item name="AddConnector" href="diagram-ta/AddConnector.html"/>
-        <item name="GraphicalAction" href="diagram-ta/GraphicalAction.html"/>
+    <item name="Edition actions" href="flexodiagram/FreeDiagramModelSlot_edition_actions.html">
+        <item name="CreateDiagram" href="flexodiagram/CreateDiagram.html"/>
+        <item name="AddShape" href="flexodiagram/AddShape.html"/>
+        <item name="AddConnector" href="flexodiagram/AddConnector.html"/>
+        <item name="GraphicalAction" href="flexodiagram/GraphicalAction.html"/>
     </item>
 </menu>
 

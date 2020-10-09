@@ -38,18 +38,18 @@
 </menu>
 
 <menu name="TypedDiagramModelSlot">
-    <item name="Roles" href="diagram-ta/TypedDiagramModelSlot_roles.html">
+    <item name="Roles" href="flexodiagram/TypedDiagramModelSlot_roles.html">
         <item name="ShapeRole" href="./ShapeRole.html"/>
         <item name="ConnectorRole" href="./ConnectorRole.html"/>
         <item name="DiagramRole" href="./DiagramRole.html"/>
     </item>
-    <item name="Behaviours" href="diagram-ta/TypedDiagramModelSlot_behaviours.html">
+    <item name="Behaviours" href="flexodiagram/TypedDiagramModelSlot_behaviours.html">
         <item name="DropScheme" href="./DropScheme.html"/>
         <item name="DrawRectangleScheme" href="./DrawRectangleScheme.html"/>
         <item name="LinkScheme" href="./LinkScheme.html"/>
         <item name="DiagramNavigationScheme" href="./DiagramNavigationScheme.html"/>
     </item>
-    <item name="Edition actions" href="diagram-ta/TypedDiagramModelSlot_edition_actions.html">
+    <item name="Edition actions" href="flexodiagram/TypedDiagramModelSlot_edition_actions.html">
         <item name="CreateDiagram" href="./CreateDiagram.html"/>
         <item name="AddShape" href="./AddShape.html"/>
         <item name="AddConnector" href="./AddConnector.html"/>
@@ -58,18 +58,18 @@
 </menu>
 
 <menu name="FreeDiagramModelSlot">
-    <item name="Roles" href="diagram-ta/FreeDiagramModelSlot_roles.html">
+    <item name="Roles" href="flexodiagram/FreeDiagramModelSlot_roles.html">
         <item name="ShapeRole" href="./ShapeRole.html"/>
         <item name="ConnectorRole" href="./ConnectorRole.html"/>
         <item name="DiagramRole" href="./DiagramRole.html"/>
     </item>
-    <item name="Behaviours" href="diagram-ta/FreeDiagramModelSlot_behaviours.html">
+    <item name="Behaviours" href="flexodiagram/FreeDiagramModelSlot_behaviours.html">
         <item name="DropScheme" href="./DropScheme.html"/>
         <item name="DrawRectangleScheme" href="./DrawRectangleScheme.html"/>
         <item name="LinkScheme" href="./LinkScheme.html"/>
         <item name="DiagramNavigationScheme" href="./DiagramNavigationScheme.html"/>
     </item>
-    <item name="Edition actions" href="diagram-ta/FreeDiagramModelSlot_edition_actions.html">
+    <item name="Edition actions" href="flexodiagram/FreeDiagramModelSlot_edition_actions.html">
         <item name="CreateDiagram" href="./CreateDiagram.html"/>
         <item name="AddShape" href="./AddShape.html"/>
         <item name="AddConnector" href="./AddConnector.html"/>
