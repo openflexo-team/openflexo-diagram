@@ -6,7 +6,7 @@ No documentation yet
 
 ---
 
-# Usage
+## Usage
 
 ```java
 [DiagramConnector <value> =]
@@ -27,10 +27,15 @@ where
 
 ---
 
-# Configuration
+## Configuration
 
 | Property        | Type                    | &nbsp;Required&nbsp;  |
 | --------------- |-------------------------| :------:|
 | `fromShape` &nbsp; | `DiagramShape` &nbsp; | yes |
 | `toShape` &nbsp; | `DiagramShape` &nbsp; | yes |
+
+---
+
+- `fromShape` : 
+- `toShape` : 
 

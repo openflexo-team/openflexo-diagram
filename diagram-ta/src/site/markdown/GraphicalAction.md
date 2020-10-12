@@ -6,7 +6,7 @@ No documentation yet
 
 ---
 
-# Usage
+## Usage
 
 ```java
 [DiagramElement <value> =]
@@ -19,14 +19,4 @@ or
 [DiagramElement <value> =]
 DIAGRAM::GraphicalAction()
 ```
-
-where
-
-
----
-
-# Configuration
-
-| Property        | Type                    | &nbsp;Required&nbsp;  |
-| --------------- |-------------------------| :------:|
 

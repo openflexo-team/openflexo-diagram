@@ -6,7 +6,7 @@ No documentation yet
 
 ---
 
-# Usage
+## Usage
 
 ```java
 [Diagram <value> =]
@@ -20,12 +20,9 @@ or
 DIAGRAM::CreateDiagram([options])
 ```
 
-where
-
-
 ---
 
-# Configuration
+## Configuration
 
 | Property        | Type                    | &nbsp;Required&nbsp;  |
 | --------------- |-------------------------| :------:|
@@ -33,4 +30,11 @@ where
 | `resourceName` &nbsp; | `String` &nbsp; | no |
 | `resourceURI` &nbsp; | `String` &nbsp; | no |
 | `resourceCenter` &nbsp; | `FlexoResourceCenter<?>` &nbsp; | no |
+
+---
+
+- `dynamicRelativePath` : 
+- `resourceName` : 
+- `resourceURI` : 
+- `resourceCenter` : 
 
