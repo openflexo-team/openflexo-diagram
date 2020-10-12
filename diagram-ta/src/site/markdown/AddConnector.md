@@ -10,20 +10,20 @@ No documentation yet
 
 ```java
 [DiagramConnector <value> =]
-AddConnector(fromShape=<fromShape_path>,toShape=<toShape_path>)
+AddConnector(toShape=<toShape_path>,fromShape=<fromShape_path>)
 ```
 
 or
 
 ```java
 [DiagramConnector <value> =]
-DIAGRAM::AddConnector(fromShape=<fromShape_path>,toShape=<toShape_path>)
+DIAGRAM::AddConnector(toShape=<toShape_path>,fromShape=<fromShape_path>)
 ```
 
 where
 
--\<fromShape_path\> addresses a `DiagramShape`
--\<toShape_path\> addresses a `DiagramShape`
+- \<toShape_path\> addresses a `DiagramShape`
+- \<fromShape_path\> addresses a `DiagramShape`
 
 ---
 
@@ -31,11 +31,11 @@ where
 
 | Property        | Type                    | &nbsp;Required&nbsp;  |
 | --------------- |-------------------------| :------:|
-| `fromShape` &nbsp; | `DiagramShape` &nbsp; | yes |
 | `toShape` &nbsp; | `DiagramShape` &nbsp; | yes |
+| `fromShape` &nbsp; | `DiagramShape` &nbsp; | yes |
 
 ---
 
-- `fromShape` : 
 - `toShape` : 
+- `fromShape` : 
 

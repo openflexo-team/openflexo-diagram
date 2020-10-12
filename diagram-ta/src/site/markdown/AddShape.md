@@ -22,7 +22,7 @@ DIAGRAM::AddShape(container=<container_path>[,options])
 
 where
 
--\<container_path\> addresses a `DiagramContainerElement<?>`
+- \<container_path\> addresses a `DiagramContainerElement<?>`
 
 ---
 
@@ -30,25 +30,33 @@ where
 
 | Property        | Type                    | &nbsp;Required&nbsp;  |
 | --------------- |-------------------------| :------:|
-| `container` &nbsp; | `DiagramContainerElement<?>` &nbsp; | yes |
 | `extendParentBoundsToHostThisShape` &nbsp; | `boolean` &nbsp; | no |
+| `container` &nbsp; | `DiagramContainerElement<?>` &nbsp; | yes |
 
 ---
 
-- `container` : container for newly created shape
 - `extendParentBoundsToHostThisShape` : flag indicating if parent container should be extended in order to fully contain newly created shape
+- `container` : container for newly created shape
 
 ## Examples
 
 ```java
-myShape = DIAGRAM::AddShape(container=topLevel) in (myDiagram);
+myShape = AddShape(container=topLevel) in (myDiagram);
 ```
 
 Creates a new shape in Diagram identified by ‘myDiagram’ expression, at top-level, and assign this new shape to ‘myShape’
 
 ```java
-myShape = DIAGRAM::AddShape(container=myContainerShape,extendParentBoundsToHostThisShape=true) in (myDiagram);
+myShape = DIAGRAM::AddShape(
+        container=myContainerShape,
+        extendParentBoundsToHostThisShape=true) in (myDiagram);
 ```
 
 Creates a new shape in Diagram identified by ‘myDiagram’ expression, inside shape identified by ‘myContainerShape’ expression, and assign this new shape to ‘myShape’
+
+## See also
+
+ - <img src="./images/CreateDiagram.png" alt="CreateDiagram"/> [`CreateDiagram`](CreateDiagram.html) : No documentation yet
+ - <img src="./images/AddConnector.png" alt="AddConnector"/> [`AddConnector`](AddConnector.html) : No documentation yet
+ - <img src="./images/GraphicalAction.png" alt="GraphicalAction"/> [`GraphicalAction`](GraphicalAction.html) : No documentation yet
 

@@ -94,7 +94,7 @@ import org.openflexo.technologyadapter.diagram.model.DiagramShape;
 		value = "AddShape",
 		description = "<html>This edition primitive addresses the creation of a new shape in a diagram.</html>",
 		examples = { @UsageExample(
-				example = "myShape = DIAGRAM::AddShape(container=topLevel) in (myDiagram);",
+				example = "myShape = AddShape(container=topLevel) in (myDiagram);",
 				description = "Creates a new shape in Diagram identified by ‘myDiagram’ expression, at top-level, and assign this new shape to ‘myShape’"),
 				@UsageExample(
 						example = "myShape = DIAGRAM::AddShape(container=myContainerShape,extendParentBoundsToHostThisShape=true) in (myDiagram);",

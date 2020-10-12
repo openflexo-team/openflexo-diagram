@@ -26,15 +26,15 @@ DIAGRAM::CreateDiagram([options])
 
 | Property        | Type                    | &nbsp;Required&nbsp;  |
 | --------------- |-------------------------| :------:|
-| `dynamicRelativePath` &nbsp; | `String` &nbsp; | no |
-| `resourceName` &nbsp; | `String` &nbsp; | no |
 | `resourceURI` &nbsp; | `String` &nbsp; | no |
 | `resourceCenter` &nbsp; | `FlexoResourceCenter<?>` &nbsp; | no |
+| `dynamicRelativePath` &nbsp; | `String` &nbsp; | no |
+| `resourceName` &nbsp; | `String` &nbsp; | no |
 
 ---
 
-- `dynamicRelativePath` : 
-- `resourceName` : 
 - `resourceURI` : 
 - `resourceCenter` : 
+- `dynamicRelativePath` : 
+- `resourceName` : 
 
