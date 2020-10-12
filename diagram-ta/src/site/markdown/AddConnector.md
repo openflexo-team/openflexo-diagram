@@ -30,7 +30,7 @@ where
 # Configuration
 
 | Property        | Type                    | &nbsp;Required&nbsp;  |
-| --------------- |-------------------------| :—————---------——————:|
+| --------------- |-------------------------| :------:|
 | `fromShape` &nbsp; | `DiagramShape` &nbsp; | yes |
 | `toShape` &nbsp; | `DiagramShape` &nbsp; | yes |
 

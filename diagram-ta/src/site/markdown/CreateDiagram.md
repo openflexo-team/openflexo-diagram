@@ -28,7 +28,7 @@ where
 # Configuration
 
 | Property        | Type                    | &nbsp;Required&nbsp;  |
-| --------------- |-------------------------| :—————---------——————:|
+| --------------- |-------------------------| :------:|
 | `dynamicRelativePath` &nbsp; | `String` &nbsp; | no |
 | `resourceName` &nbsp; | `String` &nbsp; | no |
 | `resourceURI` &nbsp; | `String` &nbsp; | no |
