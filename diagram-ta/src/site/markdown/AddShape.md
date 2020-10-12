@@ -29,7 +29,7 @@ where
 # Configuration
 
 | Property        | Type                    | &nbsp;Required&nbsp;  |
-| --------------- |-------------------------| :—————---------——————:|
-| `container` &nbsp; | `DiagramContainerElement<?>` &nbsp; | yes |
+| --------------- | ------------------------- | :—————---------——————:|
+| `container` &nbsp; | `DiagramContainerElement\<?\>` &nbsp; | yes |
 | `extendParentBoundsToHostThisShape` &nbsp; | `boolean` &nbsp; | no |
 
