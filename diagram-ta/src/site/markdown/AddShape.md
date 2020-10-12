@@ -28,11 +28,6 @@ where
 
 # Configuration
 
-| Property        | Type                    | &nbsp;Required&nbsp;  |
-| --------------- |-------------------------| :--------:|
-| `container`&nbsp;| `DiagramContainerElement`&nbsp; | yes       | 
-| `extendParentBoundsToHostThisShape`&nbsp; | `boolean`&nbsp; | no  |
-
 coucou1
 
 | Property        | Type                    | &nbsp;Required&nbsp;  |
@@ -43,16 +38,30 @@ coucou1
 coucou2
 
 | Property        | Type                    | &nbsp;Required&nbsp;  |
-| --------------- | ------------------------- | :—————---------——————:|
-| `container`&nbsp;| `DiagramContainerElement`&nbsp; | yes       | 
+| --------------- |-------------------------| :--------:|
+| `container`&nbsp;| `DiagramContainerElement\<?\>`&nbsp; | yes       | 
 | `extendParentBoundsToHostThisShape`&nbsp; | `boolean`&nbsp; | no  |
 
 coucou3
 
 | Property        | Type                    | &nbsp;Required&nbsp;  |
 | --------------- | ------------------------- | :—————---------——————:|
-| `container` &nbsp; | `DiagramContainerElement\<?\>` &nbsp; | yes |
-| `extendParentBoundsToHostThisShape` &nbsp; | `boolean` &nbsp; | no |
+| `container`&nbsp;| `DiagramContainerElement\<?\>`&nbsp; | yes       | 
+| `extendParentBoundsToHostThisShape`&nbsp; | `boolean`&nbsp; | no  |
 
-coucoufin
+coucou4
+
+| Property        | Type                    | &nbsp;Required&nbsp;  |
+| --------------- | ------------------------- | :—————---------——————:|
+| `container`&nbsp;| `DiagramContainerElement`&nbsp; | yes       | 
+| `extendParentBoundsToHostThisShape`&nbsp; | `boolean`&nbsp; | no  |
+
+coucou5
+
+| Property        | Type                    | &nbsp;Required&nbsp;  |
+| --------------- | ------------------------- | :—————---------——————:|
+| `container`&nbsp;| `DiagramContainerElement`&nbsp; | yes       | 
+| `extendParentBoundsToHostThisShape`&nbsp; | `boolean`&nbsp; | no  |
+
+coucou3
 
