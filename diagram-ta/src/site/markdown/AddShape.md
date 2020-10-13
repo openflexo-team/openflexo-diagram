@@ -60,6 +60,8 @@ Creates a new shape in Diagram identified by ‘myDiagram’ expression, inside 
 
 [org.openflexo.technologyadapter.diagram.fml.editionaction.AddShape](./apidocs/org/openflexo/technologyadapter/diagram/fml/editionaction/AddShape.html)
 
+---
+
 ## See also
 
  -  [`ShapeRole`](ShapeRole.html) : No documentation yet

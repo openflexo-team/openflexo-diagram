@@ -53,6 +53,8 @@ Creates a new connector in Diagram identified by ‘myDiagram’ expression, bin
 
 [org.openflexo.technologyadapter.diagram.fml.editionaction.AddConnector](./apidocs/org/openflexo/technologyadapter/diagram/fml/editionaction/AddConnector.html)
 
+---
+
 ## See also
 
  -  [`ConnectorRole`](ConnectorRole.html) : No documentation yet

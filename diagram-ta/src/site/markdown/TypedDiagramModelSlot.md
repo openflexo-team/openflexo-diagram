@@ -24,7 +24,7 @@ where
 
 - `visibility` is default (unspecified), 'public', 'protected' or 'private'
 - `cardinality` is [0,1] (unspecified), [0,\*] or [1,\*]
-- <identifier> is the name of declared model slot variable
+- \<identifier\> is the name of declared model slot variable
 - \<diagramSpecification_path\> addresses a `DiagramSpecification`
 
 ---
@@ -93,6 +93,8 @@ Declares a model slot called 'myDiagram' with resulting type 'Diagram', realized
 ## Javadoc
 
 [org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot](./apidocs/org/openflexo/technologyadapter/diagram/TypedDiagramModelSlot.html)
+
+---
 
 ## See also
 
