@@ -52,6 +52,8 @@ import org.openflexo.foundation.fml.annotations.DeclareFlexoRoles;
 import org.openflexo.foundation.fml.annotations.FML;
 import org.openflexo.foundation.fml.annotations.FMLAttribute;
 import org.openflexo.foundation.fml.annotations.FMLAttribute.AttributeKind;
+import org.openflexo.foundation.fml.annotations.SeeAlso;
+import org.openflexo.foundation.fml.annotations.UsageExample;
 import org.openflexo.foundation.resource.FlexoResourceCenter;
 import org.openflexo.foundation.resource.SaveResourceException;
 import org.openflexo.foundation.technologyadapter.FlexoMetaModelResource;
@@ -102,7 +104,19 @@ import org.openflexo.technologyadapter.diagram.rm.DiagramResourceFactory;
 @ModelEntity
 @ImplementationClass(TypedDiagramModelSlot.TypedDiagramModelSlotImpl.class)
 @XMLElement
-@FML("TypedDiagram")
+@FML(
+		value = "TypedDiagram",
+		description = "<html>This ModelSlot represents access to a Diagram conform to a DiagramSpecification<br>"
+				+ "Such diagram refers to a diagram metamodel which is composed of a example diagram and a collection of palettes both encoding template shapes and connectors"
+				+ "</html>",
+		examples = { @UsageExample(
+				example = "Diagram myDiagram with DIAGRAM::TypedDiagram(diagramSpecification = myDiagramSpecification,"
+						+ "paletteElementBindings = {\n"
+						+ "            FMLDiagramPaletteElementBinding:(elementId=\"MyPaletteElement\",dropAction=\"MyConcept.drop()\",overridingGR=RED_SHAPE2),\n"
+						+ "            FMLDiagramPaletteElementBinding:(elementId=\"MyPaletteElement2\",dropAction=\"MyConcept.drop()\")\n"
+						+ "});",
+				description = "Declares a model slot called 'myDiagram' with resulting type 'Diagram', realized through the 'TypedDiagram' model slot, conform to 'myDiagramSpecification' and specified palette element bindings") },
+		references = { @SeeAlso(FreeDiagramModelSlot.class), @SeeAlso(CreateDiagram.class) })
 public interface TypedDiagramModelSlot extends TypeAwareModelSlot<Diagram, DiagramSpecification>, DiagramModelSlot {
 
 	@PropertyIdentifier(type = DiagramSpecification.class)
@@ -149,7 +163,7 @@ public interface TypedDiagramModelSlot extends TypeAwareModelSlot<Diagram, Diagr
 	public FMLDiagramPaletteElementBinding addFMLDiagramPaletteElementBinding();
 
 	@Getter(value = DIAGRAM_SPECIFICATION_KEY, ignoreType = true)
-	@FMLAttribute(value = DIAGRAM_SPECIFICATION_KEY, required = false)
+	@FMLAttribute(value = DIAGRAM_SPECIFICATION_KEY, required = true)
 	public DiagramSpecification getDiagramSpecification();
 
 	@Setter(DIAGRAM_SPECIFICATION_KEY)

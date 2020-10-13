@@ -46,6 +46,8 @@ import org.openflexo.foundation.fml.annotations.DeclareFetchRequests;
 import org.openflexo.foundation.fml.annotations.DeclareFlexoBehaviours;
 import org.openflexo.foundation.fml.annotations.DeclareFlexoRoles;
 import org.openflexo.foundation.fml.annotations.FML;
+import org.openflexo.foundation.fml.annotations.SeeAlso;
+import org.openflexo.foundation.fml.annotations.UsageExample;
 import org.openflexo.foundation.technologyadapter.FreeModelSlot;
 import org.openflexo.pamela.annotations.ImplementationClass;
 import org.openflexo.pamela.annotations.ModelEntity;
@@ -79,7 +81,13 @@ import org.openflexo.technologyadapter.diagram.model.Diagram;
 @ModelEntity
 @ImplementationClass(FreeDiagramModelSlot.FreeDiagramModelSlotImpl.class)
 @XMLElement
-@FML("FreeDiagram")
+@FML(
+		value = "FreeDiagram",
+		description = "<html>This ModelSlot represents access to a Diagram without any DiagramSpecification conformance</html>",
+		examples = { @UsageExample(
+				example = "Diagram myDiagram with DIAGRAM::FreeDiagram();",
+				description = "Declares a model slot called 'myDiagram' with resulting type 'Diagram', realized through the 'FreeDiagram' model slot") },
+		references = { @SeeAlso(TypedDiagramModelSlot.class), @SeeAlso(CreateDiagram.class) })
 public interface FreeDiagramModelSlot extends FreeModelSlot<Diagram>, DiagramModelSlot {
 
 	public abstract class FreeDiagramModelSlotImpl extends FreeModelSlotImpl<Diagram> implements FreeDiagramModelSlot {

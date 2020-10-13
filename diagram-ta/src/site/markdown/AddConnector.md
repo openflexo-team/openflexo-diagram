@@ -42,9 +42,7 @@ where
 ## Examples
 
 ```java
-myConnector = AddConnector(
-        fromShape=myFirstShape,
-        toShape=mySecondShape) in (myDiagram);
+myConnector = AddConnector(fromShape=myFirstShape,toShape=mySecondShape) in (myDiagram);
 ```
 
 Creates a new connector in Diagram identified by ‘myDiagram’ expression, binding the shapes respectively identified by 'myFirstShape' and 'mySecondShape', and assign this new connector to ‘myConnector’

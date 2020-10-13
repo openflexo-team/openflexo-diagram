@@ -12,14 +12,22 @@ Both the resource and the resource data are created through this action.
 
 ```java
 [Diagram <value> =]
-CreateDiagram(resourceName=<resourceName_path>,resourceCenter=<resourceCenter_path>,relativePath=<relativePath_path>[,options])
+CreateDiagram(
+        resourceName=<resourceName_path>,
+        resourceCenter=<resourceCenter_path>,
+        relativePath=<relativePath_path>[,
+        options])
 ```
 
 or
 
 ```java
 [Diagram <value> =]
-DIAGRAM::CreateDiagram(resourceName=<resourceName_path>,resourceCenter=<resourceCenter_path>,relativePath=<relativePath_path>[,options])
+DIAGRAM::CreateDiagram(
+        resourceName=<resourceName_path>,
+        resourceCenter=<resourceCenter_path>,
+        relativePath=<relativePath_path>[,
+        options])
 ```
 
 where
@@ -34,17 +42,17 @@ where
 
 | Property        | Type                    | &nbsp;Required&nbsp;  |
 | --------------- |-------------------------| :------:|
+| `resourceURI` &nbsp; | `String` &nbsp; | no |
 | `resourceName` &nbsp; | `String` &nbsp; | yes |
 | `resourceCenter` &nbsp; | `FlexoResourceCenter<?>` &nbsp; | yes |
 | `relativePath` &nbsp; | `String` &nbsp; | yes |
-| `resourceURI` &nbsp; | `String` &nbsp; | no |
 
 ---
 
+- `resourceURI` : URI for the resource to be created
 - `resourceName` : name for the resource to be created
 - `resourceCenter` : ResourceCenter where the resource should be registered
 - `relativePath` : relative path (relative to the resource center) where the resource should be created
-- `resourceURI` : URI for the resource to be created
 
 ## Examples
 
@@ -75,7 +83,7 @@ Creates a new Diagram in resource center referenced as 'myRc', in folder '/Diagr
 
 ## See also
 
- - <img src="./images/TypedDiagramModelSlot.png" alt="TypedDiagramModelSlot"/> [`TypedDiagramModelSlot`](TypedDiagramModelSlot.html) : No documentation yet
- - <img src="./images/FreeDiagramModelSlot.png" alt="FreeDiagramModelSlot"/> [`FreeDiagramModelSlot`](FreeDiagramModelSlot.html) : No documentation yet
+ - <img src="./images/TypedDiagramModelSlot.png" alt="TypedDiagramModelSlot"/> [`TypedDiagram`](TypedDiagramModelSlot.html) : This ModelSlot represents access to a Diagram conform to a DiagramSpecification
+ - <img src="./images/FreeDiagramModelSlot.png" alt="FreeDiagramModelSlot"/> [`FreeDiagram`](FreeDiagramModelSlot.html) : This ModelSlot represents access to a Diagram without any DiagramSpecification conformance
  - <img src="./images/GraphicalAction.png" alt="GraphicalAction"/> [`GraphicalAction`](GraphicalAction.html) : No documentation yet
 

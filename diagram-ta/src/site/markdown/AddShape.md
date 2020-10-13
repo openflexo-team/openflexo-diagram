@@ -30,13 +30,13 @@ where
 
 | Property        | Type                    | &nbsp;Required&nbsp;  |
 | --------------- |-------------------------| :------:|
-| `container` &nbsp; | `DiagramContainerElement<?>` &nbsp; | yes |
 | `extendParentBoundsToHostThisShape` &nbsp; | `boolean` &nbsp; | no |
+| `container` &nbsp; | `DiagramContainerElement<?>` &nbsp; | yes |
 
 ---
 
-- `container` : container for newly created shape
 - `extendParentBoundsToHostThisShape` : flag indicating if parent container should be extended in order to fully contain newly created shape
+- `container` : container for newly created shape
 
 ## Examples
 
