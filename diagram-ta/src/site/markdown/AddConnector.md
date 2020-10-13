@@ -53,7 +53,7 @@ Creates a new connector in Diagram identified by ‘myDiagram’ expression, bin
 
 ## Javadoc
 
-[org.openflexo.technologyadapter.diagram.fml.editionaction.AddConnector](./flexodiagram/apidocs/org/openflexo/technologyadapter/diagram/fml/editionaction/AddConnector.html)
+[org.openflexo.technologyadapter.diagram.fml.editionaction.AddConnector](./apidocs/org/openflexo/technologyadapter/diagram/fml/editionaction/AddConnector.html)
 
 ## See also
 

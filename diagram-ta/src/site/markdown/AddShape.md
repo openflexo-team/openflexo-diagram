@@ -58,7 +58,7 @@ Creates a new shape in Diagram identified by ‘myDiagram’ expression, inside 
 
 ## Javadoc
 
-[org.openflexo.technologyadapter.diagram.fml.editionaction.AddShape](./flexodiagram/apidocs/org/openflexo/technologyadapter/diagram/fml/editionaction/AddShape.html)
+[org.openflexo.technologyadapter.diagram.fml.editionaction.AddShape](./apidocs/org/openflexo/technologyadapter/diagram/fml/editionaction/AddShape.html)
 
 ## See also
 

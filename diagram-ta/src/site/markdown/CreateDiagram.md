@@ -71,7 +71,7 @@ Creates a new Diagram in resource center referenced as 'myRc', in folder '/Diagr
 
 ## Javadoc
 
-[org.openflexo.technologyadapter.diagram.fml.editionaction.CreateDiagram](./flexodiagram/apidocs/org/openflexo/technologyadapter/diagram/fml/editionaction/CreateDiagram.html)
+[org.openflexo.technologyadapter.diagram.fml.editionaction.CreateDiagram](./apidocs/org/openflexo/technologyadapter/diagram/fml/editionaction/CreateDiagram.html)
 
 ## See also
 

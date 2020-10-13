@@ -24,5 +24,5 @@ DIAGRAM::GraphicalAction()
 
 ## Javadoc
 
-[org.openflexo.technologyadapter.diagram.fml.editionaction.GraphicalAction](./flexodiagram/apidocs/org/openflexo/technologyadapter/diagram/fml/editionaction/GraphicalAction.html)
+[org.openflexo.technologyadapter.diagram.fml.editionaction.GraphicalAction](./apidocs/org/openflexo/technologyadapter/diagram/fml/editionaction/GraphicalAction.html)
 
