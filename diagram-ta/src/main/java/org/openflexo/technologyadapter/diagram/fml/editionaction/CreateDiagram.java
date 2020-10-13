@@ -45,6 +45,8 @@ import java.util.logging.Logger;
 import org.openflexo.connie.DataBinding;
 import org.openflexo.foundation.FlexoException;
 import org.openflexo.foundation.fml.annotations.FML;
+import org.openflexo.foundation.fml.annotations.SeeAlso;
+import org.openflexo.foundation.fml.annotations.UsageExample;
 import org.openflexo.foundation.fml.editionaction.AbstractCreateResource;
 import org.openflexo.foundation.fml.rt.RunTimeEvaluationContext;
 import org.openflexo.foundation.resource.ResourceLoadingCancelledException;
@@ -58,6 +60,7 @@ import org.openflexo.pamela.annotations.XMLElement;
 import org.openflexo.pamela.exceptions.ModelDefinitionException;
 import org.openflexo.technologyadapter.diagram.DiagramModelSlot;
 import org.openflexo.technologyadapter.diagram.DiagramTechnologyAdapter;
+import org.openflexo.technologyadapter.diagram.FreeDiagramModelSlot;
 import org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
 import org.openflexo.technologyadapter.diagram.fml.DiagramRole;
 import org.openflexo.technologyadapter.diagram.metamodel.DiagramSpecification;
@@ -70,7 +73,17 @@ import org.openflexo.toolbox.StringUtils;
 @ModelEntity
 @ImplementationClass(CreateDiagram.CreateDiagramImpl.class)
 @XMLElement
-@FML("CreateDiagram")
+@FML(
+		value = "CreateDiagram",
+		description = "<html>This edition primitive addresses the creation of a new diagram.<br>"
+				+ "Both the resource and the resource data are created through this action.</html>",
+		examples = { @UsageExample(
+				example = "myDiagram = AddDiagram(resourceName='myDiagramName',relativePath='/Diagrams',resourceCenter=myRC);",
+				description = "Creates a new Diagram in resource center referenced as 'myRc', in folder '/Diagrams' and with name 'myDiagramName.diagram', and assign this new diagram to ‘myDiagram’"),
+				@UsageExample(
+						example = "myDiagram = DIAGRAM::AddDiagram(resourceName='myDiagramName',resourceURI='anURI',relativePath='/Diagrams',resourceCenter=myRC);",
+						description = "Creates a new Diagram in resource center referenced as 'myRc', in folder '/Diagrams' with URI 'anURI' and with name 'myDiagramName.diagram' and assign this new diagram to ‘myDiagram’") },
+		references = { @SeeAlso(TypedDiagramModelSlot.class), @SeeAlso(FreeDiagramModelSlot.class), @SeeAlso(GraphicalAction.class) })
 public interface CreateDiagram extends AbstractCreateResource<DiagramModelSlot, Diagram, DiagramTechnologyAdapter> {
 
 	@PropertyIdentifier(type = String.class)

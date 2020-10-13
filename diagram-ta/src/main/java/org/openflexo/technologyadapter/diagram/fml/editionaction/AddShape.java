@@ -99,7 +99,8 @@ import org.openflexo.technologyadapter.diagram.model.DiagramShape;
 				@UsageExample(
 						example = "myShape = DIAGRAM::AddShape(container=myContainerShape,extendParentBoundsToHostThisShape=true) in (myDiagram);",
 						description = "Creates a new shape in Diagram identified by ‘myDiagram’ expression, inside shape identified by ‘myContainerShape’ expression, and assign this new shape to ‘myShape’") },
-		references = { @SeeAlso(CreateDiagram.class), @SeeAlso(AddConnector.class), @SeeAlso(GraphicalAction.class) })
+		references = { @SeeAlso(ShapeRole.class), @SeeAlso(CreateDiagram.class), @SeeAlso(AddConnector.class),
+				@SeeAlso(GraphicalAction.class) })
 public interface AddShape extends AddDiagramElementAction<DiagramShape> {
 
 	@PropertyIdentifier(type = DataBinding.class)

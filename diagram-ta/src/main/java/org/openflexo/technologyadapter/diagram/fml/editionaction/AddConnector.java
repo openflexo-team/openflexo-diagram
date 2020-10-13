@@ -55,6 +55,8 @@ import org.openflexo.foundation.fml.FlexoConcept;
 import org.openflexo.foundation.fml.FlexoRole;
 import org.openflexo.foundation.fml.annotations.FML;
 import org.openflexo.foundation.fml.annotations.FMLAttribute;
+import org.openflexo.foundation.fml.annotations.SeeAlso;
+import org.openflexo.foundation.fml.annotations.UsageExample;
 import org.openflexo.foundation.fml.editionaction.AssignationAction;
 import org.openflexo.foundation.fml.rt.RunTimeEvaluationContext;
 import org.openflexo.foundation.fml.rt.action.FlexoBehaviourAction;
@@ -91,7 +93,14 @@ import org.openflexo.technologyadapter.diagram.model.action.LinkSchemeAction;
 @ModelEntity
 @ImplementationClass(AddConnector.AddConnectorImpl.class)
 @XMLElement
-@FML("AddConnector")
+@FML(
+		value = "AddConnector",
+		description = "<html>This edition primitive addresses the creation of a new connector linking two shapes in a diagram</html>",
+		examples = { @UsageExample(
+				example = "myConnector = AddConnector(fromShape=myFirstShape,toShape=mySecondShape) in (myDiagram);",
+				description = "Creates a new connector in Diagram identified by ‘myDiagram’ expression, binding the shapes respectively identified by 'myFirstShape' and 'mySecondShape', and assign this new connector to ‘myConnector’") },
+		references = { @SeeAlso(ConnectorRole.class), @SeeAlso(CreateDiagram.class), @SeeAlso(AddShape.class),
+				@SeeAlso(GraphicalAction.class) })
 public interface AddConnector extends AddDiagramElementAction<DiagramConnector> {
 
 	@PropertyIdentifier(type = DataBinding.class)
