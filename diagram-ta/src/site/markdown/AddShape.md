@@ -63,7 +63,7 @@ Creates a new shape in Diagram identified by ‘myDiagram’ expression, inside 
 ## See also
 
  -  [`ShapeRole`](ShapeRole.html) : No documentation yet
- - <img src="./images/CreateDiagram.png" alt="CreateDiagram"/> [`CreateDiagram`](CreateDiagram.html) : This edition primitive addresses the creation of a new diagram.<br>Both the resource and the resource data are created through this action.
+ - <img src="./images/CreateDiagram.png" alt="CreateDiagram"/> [`CreateDiagram`](CreateDiagram.html) : This edition primitive addresses the creation of a new diagram.
  - <img src="./images/AddConnector.png" alt="AddConnector"/> [`AddConnector`](AddConnector.html) : This edition primitive addresses the creation of a new connector linking two shapes in a diagram
  - <img src="./images/GraphicalAction.png" alt="GraphicalAction"/> [`GraphicalAction`](GraphicalAction.html) : No documentation yet
 
