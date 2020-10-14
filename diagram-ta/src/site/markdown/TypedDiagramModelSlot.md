@@ -35,16 +35,16 @@ where
 
 | Property        | Type                    | &nbsp;Required&nbsp;  |
 | --------------- |-------------------------| :------:|
-| `isRequired` &nbsp; | `boolean` &nbsp; | no |
-| `isReadOnly` &nbsp; | `boolean` &nbsp; | no |
 | `diagramSpecification` &nbsp; | `DiagramSpecification` &nbsp; | yes |
+| `isReadOnly` &nbsp; | `boolean` &nbsp; | no |
+| `isRequired` &nbsp; | `boolean` &nbsp; | no |
 | `paletteElementBindings` &nbsp; | `List<FMLDiagramPaletteElementBinding>` &nbsp; | no |
 
 ---
 
-- `isRequired` : 
-- `isReadOnly` : 
 - `diagramSpecification` : 
+- `isReadOnly` : 
+- `isRequired` : 
 - `paletteElementBindings` : 
 
 ---

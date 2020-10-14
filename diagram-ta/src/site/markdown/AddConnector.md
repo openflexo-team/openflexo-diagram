@@ -10,20 +10,20 @@ This edition primitive addresses the creation of a new connector linking two sha
 
 ```java
 [DiagramConnector <value> =]
-AddConnector(toShape=<toShape_path>,fromShape=<fromShape_path>)
+AddConnector(fromShape=<fromShape_path>,toShape=<toShape_path>)
 ```
 
 or
 
 ```java
 [DiagramConnector <value> =]
-DIAGRAM::AddConnector(toShape=<toShape_path>,fromShape=<fromShape_path>)
+DIAGRAM::AddConnector(fromShape=<fromShape_path>,toShape=<toShape_path>)
 ```
 
 where
 
-- \<toShape_path\> addresses a `DiagramShape`
 - \<fromShape_path\> addresses a `DiagramShape`
+- \<toShape_path\> addresses a `DiagramShape`
 
 ---
 
@@ -31,13 +31,13 @@ where
 
 | Property        | Type                    | &nbsp;Required&nbsp;  |
 | --------------- |-------------------------| :------:|
-| `toShape` &nbsp; | `DiagramShape` &nbsp; | yes |
 | `fromShape` &nbsp; | `DiagramShape` &nbsp; | yes |
+| `toShape` &nbsp; | `DiagramShape` &nbsp; | yes |
 
 ---
 
-- `toShape` : 
 - `fromShape` : 
+- `toShape` : 
 
 ## Examples
 
