@@ -11,14 +11,14 @@ Such diagram refers to a diagram metamodel which is composed of a example diagra
 ## Usage
 
 ```java
-[visibility] [cardinality] Diagram  <identifier>
+[visibility] [cardinality] Diagram <identifier>
 with TypedDiagram(diagramSpecification=<diagramSpecification_path>[,options]);
 ```
 
 or
 
 ```java
-[visibility] [cardinality] Diagram  <identifier>
+[visibility] [cardinality] Diagram <identifier>
 with DIAGRAM::TypedDiagram(diagramSpecification=<diagramSpecification_path>[,options]);
 ```
 

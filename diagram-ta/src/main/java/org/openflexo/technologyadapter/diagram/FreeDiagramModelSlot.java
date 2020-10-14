@@ -126,7 +126,7 @@ public interface FreeDiagramModelSlot extends FreeModelSlot<Diagram>, DiagramMod
 
 		@Override
 		public Type getType() {
-			return null;
+			return Diagram.class;
 		}
 
 		/**

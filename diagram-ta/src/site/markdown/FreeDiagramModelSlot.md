@@ -9,15 +9,13 @@ This ModelSlot represents access to a Diagram without any DiagramSpecification c
 ## Usage
 
 ```java
-[visibility] [cardinality] null  <identifier>
-with FreeDiagram([options]);
+[visibility] [cardinality] Diagram <identifier> with FreeDiagram([options]);
 ```
 
 or
 
 ```java
-[visibility] [cardinality] null  <identifier>
-with DIAGRAM::FreeDiagram([options]);
+[visibility] [cardinality] Diagram <identifier> with DIAGRAM::FreeDiagram([options]);
 ```
 
 where
