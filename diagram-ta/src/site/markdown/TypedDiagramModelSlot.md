@@ -11,19 +11,21 @@ Such diagram refers to a diagram metamodel which is composed of a example diagra
 ## Usage
 
 ```java
-[visibility] [cardinality] Diagram  <identifier> with TypedDiagram(diagramSpecification=<diagramSpecification_path>[,options]);
+[visibility] [cardinality] Diagram  <identifier>
+with TypedDiagram(diagramSpecification=<diagramSpecification_path>[,options]);
 ```
 
 or
 
 ```java
-[visibility] [cardinality] Diagram  <identifier> with DIAGRAM::TypedDiagram(diagramSpecification=<diagramSpecification_path>[,options]);
+[visibility] [cardinality] Diagram  <identifier>
+with DIAGRAM::TypedDiagram(diagramSpecification=<diagramSpecification_path>[,options]);
 ```
 
 where
 
 - `visibility` is default (unspecified), 'public', 'protected' or 'private'
-- `cardinality` is [0,1] (unspecified), [0,\*] or [1,\*]
+- `cardinality` is \[0,1\] (unspecified), \[0,\*\] or \[1,\*\]
 - \<identifier\> is the name of declared model slot variable
 - \<diagramSpecification_path\> addresses a `DiagramSpecification`
 
@@ -33,17 +35,17 @@ where
 
 | Property        | Type                    | &nbsp;Required&nbsp;  |
 | --------------- |-------------------------| :------:|
-| `paletteElementBindings` &nbsp; | `List<FMLDiagramPaletteElementBinding>` &nbsp; | no |
 | `isRequired` &nbsp; | `boolean` &nbsp; | no |
 | `isReadOnly` &nbsp; | `boolean` &nbsp; | no |
 | `diagramSpecification` &nbsp; | `DiagramSpecification` &nbsp; | yes |
+| `paletteElementBindings` &nbsp; | `List<FMLDiagramPaletteElementBinding>` &nbsp; | no |
 
 ---
 
-- `paletteElementBindings` : 
 - `isRequired` : 
 - `isReadOnly` : 
 - `diagramSpecification` : 
+- `paletteElementBindings` : 
 
 ---
 
@@ -66,15 +68,15 @@ Declares a model slot called 'myDiagram' with resulting type 'Diagram', realized
 
 ## Roles
 
- -  [`ShapeRole`](ShapeRole.html) : No documentation yet
- -  [`ConnectorRole`](ConnectorRole.html) : No documentation yet
- -  [`DiagramRole`](DiagramRole.html) : No documentation yet
+ - <img src="./images/ShapeRole.png" alt="ShapeRole"/> [`ShapeRole`](ShapeRole.html) : No documentation yet
+ - <img src="./images/ConnectorRole.png" alt="ConnectorRole"/> [`ConnectorRole`](ConnectorRole.html) : No documentation yet
+ - <img src="./images/DiagramRole.png" alt="DiagramRole"/> [`DiagramRole`](DiagramRole.html) : No documentation yet
 
 ---
 
 ## Behaviours
 
- -  [`drop`](DropScheme.html) : No documentation yet
+ - <img src="./images/DropScheme.png" alt="DropScheme"/> [`drop`](DropScheme.html) : No documentation yet
  - <img src="./images/DrawRectangleScheme.png" alt="DrawRectangleScheme"/> [`DrawRectangleScheme`](DrawRectangleScheme.html) : No documentation yet
  - <img src="./images/LinkScheme.png" alt="LinkScheme"/> [`link`](LinkScheme.html) : No documentation yet
  - <img src="./images/DiagramNavigationScheme.png" alt="DiagramNavigationScheme"/> [`DiagramNavigationScheme`](DiagramNavigationScheme.html) : No documentation yet

@@ -30,13 +30,13 @@ where
 
 | Property        | Type                    | &nbsp;Required&nbsp;  |
 | --------------- |-------------------------| :------:|
-| `extendParentBoundsToHostThisShape` &nbsp; | `boolean` &nbsp; | no |
 | `container` &nbsp; | `DiagramContainerElement<?>` &nbsp; | yes |
+| `extendParentBoundsToHostThisShape` &nbsp; | `boolean` &nbsp; | no |
 
 ---
 
-- `extendParentBoundsToHostThisShape` : flag indicating if parent container should be extended in order to fully contain newly created shape
 - `container` : container for newly created shape
+- `extendParentBoundsToHostThisShape` : flag indicating if parent container should be extended in order to fully contain newly created shape
 
 ## Examples
 
@@ -64,7 +64,7 @@ Creates a new shape in Diagram identified by ‘myDiagram’ expression, inside 
 
 ## See also
 
- -  [`ShapeRole`](ShapeRole.html) : No documentation yet
+ - <img src="./images/ShapeRole.png" alt="ShapeRole"/> [`ShapeRole`](ShapeRole.html) : No documentation yet
  - <img src="./images/CreateDiagram.png" alt="CreateDiagram"/> [`CreateDiagram`](CreateDiagram.html) : This edition primitive addresses the creation of a new diagram.
  - <img src="./images/AddConnector.png" alt="AddConnector"/> [`AddConnector`](AddConnector.html) : This edition primitive addresses the creation of a new connector linking two shapes in a diagram
  - <img src="./images/GraphicalAction.png" alt="GraphicalAction"/> [`GraphicalAction`](GraphicalAction.html) : No documentation yet

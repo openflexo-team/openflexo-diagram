@@ -9,19 +9,21 @@ This ModelSlot represents access to a Diagram without any DiagramSpecification c
 ## Usage
 
 ```java
-[visibility] [cardinality] null  <identifier> with FreeDiagram([options]);
+[visibility] [cardinality] null  <identifier>
+with FreeDiagram([options]);
 ```
 
 or
 
 ```java
-[visibility] [cardinality] null  <identifier> with DIAGRAM::FreeDiagram([options]);
+[visibility] [cardinality] null  <identifier>
+with DIAGRAM::FreeDiagram([options]);
 ```
 
 where
 
 - `visibility` is default (unspecified), 'public', 'protected' or 'private'
-- `cardinality` is [0,1] (unspecified), [0,\*] or [1,\*]
+- `cardinality` is \[0,1\] (unspecified), \[0,\*\] or \[1,\*\]
 - \<identifier\> is the name of declared model slot variable
 
 ---
@@ -53,16 +55,16 @@ Declares a model slot called 'myDiagram' with resulting type 'Diagram', realized
 
 ## Roles
 
- -  [`ShapeRole`](ShapeRole.html) : No documentation yet
- -  [`ConnectorRole`](ConnectorRole.html) : No documentation yet
- -  [`DiagramRole`](DiagramRole.html) : No documentation yet
+ - <img src="./images/ShapeRole.png" alt="ShapeRole"/> [`ShapeRole`](ShapeRole.html) : No documentation yet
+ - <img src="./images/ConnectorRole.png" alt="ConnectorRole"/> [`ConnectorRole`](ConnectorRole.html) : No documentation yet
+ - <img src="./images/DiagramRole.png" alt="DiagramRole"/> [`DiagramRole`](DiagramRole.html) : No documentation yet
 
 ---
 
 ## Behaviours
 
- -  [`drop`](DropScheme.html) : No documentation yet
- -  [`DrawRectangleScheme`](DrawRectangleScheme.html) : No documentation yet
+ - <img src="./images/DropScheme.png" alt="DropScheme"/> [`drop`](DropScheme.html) : No documentation yet
+ - <img src="./images/DrawRectangleScheme.png" alt="DrawRectangleScheme"/> [`DrawRectangleScheme`](DrawRectangleScheme.html) : No documentation yet
  - <img src="./images/LinkScheme.png" alt="LinkScheme"/> [`link`](LinkScheme.html) : No documentation yet
  - <img src="./images/DiagramNavigationScheme.png" alt="DiagramNavigationScheme"/> [`DiagramNavigationScheme`](DiagramNavigationScheme.html) : No documentation yet
 

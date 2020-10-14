@@ -13,9 +13,9 @@ Both the resource and the resource data are created through this action.
 ```java
 [Diagram <value> =]
 CreateDiagram(
-        resourceName=<resourceName_path>,
         resourceCenter=<resourceCenter_path>,
-        relativePath=<relativePath_path>[,
+        relativePath=<relativePath_path>,
+        resourceName=<resourceName_path>[,
         options])
 ```
 
@@ -24,17 +24,17 @@ or
 ```java
 [Diagram <value> =]
 DIAGRAM::CreateDiagram(
-        resourceName=<resourceName_path>,
         resourceCenter=<resourceCenter_path>,
-        relativePath=<relativePath_path>[,
+        relativePath=<relativePath_path>,
+        resourceName=<resourceName_path>[,
         options])
 ```
 
 where
 
-- \<resourceName_path\> addresses a `String`
 - \<resourceCenter_path\> addresses a `FlexoResourceCenter<?>`
 - \<relativePath_path\> addresses a `String`
+- \<resourceName_path\> addresses a `String`
 
 ---
 
@@ -42,17 +42,17 @@ where
 
 | Property        | Type                    | &nbsp;Required&nbsp;  |
 | --------------- |-------------------------| :------:|
-| `resourceURI` &nbsp; | `String` &nbsp; | no |
-| `resourceName` &nbsp; | `String` &nbsp; | yes |
 | `resourceCenter` &nbsp; | `FlexoResourceCenter<?>` &nbsp; | yes |
 | `relativePath` &nbsp; | `String` &nbsp; | yes |
+| `resourceURI` &nbsp; | `String` &nbsp; | no |
+| `resourceName` &nbsp; | `String` &nbsp; | yes |
 
 ---
 
-- `resourceURI` : URI for the resource to be created
-- `resourceName` : name for the resource to be created
 - `resourceCenter` : ResourceCenter where the resource should be registered
 - `relativePath` : relative path (relative to the resource center) where the resource should be created
+- `resourceURI` : URI for the resource to be created
+- `resourceName` : name for the resource to be created
 
 ## Examples
 
