@@ -4,6 +4,7 @@
 
 This edition primitive addresses the creation of a new connector linking two shapes in a diagram
 
+
 ---
 
 ## Usage

@@ -4,6 +4,7 @@
 
 This ModelSlot represents access to a Diagram without any DiagramSpecification conformance
 
+
 ---
 
 ## Usage

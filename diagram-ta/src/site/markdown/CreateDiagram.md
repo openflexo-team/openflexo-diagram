@@ -6,6 +6,7 @@ This edition primitive addresses the creation of a new diagram.
 
 Both the resource and the resource data are created through this action.
 
+
 ---
 
 ## Usage
