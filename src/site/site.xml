@@ -44,11 +44,11 @@
 
 <!-- BEGIN GENERATED -->
 <menu name="FML / Usage">
-    <item name="TypedDiagramModelSlot" href="flexodiagram/TypedDiagramModelSlot.html"/>
-    <item name="FreeDiagramModelSlot" href="flexodiagram/FreeDiagramModelSlot.html"/>
+    <item name="TypedDiagram" href="flexodiagram/TypedDiagramModelSlot.html"/>
+    <item name="FreeDiagram" href="flexodiagram/FreeDiagramModelSlot.html"/>
 </menu>
 
-<menu name="TypedDiagramModelSlot">
+<menu name="TypedDiagram">
     <item name="Roles" href="flexodiagram/TypedDiagramModelSlot_roles.html">
         <item name="ShapeRole" href="flexodiagram/ShapeRole.html"/>
         <item name="ConnectorRole" href="flexodiagram/ConnectorRole.html"/>
@@ -68,7 +68,7 @@
     </item>
 </menu>
 
-<menu name="FreeDiagramModelSlot">
+<menu name="FreeDiagram">
     <item name="Roles" href="flexodiagram/FreeDiagramModelSlot_roles.html">
         <item name="ShapeRole" href="flexodiagram/ShapeRole.html"/>
         <item name="ConnectorRole" href="flexodiagram/ConnectorRole.html"/>
