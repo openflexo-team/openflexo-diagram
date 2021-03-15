@@ -72,6 +72,8 @@ public interface DiagramPreferences extends TechnologyAdapterPreferences<Diagram
 
 	public static final String HANDLE_LONG_FOCUSING = "handleLongFocusing";
 	public static final String LONG_FOCUSING_DELAY = "longFocusingDelay";
+	public static final String HANDLE_TRAILING_FOCUSING = "handleTrailingFocusing";
+	public static final String TRAILING_FOCUSING_DELAY = "trailingFocusingDelay";
 
 	@Getter(value = HANDLE_LONG_FOCUSING, defaultValue = "true")
 	@XMLAttribute
@@ -80,12 +82,26 @@ public interface DiagramPreferences extends TechnologyAdapterPreferences<Diagram
 	@Setter(HANDLE_LONG_FOCUSING)
 	public void setHandleLongFocusing(boolean handleLongFocusing);
 
-	@Getter(value = LONG_FOCUSING_DELAY, defaultValue = "1500")
+	@Getter(value = LONG_FOCUSING_DELAY, defaultValue = "1000")
 	@XMLAttribute
 	public int getLongFocusingDelay();
 
 	@Setter(LONG_FOCUSING_DELAY)
 	public void setLongFocusingDelay(int delay);
+
+	@Getter(value = HANDLE_TRAILING_FOCUSING, defaultValue = "true")
+	@XMLAttribute
+	public boolean getHandleTrailingFocusing();
+
+	@Setter(HANDLE_TRAILING_FOCUSING)
+	public void setHandleTrailingFocusing(boolean handleLongFocusing);
+
+	@Getter(value = TRAILING_FOCUSING_DELAY, defaultValue = "1500")
+	@XMLAttribute
+	public int getTrailingFocusingDelay();
+
+	@Setter(TRAILING_FOCUSING_DELAY)
+	public void setTrailingFocusingDelay(int delay);
 
 	public abstract class DiagramPreferencesImpl extends PreferencesContainerImpl implements DiagramPreferences {
 
@@ -116,6 +132,38 @@ public interface DiagramPreferences extends TechnologyAdapterPreferences<Diagram
 				int oldValue = getLongFocusingDelay();
 				DianaPrefs.LONG_FOCUSING_DELAY = longFocusingDelay;
 				getPropertyChangeSupport().firePropertyChange(LONG_FOCUSING_DELAY, oldValue, longFocusingDelay);
+			}
+		}
+
+		@Override
+		public boolean getHandleTrailingFocusing() {
+			return DianaPrefs.HANDLE_TRAILING_FOCUSING;
+		}
+
+		@Override
+		public void setHandleTrailingFocusing(boolean handleTrailingFocusing) {
+
+			System.out.println("setHandleTrailingFocusing : " + handleTrailingFocusing);
+			Thread.dumpStack();
+
+			if (handleTrailingFocusing != getHandleTrailingFocusing()) {
+				DianaPrefs.HANDLE_TRAILING_FOCUSING = handleTrailingFocusing;
+				getPropertyChangeSupport().firePropertyChange(HANDLE_TRAILING_FOCUSING, !handleTrailingFocusing, handleTrailingFocusing);
+				System.out.println("Hop maintenant getHandleTrailingFocusing()=" + getHandleTrailingFocusing());
+			}
+		}
+
+		@Override
+		public int getTrailingFocusingDelay() {
+			return DianaPrefs.TRAILING_FOCUSING_DELAY;
+		}
+
+		@Override
+		public void setTrailingFocusingDelay(int trailingFocusingDelay) {
+			if (trailingFocusingDelay != getTrailingFocusingDelay()) {
+				int oldValue = getTrailingFocusingDelay();
+				DianaPrefs.TRAILING_FOCUSING_DELAY = trailingFocusingDelay;
+				getPropertyChangeSupport().firePropertyChange(TRAILING_FOCUSING_DELAY, oldValue, trailingFocusingDelay);
 			}
 		}
 	}

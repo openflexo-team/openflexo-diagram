@@ -1,22 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Panel id="0" align="left" borderTop="5" borderLeft="0" trackViewPortHeight="true" trackViewPortWidth="true" borderBottom="0" border="empty" sizeAdjustment="OriginalSize" titleFont="Lucida Grande,0,13" layout="twocols" borderRight="0" height="99" width="99" controllerClassName="org.openflexo.components.PreferencesDialog$PreferencesFIBController" name="GeneralPreferencesPanel">
-  <Label id="1" label="long_focusing" align="left" localize="true" constraints="twocols(expandHorizontally=true;expandVertically=false;insetsBottom=0;insetsLeft=20;insetsRight=10;insetsTop=10;location=left)" name="Label" />
-  <Panel id="2" align="left" borderTop="0" borderLeft="0" trackViewPortHeight="true" trackViewPortWidth="true" borderBottom="0" border="rounded3d" sizeAdjustment="OriginalSize" layout="twocols" borderRight="0" constraints="twocols(expandHorizontally=true;expandVertically=false;insetsBottom=0;insetsLeft=0;insetsRight=30;insetsTop=10;location=right)" name="FIBPanel">
-    <Label id="3" label="enable_long_focusing" align="left" localize="true" constraints="twocols(expandHorizontally=true;expandVertically=false;insetsBottom=0;insetsLeft=0;insetsRight=0;insetsTop=0;location=left)" name="Label2" />
-    <CheckBox id="4" selected="true" data="data.handleLongFocusing" constraints="twocols(expandHorizontally=true;expandVertically=false;insetsBottom=0;insetsLeft=0;insetsRight=0;insetsTop=0;location=right)" name="checkbox" />
-    <Label id="5" label="long_focusing_delay_(ms)" align="left" localize="true" enable="data.handleLongFocusing" constraints="twocols(expandHorizontally=true;expandVertically=false;insetsBottom=0;insetsLeft=0;insetsRight=0;insetsTop=0;location=left)" name="Label3" />
-    <Number id="6" minValue="1" numberType="IntegerType" maxValue="65535" columns="5" increment="50" enable="data.handleLongFocusing" data="data.longFocusingDelay" constraints="twocols(expandHorizontally=false;expandVertically=false;insetsBottom=0;insetsLeft=0;insetsRight=0;insetsTop=0;location=right)" name="Integer" />
-  </Panel>
-  <LocalizedDictionary id="7">
-    <Localized id="8" lang="English" value="Enable long focusing" key="enable_long_focusing" />
-    <Localized id="9" lang="Dutch" value="Enable long focusing" key="enable_long_focusing" />
-    <Localized id="10" lang="French" value="Activer le contrôle maintenu" key="enable_long_focusing" />
-    <Localized id="11" lang="English" value="Long focusing delay (ms)" key="long_focusing_delay_(ms)" />
-    <Localized id="12" lang="Dutch" value="Long focusing delay (ms)" key="long_focusing_delay_(ms)" />
-    <Localized id="13" lang="French" value="Délai d'activation (ms)" key="long_focusing_delay_(ms)" />
-    <Localized id="14" lang="English" value="Long focusing" key="long_focusing" />
-    <Localized id="15" lang="Dutch" value="Long focusing" key="long_focusing" />
-    <Localized id="16" lang="French" value="Contrôles maintenus" key="long_focusing" />
-  </LocalizedDictionary>
-  <FIBVariable id="17" type="org.openflexo.technologyadapter.diagram.controller.DiagramPreferences" name="data" />
+<Panel id="0" align="left" borderTop="5" borderLeft="0"
+	trackViewPortHeight="true" trackViewPortWidth="true" borderBottom="0"
+	border="empty" sizeAdjustment="OriginalSize"
+	titleFont="Lucida Grande,0,13" layout="twocols" borderRight="0"
+	height="99" width="99"
+	controllerClassName="org.openflexo.components.PreferencesDialog$PreferencesFIBController"
+	name="GeneralPreferencesPanel">
+	<Label id="1" label="long_focusing" align="left" localize="true"
+		constraints="twocols(expandHorizontally=true;expandVertically=false;insetsBottom=0;insetsLeft=20;insetsRight=10;insetsTop=10;location=left)"
+		name="Label" />
+	<Panel id="2" align="left" borderTop="0" borderLeft="0"
+		trackViewPortHeight="true" trackViewPortWidth="true" borderBottom="0"
+		border="rounded3d" sizeAdjustment="OriginalSize" layout="twocols"
+		borderRight="0"
+		constraints="twocols(expandHorizontally=true;expandVertically=false;insetsBottom=0;insetsLeft=0;insetsRight=30;insetsTop=10;location=right)"
+		name="FIBPanel">
+		<Label id="3" label="enable_long_focusing" align="left"
+			localize="true"
+			constraints="twocols(expandHorizontally=true;expandVertically=false;insetsBottom=0;insetsLeft=0;insetsRight=0;insetsTop=0;location=left)"
+			name="Label2" />
+		<CheckBox id="4" selected="true"
+			data="data.handleLongFocusing"
+			constraints="twocols(expandHorizontally=true;expandVertically=false;insetsBottom=0;insetsLeft=0;insetsRight=0;insetsTop=0;location=right)"
+			name="checkbox" />
+		<Label id="5" label="long_focusing_delay_(ms)" align="left"
+			localize="true" enable="data.handleLongFocusing"
+			constraints="twocols(expandHorizontally=true;expandVertically=false;insetsBottom=0;insetsLeft=0;insetsRight=0;insetsTop=0;location=left)"
+			name="Label3" />
+		<Number id="6" minValue="1" numberType="IntegerType"
+			maxValue="65535" columns="5" increment="50"
+			enable="data.handleLongFocusing" data="data.longFocusingDelay"
+			constraints="twocols(expandHorizontally=false;expandVertically=false;insetsBottom=0;insetsLeft=0;insetsRight=0;insetsTop=0;location=right)"
+			name="Integer" />
+		<Label id="33" label="enable_trailing_focusing" align="left"
+			localize="true"
+			constraints="twocols(expandHorizontally=true;expandVertically=false;insetsBottom=0;insetsLeft=0;insetsRight=0;insetsTop=0;location=left)"
+			name="Label2" />
+		<CheckBox id="34" selected="true"
+			data="data.handleTrailingFocusing"
+			constraints="twocols(expandHorizontally=true;expandVertically=false;insetsBottom=0;insetsLeft=0;insetsRight=0;insetsTop=0;location=right)"
+			name="checkbox" />
+		<Label id="35" label="trailing_focusing_delay_(ms)" align="left"
+			localize="true" enable="data.handleTrailingFocusing"
+			constraints="twocols(expandHorizontally=true;expandVertically=false;insetsBottom=0;insetsLeft=0;insetsRight=0;insetsTop=0;location=left)"
+			name="Label3" />
+		<Number id="36" minValue="1" numberType="IntegerType"
+			maxValue="65535" columns="5" increment="50"
+			enable="data.handleTrailingFocusing" data="data.trailingFocusingDelay"
+			constraints="twocols(expandHorizontally=false;expandVertically=false;insetsBottom=0;insetsLeft=0;insetsRight=0;insetsTop=0;location=right)"
+			name="Integer" />
+	</Panel>
+	<LocalizedDictionary id="7">
+		<Localized id="8" lang="English"
+			value="Enable long focusing" key="enable_long_focusing" />
+		<Localized id="9" lang="Dutch" value="Enable long focusing"
+			key="enable_long_focusing" />
+		<Localized id="10" lang="French"
+			value="Activer le contrôle maintenu" key="enable_long_focusing" />
+		<Localized id="11" lang="English"
+			value="Long focusing delay (ms)" key="long_focusing_delay_(ms)" />
+		<Localized id="12" lang="Dutch"
+			value="Long focusing delay (ms)" key="long_focusing_delay_(ms)" />
+		<Localized id="13" lang="French"
+			value="Délai d'activation (ms)" key="long_focusing_delay_(ms)" />
+		<Localized id="14" lang="English" value="Long focusing"
+			key="long_focusing" />
+		<Localized id="15" lang="Dutch" value="Long focusing"
+			key="long_focusing" />
+		<Localized id="16" lang="French" value="Contrôles maintenus"
+			key="long_focusing" />
+	</LocalizedDictionary>
+	<FIBVariable id="17"
+		type="org.openflexo.technologyadapter.diagram.controller.DiagramPreferences"
+		name="data" />
 </Panel>
