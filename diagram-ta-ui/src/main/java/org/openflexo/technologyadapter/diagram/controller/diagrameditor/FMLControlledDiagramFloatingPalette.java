@@ -410,22 +410,9 @@ public class FMLControlledDiagramFloatingPalette extends ControlArea<DianaRoundR
 			JPopupMenu popup = new JPopupMenu();
 			for (final DropAndLinkScheme dropAndLinkScheme : allDropAndLinkSchemes) {
 				LocalizedDelegate localizedDictionary = dropAndLinkScheme.linkScheme.getDeclaringVirtualModel().getLocalizedDictionary();
-				String linkLabel = dropAndLinkScheme.linkScheme.getLabel() != null ? dropAndLinkScheme.linkScheme.getLabel()
-						: dropAndLinkScheme.linkScheme.getName();
-				String localizedLinkLabel = localizedDictionary.localizedForKeyAndLanguage(linkLabel,
+				String localizedLabel = localizedDictionary.localizedForKeyAndLanguage(dropAndLinkScheme.getPresentationName(),
 						FlexoLocalization.getCurrentLanguage());
-				if (localizedLinkLabel == null) {
-					localizedLinkLabel = linkLabel;
-				}
-				String dropLabel = dropAndLinkScheme.dropScheme.getFlexoConcept().getName();
-				String localizedDropLabel = localizedDictionary.localizedForKeyAndLanguage(dropLabel,
-						FlexoLocalization.getCurrentLanguage());
-				if (localizedDropLabel == null) {
-					localizedDropLabel = dropLabel;
-				}
-				String withNew = FlexoLocalization.getMainLocalizer().localizedForKey("with_new");
-				JMenuItem menuItem = new JMenuItem(localizedLinkLabel + " " + withNew + " " + localizedDropLabel);
-				// final DiagramContainerElement<?> finalContainer = container;
+				JMenuItem menuItem = new JMenuItem(localizedLabel);
 				final FlexoConceptInstance finalParentFlexoConceptInstance = parentFlexoConceptInstance;
 				final ShapeRole finalParentShapeRole = parentShapeRole;
 

@@ -42,6 +42,7 @@ import java.beans.PropertyChangeEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.openflexo.diana.Drawing.ShapeNode;
 import org.openflexo.diana.ShapeGraphicalRepresentation;
 import org.openflexo.foundation.fml.FlexoConcept;
@@ -111,15 +112,29 @@ public interface FMLControlledDiagramShape extends FMLControlledDiagramElement<D
 	 *
 	 */
 	public static class DropAndLinkScheme {
-		public DropAndLinkScheme(DropScheme dropScheme, LinkScheme linkScheme) {
-			super();
-			this.dropScheme = dropScheme;
-			this.linkScheme = linkScheme;
-		}
 
 		public DropScheme dropScheme;
 		public LinkScheme linkScheme;
+		private boolean multipleLinksAvailableForThatDropScheme;
 
+		public DropAndLinkScheme(DropScheme dropScheme, LinkScheme linkScheme, boolean multipleLinksAvailableForThatDropScheme) {
+			super();
+			this.dropScheme = dropScheme;
+			this.linkScheme = linkScheme;
+			this.multipleLinksAvailableForThatDropScheme = multipleLinksAvailableForThatDropScheme;
+		}
+
+		public String getPresentationName() {
+			String conceptLabel = dropScheme.getFlexoConcept().getPresentationName();
+			if (multipleLinksAvailableForThatDropScheme) {
+								String linkLabel = StringUtils.isNotEmpty(linkScheme.getLabel()) ? linkScheme.getLabel()
+						: linkScheme.getName();
+				return linkLabel + "_with_new_" + conceptLabel;
+			}
+			else {
+				return conceptLabel;
+			}
+		}
 	}
 
 	public abstract class FMLControlledDiagramShapeImpl extends FMLControlledDiagramElementImpl<DiagramShape, ShapeGraphicalRepresentation>
@@ -152,12 +167,18 @@ public interface FMLControlledDiagramShape extends FMLControlledDiagramElement<D
 				for (DropScheme ds : c.getFlexoBehaviours(DropScheme.class)) {
 					if (ds.getTargetFlexoConcept() == targetFlexoConcept || (ds.getTopTarget() && targetFlexoConcept == null)) {
 						for (FlexoConcept c2 : virtualModel.getFlexoConcepts()) {
+							List<LinkScheme> acceptableLinkSchemes = new ArrayList<>();
 							for (LinkScheme ls : c2.getFlexoBehaviours(LinkScheme.class)) {
 								if (ls.isValidTarget(getFlexoConceptInstance().getFlexoConcept(), ds.getFlexoConcept())
 										&& ls.getIsAvailableWithFloatingPalette()) {
 									// This candidate is acceptable
-									availableDropAndLinkSchemeFromThisShape.add(new DropAndLinkScheme(ds, ls));
+									// availableDropAndLinkSchemeFromThisShape.add(new DropAndLinkScheme(ds, ls));
+									acceptableLinkSchemes.add(ls);
 								}
+							}
+							for (LinkScheme ls : acceptableLinkSchemes) {
+								availableDropAndLinkSchemeFromThisShape
+										.add(new DropAndLinkScheme(ds, ls, acceptableLinkSchemes.size() > 1));
 							}
 						}
 					}
