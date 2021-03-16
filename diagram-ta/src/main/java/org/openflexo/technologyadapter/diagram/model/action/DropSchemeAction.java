@@ -207,80 +207,26 @@ public class DropSchemeAction extends DiagramFlexoBehaviourAction<DropSchemeActi
 		return primaryShape;
 	}
 
-	/*@Override
-	public FMLRTVirtualModelInstance getFlexoConceptInstance() {
-		return (FMLRTVirtualModelInstance) getVirtualModelInstance();
-	}
-	
-	@Override
-	public FlexoConceptInstance getNewFlexoConceptInstance() {
-		return flexoConceptInstance;
-	}
-	
-	@Override
-	public FMLRTVirtualModelInstance retrieveVirtualModelInstance() {
-		return getFocusedObject();
-	}*/
-
 	@Override
 	public <T> void hasPerformedAction(EditionAction anAction, T object) {
 		super.hasPerformedAction(anAction, object);
 		if (anAction instanceof AddShape) {
-			// AddShape action = (AddShape) anAction;
+			AddShape action = (AddShape) anAction;
 			DiagramShape newShape = (DiagramShape) object;
 			if (newShape != null) {
 				ShapeGraphicalRepresentation gr = newShape.getGraphicalRepresentation();
-				// if (action.getPatternRole().getIsPrimaryRepresentationRole()) {
-				// Declare shape as new shape only if it is the primary representation property of the EP
 
-				primaryShape = newShape;
-				gr.setX(dropLocation.getX());
-				gr.setY(dropLocation.getY());
+				// System.out.println(">>>>>> hop, new shape avec " + gr);
+				// System.out.println("container=" + action.getContainer());
+				// System.out.println(
+				// "getParentShapeAsDefinedInAction()=" + action.getAssignedFlexoProperty().getParentShapeAsDefinedInAction());
 
-				// Temporary comment this portion of code if child shapes are declared inside this shape
-				/*if (!action.getAssignedFlexoProperty().containsShapes()
-						&& action.getContainer().toString().equals(DiagramBehaviourBindingModel.TOP_LEVEL)) {
-					ShapeBorder border = gr.getBorder();
-					ShapeBorder newBorder = gr.getFactory().makeShapeBorder(border);
-					boolean requireNewBorder = false;
-					double deltaX = 0;
-					double deltaY = 0;
-					if (border.getTop() < 25) {
-						requireNewBorder = true;
-						deltaY = border.getTop() - 25;
-						newBorder.setTop(25);
-					}
-					if (border.getLeft() < 25) {
-						requireNewBorder = true;
-						deltaX = border.getLeft() - 25;
-						newBorder.setLeft(25);
-					}
-					if (border.getRight() < 25) {
-						requireNewBorder = true;
-						newBorder.setRight(25);
-					}
-					if (border.getBottom() < 25) {
-						requireNewBorder = true;
-						newBorder.setBottom(25);
-					}
-					if (requireNewBorder) {
-						gr.setBorder(newBorder);
-						gr.setX(gr.getX() + deltaX);
-						gr.setY(gr.getY() + deltaY);
-						if (gr.getIsFloatingLabel()) {
-							gr.setAbsoluteTextX(gr.getAbsoluteTextX() - deltaX);
-							gr.setAbsoluteTextY(gr.getAbsoluteTextY() - deltaY);
-						}
-					}
-				}*/
-				/*} else if (action.getPatternRole().getParentShapeAsDefinedInAction()) {
-					Object graphicalRepresentation = action.getFlexoConcept().getPrimaryRepresentationRole().getGraphicalRepresentation();
-					if (graphicalRepresentation instanceof ShapeGraphicalRepresentation) {
-						ShapeGraphicalRepresentation primaryGR = (ShapeGraphicalRepresentation) graphicalRepresentation;
-						gr.setX(dropLocation.x + gr.getX() - primaryGR.getX());
-						gr.setY(dropLocation.y + gr.getY() - primaryGR.getY());
-					}
-				}*/
+				if (action.getAssignedFlexoProperty().getParentShapeAsDefinedInAction()) {
+					primaryShape = newShape;
+					gr.setX(dropLocation.getX());
+					gr.setY(dropLocation.getY());
+				}
+
 			}
 			else {
 				logger.warning("Inconsistant data: shape has not been created");
@@ -292,64 +238,6 @@ public class DropSchemeAction extends DiagramFlexoBehaviourAction<DropSchemeActi
 
 		}
 	}
-
-	/*@Override
-	protected Object performAction(EditionAction anAction, Hashtable<EditionAction, Object> performedActions) throws FlexoException {
-		Object assignedObject = super.performAction(anAction, performedActions);
-		if (anAction instanceof AddShape) {
-			AddShape action = (AddShape) anAction;
-			DiagramShape newShape = (DiagramShape) assignedObject;
-			if (newShape != null) {
-				ShapeGraphicalRepresentation gr = newShape.getGraphicalRepresentation();
-				// if (action.getPatternRole().getIsPrimaryRepresentationRole()) {
-				// Declare shape as new shape only if it is the primary representation property of the EP
-	
-				primaryShape = newShape;
-				gr.setX(dropLocation.getX());
-				gr.setY(dropLocation.getY());
-	
-				// Temporary comment this portion of code if child shapes are declared inside this shape
-				if (!action.getFlexoRole().containsShapes()
-						&& action.getContainer().toString().equals(DiagramBehaviourBindingModel.TOP_LEVEL)) {
-					ShapeBorder border = gr.getBorder();
-					ShapeBorder newBorder = gr.getFactory().makeShapeBorder(border);
-					boolean requireNewBorder = false;
-					double deltaX = 0;
-					double deltaY = 0;
-					if (border.getTop() < 25) {
-						requireNewBorder = true;
-						deltaY = border.getTop() - 25;
-						newBorder.setTop(25);
-					}
-					if (border.getLeft() < 25) {
-						requireNewBorder = true;
-						deltaX = border.getLeft() - 25;
-						newBorder.setLeft(25);
-					}
-					if (border.getRight() < 25) {
-						requireNewBorder = true;
-						newBorder.setRight(25);
-					}
-					if (border.getBottom() < 25) {
-						requireNewBorder = true;
-						newBorder.setBottom(25);
-					}
-					if (requireNewBorder) {
-						gr.setBorder(newBorder);
-						gr.setX(gr.getX() + deltaX);
-						gr.setY(gr.getY() + deltaY);
-						if (gr.getIsFloatingLabel()) {
-							gr.setAbsoluteTextX(gr.getAbsoluteTextX() - deltaX);
-							gr.setAbsoluteTextY(gr.getAbsoluteTextY() - deltaY);
-						}
-					}
-			} else {
-				logger.warning("Inconsistant data: shape has not been created");
-			}
-	
-		}
-		return assignedObject;
-	}*/
 
 	@Override
 	public Object getValue(BindingVariable variable) {
