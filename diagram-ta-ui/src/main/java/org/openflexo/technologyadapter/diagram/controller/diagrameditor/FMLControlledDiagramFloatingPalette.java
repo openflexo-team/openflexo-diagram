@@ -367,7 +367,7 @@ public class FMLControlledDiagramFloatingPalette extends ControlArea<DianaRoundR
 		super.stopDragging(controller, focusedNode);
 	}
 
-	private void askAndApplyDropAndLinkScheme(final DianaPoint dropLocation, DrawingTreeNode<?, ?> focused) {
+	private void askAndApplyDropAndLinkScheme(final DianaPoint initialDropLocation, DrawingTreeNode<?, ?> focused) {
 
 		FlexoConceptInstance parentFlexoConceptInstance = null;
 		ShapeRole parentShapeRole = null;
@@ -379,21 +379,13 @@ public class FMLControlledDiagramFloatingPalette extends ControlArea<DianaRoundR
 			parentShapeRole = ((FMLControlledDiagramShape) focused.getDrawable()).getRole();
 		}
 
-		/*if (parentFlexoConceptInstance == null || parentShapeRole == null) {
-			return;
-		}*/
-
-		/*if (focused.getDrawable() instanceof FMLControlledDiagramShape) {
-			container = ((FMLControlledDiagramShape) focused.getDrawable()).getDiagramElement();
-			containerConcept = ((FMLControlledDiagramShape) focused.getDrawable()).getFlexoConceptInstance().getFlexoConcept();
-		} else if (focused.getDrawable() instanceof Diagram) {
-			container = (Diagram) focused.getDrawable();
-			containerConcept = null;
-		}
-		
-		if (container == null) {
-			return;
-		}*/
+		// initialDropLocation is relative to dragram view, convert it into local drawing hierarchy
+		DiagramView diagramView = ((DiagramEditor) controller).getDrawingView();
+		Point pt = new Point((int) initialDropLocation.x, (int) initialDropLocation.y);
+		DianaPoint dropLocation = new DianaPoint();
+		pt = DianaUtils.convertPoint(diagramView.getDrawing().getRoot(), pt, focused, diagramView.getScale());
+		dropLocation.x = pt.x / diagramView.getScale();
+		dropLocation.y = pt.y / diagramView.getScale();
 
 		List<DropAndLinkScheme> allDropAndLinkSchemes = getNode().getDrawable()
 				.getAvailableDropAndLinkSchemes(parentFlexoConceptInstance != null ? parentFlexoConceptInstance.getFlexoConcept() : null);
@@ -425,8 +417,8 @@ public class FMLControlledDiagramFloatingPalette extends ControlArea<DianaRoundR
 				menuItem.setToolTipText(dropAndLinkScheme.dropScheme.getDescription());
 				popup.add(menuItem);
 			}
-			popup.show((Component) controller.getDrawingView().viewForNode(getNode().getParentNode()), (int) dropLocation.x,
-					(int) dropLocation.y);
+			popup.show((Component) controller.getDrawingView().viewForNode(getNode().getParentNode()),
+					(int) (dropLocation.x * diagramView.getScale()), (int) (dropLocation.y * diagramView.getScale()));
 
 		}
 	}
