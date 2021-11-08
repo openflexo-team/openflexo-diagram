@@ -338,6 +338,11 @@ public abstract interface GraphicalElementRole<T extends DiagramElement<GR>, GR 
 
 		@Override
 		public void setMetamodelElement(T anElement) {
+
+			if (getDeclaringCompilationUnit() != null) {
+				getDeclaringCompilationUnit().ensureElementImport(anElement);
+			}
+
 			T old = (metaModelElementReference != null ? metaModelElementReference.getObject() : null);
 			if (metaModelElementReference != null) {
 				metaModelElementReference.setObject(anElement);
@@ -426,7 +431,10 @@ public abstract interface GraphicalElementRole<T extends DiagramElement<GR>, GR 
 
 		@Override
 		public BindingFactory getBindingFactory() {
-			return getFlexoConcept().getInspector().getBindingFactory();
+			if (getFlexoConcept() != null && getFlexoConcept().getInspector() != null) {
+				return getFlexoConcept().getInspector().getBindingFactory();
+			}
+			return null;
 		}
 
 		@Override

@@ -267,6 +267,7 @@ public class TestControlledDiagramVirtualModel extends DiagramTestCase {
 		assertTrue(virtualModel.getModelSlots(TypedDiagramModelSlot.class).size() == 1);
 
 		FlexoConcept flexoConcept = virtualModel.getFMLModelFactory().newInstance(FlexoConcept.class);
+		flexoConcept.setName("TestFlexoConcept");
 		virtualModel.addToFlexoConcepts(flexoConcept);
 
 		CreateTechnologyRole createShapeRole = CreateTechnologyRole.actionType.makeNewAction(flexoConcept, null, editor);
@@ -308,6 +309,8 @@ public class TestControlledDiagramVirtualModel extends DiagramTestCase {
 
 		assertTrue(virtualModel.hasNature(FMLControlledDiagramVirtualModelNature.INSTANCE));
 		assertEquals(typedDiagramModelSlot, FMLControlledDiagramVirtualModelNature.getTypedDiagramModelSlot(virtualModel));
+
+		System.out.println(newVMResource.getLoadedResourceData().getFMLPrettyPrint());
 	}
 
 	/**

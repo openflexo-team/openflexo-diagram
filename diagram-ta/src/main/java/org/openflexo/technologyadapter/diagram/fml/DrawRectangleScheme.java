@@ -62,7 +62,7 @@ import org.openflexo.toolbox.StringUtils;
 @ModelEntity
 @ImplementationClass(DrawRectangleScheme.DrawRectangleSchemeImpl.class)
 @XMLElement
-@FML("DrawRectangleScheme")
+@FML("DrawRectangle")
 public interface DrawRectangleScheme extends AbstractCreationScheme, DiagramFlexoBehaviour {
 
 	@PropertyIdentifier(type = String.class)

@@ -38,7 +38,6 @@
 
 package org.openflexo.fml.diagram;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.logging.Logger;
 
 import org.openflexo.connie.exception.InvalidBindingException;
@@ -143,7 +142,7 @@ public class FMLDiagrammingPlugin extends TechnologyAdapterPluginController<FMLT
 			} catch (NullReferenceException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			} catch (InvocationTargetException e) {
+			} catch (ReflectiveOperationException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (InvalidBindingException e) {

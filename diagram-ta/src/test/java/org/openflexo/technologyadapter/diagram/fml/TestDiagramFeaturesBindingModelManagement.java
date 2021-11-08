@@ -349,9 +349,9 @@ public class TestDiagramFeaturesBindingModelManagement extends DiagramTestCase {
 		System.out.println(virtualModel.getFMLModelFactory().stringRepresentation(virtualModel));
 
 		assertEquals(6, dropScheme.getBindingModel().getBindingVariablesCount());
-		assertNotNull(dropScheme.getBindingModel().bindingVariableNamed(FlexoConceptBindingModel.THIS_PROPERTY));
+		assertNotNull(dropScheme.getBindingModel().bindingVariableNamed(FlexoConceptBindingModel.THIS_PROPERTY_NAME));
 		assertEquals(FlexoConceptInstanceType.getFlexoConceptInstanceType(flexoConcept),
-				dropScheme.getBindingModel().bindingVariableNamed(FlexoConceptBindingModel.THIS_PROPERTY).getType());
+				dropScheme.getBindingModel().bindingVariableNamed(FlexoConceptBindingModel.THIS_PROPERTY_NAME).getType());
 		assertNotNull(dropScheme.getBindingModel().bindingVariableNamed("shape"));
 		assertEquals(DiagramShape.class, dropScheme.getBindingModel().bindingVariableNamed("shape").getType());
 		assertNotNull(dropScheme.getBindingModel().bindingVariableNamed(FlexoBehaviourBindingModel.PARAMETERS_PROPERTY));
@@ -427,9 +427,9 @@ public class TestDiagramFeaturesBindingModelManagement extends DiagramTestCase {
 		virtualModel.getResource().save();
 
 		assertEquals(8, linkScheme.getBindingModel().getBindingVariablesCount());
-		assertNotNull(linkScheme.getBindingModel().bindingVariableNamed(FlexoConceptBindingModel.THIS_PROPERTY));
+		assertNotNull(linkScheme.getBindingModel().bindingVariableNamed(FlexoConceptBindingModel.THIS_PROPERTY_NAME));
 		assertEquals(FlexoConceptInstanceType.getFlexoConceptInstanceType(flexoConcept),
-				linkScheme.getBindingModel().bindingVariableNamed(FlexoConceptBindingModel.THIS_PROPERTY).getType());
+				linkScheme.getBindingModel().bindingVariableNamed(FlexoConceptBindingModel.THIS_PROPERTY_NAME).getType());
 		assertNotNull(linkScheme.getBindingModel().bindingVariableNamed("shape"));
 		assertEquals(DiagramShape.class, linkScheme.getBindingModel().bindingVariableNamed("shape").getType());
 		assertNotNull(linkScheme.getBindingModel().bindingVariableNamed(FlexoBehaviourBindingModel.PARAMETERS_PROPERTY));
@@ -527,9 +527,9 @@ public class TestDiagramFeaturesBindingModelManagement extends DiagramTestCase {
 		dropScheme = (DropScheme) flexoConcept.getFlexoBehaviour("drop");
 
 		assertEquals(7, dropScheme.getBindingModel().getBindingVariablesCount());
-		assertNotNull(dropScheme.getBindingModel().bindingVariableNamed(FlexoConceptBindingModel.THIS_PROPERTY));
+		assertNotNull(dropScheme.getBindingModel().bindingVariableNamed(FlexoConceptBindingModel.THIS_PROPERTY_NAME));
 		assertEquals(FlexoConceptInstanceType.getFlexoConceptInstanceType(flexoConcept),
-				dropScheme.getBindingModel().bindingVariableNamed(FlexoConceptBindingModel.THIS_PROPERTY).getType());
+				dropScheme.getBindingModel().bindingVariableNamed(FlexoConceptBindingModel.THIS_PROPERTY_NAME).getType());
 		assertNotNull(dropScheme.getBindingModel().bindingVariableNamed("shape"));
 		assertEquals(DiagramShape.class, dropScheme.getBindingModel().bindingVariableNamed("shape").getType());
 		assertNotNull(dropScheme.getBindingModel().bindingVariableNamed(FlexoBehaviourBindingModel.PARAMETERS_PROPERTY));
@@ -630,9 +630,9 @@ public class TestDiagramFeaturesBindingModelManagement extends DiagramTestCase {
 		dropScheme = (DropScheme) flexoConcept.getFlexoBehaviour("drop");
 
 		assertEquals(6, dropScheme.getBindingModel().getBindingVariablesCount());
-		assertNotNull(dropScheme.getBindingModel().bindingVariableNamed(FlexoConceptBindingModel.THIS_PROPERTY));
+		assertNotNull(dropScheme.getBindingModel().bindingVariableNamed(FlexoConceptBindingModel.THIS_PROPERTY_NAME));
 		assertEquals(FlexoConceptInstanceType.getFlexoConceptInstanceType(flexoConcept),
-				dropScheme.getBindingModel().bindingVariableNamed(FlexoConceptBindingModel.THIS_PROPERTY).getType());
+				dropScheme.getBindingModel().bindingVariableNamed(FlexoConceptBindingModel.THIS_PROPERTY_NAME).getType());
 		assertNotNull(dropScheme.getBindingModel().bindingVariableNamed("shape"));
 		assertEquals(DiagramShape.class, dropScheme.getBindingModel().bindingVariableNamed("shape").getType());
 		assertNotNull(dropScheme.getBindingModel().bindingVariableNamed(FlexoBehaviourBindingModel.PARAMETERS_PROPERTY));
@@ -648,9 +648,9 @@ public class TestDiagramFeaturesBindingModelManagement extends DiagramTestCase {
 		assertNotNull(linkScheme);
 
 		assertEquals(8, linkScheme.getBindingModel().getBindingVariablesCount());
-		assertNotNull(linkScheme.getBindingModel().bindingVariableNamed(FlexoConceptBindingModel.THIS_PROPERTY));
+		assertNotNull(linkScheme.getBindingModel().bindingVariableNamed(FlexoConceptBindingModel.THIS_PROPERTY_NAME));
 		assertEquals(FlexoConceptInstanceType.getFlexoConceptInstanceType(FCLink),
-				linkScheme.getBindingModel().bindingVariableNamed(FlexoConceptBindingModel.THIS_PROPERTY).getType());
+				linkScheme.getBindingModel().bindingVariableNamed(FlexoConceptBindingModel.THIS_PROPERTY_NAME).getType());
 
 		assertNotNull(linkScheme.getBindingModel().bindingVariableNamed(FlexoBehaviourBindingModel.PARAMETERS_PROPERTY));
 		assertNotNull(linkScheme.getBindingModel().bindingVariableNamed(DiagramBehaviourBindingModel.TOP_LEVEL));
@@ -678,9 +678,9 @@ public class TestDiagramFeaturesBindingModelManagement extends DiagramTestCase {
 		dropScheme = (DropScheme) flexoConcept.getFlexoBehaviour("drop");
 
 		assertEquals(6, dropScheme.getBindingModel().getBindingVariablesCount());
-		assertNotNull(dropScheme.getBindingModel().bindingVariableNamed(FlexoConceptBindingModel.THIS_PROPERTY));
+		assertNotNull(dropScheme.getBindingModel().bindingVariableNamed(FlexoConceptBindingModel.THIS_PROPERTY_NAME));
 		assertEquals(FlexoConceptInstanceType.getFlexoConceptInstanceType(flexoConcept),
-				dropScheme.getBindingModel().bindingVariableNamed(FlexoConceptBindingModel.THIS_PROPERTY).getType());
+				dropScheme.getBindingModel().bindingVariableNamed(FlexoConceptBindingModel.THIS_PROPERTY_NAME).getType());
 		assertNotNull(dropScheme.getBindingModel().bindingVariableNamed("shape"));
 		assertEquals(DiagramShape.class, dropScheme.getBindingModel().bindingVariableNamed("shape").getType());
 		assertNotNull(dropScheme.getBindingModel().bindingVariableNamed(FlexoBehaviourBindingModel.PARAMETERS_PROPERTY));
@@ -696,9 +696,9 @@ public class TestDiagramFeaturesBindingModelManagement extends DiagramTestCase {
 		assertNotNull(linkScheme);
 
 		assertEquals(8, linkScheme.getBindingModel().getBindingVariablesCount());
-		assertNotNull(linkScheme.getBindingModel().bindingVariableNamed(FlexoConceptBindingModel.THIS_PROPERTY));
+		assertNotNull(linkScheme.getBindingModel().bindingVariableNamed(FlexoConceptBindingModel.THIS_PROPERTY_NAME));
 		assertEquals(FlexoConceptInstanceType.getFlexoConceptInstanceType(FCLink),
-				linkScheme.getBindingModel().bindingVariableNamed(FlexoConceptBindingModel.THIS_PROPERTY).getType());
+				linkScheme.getBindingModel().bindingVariableNamed(FlexoConceptBindingModel.THIS_PROPERTY_NAME).getType());
 
 		assertNotNull(linkScheme.getBindingModel().bindingVariableNamed(FlexoBehaviourBindingModel.PARAMETERS_PROPERTY));
 		assertNotNull(linkScheme.getBindingModel().bindingVariableNamed(DiagramBehaviourBindingModel.TOP_LEVEL));

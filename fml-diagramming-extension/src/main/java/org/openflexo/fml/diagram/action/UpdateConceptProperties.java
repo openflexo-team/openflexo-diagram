@@ -38,7 +38,6 @@
 
 package org.openflexo.fml.diagram.action;
 
-import java.lang.reflect.InvocationTargetException;
 import java.security.InvalidParameterException;
 import java.util.Vector;
 import java.util.logging.Logger;
@@ -134,7 +133,7 @@ public class UpdateConceptProperties extends FlexoAction<UpdateConceptProperties
 						} catch (NullReferenceException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-						} catch (InvocationTargetException e) {
+						} catch (ReflectiveOperationException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						} catch (InvalidBindingException e) {

@@ -52,7 +52,7 @@ import org.openflexo.foundation.FlexoServiceManager;
 import org.openflexo.foundation.fml.FMLCompilationUnit;
 import org.openflexo.foundation.fml.FMLModelFactory;
 import org.openflexo.foundation.fml.FMLTechnologyAdapter;
-import org.openflexo.foundation.fml.parser.FMLParser;
+import org.openflexo.foundation.fml.parser.FMLCompilationUnitParser;
 import org.openflexo.foundation.fml.parser.ParseException;
 import org.openflexo.foundation.fml.parser.fmlnodes.FMLCompilationUnitNode;
 import org.openflexo.foundation.fml.rt.FMLRTTechnologyAdapter;
@@ -94,7 +94,7 @@ public class TestFMLParser {
 		// testFMLCompilationUnit(fmlResource);
 		System.out.println("Parsing FML resource " + fmlResource);
 		FMLModelFactory fmlModelFactory = new FMLModelFactory(null, serviceManager);
-		FMLParser parser = new FMLParser();
+		FMLCompilationUnitParser parser = new FMLCompilationUnitParser();
 		FMLCompilationUnit compilationUnit = parser.parse(fmlResource.openInputStream(), fmlModelFactory, (modelSlotClasses) -> {
 			// We dont expect to have particular ModelSlots in this context, but be aware of that
 			return null;

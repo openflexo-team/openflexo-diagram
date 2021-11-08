@@ -63,7 +63,7 @@ import org.openflexo.toolbox.StringUtils;
 @ModelEntity
 @ImplementationClass(LinkScheme.LinkSchemeImpl.class)
 @XMLElement
-@FML("link")
+@FML("Link")
 public interface LinkScheme extends AbstractCreationScheme, DiagramFlexoBehaviour {
 
 	@PropertyIdentifier(type = String.class)

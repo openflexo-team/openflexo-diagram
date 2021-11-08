@@ -38,7 +38,6 @@
 
 package org.openflexo.technologyadapter.diagram.fml.editionaction;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Type;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -172,7 +171,7 @@ public interface AddShape extends AddDiagramElementAction<DiagramShape> {
 				e.printStackTrace();
 			} catch (NullReferenceException e) {
 				e.printStackTrace();
-			} catch (InvocationTargetException e) {
+			} catch (ReflectiveOperationException e) {
 				e.printStackTrace();
 			}
 			return null;
