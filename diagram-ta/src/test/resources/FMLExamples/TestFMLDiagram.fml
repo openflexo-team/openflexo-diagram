@@ -15,10 +15,9 @@ model MyModel {
 	
 	Diagram diagram with DIAGRAM::TypedDiagramModelSlot(
 		diagramSpecification = DIAGRAM_SPECIFICATION,
-		//foo = Toto:(p1="toto",p2=TUTU, p3=3),
 		paletteElementBindings = {
-			FMLDiagramPaletteElementBinding:(elementId="MyPaletteElement",dropAction="MyConcept.drop()",overridingGR=RED_SHAPE2),
-			FMLDiagramPaletteElementBinding:(elementId="MyPaletteElement2",dropAction="MyConcept.drop()")
+			FMLDiagramPaletteElementBinding:(paletteElementId="MyPaletteElement",call=new MyConceptGR::dropNewConcept("foo")),
+			FMLDiagramPaletteElementBinding:(paletteElementId="MyPaletteElement2",call=new MyConceptGR::dropNewConcept2("foo2"))
 		});
 
 	ConceptualModel conceptualModel;
@@ -27,29 +26,29 @@ model MyModel {
 		
 		MyConcept myConcept;
 		DiagramShape shape with DIAGRAM::ShapeRole (
-			metaModelElement = RED_SHAPE,
+			metamodelElement = RED_SHAPE,
 			label = myConcept.name
 		);
 		
 		// DropScheme
-		dropNewConcept(String name) with DIAGRAM::DropScheme(target=topLevel) {
+		dropNewConcept(String name) with DIAGRAM::DropScheme(target="topLevel") {
 			myConcept = new MyConcept::init(name);
-			shape = DIAGRAM::AddShape(container=topLevel) in (diagram);
+			shape = DIAGRAM::AddShape(container="topLevel") in (diagram);
 		}
 		
-		dropNewConcept2(String name) with drop(target=topLevel) {
+		dropNewConcept2(String name) with DropScheme(target="topLevel") {
 			myConcept = new MyConcept::init(name);
-			shape = DIAGRAM::AddShape(container=topLevel) in (diagram);
+			shape = DIAGRAM::AddShape(container="topLevel") in (diagram);
 		}
 
 		delete::deleteConcept() {
-			delete (myConcept);
-			delete (shape);
+			delete(myConcept);
+			delete(shape);
 		}
 		
 		delete::removeFromDiagram() {
 			myConcept = null;
-			delete (shape);
+			delete(shape);
 		}
 	}
 	
@@ -58,12 +57,12 @@ model MyModel {
 		MyConceptGR fromGR;
 		MyConceptGR toGR;
 		DiagramConnector connector with DIAGRAM::ConnectorRole (
-			metaModelElement = BLUE_ARC,
+			metamodelElement = BLUE_ARC,
 			label = "connected with"
 		);
 		
 		// LinkScheme
-		linkConcepts() with link(fromTarget=MyConceptGR,toTarget=MyConceptGR) {
+		linkConcepts() with LinkScheme(fromTarget="MyConceptGR",toTarget="MyConceptGR") {
 			fromGR = fromTarget;
 			toGR = toTarget;
 			performLink(fromTarget.myConcept,toTarget.myConcept);
