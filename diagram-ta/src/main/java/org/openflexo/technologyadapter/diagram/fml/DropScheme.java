@@ -66,7 +66,7 @@ import org.openflexo.toolbox.StringUtils;
 @ModelEntity
 @ImplementationClass(DropScheme.DropSchemeImpl.class)
 @XMLElement
-@FML("Drop")
+@FML("DropScheme")
 public interface DropScheme extends AbstractCreationScheme, DiagramFlexoBehaviour {
 
 	@PropertyIdentifier(type = String.class)
