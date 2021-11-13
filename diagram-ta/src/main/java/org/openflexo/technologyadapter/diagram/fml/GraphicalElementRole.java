@@ -157,6 +157,8 @@ public abstract interface GraphicalElementRole<T extends DiagramElement<GR>, GR 
 	String METAMODEL_ELEMENT_KEY = "metamodelElement";
 	@PropertyIdentifier(type = FlexoObjectReference.class)
 	String METAMODEL_ELEMENT_REFERENCE_KEY = "metamodelElementReference";
+	@PropertyIdentifier(type = DataBinding.class)
+	String LABEL_KEY = "label";
 
 	@Getter(EXAMPLE_LABEL_KEY)
 	@XMLAttribute
@@ -209,9 +211,12 @@ public abstract interface GraphicalElementRole<T extends DiagramElement<GR>, GR 
 	public GR getGraphicalRepresentation();
 
 	// Convenient method to access spec for label feature
+	@Getter(LABEL_KEY)
+	@FMLAttribute(value = LABEL_KEY, required = false)
 	public DataBinding<String> getLabel();
 
 	// Convenient method to access spec for label feature
+	@Setter(LABEL_KEY)
 	public void setLabel(DataBinding<String> label);
 
 	// Convenient method to access read-only property for spec for label feature
