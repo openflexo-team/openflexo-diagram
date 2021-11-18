@@ -50,6 +50,7 @@ import org.openflexo.pamela.annotations.XMLElement;
  * @author sylvain
  * 
  */
+@Deprecated
 @ModelEntity
 @ImplementationClass(FMLDiagramPaletteElementBindingParameter.FMLDiagramPaletteElementBindingParameterImpl.class)
 @XMLElement

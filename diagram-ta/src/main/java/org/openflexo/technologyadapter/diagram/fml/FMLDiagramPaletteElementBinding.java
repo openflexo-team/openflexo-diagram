@@ -141,26 +141,33 @@ public interface FMLDiagramPaletteElementBinding extends FlexoConceptObject {
 	@Setter(CALL_KEY)
 	public void setCall(DataBinding<FlexoConceptInstance> call);
 
+	@Deprecated
 	@Getter(value = DROP_SCHEME_KEY)
 	@XMLElement(primary = false)
 	public DropScheme getDropScheme();
 
+	@Deprecated
 	@Setter(DROP_SCHEME_KEY)
 	public void setDropScheme(DropScheme aDropScheme);
 
+	@Deprecated
 	@Getter(value = PARAMETERS_KEY, cardinality = Cardinality.LIST, inverse = FMLDiagramPaletteElementBindingParameter.OWNER_KEY)
 	@XMLElement
 	public List<FMLDiagramPaletteElementBindingParameter> getParameters();
 
+	@Deprecated
 	@Setter(PARAMETERS_KEY)
 	public void setParameters(List<FMLDiagramPaletteElementBindingParameter> parameters);
 
+	@Deprecated
 	@Adder(PARAMETERS_KEY)
 	public void addToParameters(FMLDiagramPaletteElementBindingParameter aParameter);
 
+	@Deprecated
 	@Remover(PARAMETERS_KEY)
 	public void removeFromParameters(FMLDiagramPaletteElementBindingParameter aParameter);
 
+	@Deprecated
 	@Finder(collection = PARAMETERS_KEY, attribute = FMLDiagramPaletteElementBindingParameter.NAME_KEY)
 	public FMLDiagramPaletteElementBindingParameter getParameter(String parameterName);
 
@@ -373,6 +380,7 @@ public interface FMLDiagramPaletteElementBinding extends FlexoConceptObject {
 			return (List<FMLDiagramPaletteElementBindingParameter>) performSuperGetter(PARAMETERS_KEY);
 		}*/
 
+		@Deprecated
 		@Override
 		public DropScheme getDropScheme() {
 			if (dropScheme != null) {
@@ -398,6 +406,7 @@ public interface FMLDiagramPaletteElementBinding extends FlexoConceptObject {
 			return dropScheme;
 		}
 
+		@Deprecated
 		@Override
 		public void setDropScheme(DropScheme aDropScheme) {
 			if (dropScheme != aDropScheme) {
@@ -613,6 +622,8 @@ public interface FMLDiagramPaletteElementBinding extends FlexoConceptObject {
 				call = new DataBinding<>(this, FlexoConceptInstance.class, BindingDefinitionType.GET);
 				call.setBindingName("call");
 				call.setMandatory(true);
+				// BindingValue bv = new BindingValue(this, FMLPrettyPrinter.getInstance());
+				// bv.addBindingPathElement(new CreationSc)
 			}
 			return call;
 		}
