@@ -40,7 +40,6 @@ package org.openflexo.technologyadapter.diagram.controller.diagrameditor;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -210,7 +209,7 @@ public interface FMLControlledDiagramElement<E extends DiagramElement<GR>, GR ex
 					e.printStackTrace();
 				} catch (NullReferenceException e) {
 					e.printStackTrace();
-				} catch (InvocationTargetException e) {
+				} catch (ReflectiveOperationException e) {
 					e.printStackTrace();
 				}
 			}
@@ -312,7 +311,7 @@ public interface FMLControlledDiagramElement<E extends DiagramElement<GR>, GR ex
 					e.printStackTrace();
 				} catch (NullReferenceException e) {
 					e.printStackTrace();
-				} catch (InvocationTargetException e) {
+				} catch (ReflectiveOperationException e) {
 					e.printStackTrace();
 				}
 			}
@@ -344,7 +343,7 @@ public interface FMLControlledDiagramElement<E extends DiagramElement<GR>, GR ex
 					e.printStackTrace();
 				} catch (NotSettableContextException e) {
 					e.printStackTrace();
-				} catch (InvocationTargetException e) {
+				} catch (ReflectiveOperationException e) {
 					e.printStackTrace();
 				}
 			}

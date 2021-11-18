@@ -57,7 +57,7 @@
 		autoSelectFirstRow="true" name="PaletteRadioButtonList" hGap="0"
 		readOnly="false" />
 	<Panel id="10" darkLevel="0"
-		visible="(PaletteRadioButtonList.selectedIndex = 0)" useScrollBar="false"
+		visible="(PaletteRadioButtonList.selectedIndex == 0)" useScrollBar="false"
 		borderLeft="0" protectContent="false" opaque="false" layout="twocols"
 		borderRight="0" border="rounded3d" trackViewPortWidth="true" index="3"
 		constraints="gridbag(anchor=center;fill=both;gridHeight=1;gridWidth=0;gridX=1;gridY=4;index=3;insetsBottom=0;insetsLeft=0;insetsRight=0;insetsTop=0;padX=0;padY=0;weightX=0.0;weightY=1.0)"

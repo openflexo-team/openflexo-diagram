@@ -194,7 +194,7 @@ public class TestCreateVirtualModelInstanceWithTypedDiagram extends OpenflexoPro
 		assertTrue(createDiagramAction.hasActionExecutionSucceeded());
 
 		CreateDiagram createDiagram = (CreateDiagram) createDiagramAction.getBaseEditionAction();
-		createDiagram.setDiagramName(new DataBinding<>("'TestDiagram'"));
+		createDiagram.setDiagramName(new DataBinding<>("\"TestDiagram\""));
 		createDiagram.setResourceCenter(new DataBinding<>("this.resourceCenter"));
 
 		System.out.println("FML: " + newVirtualModel.getFMLPrettyPrint());

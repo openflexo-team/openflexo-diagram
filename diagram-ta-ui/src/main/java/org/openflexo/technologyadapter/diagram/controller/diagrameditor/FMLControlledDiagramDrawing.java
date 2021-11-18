@@ -59,7 +59,7 @@ import org.openflexo.diana.GRStructureVisitor;
 import org.openflexo.diana.GraphicalRepresentation;
 import org.openflexo.diana.ShapeGraphicalRepresentation;
 import org.openflexo.diana.geom.DianaGeometricObject.SimplifiedCardinalDirection;
-import org.openflexo.foundation.fml.binding.FMLBindingFactory;
+import org.openflexo.foundation.fml.FMLBindingFactory;
 import org.openflexo.foundation.fml.rt.FMLRTVirtualModelInstance;
 import org.openflexo.foundation.fml.rt.FlexoConceptInstance;
 import org.openflexo.foundation.fml.rt.VirtualModelInstance.ObjectLookupResult;
@@ -457,8 +457,9 @@ public class FMLControlledDiagramDrawing extends AbstractDiagramDrawing {
 		});
 
 		fmlControlledShapeBinding.setDynamicPropertyValue(GraphicalRepresentation.TEXT, new DataBinding<String>("drawable.label"), true);
-		//fmlControlledShapeBinding.setDynamicPropertyValue(ShapeGraphicalRepresentation.HEIGHT, new DataBinding<Double>("drawable.height"),
-		//		true);
+		// fmlControlledShapeBinding.setDynamicPropertyValue(ShapeGraphicalRepresentation.HEIGHT, new
+		// DataBinding<Double>("drawable.height"),
+		// true);
 
 		fmlControlledConnectorBinding.setDynamicPropertyValue(GraphicalRepresentation.TEXT, new DataBinding<String>("drawable.label"),
 				true);

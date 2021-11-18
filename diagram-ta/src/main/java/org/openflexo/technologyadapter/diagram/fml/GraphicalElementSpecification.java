@@ -38,7 +38,6 @@
 
 package org.openflexo.technologyadapter.diagram.fml;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.logging.Logger;
 
@@ -280,7 +279,7 @@ public interface GraphicalElementSpecification<T, GR extends GraphicalRepresenta
 				e.printStackTrace();
 			} catch (NullReferenceException e) {
 				e.printStackTrace();
-			} catch (InvocationTargetException e) {
+			} catch (ReflectiveOperationException e) {
 				e.printStackTrace();
 			}
 		}
@@ -302,7 +301,7 @@ public interface GraphicalElementSpecification<T, GR extends GraphicalRepresenta
 				e.printStackTrace();
 			} catch (NullReferenceException e) {
 				e.printStackTrace();
-			} catch (InvocationTargetException e) {
+			} catch (ReflectiveOperationException e) {
 				e.printStackTrace();
 			} catch (NotSettableContextException e) {
 				e.printStackTrace();

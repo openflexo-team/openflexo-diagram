@@ -28,11 +28,11 @@
 			title="icon" columnWidth="30" resizable="false" displayTitle="false"
 			name="icon" />
 		<LabelColumn
-			data="($org.openflexo.foundation.fml.rt.FlexoConceptInstance)iterator.stringRepresentation"
+			data="(org.openflexo.foundation.fml.rt.FlexoConceptInstance)iterator.stringRepresentation"
 			title="name" columnWidth="130" resizable="true" displayTitle="true"
 			name="label" />
 		<LabelColumn
-			data="($org.openflexo.foundation.fml.rt.FlexoConceptInstance)iterator.flexoConcept"
+			data="(org.openflexo.foundation.fml.rt.FlexoConceptInstance)iterator.flexoConcept"
 			title="type" columnWidth="130" resizable="true" displayTitle="true"
 			name="label" />
 		<LocalizedDictionary />

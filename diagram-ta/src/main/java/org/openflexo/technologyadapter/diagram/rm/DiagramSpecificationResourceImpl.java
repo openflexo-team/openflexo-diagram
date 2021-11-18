@@ -42,16 +42,9 @@ import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.logging.Logger;
 
-import org.apache.commons.io.FilenameUtils;
 import org.openflexo.foundation.FlexoException;
-import org.openflexo.foundation.resource.FileIODelegate;
-import org.openflexo.foundation.resource.InJarIODelegate;
 import org.openflexo.foundation.resource.PamelaXMLSerializableResourceImpl;
 import org.openflexo.foundation.resource.ResourceLoadingCancelledException;
-import org.openflexo.rm.BasicResourceImpl;
-import org.openflexo.rm.ClasspathResourceLocatorImpl;
-import org.openflexo.rm.FileSystemResourceLocatorImpl;
-import org.openflexo.rm.InJarResourceImpl;
 import org.openflexo.rm.Resource;
 import org.openflexo.rm.ResourceLocator;
 import org.openflexo.technologyadapter.diagram.DiagramTechnologyAdapter;
@@ -145,7 +138,11 @@ public abstract class DiagramSpecificationResourceImpl extends
 
 	@Override
 	public Resource getDirectory() {
-		if (getIODelegate() instanceof FileIODelegate) {
+		if (getIODelegate() != null && getIODelegate().getSerializationArtefactAsResource() != null) {
+			return getIODelegate().getSerializationArtefactAsResource().getContainer();
+		}
+
+		/*if (getIODelegate() instanceof FileIODelegate) {
 			String parentPath = ((FileIODelegate) getIODelegate()).getFile().getParentFile().getAbsolutePath();
 			if (ResourceLocator.locateResource(parentPath) == null) {
 				FileSystemResourceLocatorImpl.appendDirectoryToFileSystemResourceLocator(parentPath);
@@ -157,7 +154,7 @@ public abstract class DiagramSpecificationResourceImpl extends
 			String parentPath = FilenameUtils.getFullPath(resource.getRelativePath());
 			BasicResourceImpl parent = ((ClasspathResourceLocatorImpl) (resource.getLocator())).getJarResourcesList().get(parentPath);
 			return parent;
-		}
+		}*/
 		return null;
 	}
 
