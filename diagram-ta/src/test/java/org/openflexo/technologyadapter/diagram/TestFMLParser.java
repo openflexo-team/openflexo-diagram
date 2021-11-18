@@ -98,7 +98,7 @@ public class TestFMLParser {
 		FMLCompilationUnit compilationUnit = parser.parse(fmlResource.openInputStream(), fmlModelFactory, (modelSlotClasses) -> {
 			// We dont expect to have particular ModelSlots in this context, but be aware of that
 			return null;
-		});
+		}, true);
 		FMLCompilationUnitNode rootNode = (FMLCompilationUnitNode) compilationUnit.getPrettyPrintDelegate();
 		debug(rootNode, 0);
 
