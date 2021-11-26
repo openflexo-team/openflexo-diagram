@@ -24,9 +24,9 @@
 			variable="component.selectableCondition" />
 		<Assignment id="9" mandatory="true"
 			value="data.serviceManager.resourceManager" variable="component.resourceManager" />
-		<Assignment id="10" mandatory="true" value="data.DiagramTechnologyAdapter"
+		<Assignment id="10" mandatory="true" value="data.diagramTechnologyAdapter"
 			variable="component.technologyAdapter" />
-		<Assignment id="11" mandatory="true" value="data.DiagramSpecificationType"
+		<Assignment id="11" mandatory="true" value="data.diagramSpecificationType"
 			variable="component.resourceDataClass" />
 	</Custom>
 	<FIBVariable id="12" name="data"

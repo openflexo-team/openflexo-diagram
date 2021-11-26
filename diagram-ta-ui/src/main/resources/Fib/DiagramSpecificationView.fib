@@ -18,9 +18,9 @@
 		</RowSplit>
 
 		<FIBReferencedComponent
-			dynamicComponent="controller.inspectorForObject(DiagramElementTable.selected)"
+			dynamicComponent="controller.inspectorForObject(diagramElementTable.selected)"
 			localize="true" manageDynamicModel="true" name="InspectedWidget"
-			index="15" data="DiagramElementTable.selected" constraints="split(index=0;location=north;splitIdentifier=right)"
+			index="15" data="diagramElementTable.selected" constraints="split(index=0;location=north;splitIdentifier=right)"
 			opaque="false">
 			<ReferenceAssignment mandatory="true"
 				variable="controller.flexoController" value="controller.flexoController" />
@@ -31,11 +31,11 @@
 			selectionMode="DiscontiguousTreeSelection" showFooter="true"
 			rootVisible="true" showRootsHandle="true" localize="true" enable=""
 			manageDynamicModel="true"
-			clickAction="controller.singleClick(DiagramElementTable.selected)"
-			doubleClickAction="controller.doubleClick(DiagramElementTable.selected)"
-			rightClickAction="controller.rightClick(DiagramElementTable.selected,event)"
+			clickAction="controller.singleClick(diagramElementTable.selected)"
+			doubleClickAction="controller.doubleClick(diagramElementTable.selected)"
+			rightClickAction="controller.rightClick(diagramElementTable.selected,event)"
 			enterPressedAction="" valueChangedAction="" valueTransform=""
-			valueValidator="" name="DiagramElementTable" index="0" data=""
+			valueValidator="" name="diagramElementTable" index="0" data=""
 			constraints="split(index=0;location=north;splitIdentifier=left)">
 
 			<BrowserElement dataClassName="org.openflexo.technologyadapter.diagram.metamodel.DiagramSpecification"

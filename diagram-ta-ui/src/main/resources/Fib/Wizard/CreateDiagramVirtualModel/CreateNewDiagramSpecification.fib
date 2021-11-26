@@ -23,9 +23,9 @@
 			variable="component.selectableCondition" />
 		<Assignment id="39" mandatory="true"
 			value="data.serviceManager.resourceManager" variable="component.resourceManager" />
-		<Assignment id="40" mandatory="true" value="data.DiagramTechnologyAdapter"
+		<Assignment id="40" mandatory="true" value="data.diagramTechnologyAdapter"
 			variable="component.technologyAdapter" />
-		<Assignment id="41" mandatory="true" value="data.DiagramSpecificationType"
+		<Assignment id="41" mandatory="true" value="data.diagramSpecificationType"
 			variable="component.resourceDataClass" />
 	</Custom>
 	<Label id="42" name="Label2" align="left"

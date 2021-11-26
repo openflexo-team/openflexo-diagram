@@ -64,12 +64,12 @@
 			root="controller.getDiagramSpecification(data)"
 			selectionMode="DiscontiguousTreeSelection" rootVisible="true"
 			rowHeight="18" localize="true" manageDynamicModel="true"
-			rightClickAction="controller.rightClick(DiagramElementTable.selected,event)"
-			doubleClickAction="controller.doubleClick(DiagramElementTable.selected)"
-			clickAction="controller.singleClick(DiagramElementTable.selected)"
+			rightClickAction="controller.rightClick(diagramElementTable.selected,event)"
+			doubleClickAction="controller.doubleClick(diagramElementTable.selected)"
+			clickAction="controller.singleClick(diagramElementTable.selected)"
 			index="0"
 			constraints="split(index=0;location=north;splitIdentifier=top_left)"
-			name="DiagramElementTable">
+			name="diagramElementTable">
 			<BrowserElement id="20"
 				dataClassName="org.openflexo.technologyadapter.diagram.metamodel.DiagramSpecification"
 				icon="controller.iconForObject(diagramSpec)"
@@ -126,12 +126,12 @@
 			textNonSelectionColor="0,0,0" root="data" deepExploration="true"
 			selectionMode="DiscontiguousTreeSelection" rootVisible="true"
 			rowHeight="18" localize="true" manageDynamicModel="true"
-			rightClickAction="controller.rightClick(FlexoConceptBrowser.selected,event)"
-			doubleClickAction="controller.doubleClick(FlexoConceptBrowser.selected)"
-			clickAction="controller.singleClick(FlexoConceptBrowser.selected)"
+			rightClickAction="controller.rightClick(flexoConceptBrowser.selected,event)"
+			doubleClickAction="controller.doubleClick(flexoConceptBrowser.selected)"
+			clickAction="controller.singleClick(flexoConceptBrowser.selected)"
 			index="0"
 			constraints="split(index=0;location=north;splitIdentifier=left)"
-			name="FlexoConceptBrowser">
+			name="flexoConceptBrowser">
 			<BrowserElement
 				dataClassName="org.openflexo.foundation.fml.FMLCompilationUnit"
 				icon="controller.iconForObject(compilationUnit)"
@@ -397,9 +397,9 @@
 			</BrowserElement>
 		</Browser>
 		<FIBReferencedComponent id="111"
-			dynamicComponent="controller.inspectorForObject(FlexoConceptBrowser.selected)"
+			dynamicComponent="controller.inspectorForObject(flexoConceptBrowser.selected)"
 			localize="true" manageDynamicModel="true"
-			data="FlexoConceptBrowser.selected" opaque="false" index="15"
+			data="flexoConceptBrowser.selected" opaque="false" index="15"
 			constraints="split(index=0;location=north;splitIdentifier=right)"
 			name="InspectedWidget">
 			<ReferenceAssignment id="112"
