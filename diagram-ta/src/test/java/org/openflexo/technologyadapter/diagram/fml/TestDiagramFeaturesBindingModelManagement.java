@@ -346,7 +346,7 @@ public class TestDiagramFeaturesBindingModelManagement extends DiagramTestCase {
 
 		virtualModel.getResource().save();
 
-		System.out.println(virtualModel.getFMLModelFactory().stringRepresentation(virtualModel));
+		System.out.println(virtualModel.getCompilationUnit().getFMLPrettyPrint());
 
 		assertEquals(6, dropScheme.getBindingModel().getBindingVariablesCount());
 		assertNotNull(dropScheme.getBindingModel().bindingVariableNamed(FlexoConceptBindingModel.THIS_PROPERTY_NAME));
@@ -499,6 +499,10 @@ public class TestDiagramFeaturesBindingModelManagement extends DiagramTestCase {
 		assertEquals(1, retrievedVPResource.getContainedVirtualModelResources().size());
 		CompilationUnitResource retrievedVMResource = retrievedVPResource.getContainedVirtualModelResources().get(0);
 
+		System.out.println("Loading file: " + retrievedVMResource.getIODelegate().getSerializationArtefact());
+
+		System.out.println(retrievedVMResource.getCompilationUnit().getFMLPrettyPrint());
+
 		assertTrue(FMLControlledDiagramVirtualModelNature.INSTANCE.hasNature(retrievedVMResource.getCompilationUnit().getVirtualModel()));
 
 		TypedDiagramModelSlot retrievedDiagramMS = FMLControlledDiagramVirtualModelNature
@@ -556,6 +560,7 @@ public class TestDiagramFeaturesBindingModelManagement extends DiagramTestCase {
 	@TestOrder(9)
 	@Category(UITest.class)
 	public void testLoadViewPointAndVirtualModel() throws FileNotFoundException, ResourceLoadingCancelledException, FlexoException {
+
 		instanciateTestServiceManager(DiagramTechnologyAdapter.class);
 		VirtualModelLibrary vpLib = serviceManager.getVirtualModelLibrary();
 		assertNotNull(vpLib);
