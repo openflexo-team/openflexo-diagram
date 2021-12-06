@@ -730,6 +730,10 @@ public interface FMLDiagramPaletteElementBinding extends FlexoConceptObject {
 			return "";
 		}
 
+		@Override
+		public String toString() {
+			return "FMLDiagramPaletteElementBinding" + Integer.toHexString(hashCode()) + "(" + getPaletteElementId() + ")";
+		}
 	}
 
 }
