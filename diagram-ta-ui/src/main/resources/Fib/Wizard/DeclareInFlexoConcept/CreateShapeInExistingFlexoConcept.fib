@@ -90,7 +90,7 @@
 		label="x" />
 	<Custom id="25" manageDynamicModel="true"
 		dataClassForComponent="org.openflexo.connie.DataBinding"
-		componentClassName="org.openflexo.gina.swing.utils.BindingSelector"
+		componentClassName="org.openflexo.gina.swing.utils.JavaBindingSelector"
 		name="xConstraints" data="data.newFlexoRole.graphicalRepresentation.xConstraints"
 		index="11" localize="true"
 		constraints="twocols(expandHorizontally=true;expandVertically=false;index=11;insetsBottom=0;insetsLeft=2;insetsRight=2;insetsTop=0;location=right)">
@@ -102,7 +102,7 @@
 		label="y" />
 	<Custom id="28" manageDynamicModel="true"
 		dataClassForComponent="org.openflexo.connie.DataBinding"
-		componentClassName="org.openflexo.gina.swing.utils.BindingSelector"
+		componentClassName="org.openflexo.gina.swing.utils.JavaBindingSelector"
 		name="CustomSelector" data="data.newFlexoRole.graphicalRepresentation.yConstraints"
 		index="13" localize="true"
 		constraints="twocols(expandHorizontally=true;expandVertically=false;index=13;insetsBottom=0;insetsLeft=2;insetsRight=2;insetsTop=0;location=right)">
@@ -114,7 +114,7 @@
 		label="width" />
 	<Custom id="31" manageDynamicModel="true"
 		dataClassForComponent="org.openflexo.connie.DataBinding"
-		componentClassName="org.openflexo.gina.swing.utils.BindingSelector"
+		componentClassName="org.openflexo.gina.swing.utils.JavaBindingSelector"
 		name="CustomSelector2" data="data.newFlexoRole.graphicalRepresentation.widthConstraints"
 		index="15" localize="true"
 		constraints="twocols(expandHorizontally=true;expandVertically=false;index=15;insetsBottom=0;insetsLeft=2;insetsRight=2;insetsTop=0;location=right)">
@@ -126,7 +126,7 @@
 		label="height" />
 	<Custom id="34" manageDynamicModel="true"
 		dataClassForComponent="org.openflexo.connie.DataBinding"
-		componentClassName="org.openflexo.gina.swing.utils.BindingSelector"
+		componentClassName="org.openflexo.gina.swing.utils.JavaBindingSelector"
 		name="CustomSelector3" data="data.newFlexoRole.graphicalRepresentation.heightConstraints"
 		index="17" localize="true"
 		constraints="twocols(expandHorizontally=true;expandVertically=false;index=17;insetsBottom=0;insetsLeft=2;insetsRight=2;insetsTop=0;location=right)">
