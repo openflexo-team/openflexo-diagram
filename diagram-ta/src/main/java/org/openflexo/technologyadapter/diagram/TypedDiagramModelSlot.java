@@ -224,10 +224,10 @@ public interface TypedDiagramModelSlot extends TypeAwareModelSlot<Diagram, Diagr
 			return (DiagramTechnologyAdapter) super.getModelSlotTechnologyAdapter();
 		}
 
-		@Override
+		/*@Override
 		public boolean getIsRequired() {
 			return true;
-		}
+		}*/
 
 		@Override
 		public FMLDiagramPaletteElementBinding getPaletteElementBinding(DiagramPaletteElement paletteElement) {

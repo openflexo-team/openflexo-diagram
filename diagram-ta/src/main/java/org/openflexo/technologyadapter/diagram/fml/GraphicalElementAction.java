@@ -38,7 +38,6 @@
 
 package org.openflexo.technologyadapter.diagram.fml;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 
 import org.openflexo.connie.BindingModel;
@@ -161,7 +160,7 @@ public interface GraphicalElementAction extends FlexoConceptObject {
 					e.printStackTrace();
 				} catch (NullReferenceException e) {
 					e.printStackTrace();
-				} catch (InvocationTargetException e) {
+				} catch (ReflectiveOperationException e) {
 					e.printStackTrace();
 				}
 			}

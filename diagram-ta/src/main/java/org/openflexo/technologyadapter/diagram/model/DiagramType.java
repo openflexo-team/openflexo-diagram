@@ -95,8 +95,10 @@ public class DiagramType implements TechnologySpecificType<DiagramTechnologyAdap
 
 	@Override
 	public String simpleRepresentation() {
-		return getClass().getSimpleName() + "<"
-				+ (diagramSpecification != null ? diagramSpecification.getName() : "NotFound:" + diagramSpecificationURI) + ">";
+		// return getClass().getSimpleName() + "<"
+		// + (diagramSpecification != null ? diagramSpecification.getName() : "NotFound:" + diagramSpecificationURI) + ">";
+		// TODO : manage something better here
+		return getClass().getSimpleName() + "<?>";
 	}
 
 	@Override

@@ -31,7 +31,7 @@
 				border="rounded3d" trackViewPortWidth="true" index="19"
 				constraints="twocols(expandHorizontally=true;expandVertically=false;index=14;insetsBottom=0;insetsLeft=2;insetsRight=2;insetsTop=5;location=right)"
 				borderBottom="2" borderTitle="" borderTop="2" trackViewPortHeight="true">
-				<Table id="36" name="FMLPaletteElementBindingTable"
+				<Table id="36" name="fmlPaletteElementBindingTable"
 					showFooter="true" boundToSelectionManager="true"
 					manageDynamicModel="true" enable="true" selectionMode="MultipleIntervalSelection"
 					index="-1" localize="true"
@@ -52,7 +52,7 @@
 						displayTitle="true" title="palette_element" name="paletteElement"
 						columnWidth="40" resizable="true" />
 					<DropDownColumn data="iterator.boundFlexoConcept"
-						format="object.name" list="data.declaringVirtualModel.flexoConcepts"
+						format="object.name" list="data.declaringCompilationUnit.virtualModel.flexoConcepts"
 						displayTitle="true" title="flexo_concept" name="flexoConcept"
 						columnWidth="40" resizable="true" />
 					<DropDownColumn data="iterator.dropScheme" format="object.name"
@@ -61,11 +61,11 @@
 					<AddAction method="data.addFMLDiagramPaletteElementBinding()"
 						name="addFMLPaletteElementBinding" />
 					<RemoveAction
-						method="data.removeFromPaletteElementBindings(FMLPaletteElementBindingTable.selected)"
+						method="data.removeFromPaletteElementBindings(fmlPaletteElementBindingTable.selected)"
 						name="removeFMLPaletteElementBinding" />
 				</Table>
 				<Table id="37" showFooter="false" manageDynamicModel="true"
-					visible="true" enable="(FMLPaletteElementBindingTable.selected != null)"
+					visible="true" enable="(fmlPaletteElementBindingTable.selected != null)"
 					selectionMode="MultipleIntervalSelection" index="-1" localize="true"
 					constraints="gridbag(anchor=center;fill=both;gridHeight=1;gridWidth=0;gridX=1;gridY=1;index=-1;insetsBottom=0;insetsLeft=0;insetsRight=20;insetsTop=0;location=center;padX=0;padY=0;weightX=1.0;weightY=1.0)"
 					visibleRowCount="6" createNewRowOnClick="false" rowHeight="18"
@@ -73,7 +73,7 @@
 					iteratorClassName="org.openflexo.technologyadapter.diagram.fml.FMLDiagramPaletteElementBindingParameter"
 					backgroundSelectionColor="41,90,209" useScrollBar="false"
 					backgroundNonSelectionColor="255,255,255"
-					data="FMLPaletteElementBindingTable.selected.parameters"
+					data="fmlPaletteElementBindingTable.selected.parameters"
 					autoSelectFirstRow="true" textNonSelectionColor="0,0,0" readOnly="false"
 					backgroundSecondarySelectionColor="173,215,255">
 					<IconColumn data="controller.iconForObject(iterator)"

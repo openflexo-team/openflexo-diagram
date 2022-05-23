@@ -56,6 +56,7 @@ import org.apache.poi.hslf.model.Slide;
 import org.apache.poi.hslf.model.Table;
 import org.apache.poi.hslf.model.TextBox;
 import org.junit.Assume;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openflexo.foundation.FlexoEditor;
@@ -79,6 +80,7 @@ import org.openflexo.test.TestOrder;
  * @author vincent
  * 
  */
+@Ignore
 @RunWith(OrderedRunner.class)
 public class TestActions extends OpenflexoProjectAtRunTimeTestCase {
 
