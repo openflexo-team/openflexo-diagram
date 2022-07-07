@@ -35,11 +35,13 @@ where
 | --------------- |-------------------------| :------:|
 | `metamodelElement` &nbsp; | `T` &nbsp; | yes |
 | `exampleLabel` &nbsp; | `String` &nbsp; | no |
+| `label` &nbsp; | `String` &nbsp; | no |
 
 ---
 
 - `metamodelElement` : 
 - `exampleLabel` : 
+- `label` : 
 
 ---
 
