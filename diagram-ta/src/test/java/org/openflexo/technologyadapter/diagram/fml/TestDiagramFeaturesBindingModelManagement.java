@@ -338,6 +338,7 @@ public class TestDiagramFeaturesBindingModelManagement extends DiagramTestCase {
 		assertTrue(createAddShape.hasActionExecutionSucceeded());
 
 		FMLDiagramPaletteElementBinding newBinding = virtualModel.getFMLModelFactory().newInstance(FMLDiagramPaletteElementBinding.class);
+		newBinding.setDiagramModelSlot(typedDiagramModelSlot);
 		newBinding.setPaletteElement(paletteElement);
 		newBinding.setBoundFlexoConcept(flexoConcept);
 		newBinding.setDropScheme(dropScheme);
@@ -560,6 +561,8 @@ public class TestDiagramFeaturesBindingModelManagement extends DiagramTestCase {
 	@TestOrder(9)
 	@Category(UITest.class)
 	public void testLoadViewPointAndVirtualModel() throws FileNotFoundException, ResourceLoadingCancelledException, FlexoException {
+
+		System.exit(-1);
 
 		instanciateTestServiceManager(DiagramTechnologyAdapter.class);
 		VirtualModelLibrary vpLib = serviceManager.getVirtualModelLibrary();

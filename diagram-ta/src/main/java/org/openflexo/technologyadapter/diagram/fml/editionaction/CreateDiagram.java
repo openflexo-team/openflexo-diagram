@@ -48,8 +48,10 @@ import org.openflexo.foundation.fml.annotations.FML;
 import org.openflexo.foundation.fml.annotations.SeeAlso;
 import org.openflexo.foundation.fml.annotations.UsageExample;
 import org.openflexo.foundation.fml.editionaction.AbstractCreateResource;
+import org.openflexo.foundation.fml.rt.FMLExecutionException;
 import org.openflexo.foundation.fml.rt.RunTimeEvaluationContext;
 import org.openflexo.foundation.resource.ResourceLoadingCancelledException;
+import org.openflexo.foundation.resource.SaveResourceException;
 import org.openflexo.pamela.annotations.Getter;
 import org.openflexo.pamela.annotations.ImplementationClass;
 import org.openflexo.pamela.annotations.ModelEntity;
@@ -215,7 +217,7 @@ public interface CreateDiagram extends AbstractCreateResource<DiagramModelSlot, 
 		}
 
 		@Override
-		public Diagram execute(RunTimeEvaluationContext evaluationContext) throws FlexoException {
+		public Diagram execute(RunTimeEvaluationContext evaluationContext) throws FMLExecutionException {
 
 			DiagramTechnologyAdapter diagramTA = getServiceManager().getTechnologyAdapterService()
 					.getTechnologyAdapter(DiagramTechnologyAdapter.class);
@@ -255,8 +257,10 @@ public interface CreateDiagram extends AbstractCreateResource<DiagramModelSlot, 
 
 				System.out.println("Return " + diagram);
 				return diagram;
-			} catch (ModelDefinitionException | FileNotFoundException | ResourceLoadingCancelledException e) {
-				throw new FlexoException(e);
+			} catch (SaveResourceException | ModelDefinitionException | FileNotFoundException | ResourceLoadingCancelledException e) {
+				throw new FMLExecutionException(e);
+			} catch (FlexoException e) {
+				throw new FMLExecutionException(e);
 			}
 		}
 

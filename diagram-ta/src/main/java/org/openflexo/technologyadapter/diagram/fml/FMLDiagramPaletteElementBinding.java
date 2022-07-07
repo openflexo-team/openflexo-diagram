@@ -45,6 +45,7 @@ import java.util.logging.Logger;
 import org.openflexo.connie.BindingModel;
 import org.openflexo.connie.DataBinding;
 import org.openflexo.connie.DataBinding.BindingDefinitionType;
+import org.openflexo.connie.expr.BindingValue;
 import org.openflexo.diana.GraphicalRepresentation;
 import org.openflexo.diana.control.PaletteElement;
 import org.openflexo.foundation.DataModification;
@@ -56,6 +57,8 @@ import org.openflexo.foundation.fml.FlexoConceptObject;
 import org.openflexo.foundation.fml.VirtualModel;
 import org.openflexo.foundation.fml.annotations.FML;
 import org.openflexo.foundation.fml.annotations.FMLAttribute;
+import org.openflexo.foundation.fml.binding.CreationSchemePathElement;
+import org.openflexo.foundation.fml.expr.FMLPrettyPrinter;
 import org.openflexo.foundation.fml.rt.FlexoConceptInstance;
 import org.openflexo.pamela.annotations.Adder;
 import org.openflexo.pamela.annotations.Finder;
@@ -70,6 +73,7 @@ import org.openflexo.pamela.annotations.XMLAttribute;
 import org.openflexo.pamela.annotations.XMLElement;
 import org.openflexo.technologyadapter.diagram.DiagramTechnologyAdapter;
 import org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
+import org.openflexo.technologyadapter.diagram.fml.binding.DropSchemePathElement;
 import org.openflexo.technologyadapter.diagram.metamodel.DiagramPalette;
 import org.openflexo.technologyadapter.diagram.metamodel.DiagramPaletteElement;
 import org.openflexo.technologyadapter.diagram.metamodel.DiagramSpecification;
@@ -224,10 +228,11 @@ public interface FMLDiagramPaletteElementBinding extends FlexoConceptObject {
 		private String _boundFlexoConceptId;
 		private String _dropSchemeName;
 
+		private DataBinding<FlexoConceptInstance> call;
 		private FlexoConcept boundFlexoConcept;
 		private DropScheme dropScheme;
 		// private Vector<FMLDiagramPaletteElementBindingParameter> parameters;
-		private String patternRoleName;
+		// private String patternRoleName2;
 
 		private boolean boundLabelToElementName = true;
 
@@ -383,6 +388,15 @@ public interface FMLDiagramPaletteElementBinding extends FlexoConceptObject {
 		@Deprecated
 		@Override
 		public DropScheme getDropScheme() {
+
+			if (isMakingCall) {
+				return dropScheme;
+			}
+
+			if (getDropSchemePathElement() != null) {
+				return getDropSchemePathElement().getCreationScheme();
+			}
+
 			if (dropScheme != null) {
 				return dropScheme;
 			}
@@ -409,6 +423,11 @@ public interface FMLDiagramPaletteElementBinding extends FlexoConceptObject {
 		@Deprecated
 		@Override
 		public void setDropScheme(DropScheme aDropScheme) {
+
+			if (!isMakingCall && getDropSchemePathElement() != null) {
+				getDropSchemePathElement().setFunction(aDropScheme);
+			}
+
 			if (dropScheme != aDropScheme) {
 				dropScheme = aDropScheme;
 				updateParameters();
@@ -442,6 +461,7 @@ public interface FMLDiagramPaletteElementBinding extends FlexoConceptObject {
 			return null;
 		}*/
 
+		@Deprecated
 		private void updateParameters() {
 			if (boundFlexoConcept == null) {
 				return;
@@ -472,7 +492,10 @@ public interface FMLDiagramPaletteElementBinding extends FlexoConceptObject {
 
 		@Override
 		public FMLModelFactory getFMLModelFactory() {
-			return getDiagramModelSlot().getFMLModelFactory();
+			if (getDiagramModelSlot() != null) {
+				return getDiagramModelSlot().getFMLModelFactory();
+			}
+			return null;
 		}
 
 		/*@Override
@@ -577,13 +600,13 @@ public interface FMLDiagramPaletteElementBinding extends FlexoConceptObject {
 			return null;
 		}
 
-		public String getPatternRoleName() {
+		/*public String getPatternRoleName() {
 			return patternRoleName;
 		}
-
+		
 		public void setPatternRoleName(String patternRoleName) {
 			this.patternRoleName = patternRoleName;
-		}
+		}*/
 
 		@Override
 		public boolean getBoundLabelToElementName() {
@@ -614,16 +637,45 @@ public interface FMLDiagramPaletteElementBinding extends FlexoConceptObject {
 			serializedPaletteElementName = serializedPaletteElement;
 		}*/
 
-		private DataBinding<FlexoConceptInstance> call;
+		private DataBinding<FlexoConceptInstance> makeCall(DropScheme dropScheme,
+				List<FMLDiagramPaletteElementBindingParameter> parameters) {
+			DataBinding<FlexoConceptInstance> returned = new DataBinding<FlexoConceptInstance>(this, FlexoConceptInstance.class,
+					BindingDefinitionType.GET);
+			returned.setBindingName("call");
+			returned.setMandatory(true);
+			BindingValue bv = new BindingValue(this, FMLPrettyPrinter.getInstance());
+
+			List<DataBinding<?>> args = new ArrayList<>();
+			if (parameters != null) {
+				for (FMLDiagramPaletteElementBindingParameter parameter : parameters) {
+					args.add(parameter.getValue());
+				}
+			}
+
+			DropSchemePathElement dropSchemePathElement = (DropSchemePathElement) getFMLModelFactory().newAbstractCreationSchemePathElement(
+					DropSchemePathElement.class, dropScheme != null ? dropScheme.getFlexoConcept().getInstanceType() : null, null,
+					dropScheme != null ? dropScheme.getName() : null, args, this);
+			bv.addBindingPathElement(dropSchemePathElement);
+
+			return returned;
+		}
+
+		private DropSchemePathElement getDropSchemePathElement() {
+			if (getCall() != null && getCall().isBindingValue()
+					&& ((BindingValue) getCall().getExpression()).getBindingPathElementAtIndex(0) instanceof CreationSchemePathElement) {
+				return (DropSchemePathElement) ((BindingValue) getCall().getExpression()).getBindingPathElementAtIndex(0);
+			}
+			return null;
+		}
+
+		private boolean isMakingCall = false;
 
 		@Override
 		public DataBinding<FlexoConceptInstance> getCall() {
-			if (call == null) {
-				call = new DataBinding<>(this, FlexoConceptInstance.class, BindingDefinitionType.GET);
-				call.setBindingName("call");
-				call.setMandatory(true);
-				// BindingValue bv = new BindingValue(this, FMLPrettyPrinter.getInstance());
-				// bv.addBindingPathElement(new CreationSc)
+			if (call == null && getFMLModelFactory() != null) {
+				isMakingCall = true;
+				call = makeCall(getDropScheme(), getParameters());
+				isMakingCall = false;
 			}
 			return call;
 		}
