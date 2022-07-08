@@ -20,7 +20,7 @@
 		<flexohelp.version>1.5.0.1-SNAPSHOT</flexohelp.version>
 		<flexodocresourcecenter.version>2.0.1-SNAPSHOT</flexodocresourcecenter.version>
 		<flexodocresourcemanager.version>2.0.1-SNAPSHOT</flexodocresourcemanager.version>
-		<flexocore.version>2.0.1</flexocore.version>
+		<flexocore.version>2.0.1-SNAPSHOT</flexocore.version>
 		<poi.version>3.12</poi.version>
 		<ta.logo>https://support.openflexo.org/images/components/ta/diagram_ta/Diagram128x128.png</ta.logo>
 	    <sitedeploy.dir>/home/www/sites/openflexo-diagram</sitedeploy.dir>
