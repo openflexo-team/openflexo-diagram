@@ -1,8 +1,4 @@
- -----
- Openflexo Diagram
- -----
- The Openflexo team
- -----
+# Openflexo Diagram
 
 [/images/components/fml-core/FMLCore] Openflexo-Diagram
 
