@@ -100,7 +100,7 @@ public class FMLDiagrammingPlugin extends TechnologyAdapterPluginController<FMLT
 
 	@Override
 	public boolean hasModuleViewForObject(FlexoObject object) {
-		if (object instanceof FMLRTVirtualModelInstance
+		if (object instanceof FMLRTVirtualModelInstance && (((FMLRTVirtualModelInstance) object).getVirtualModel() != null)
 				&& ((FMLRTVirtualModelInstance) object).getVirtualModel().getURI().equals(FML_CLASS_DIAGRAM_VIRTUAL_MODEL_URI)) {
 			return true;
 		}

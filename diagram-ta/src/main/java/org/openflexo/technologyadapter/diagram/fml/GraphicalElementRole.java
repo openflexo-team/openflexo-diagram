@@ -136,9 +136,12 @@ public abstract interface GraphicalElementRole<T extends DiagramElement<GR>, GR 
 				if (gr instanceof ShapeGraphicalRepresentation) {
 					((ShapeGraphicalRepresentation) gr).getForeground().setTransparencyLevel(value.floatValue());
 					((ShapeGraphicalRepresentation) gr).getBackground().setTransparencyLevel(value.floatValue());
+					((ShapeGraphicalRepresentation) gr).getForeground().setUseTransparency(value < 1.0);
+					((ShapeGraphicalRepresentation) gr).getBackground().setUseTransparency(value < 1.0);
 				}
 				else if (gr instanceof ConnectorGraphicalRepresentation) {
 					((ConnectorGraphicalRepresentation) gr).getForeground().setTransparencyLevel(value.floatValue());
+					((ConnectorGraphicalRepresentation) gr).getForeground().setUseTransparency(value < 1.0);
 				}
 			}
 		}
