@@ -127,8 +127,7 @@ public interface FMLControlledDiagramShape extends FMLControlledDiagramElement<D
 		public String getPresentationName() {
 			String conceptLabel = dropScheme.getFlexoConcept().getPresentationName();
 			if (multipleLinksAvailableForThatDropScheme) {
-								String linkLabel = StringUtils.isNotEmpty(linkScheme.getLabel()) ? linkScheme.getLabel()
-						: linkScheme.getName();
+				String linkLabel = StringUtils.isNotEmpty(linkScheme.getName()) ? linkScheme.getName() : linkScheme.getName();
 				return linkLabel + "_with_new_" + conceptLabel;
 			}
 			else {
