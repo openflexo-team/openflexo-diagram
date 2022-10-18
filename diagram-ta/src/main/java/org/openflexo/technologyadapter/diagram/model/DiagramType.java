@@ -38,6 +38,7 @@
 
 package org.openflexo.technologyadapter.diagram.model;
 
+import java.beans.PropertyChangeSupport;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
@@ -58,15 +59,30 @@ public class DiagramType implements TechnologySpecificType<DiagramTechnologyAdap
 	// should be nullified as quickly as possible (nullified when resolved)
 	protected CustomTypeFactory<?> customTypeFactory;
 
+	private final PropertyChangeSupport pcSupport;
+
 	private DiagramType(DiagramSpecification diagramSpecification) {
+		pcSupport = new PropertyChangeSupport(this);
 		this.diagramSpecification = diagramSpecification;
 	}
 
 	protected DiagramType(String diagramSpecificationURI, CustomTypeFactory<?> customTypeFactory) {
+		pcSupport = new PropertyChangeSupport(this);
 		this.diagramSpecificationURI = diagramSpecificationURI;
 		this.customTypeFactory = customTypeFactory;
 	}
 
+	@Override
+	public PropertyChangeSupport getPropertyChangeSupport() {
+		return pcSupport;
+	}
+
+	@Override
+	public String getDeletedProperty() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	public DiagramSpecification getDiagramSpecification() {
 		return diagramSpecification;
 	}
