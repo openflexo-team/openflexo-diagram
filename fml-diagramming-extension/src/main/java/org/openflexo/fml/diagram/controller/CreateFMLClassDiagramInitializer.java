@@ -81,7 +81,7 @@ public class CreateFMLClassDiagramInitializer extends ActionInitializer<CreateFM
 	@Override
 	protected FlexoActionRunnable<CreateFMLClassDiagram, VirtualModel, FMLObject> getDefaultFinalizer() {
 		return (e, action) -> {
-			getController().setCurrentEditedObjectAsModuleView(action.getNewFMLControlledDiagram());
+			getController().setCurrentEditedObject(action.getNewFMLControlledDiagram());
 			return true;
 		};
 	}

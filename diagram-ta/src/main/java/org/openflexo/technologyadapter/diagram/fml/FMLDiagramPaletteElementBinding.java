@@ -401,7 +401,7 @@ public interface FMLDiagramPaletteElementBinding extends FlexoConceptObject {
 				return dropScheme;
 			}
 
-			if (getCall().isSet() && getDeclaringCompilationUnit() != null) {
+			if (getCall() != null && getCall().isSet() && getDeclaringCompilationUnit() != null) {
 				decodeSerializedCall();
 				if (dropScheme != null) {
 					return dropScheme;
@@ -652,7 +652,7 @@ public interface FMLDiagramPaletteElementBinding extends FlexoConceptObject {
 				}
 			}
 
-			DropSchemePathElement dropSchemePathElement = (DropSchemePathElement) getFMLModelFactory().newAbstractCreationSchemePathElement(
+			DropSchemePathElement dropSchemePathElement = getFMLModelFactory().newAbstractCreationSchemePathElement(
 					DropSchemePathElement.class, dropScheme != null ? dropScheme.getFlexoConcept().getInstanceType() : null, null,
 					dropScheme != null ? dropScheme.getName() : null, args, this);
 			bv.addBindingPathElement(dropSchemePathElement);

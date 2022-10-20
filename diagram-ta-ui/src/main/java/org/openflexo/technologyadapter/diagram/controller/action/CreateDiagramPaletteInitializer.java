@@ -44,9 +44,9 @@ import javax.swing.Icon;
 
 import org.openflexo.components.wizard.Wizard;
 import org.openflexo.components.wizard.WizardDialog;
-import org.openflexo.diana.DrawingGraphicalRepresentation;
 import org.openflexo.diana.DianaModelFactory;
 import org.openflexo.diana.DianaModelFactoryImpl;
+import org.openflexo.diana.DrawingGraphicalRepresentation;
 import org.openflexo.foundation.FlexoObject;
 import org.openflexo.foundation.action.FlexoActionFactory;
 import org.openflexo.foundation.action.FlexoActionRunnable;
@@ -106,7 +106,7 @@ public class CreateDiagramPaletteInitializer extends ActionInitializer<CreateDia
 	protected FlexoActionRunnable<CreateDiagramPalette, DiagramSpecification, FlexoObject> getDefaultFinalizer() {
 		return (e, action) -> {
 			getController().focusOnTechnologyAdapter(getController().getTechnologyAdapter(DiagramTechnologyAdapter.class));
-			getController().setCurrentEditedObjectAsModuleView(action.getNewPalette());
+			getController().setCurrentEditedObject(action.getNewPalette());
 			return true;
 		};
 	}

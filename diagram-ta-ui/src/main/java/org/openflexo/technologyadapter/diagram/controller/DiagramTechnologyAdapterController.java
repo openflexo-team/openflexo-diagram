@@ -44,6 +44,7 @@ import org.openflexo.diana.swing.control.SwingToolFactory;
 import org.openflexo.diana.swing.control.tools.JDianaDialogInspectors;
 import org.openflexo.diana.swing.control.tools.JDianaInspectors;
 import org.openflexo.diana.swing.control.tools.JDianaScaleSelector;
+import org.openflexo.foundation.FlexoObject;
 import org.openflexo.foundation.fml.FlexoBehaviour;
 import org.openflexo.foundation.fml.FlexoConceptInstanceRole;
 import org.openflexo.foundation.fml.FlexoRole;
@@ -111,9 +112,11 @@ import org.openflexo.technologyadapter.diagram.fml.editionaction.GraphicalAction
 import org.openflexo.technologyadapter.diagram.gui.DiagramIconLibrary;
 import org.openflexo.technologyadapter.diagram.gui.view.DiagramSpecificationView;
 import org.openflexo.technologyadapter.diagram.metamodel.DiagramPalette;
+import org.openflexo.technologyadapter.diagram.metamodel.DiagramPaletteElement;
 import org.openflexo.technologyadapter.diagram.metamodel.DiagramSpecification;
 import org.openflexo.technologyadapter.diagram.model.Diagram;
 import org.openflexo.technologyadapter.diagram.model.DiagramConnector;
+import org.openflexo.technologyadapter.diagram.model.DiagramElement;
 import org.openflexo.technologyadapter.diagram.model.DiagramShape;
 import org.openflexo.view.EmptyPanel;
 import org.openflexo.view.ModuleView;
@@ -416,10 +419,24 @@ public class DiagramTechnologyAdapterController extends TechnologyAdapterControl
 	}
 
 	@Override
-	public boolean hasModuleViewForObject(TechnologyObject<DiagramTechnologyAdapter> object, FlexoController controller) {
-		return object instanceof Diagram || object instanceof DiagramPalette || object instanceof DiagramSpecification;
+	public boolean isRepresentableInModuleView(TechnologyObject<DiagramTechnologyAdapter> object) {
+		return object instanceof DiagramElement || object instanceof DiagramPaletteElement || object instanceof DiagramSpecification;
 	}
-
+	
+	@Override
+	public FlexoObject getRepresentableMasterObject(TechnologyObject<DiagramTechnologyAdapter> object) {
+		if (object instanceof DiagramElement) {
+			return ((DiagramElement<?>)object).getDiagram();
+		}
+		if (object instanceof DiagramPaletteElement) {
+			return ((DiagramPaletteElement)object).getPalette();
+		}
+		if (object instanceof DiagramSpecification) {
+			return object;
+		}
+		return null;
+	}
+	
 	@Override
 	public String getWindowTitleforObject(TechnologyObject<DiagramTechnologyAdapter> object, FlexoController controller) {
 
@@ -430,7 +447,7 @@ public class DiagramTechnologyAdapterController extends TechnologyAdapterControl
 	}
 
 	@Override
-	public ModuleView<?> createModuleViewForObject(TechnologyObject<DiagramTechnologyAdapter> object, FlexoController controller,
+	public ModuleView<?> createModuleViewForMasterObject(TechnologyObject<DiagramTechnologyAdapter> object, FlexoController controller,
 			FlexoPerspective perspective) {
 
 		if (object instanceof Diagram) {

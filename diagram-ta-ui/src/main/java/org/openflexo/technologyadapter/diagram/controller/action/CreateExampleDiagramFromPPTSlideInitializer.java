@@ -70,7 +70,7 @@ public class CreateExampleDiagramFromPPTSlideInitializer
 	@Override
 	protected FlexoActionRunnable<CreateExampleDiagramFromPPTSlide, DiagramSpecification, FMLObject> getDefaultFinalizer() {
 		return (e, action) -> {
-			getController().setCurrentEditedObjectAsModuleView(action.getDiagram());
+			getController().setCurrentEditedObject(action.getDiagram());
 			return true;
 		};
 	}

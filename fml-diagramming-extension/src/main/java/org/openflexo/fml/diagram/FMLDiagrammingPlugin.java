@@ -99,16 +99,24 @@ public class FMLDiagrammingPlugin extends TechnologyAdapterPluginController<FMLT
 	}
 
 	@Override
-	public boolean hasModuleViewForObject(FlexoObject object) {
+	public boolean isRepresentableInModuleView(FlexoObject object) {
 		if (object instanceof FMLRTVirtualModelInstance && (((FMLRTVirtualModelInstance) object).getVirtualModel() != null)
 				&& ((FMLRTVirtualModelInstance) object).getVirtualModel().getURI().equals(FML_CLASS_DIAGRAM_VIRTUAL_MODEL_URI)) {
 			return true;
 		}
 		return false;
 	}
-
+	
 	@Override
-	public ModuleView<?> createModuleViewForObject(FlexoObject object, FlexoController controller, FlexoPerspective perspective) {
+	public FMLRTVirtualModelInstance getRepresentableMasterObject(FlexoObject object) {
+		if (isRepresentableInModuleView(object)) {
+			return (FMLRTVirtualModelInstance)object;
+		}
+		return null;
+	}
+	
+	@Override
+	public ModuleView<?> createModuleViewForMasterObject(FlexoObject object, FlexoController controller, FlexoPerspective perspective) {
 		if (object instanceof FMLRTVirtualModelInstance
 				&& ((FMLRTVirtualModelInstance) object).getVirtualModel().getURI().equals(FML_CLASS_DIAGRAM_VIRTUAL_MODEL_URI)) {
 			FMLRTVirtualModelInstance vmInstance = (FMLRTVirtualModelInstance) object;

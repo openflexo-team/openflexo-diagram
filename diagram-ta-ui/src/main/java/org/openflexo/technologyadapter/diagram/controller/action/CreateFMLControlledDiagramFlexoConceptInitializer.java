@@ -103,7 +103,7 @@ public class CreateFMLControlledDiagramFlexoConceptInitializer
 						.hasNature(FMLControlledDiagramVirtualModelNature.INSTANCE)) {
 					getController().focusOnTechnologyAdapter(getController().getTechnologyAdapter(DiagramTechnologyAdapter.class));
 				}
-				getController().setCurrentEditedObjectAsModuleView(action.getNewFlexoConcept());
+				getController().setCurrentEditedObject(action.getNewFlexoConcept());
 			}
 			return true;
 		};

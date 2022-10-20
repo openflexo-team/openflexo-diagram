@@ -75,7 +75,7 @@ public class CreatePaletteElementFromShapeInitializer
 			if (getController().getCurrentModuleView() instanceof FMLControlledDiagramModuleView) {
 				FMLControlledDiagramModuleView moduleView = (FMLControlledDiagramModuleView) getController().getCurrentModuleView();
 				action.setVirtualModelResource(
-						(CompilationUnitResource) moduleView.getEditor().getVirtualModelInstance().getVirtualModel().getResource());
+						moduleView.getEditor().getVirtualModelInstance().getVirtualModel().getResource());
 			}
 
 			if (getController().getCurrentModuleView() instanceof FMLControlledDiagramCompilationUnitView) {
@@ -102,7 +102,7 @@ public class CreatePaletteElementFromShapeInitializer
 		return (e, action) -> {
 			// Switch to palette if in DiagramPerspective
 			getController().focusOnTechnologyAdapter(getController().getTechnologyAdapter(DiagramTechnologyAdapter.class));
-			getController().setCurrentEditedObjectAsModuleView(action.getPalette());
+			getController().setCurrentEditedObject(action.getPalette());
 			getController().getSelectionManager().setSelectedObject(action.getNewPaletteElement());
 			return true;
 		};

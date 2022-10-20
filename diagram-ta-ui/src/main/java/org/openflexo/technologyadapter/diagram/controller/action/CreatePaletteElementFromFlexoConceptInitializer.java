@@ -75,7 +75,7 @@ public class CreatePaletteElementFromFlexoConceptInitializer
 			if (getController().getCurrentModuleView() instanceof FMLControlledDiagramModuleView) {
 				FMLControlledDiagramModuleView moduleView = (FMLControlledDiagramModuleView) getController().getCurrentModuleView();
 				action.setVirtualModelResource(
-						(CompilationUnitResource) moduleView.getEditor().getVirtualModelInstance().getVirtualModel().getResource());
+						moduleView.getEditor().getVirtualModelInstance().getVirtualModel().getResource());
 			}
 
 			if (getController().getCurrentModuleView() instanceof FMLControlledDiagramCompilationUnitView) {
@@ -101,7 +101,7 @@ public class CreatePaletteElementFromFlexoConceptInitializer
 	protected FlexoActionRunnable<CreatePaletteElementFromFlexoConcept, FlexoConcept, FMLObject> getDefaultFinalizer() {
 		return (e, action) -> {
 			getController().focusOnTechnologyAdapter(getController().getTechnologyAdapter(DiagramTechnologyAdapter.class));
-			getController().setCurrentEditedObjectAsModuleView(action.getPalette());
+			getController().setCurrentEditedObject(action.getPalette());
 			getController().getSelectionManager().setSelectedObject(action.getNewPaletteElement());
 			return true;
 		};

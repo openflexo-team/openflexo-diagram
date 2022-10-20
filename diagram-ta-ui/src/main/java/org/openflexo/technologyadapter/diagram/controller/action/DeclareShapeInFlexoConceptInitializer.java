@@ -73,7 +73,7 @@ public class DeclareShapeInFlexoConceptInitializer extends ActionInitializer<Dec
 			if (getController().getCurrentModuleView() instanceof FMLControlledDiagramModuleView) {
 				FMLControlledDiagramModuleView moduleView = (FMLControlledDiagramModuleView) getController().getCurrentModuleView();
 				action.setCompilationUnitResource(
-						(CompilationUnitResource) moduleView.getEditor().getVirtualModelInstance().getVirtualModel().getResource());
+						moduleView.getEditor().getVirtualModelInstance().getVirtualModel().getResource());
 			}
 
 			if (getController().getCurrentModuleView() instanceof FMLControlledDiagramCompilationUnitView) {
@@ -98,7 +98,7 @@ public class DeclareShapeInFlexoConceptInitializer extends ActionInitializer<Dec
 	protected FlexoActionRunnable<DeclareShapeInFlexoConcept, DiagramShape, DiagramElement<?>> getDefaultFinalizer() {
 		return (e, action) -> {
 			// TODO: try to switch first to ViewPointModeller !!!
-			getController().setCurrentEditedObjectAsModuleView(action.getFlexoConcept());
+			getController().setCurrentEditedObject(action.getFlexoConcept());
 			getController().getSelectionManager().setSelectedObject(action.getFlexoConcept());
 			return true;
 		};

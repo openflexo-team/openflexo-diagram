@@ -75,7 +75,7 @@ public class DeclareConnectorInFlexoConceptInitializer
 			if (getController().getCurrentModuleView() instanceof FMLControlledDiagramModuleView) {
 				FMLControlledDiagramModuleView moduleView = (FMLControlledDiagramModuleView) getController().getCurrentModuleView();
 				action.setCompilationUnitResource(
-						(CompilationUnitResource) moduleView.getEditor().getVirtualModelInstance().getVirtualModel().getResource());
+						moduleView.getEditor().getVirtualModelInstance().getVirtualModel().getResource());
 			}
 
 			if (getController().getCurrentModuleView() instanceof FMLControlledDiagramCompilationUnitView) {
@@ -99,7 +99,7 @@ public class DeclareConnectorInFlexoConceptInitializer
 	@Override
 	protected FlexoActionRunnable<DeclareConnectorInFlexoConcept, DiagramConnector, DiagramElement<?>> getDefaultFinalizer() {
 		return (e, action) -> {
-			getController().setCurrentEditedObjectAsModuleView(action.getFlexoConcept());
+			getController().setCurrentEditedObject(action.getFlexoConcept());
 			if (action.getPrimaryChoice() == DeclareInFlexoConceptChoices.CREATE_ELEMENT_IN_EXISTING_FLEXO_CONCEPT) {
 				getController().getSelectionManager().setSelectedObject(action.getFlexoRoleCreationStrategy().getNewFlexoRole());
 			}

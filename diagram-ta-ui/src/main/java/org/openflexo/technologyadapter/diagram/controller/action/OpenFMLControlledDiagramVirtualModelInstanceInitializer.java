@@ -81,7 +81,7 @@ public class OpenFMLControlledDiagramVirtualModelInstanceInitializer
 	protected FlexoActionRunnable<OpenFMLControlledDiagramVirtualModelInstance, FMLRTVirtualModelInstance, FlexoObject> getDefaultFinalizer() {
 		return (e, action) -> {
 			getController().focusOnTechnologyAdapter(getController().getTechnologyAdapter(DiagramTechnologyAdapter.class));
-			getController().setCurrentEditedObjectAsModuleView(action.getFocusedObject());
+			getController().setCurrentEditedObject(action.getFocusedObject());
 			return true;
 		};
 	}

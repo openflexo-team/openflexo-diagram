@@ -69,7 +69,7 @@ public class CreateDiagramFromPPTSlideInitializer extends ActionInitializer<Crea
 	@Override
 	protected FlexoActionRunnable<CreateDiagramFromPPTSlide, RepositoryFolder, FMLObject> getDefaultFinalizer() {
 		return (e, action) -> {
-			getController().setCurrentEditedObjectAsModuleView(action.getDiagram());
+			getController().setCurrentEditedObject(action.getDiagram());
 			return true;
 		};
 	}

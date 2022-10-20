@@ -83,7 +83,7 @@ public class CreateExampleDiagramInitializer extends ActionInitializer<CreateExa
 	protected FlexoActionRunnable<CreateExampleDiagram, DiagramSpecification, FMLObject> getDefaultFinalizer() {
 		return (e, action) -> {
 			getController().focusOnTechnologyAdapter(getController().getTechnologyAdapter(DiagramTechnologyAdapter.class));
-			getController().setCurrentEditedObjectAsModuleView(action.getNewDiagram());
+			getController().setCurrentEditedObject(action.getNewDiagram());
 			return true;
 		};
 	}
