@@ -345,6 +345,8 @@ public class TestDiagramFeaturesBindingModelManagement extends DiagramTestCase {
 
 		typedDiagramModelSlot.addToPaletteElementBindings(newBinding);
 
+		System.out.println("typedDiagramModelSlot FML: "+typedDiagramModelSlot.getFMLPrettyPrint());
+		
 		virtualModel.getResource().save();
 
 		System.out.println(virtualModel.getCompilationUnit().getFMLPrettyPrint());
