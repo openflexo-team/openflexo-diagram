@@ -564,8 +564,6 @@ public class TestDiagramFeaturesBindingModelManagement extends DiagramTestCase {
 	@Category(UITest.class)
 	public void testLoadViewPointAndVirtualModel() throws FileNotFoundException, ResourceLoadingCancelledException, FlexoException {
 
-		System.exit(-1);
-
 		instanciateTestServiceManager(DiagramTechnologyAdapter.class);
 		VirtualModelLibrary vpLib = serviceManager.getVirtualModelLibrary();
 		assertNotNull(vpLib);

@@ -52,7 +52,7 @@ import org.openflexo.foundation.fml.CreationScheme;
 import org.openflexo.foundation.fml.FlexoBehaviourParameter;
 import org.openflexo.foundation.fml.FlexoConcept;
 import org.openflexo.foundation.fml.annotations.FML;
-import org.openflexo.foundation.fml.binding.AbstractCreationSchemePathElement;
+import org.openflexo.foundation.fml.binding.CreationSchemePathElement;
 import org.openflexo.foundation.fml.rt.FMLRTVirtualModelInstance;
 import org.openflexo.foundation.fml.rt.FlexoConceptInstance;
 import org.openflexo.foundation.fml.rt.action.FlexoBehaviourAction;
@@ -70,9 +70,10 @@ import org.openflexo.technologyadapter.diagram.model.action.DropSchemeAction;
 @ModelEntity
 @ImplementationClass(DropSchemePathElement.DropSchemePathElementImpl.class)
 @FML("DropSchemePathElement")
-public interface DropSchemePathElement extends AbstractCreationSchemePathElement<DropScheme> {
+@Deprecated // Should not be used anymore !!!
+public interface DropSchemePathElement extends CreationSchemePathElement<DropScheme> {
 
-	public abstract class DropSchemePathElementImpl extends AbstractCreationSchemePathElementImpl<DropScheme>
+	public abstract class DropSchemePathElementImpl extends CreationSchemePathElementImpl<DropScheme>
 			implements DropSchemePathElement {
 
 		static final Logger logger = Logger.getLogger(DropSchemePathElement.class.getPackage().getName());

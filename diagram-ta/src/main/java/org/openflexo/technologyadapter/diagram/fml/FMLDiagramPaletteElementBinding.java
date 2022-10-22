@@ -394,7 +394,7 @@ public interface FMLDiagramPaletteElementBinding extends FlexoConceptObject {
 			}
 
 			if (getDropSchemePathElement() != null) {
-				return getDropSchemePathElement().getCreationScheme();
+				return (DropScheme)getDropSchemePathElement().getCreationScheme();
 			}
 
 			if (dropScheme != null) {
@@ -661,10 +661,10 @@ public interface FMLDiagramPaletteElementBinding extends FlexoConceptObject {
 			return returned;
 		}
 
-		private DropSchemePathElement getDropSchemePathElement() {
+		private CreationSchemePathElement getDropSchemePathElement() {
 			if (getCall() != null && getCall().isBindingValue()
 					&& ((BindingValue) getCall().getExpression()).getBindingPathElementAtIndex(0) instanceof CreationSchemePathElement) {
-				return (DropSchemePathElement) ((BindingValue) getCall().getExpression()).getBindingPathElementAtIndex(0);
+				return (CreationSchemePathElement) ((BindingValue) getCall().getExpression()).getBindingPathElementAtIndex(0);
 			}
 			return null;
 		}
