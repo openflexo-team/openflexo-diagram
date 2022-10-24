@@ -111,8 +111,8 @@ public class TestDiagramFeaturesBindingModelManagement extends DiagramTestCase {
 	private final String PALETTE_ELEMENT_NAME = "myPaletteElement";
 
 	private final String VIEWPOINT_NAME = "TestViewPoint";
-	private final String VIEWPOINT_URI = "http://openflexo.org/test/TestResourceCenter/TestViewPoint.fml";
-	public static final String VIRTUAL_MODEL_NAME = "TestVirtualModel";
+	private final String VIEWPOINT_URI = "http://openflexo.org/test/TestResourceCenter/MyTestViewPoint.fml";
+	public static final String VIRTUAL_MODEL_NAME = "MyTestVirtualModel";
 
 	public static DiagramSpecificationResource diagramSpecificationResource;
 	public static DiagramPaletteResource paletteResource;
@@ -520,7 +520,7 @@ public class TestDiagramFeaturesBindingModelManagement extends DiagramTestCase {
 		viewPoint = retrievedVPResource.getCompilationUnit().getVirtualModel();
 		assertNotNull(viewPoint);
 
-		virtualModel = viewPoint.getVirtualModelNamed("TestVirtualModel");
+		virtualModel = viewPoint.getVirtualModelNamed(VIRTUAL_MODEL_NAME);
 
 		assertNotNull(virtualModel.getBindingModel());
 		assertEquals(3, virtualModel.getBindingModel().getBindingVariablesCount());
