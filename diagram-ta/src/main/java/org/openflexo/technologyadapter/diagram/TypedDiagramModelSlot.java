@@ -85,7 +85,6 @@ import org.openflexo.technologyadapter.diagram.fml.editionaction.GraphicalAction
 import org.openflexo.technologyadapter.diagram.metamodel.DiagramPaletteElement;
 import org.openflexo.technologyadapter.diagram.metamodel.DiagramSpecification;
 import org.openflexo.technologyadapter.diagram.model.Diagram;
-import org.openflexo.technologyadapter.diagram.model.DiagramType;
 import org.openflexo.technologyadapter.diagram.rm.DiagramResource;
 import org.openflexo.technologyadapter.diagram.rm.DiagramResourceFactory;
 
@@ -309,14 +308,9 @@ public interface TypedDiagramModelSlot extends TypeAwareModelSlot<Diagram, Diagr
 
 		@Override
 		public Type getType() {
-			return DiagramType.getDiagramType(getDiagramSpecification());
-
-			// Vincent: update this when we will clarify what is a diagram specification and diagram
-			// Answer from Sylvain: is that ok for you ?
-			/*if (diagramType == null) {
-				diagramType = DiagramType.getDiagramType(getDiagramSpecification());
-			}
-			return diagramType;*/
+			// TODO: handle DiagramType here instead of simple Diagram
+			// return DiagramType.getDiagramType(getDiagramSpecification());
+			return Diagram.class;
 		}
 
 		@Override
