@@ -1,0 +1,5 @@
+@URI("http://openflexo.org/test/TestResourceCenter/TestControlledDiagramViewPoint.fml")
+@Version("0.1")
+@Description("")
+model TestControlledDiagramViewPoint { 
+}

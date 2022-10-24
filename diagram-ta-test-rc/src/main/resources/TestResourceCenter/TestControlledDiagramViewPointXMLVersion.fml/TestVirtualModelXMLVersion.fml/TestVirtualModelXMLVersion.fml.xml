@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<VirtualModel id="FLX-4" virtualModelClass="org.openflexo.foundation.fml.VirtualModel" modelVersion="2.0" uri="http://openflexo.org/test/TestResourceCenter/TestControlledDiagramViewPoint.fml/TestVirtualModel.fml" version="0.1" name="TestVirtualModel" userID="FLX" flexoID="4">
+<VirtualModel id="FLX-4" virtualModelClass="org.openflexo.foundation.fml.VirtualModel" modelVersion="2.0" uri="http://openflexo.org/test/TestResourceCenter/TestControlledDiagramViewPoint.fml/TestVirtualModelXMLVersion.fml" version="0.1" name="TestVirtualModelXMLVersion" userID="FLX" flexoID="4">
   <FMLLocalizedDictionary id="SYL-62" userID="SYL" flexoID="62" />
   <FlexoConcept id="FLX-10" name="TestConcept" userID="FLX" flexoID="10">
     <Inspector id="FLX-5" userID="FLX" flexoID="5" />
@@ -17,14 +17,14 @@
   <FlexoConcept id="FLX-17" name="TestLink" userID="FLX" flexoID="17">
     <Inspector id="FLX-16" inspectorTitle="TestLink" userID="FLX" flexoID="16" />
     <ConnectorRole id="FLX-21" exampleLabel="label" metamodelElementReference="http://openflexo.org/test/TestDiagramSpecification/ExampleDiagram.diagram#SYL_4" cloningStrategy="Clone" cardinality="ZeroOne" name="connector" userID="FLX" flexoID="21" />
-    <LinkScheme id="FLX-18" northDirectionSupported="true" eastDirectionSupported="true" fromTarget="http://openflexo.org/test/TestResourceCenter/TestControlledDiagramViewPoint.fml/TestVirtualModel.fml#TestConcept" toTarget="http://openflexo.org/test/TestResourceCenter/TestControlledDiagramViewPoint.fml/TestVirtualModel.fml#TestConcept" westDirectionSupported="true" isAvailableWithFloatingPalette="true" southDirectionSupported="true" skipConfirmationPanel="false" name="link" width="800" label="link" height="600" userID="FLX" flexoID="18">
+    <LinkScheme id="FLX-18" northDirectionSupported="true" eastDirectionSupported="true" fromTarget="http://openflexo.org/test/TestResourceCenter/TestControlledDiagramViewPoint.fml/TestVirtualModelXMLVersion.fml#TestConcept" toTarget="http://openflexo.org/test/TestResourceCenter/TestControlledDiagramViewPoint.fml/TestVirtualModelXMLVersion.fml#TestConcept" westDirectionSupported="true" isAvailableWithFloatingPalette="true" southDirectionSupported="true" skipConfirmationPanel="false" name="link" width="800" label="link" height="600" userID="FLX" flexoID="18">
       <BehaviourControlGraph_AssignationAction id="SYL-41" assign="connector" userID="SYL" flexoID="41">
         <AssignableAction_AddConnector id="FLX-19" fromShape="fromTarget.shape" toShape="toTarget.shape" receiver="diagram" assignation="connector" userID="FLX" flexoID="19" />
       </BehaviourControlGraph_AssignationAction>
     </LinkScheme>
   </FlexoConcept>
   <UseModelSlotDeclaration id="0" modelSlotClass="org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot" userID="FLX" flexoID="-1" />
-  <Inspector id="FLX-2" inspectorTitle="TestVirtualModel" userID="FLX" flexoID="2" />
+  <Inspector id="FLX-2" inspectorTitle="TestVirtualModelXMLVersion" userID="FLX" flexoID="2" />
   <TypedDiagramModelSlot id="FLX-8" metaModelURI="http://openflexo.org/test/TestDiagramSpecification" isRequired="true" cloningStrategy="Reference" cardinality="ZeroOne" name="diagram" userID="FLX" flexoID="8">
     <FMLDiagramPaletteElementBinding id="FLX-7" paletteElementId="http://openflexo.org/test/TestDiagramSpecification/TestPalette.palette#TestPaletteElement" userID="FLX" flexoID="7">
       <DropScheme idref="FLX-6" />

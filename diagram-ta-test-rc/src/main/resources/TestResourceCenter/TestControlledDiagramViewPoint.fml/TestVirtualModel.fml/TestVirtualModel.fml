@@ -1,0 +1,35 @@
+use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot as DIAGRAM;
+
+import ["http://openflexo.org/test/TestDiagramSpecification"] as TEST_DIAGRAM_SPECIFICATION;
+import [TEST_DIAGRAM_SPECIFICATION + "/ExampleDiagram.diagram"] as EXAMPLE_DIAGRAM;
+import [EXAMPLE_DIAGRAM:"SYL-2"] as DIAGRAM_SHAPE;
+import [EXAMPLE_DIAGRAM:"SYL-3"] as DIAGRAM_SHAPE2;
+import [EXAMPLE_DIAGRAM:"SYL-4"] as DIAGRAM_CONNECTOR;
+
+@URI("http://openflexo.org/test/TestResourceCenter/TestControlledDiagramViewPoint.fml/TestVirtualModel.fml")
+@Version("0.1")
+model TestVirtualModel {
+	DiagramType<?> diagram with TypedDiagram(paletteElementBindings={PaletteElementBinding:(call=unknown_new(), paletteElementId="http://openflexo.org/test/TestDiagramSpecification/TestPalette.palette#TestPaletteElement")},diagramSpecification=TEST_DIAGRAM_SPECIFICATION,isRequired=true);
+
+	create() {
+		diagram = DIAGRAM::CreateDiagram(resourceCenter=this.resourceCenter, resourceName="TestDiagram", relativePath="Diagrams");
+	}
+
+	concept TestConcept {
+		DiagramShape shape with ShapeRole(exampleLabel="label",metamodelElement=DIAGRAM_SHAPE);
+		TestConcept drop() with DropScheme(skipConfirmationPanel=false,target="top") {
+			shape = DIAGRAM::AddShape(container=topLevel);
+		}
+	}
+
+	concept TestConcept2 {
+		DiagramShape shape with ShapeRole(exampleLabel="label",metamodelElement=DIAGRAM_SHAPE2);
+	}
+
+	concept TestLink {
+		DiagramConnector connector with ConnectorRole(exampleLabel="label",metamodelElement=DIAGRAM_CONNECTOR);
+		TestLink link() with LinkScheme(fromTarget="http://openflexo.org/test/TestResourceCenter/TestControlledDiagramViewPoint.fml/TestVirtualModel.fml#TestConcept",skipConfirmationPanel=false,toTarget="http://openflexo.org/test/TestResourceCenter/TestControlledDiagramViewPoint.fml/TestVirtualModel.fml#TestConcept") {
+			connector = DIAGRAM::AddConnector(fromShape=fromTarget.shape, toShape=toTarget.shape);
+		}
+	}
+}
