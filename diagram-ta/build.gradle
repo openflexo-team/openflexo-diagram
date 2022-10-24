@@ -10,7 +10,8 @@ dependencies {
   implementation group: 'org.apache.poi', name: 'poi-scratchpad', version: '3.12'
 
   // testing dep
-  testImplementation flexoFoundationTest()
+  implementation flexoFoundationTest()
+  // implementation project(':flexo-foundation-test')
 
   // testRuntimeOnly group: "org.openflexo", name: "testdiagram_vp", version: "1.1"
 
