@@ -673,7 +673,7 @@ public interface FMLDiagramPaletteElementBinding extends FlexoConceptObject {
 
 		@Override
 		public DataBinding<FlexoConceptInstance> getCall() {
-			if (call == null && getFMLModelFactory() != null) {
+			if (call == null && getFMLModelFactory() != null && !isMakingCall) {
 				isMakingCall = true;
 				if (getDropScheme() != null) {
 					call = makeCall(getDropScheme(), getParameters());
