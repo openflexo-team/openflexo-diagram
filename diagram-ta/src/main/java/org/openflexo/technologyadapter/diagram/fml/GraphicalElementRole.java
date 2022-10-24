@@ -347,7 +347,7 @@ public abstract interface GraphicalElementRole<T extends DiagramElement<GR>, GR 
 		@Override
 		public void setMetamodelElement(T anElement) {
 
-			if (getDeclaringCompilationUnit() != null) {
+			if (getDeclaringCompilationUnit() != null && anElement != null) {
 				getDeclaringCompilationUnit().ensureElementImport(anElement);
 			}
 
