@@ -1,7 +1,9 @@
+namespace "http://openflexo.org/test/TestDiagramSpecification" as DIAGRAM_SPECIFICATION; 
+
 use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot as DIAGRAM;
 
-import ["http://openflexo.org/test/TestDiagramSpecification"] as TEST_DIAGRAM_SPECIFICATION;
-import [TEST_DIAGRAM_SPECIFICATION + "/ExampleDiagram.diagram"] as EXAMPLE_DIAGRAM;
+import [DIAGRAM_SPECIFICATION] as TEST_DIAGRAM_SPECIFICATION;
+import [DIAGRAM_SPECIFICATION + "/ExampleDiagram.diagram"] as EXAMPLE_DIAGRAM;
 import [EXAMPLE_DIAGRAM:"SYL-2"] as DIAGRAM_SHAPE;
 import [EXAMPLE_DIAGRAM:"SYL-3"] as DIAGRAM_SHAPE2;
 import [EXAMPLE_DIAGRAM:"SYL-4"] as DIAGRAM_CONNECTOR;
