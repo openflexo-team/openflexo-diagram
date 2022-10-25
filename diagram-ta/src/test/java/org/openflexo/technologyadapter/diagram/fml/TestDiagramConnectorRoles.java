@@ -61,7 +61,7 @@ import org.openflexo.foundation.resource.ResourceLoadingCancelledException;
 import org.openflexo.foundation.test.OpenflexoTestCase;
 import org.openflexo.technologyadapter.diagram.DiagramTechnologyAdapter;
 import org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
-import org.openflexo.technologyadapter.diagram.model.DiagramType;
+import org.openflexo.technologyadapter.diagram.model.Diagram;
 import org.openflexo.technologyadapter.diagram.rm.DiagramSpecificationRepository;
 import org.openflexo.test.OrderedRunner;
 import org.openflexo.test.TestOrder;
@@ -144,7 +144,7 @@ public class TestDiagramConnectorRoles extends OpenflexoTestCase {
 		assertNotNull(virtualModel.getBindingModel());
 		assertEquals(3, virtualModel.getBindingModel().getBindingVariablesCount());
 		assertNotNull(virtualModel.getBindingModel().bindingVariableNamed("diagram"));
-		assertTrue(virtualModel.getBindingModel().bindingVariableNamed("diagram").getType() instanceof DiagramType);
+		assertTrue(virtualModel.getBindingModel().bindingVariableNamed("diagram").getType().equals(Diagram.class));
 
 		flexoConcept = virtualModel.getFlexoConcepts().get(0);
 		assertNotNull(flexoConcept);
@@ -165,7 +165,7 @@ public class TestDiagramConnectorRoles extends OpenflexoTestCase {
 		assertNotNull(virtualModel.getBindingModel());
 		assertEquals(3, virtualModel.getBindingModel().getBindingVariablesCount());
 		assertNotNull(virtualModel.getBindingModel().bindingVariableNamed("diagram"));
-		assertTrue(virtualModel.getBindingModel().bindingVariableNamed("diagram").getType() instanceof DiagramType);
+		assertTrue(virtualModel.getBindingModel().bindingVariableNamed("diagram").getType().equals(Diagram.class));
 
 		flexoConcept = virtualModel.getFlexoConcepts().get(0);
 		assertNotNull(flexoConcept);

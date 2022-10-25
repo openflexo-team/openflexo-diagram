@@ -65,7 +65,7 @@ import org.openflexo.technologyadapter.diagram.fml.ConnectorRole;
 import org.openflexo.technologyadapter.diagram.fml.DropScheme;
 import org.openflexo.technologyadapter.diagram.fml.FMLControlledDiagramVirtualModelNature;
 import org.openflexo.technologyadapter.diagram.fml.LinkScheme;
-import org.openflexo.technologyadapter.diagram.model.DiagramType;
+import org.openflexo.technologyadapter.diagram.model.Diagram;
 import org.openflexo.technologyadapter.diagram.rm.DiagramSpecificationRepository;
 import org.openflexo.test.OrderedRunner;
 import org.openflexo.test.TestOrder;
@@ -148,7 +148,7 @@ public class TestDiagramConnectorRolesXMLVersion extends OpenflexoTestCase {
 		assertNotNull(virtualModel.getBindingModel());
 		assertEquals(3, virtualModel.getBindingModel().getBindingVariablesCount());
 		assertNotNull(virtualModel.getBindingModel().bindingVariableNamed("diagram"));
-		assertTrue(virtualModel.getBindingModel().bindingVariableNamed("diagram").getType() instanceof DiagramType);
+		assertTrue(virtualModel.getBindingModel().bindingVariableNamed("diagram").getType().equals(Diagram.class));
 
 		flexoConcept = virtualModel.getFlexoConcepts().get(0);
 		assertNotNull(flexoConcept);
@@ -169,7 +169,7 @@ public class TestDiagramConnectorRolesXMLVersion extends OpenflexoTestCase {
 		assertNotNull(virtualModel.getBindingModel());
 		assertEquals(3, virtualModel.getBindingModel().getBindingVariablesCount());
 		assertNotNull(virtualModel.getBindingModel().bindingVariableNamed("diagram"));
-		assertTrue(virtualModel.getBindingModel().bindingVariableNamed("diagram").getType() instanceof DiagramType);
+		assertTrue(virtualModel.getBindingModel().bindingVariableNamed("diagram").getType().equals(Diagram.class));
 
 		flexoConcept = virtualModel.getFlexoConcepts().get(0);
 		assertNotNull(flexoConcept);
