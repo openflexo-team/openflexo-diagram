@@ -88,7 +88,6 @@ import org.openflexo.technologyadapter.diagram.metamodel.DiagramPaletteElement;
 import org.openflexo.technologyadapter.diagram.metamodel.DiagramSpecification;
 import org.openflexo.technologyadapter.diagram.model.Diagram;
 import org.openflexo.technologyadapter.diagram.model.DiagramShape;
-import org.openflexo.technologyadapter.diagram.model.DiagramType;
 import org.openflexo.technologyadapter.diagram.rm.DiagramPaletteResource;
 import org.openflexo.technologyadapter.diagram.rm.DiagramSpecificationRepository;
 import org.openflexo.technologyadapter.diagram.rm.DiagramSpecificationResource;
@@ -304,9 +303,9 @@ public class TestDiagramFeaturesBindingModelManagement extends DiagramTestCase {
 
 		assertEquals(3, virtualModel.getBindingModel().getBindingVariablesCount());
 		assertNotNull(virtualModel.getBindingModel().bindingVariableNamed("diagram"));
-		assertTrue(virtualModel.getBindingModel().bindingVariableNamed("diagram").getType() instanceof DiagramType);
-		assertTrue(((DiagramType) virtualModel.getBindingModel().bindingVariableNamed("diagram").getType())
-				.getDiagramSpecification() == diagramSpecificationResource.getDiagramSpecification());
+		assertTrue(virtualModel.getBindingModel().bindingVariableNamed("diagram").getType().equals(Diagram.class));
+		//assertTrue(((DiagramType) virtualModel.getBindingModel().bindingVariableNamed("diagram").getType())
+		//		.getDiagramSpecification() == diagramSpecificationResource.getDiagramSpecification());
 
 	}
 
@@ -361,9 +360,9 @@ public class TestDiagramFeaturesBindingModelManagement extends DiagramTestCase {
 		assertNotNull(dropScheme.getBindingModel().bindingVariableNamed(DiagramBehaviourBindingModel.TOP_LEVEL));
 		assertEquals(Diagram.class, dropScheme.getBindingModel().bindingVariableNamed(DiagramBehaviourBindingModel.TOP_LEVEL).getType());
 		assertNotNull(dropScheme.getBindingModel().bindingVariableNamed("diagram"));
-		assertTrue(dropScheme.getBindingModel().bindingVariableNamed("diagram").getType() instanceof DiagramType);
-		assertTrue(((DiagramType) dropScheme.getBindingModel().bindingVariableNamed("diagram").getType())
-				.getDiagramSpecification() == diagramSpecificationResource.getDiagramSpecification());
+		assertTrue(dropScheme.getBindingModel().bindingVariableNamed("diagram").getType().equals(Diagram.class));
+		//assertTrue(((DiagramType) dropScheme.getBindingModel().bindingVariableNamed("diagram").getType())
+		//		.getDiagramSpecification() == diagramSpecificationResource.getDiagramSpecification());
 
 		assertTrue(dropScheme.isTopTarget());
 		dropScheme.setTopTarget(true);
@@ -439,9 +438,9 @@ public class TestDiagramFeaturesBindingModelManagement extends DiagramTestCase {
 		assertNotNull(linkScheme.getBindingModel().bindingVariableNamed(DiagramBehaviourBindingModel.TOP_LEVEL));
 		assertEquals(Diagram.class, linkScheme.getBindingModel().bindingVariableNamed(DiagramBehaviourBindingModel.TOP_LEVEL).getType());
 		assertNotNull(linkScheme.getBindingModel().bindingVariableNamed("diagram"));
-		assertTrue(linkScheme.getBindingModel().bindingVariableNamed("diagram").getType() instanceof DiagramType);
-		assertTrue(((DiagramType) linkScheme.getBindingModel().bindingVariableNamed("diagram").getType())
-				.getDiagramSpecification() == diagramSpecificationResource.getDiagramSpecification());
+		assertTrue(linkScheme.getBindingModel().bindingVariableNamed("diagram").getType().equals(Diagram.class));
+		//assertTrue(((DiagramType) linkScheme.getBindingModel().bindingVariableNamed("diagram").getType())
+		//		.getDiagramSpecification() == diagramSpecificationResource.getDiagramSpecification());
 
 		assertNotNull(linkScheme.getBindingModel().bindingVariableNamed(LinkSchemeBindingModel.FROM_TARGET));
 		assertEquals(FlexoConceptInstanceType.UNDEFINED_FLEXO_CONCEPT_INSTANCE_TYPE,
@@ -525,9 +524,9 @@ public class TestDiagramFeaturesBindingModelManagement extends DiagramTestCase {
 		assertNotNull(virtualModel.getBindingModel());
 		assertEquals(3, virtualModel.getBindingModel().getBindingVariablesCount());
 		assertNotNull(virtualModel.getBindingModel().bindingVariableNamed("diagram"));
-		assertTrue(virtualModel.getBindingModel().bindingVariableNamed("diagram").getType() instanceof DiagramType);
-		assertTrue(((DiagramType) virtualModel.getBindingModel().bindingVariableNamed("diagram").getType())
-				.getDiagramSpecification() == retrievedDSResource.getDiagramSpecification());
+		assertTrue(virtualModel.getBindingModel().bindingVariableNamed("diagram").getType().equals(Diagram.class));
+		//assertTrue(((DiagramType) virtualModel.getBindingModel().bindingVariableNamed("diagram").getType())
+		//		.getDiagramSpecification() == retrievedDSResource.getDiagramSpecification());
 
 		flexoConcept = virtualModel.getFlexoConcept("Concept");
 
@@ -543,9 +542,9 @@ public class TestDiagramFeaturesBindingModelManagement extends DiagramTestCase {
 		assertNotNull(dropScheme.getBindingModel().bindingVariableNamed(DiagramBehaviourBindingModel.TOP_LEVEL));
 		assertEquals(Diagram.class, dropScheme.getBindingModel().bindingVariableNamed(DiagramBehaviourBindingModel.TOP_LEVEL).getType());
 		assertNotNull(dropScheme.getBindingModel().bindingVariableNamed("diagram"));
-		assertTrue(dropScheme.getBindingModel().bindingVariableNamed("diagram").getType() instanceof DiagramType);
-		assertTrue(((DiagramType) dropScheme.getBindingModel().bindingVariableNamed("diagram").getType())
-				.getDiagramSpecification() == retrievedDSResource.getDiagramSpecification());
+		assertTrue(dropScheme.getBindingModel().bindingVariableNamed("diagram").getType().equals(Diagram.class));
+		//assertTrue(((DiagramType) dropScheme.getBindingModel().bindingVariableNamed("diagram").getType())
+		//		.getDiagramSpecification() == retrievedDSResource.getDiagramSpecification());
 		assertNotNull(dropScheme.getBindingModel().bindingVariableNamed(DropSchemeBindingModel.TARGET));
 		assertEquals(FlexoConceptInstanceType.getFlexoConceptInstanceType(flexoConcept),
 				dropScheme.getBindingModel().bindingVariableNamed(DropSchemeBindingModel.TARGET).getType());
@@ -578,7 +577,7 @@ public class TestDiagramFeaturesBindingModelManagement extends DiagramTestCase {
 		assertNotNull(virtualModel.getBindingModel());
 		assertEquals(3, virtualModel.getBindingModel().getBindingVariablesCount());
 		assertNotNull(virtualModel.getBindingModel().bindingVariableNamed("diagram"));
-		assertTrue(virtualModel.getBindingModel().bindingVariableNamed("diagram").getType() instanceof DiagramType);
+		assertTrue(virtualModel.getBindingModel().bindingVariableNamed("diagram").getType().equals(Diagram.class));
 
 		flexoConcept = virtualModel.getFlexoConcepts().get(0);
 		assertNotNull(flexoConcept);
@@ -613,7 +612,7 @@ public class TestDiagramFeaturesBindingModelManagement extends DiagramTestCase {
 		assertNotNull(virtualModel.getBindingModel());
 		assertEquals(3, virtualModel.getBindingModel().getBindingVariablesCount());
 		assertNotNull(virtualModel.getBindingModel().bindingVariableNamed("diagram"));
-		assertTrue(virtualModel.getBindingModel().bindingVariableNamed("diagram").getType() instanceof DiagramType);
+		assertTrue(virtualModel.getBindingModel().bindingVariableNamed("diagram").getType().equals(Diagram.class));
 
 		flexoConcept = virtualModel.getFlexoConcepts().get(0);
 		assertNotNull(flexoConcept);
@@ -647,7 +646,7 @@ public class TestDiagramFeaturesBindingModelManagement extends DiagramTestCase {
 		assertNotNull(dropScheme.getBindingModel().bindingVariableNamed(DiagramBehaviourBindingModel.TOP_LEVEL));
 		assertEquals(Diagram.class, dropScheme.getBindingModel().bindingVariableNamed(DiagramBehaviourBindingModel.TOP_LEVEL).getType());
 		assertNotNull(dropScheme.getBindingModel().bindingVariableNamed("diagram"));
-		assertTrue(dropScheme.getBindingModel().bindingVariableNamed("diagram").getType() instanceof DiagramType);
+		assertTrue(dropScheme.getBindingModel().bindingVariableNamed("diagram").getType().equals(Diagram.class));
 		assertNull(dropScheme.getBindingModel().bindingVariableNamed(DropSchemeBindingModel.TARGET));
 
 		FlexoConcept FCLink = virtualModel.getFlexoConcept("TestLink");
@@ -664,7 +663,7 @@ public class TestDiagramFeaturesBindingModelManagement extends DiagramTestCase {
 		assertNotNull(linkScheme.getBindingModel().bindingVariableNamed(DiagramBehaviourBindingModel.TOP_LEVEL));
 		assertEquals(Diagram.class, linkScheme.getBindingModel().bindingVariableNamed(DiagramBehaviourBindingModel.TOP_LEVEL).getType());
 		assertNotNull(linkScheme.getBindingModel().bindingVariableNamed("diagram"));
-		assertTrue(linkScheme.getBindingModel().bindingVariableNamed("diagram").getType() instanceof DiagramType);
+		assertTrue(linkScheme.getBindingModel().bindingVariableNamed("diagram").getType().equals(Diagram.class));
 
 		System.out.println("BM=" + linkScheme.getBindingModel());
 
@@ -695,7 +694,7 @@ public class TestDiagramFeaturesBindingModelManagement extends DiagramTestCase {
 		assertNotNull(dropScheme.getBindingModel().bindingVariableNamed(DiagramBehaviourBindingModel.TOP_LEVEL));
 		assertEquals(Diagram.class, dropScheme.getBindingModel().bindingVariableNamed(DiagramBehaviourBindingModel.TOP_LEVEL).getType());
 		assertNotNull(dropScheme.getBindingModel().bindingVariableNamed("diagram"));
-		assertTrue(dropScheme.getBindingModel().bindingVariableNamed("diagram").getType() instanceof DiagramType);
+		assertTrue(dropScheme.getBindingModel().bindingVariableNamed("diagram").getType().equals(Diagram.class));
 		assertNull(dropScheme.getBindingModel().bindingVariableNamed(DropSchemeBindingModel.TARGET));
 
 		FlexoConcept FCLink = virtualModel.getFlexoConcept("TestLink");
@@ -712,7 +711,7 @@ public class TestDiagramFeaturesBindingModelManagement extends DiagramTestCase {
 		assertNotNull(linkScheme.getBindingModel().bindingVariableNamed(DiagramBehaviourBindingModel.TOP_LEVEL));
 		assertEquals(Diagram.class, linkScheme.getBindingModel().bindingVariableNamed(DiagramBehaviourBindingModel.TOP_LEVEL).getType());
 		assertNotNull(linkScheme.getBindingModel().bindingVariableNamed("diagram"));
-		assertTrue(linkScheme.getBindingModel().bindingVariableNamed("diagram").getType() instanceof DiagramType);
+		assertTrue(linkScheme.getBindingModel().bindingVariableNamed("diagram").getType().equals(Diagram.class));
 
 		System.out.println("BM=" + linkScheme.getBindingModel());
 
