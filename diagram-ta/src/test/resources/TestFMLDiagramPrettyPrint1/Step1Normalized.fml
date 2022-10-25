@@ -1,4 +1,4 @@
-namespace "http://openflexo.org/test/TestDiagramSpecification" as DIAGRAM_SPECIFICATION; 
+namespace "http://openflexo.org/test/TestDiagramSpecification" as DIAGRAM_SPECIFICATION;
 
 use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot as DIAGRAM;
 
@@ -11,15 +11,10 @@ import [EXAMPLE_DIAGRAM:"SYL-4"] as DIAGRAM_CONNECTOR;
 @URI("http://openflexo.org/test/TestResourceCenter/TestControlledDiagramViewPoint.fml/TestVirtualModel.fml")
 @Version("0.1")
 model TestVirtualModel {
-	Diagram diagram with TypedDiagram(
-			paletteElementBindings={
-					PaletteElementBinding:(call=new TestConcept::drop(), paletteElementId="http://openflexo.org/test/TestDiagramSpecification/TestPalette.palette#TestPaletteElement")
-			},
-			diagramSpecification=TEST_DIAGRAM_SPECIFICATION,
-			isRequired=true);
+	Diagram diagram with TypedDiagram(paletteElementBindings={PaletteElementBinding:(call=new TestConcept::drop(), paletteElementId="http://openflexo.org/test/TestDiagramSpecification/TestPalette.palette#TestPaletteElement")},diagramSpecification=TEST_DIAGRAM_SPECIFICATION,isRequired=true);
 
 	create() {
-		diagram = DIAGRAM::CreateDiagram(resourceCenter=this.resourceCenter, resourceName="TestDiagram", relativePath="Diagrams");
+		diagram = DIAGRAM::CreateDiagram(relativePath="Diagrams",resourceCenter=this.resourceCenter,resourceName="TestDiagram");
 	}
 
 	concept TestConcept {
@@ -36,7 +31,7 @@ model TestVirtualModel {
 	concept TestLink {
 		DiagramConnector connector with ConnectorRole(exampleLabel="label",metamodelElement=DIAGRAM_CONNECTOR);
 		TestLink link() with LinkScheme(fromTarget="http://openflexo.org/test/TestResourceCenter/TestControlledDiagramViewPoint.fml/TestVirtualModel.fml#TestConcept",skipConfirmationPanel=false,toTarget="http://openflexo.org/test/TestResourceCenter/TestControlledDiagramViewPoint.fml/TestVirtualModel.fml#TestConcept") {
-			connector = DIAGRAM::AddConnector(fromShape=fromTarget.shape, toShape=toTarget.shape);
+			connector = DIAGRAM::AddConnector(fromShape=fromTarget.shape,toShape=toTarget.shape);
 		}
 	}
 }
