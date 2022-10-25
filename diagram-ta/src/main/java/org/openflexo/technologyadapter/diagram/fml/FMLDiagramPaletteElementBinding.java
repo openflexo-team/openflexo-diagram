@@ -61,6 +61,7 @@ import org.openflexo.foundation.fml.binding.CreationSchemePathElement;
 import org.openflexo.foundation.fml.expr.FMLPrettyPrinter;
 import org.openflexo.foundation.fml.rt.FlexoConceptInstance;
 import org.openflexo.pamela.annotations.Adder;
+import org.openflexo.pamela.annotations.DefineValidationRule;
 import org.openflexo.pamela.annotations.Finder;
 import org.openflexo.pamela.annotations.Getter;
 import org.openflexo.pamela.annotations.Getter.Cardinality;
@@ -790,5 +791,19 @@ public interface FMLDiagramPaletteElementBinding extends FlexoConceptObject {
 			return "FMLDiagramPaletteElementBinding" + Integer.toHexString(hashCode()) + "(" + getPaletteElementId() + ")";
 		}
 	}
+	
+	@DefineValidationRule
+	public static class CallBindingIsRequiredAndMustBeValid extends BindingIsRequiredAndMustBeValid<FMLDiagramPaletteElementBinding> {
+		public CallBindingIsRequiredAndMustBeValid() {
+			super("'call'_binding_is_not_valid", FMLDiagramPaletteElementBinding.class);
+		}
+
+		@Override
+		public DataBinding<FlexoConceptInstance> getBinding(FMLDiagramPaletteElementBinding object) {
+			return object.getCall();
+		}
+	}
+
+
 
 }

@@ -60,6 +60,7 @@ import org.openflexo.foundation.technologyadapter.FlexoMetaModelResource;
 import org.openflexo.foundation.technologyadapter.TypeAwareModelSlot;
 import org.openflexo.foundation.utils.FlexoObjectReference;
 import org.openflexo.pamela.annotations.Adder;
+import org.openflexo.pamela.annotations.Embedded;
 import org.openflexo.pamela.annotations.Getter;
 import org.openflexo.pamela.annotations.Getter.Cardinality;
 import org.openflexo.pamela.annotations.ImplementationClass;
@@ -144,6 +145,7 @@ public interface TypedDiagramModelSlot extends TypeAwareModelSlot<Diagram, Diagr
 			inverse = FMLDiagramPaletteElementBinding.DIAGRAM_MODEL_SLOT_KEY)
 	@XMLElement
 	@FMLAttribute(value = PALETTE_ELEMENTS_BINDING_KEY, kind = AttributeKind.InstancesList)
+	@Embedded
 	public List<FMLDiagramPaletteElementBinding> getPaletteElementBindings();
 
 	@Setter(PALETTE_ELEMENTS_BINDING_KEY)
