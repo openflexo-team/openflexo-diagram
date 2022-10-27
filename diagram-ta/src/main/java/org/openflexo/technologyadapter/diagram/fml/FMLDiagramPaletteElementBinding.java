@@ -45,7 +45,7 @@ import java.util.logging.Logger;
 import org.openflexo.connie.BindingModel;
 import org.openflexo.connie.DataBinding;
 import org.openflexo.connie.DataBinding.BindingDefinitionType;
-import org.openflexo.connie.expr.BindingValue;
+import org.openflexo.connie.expr.BindingPath;
 import org.openflexo.diana.GraphicalRepresentation;
 import org.openflexo.diana.control.PaletteElement;
 import org.openflexo.foundation.DataModification;
@@ -644,7 +644,7 @@ public interface FMLDiagramPaletteElementBinding extends FlexoConceptObject {
 					BindingDefinitionType.GET);
 			returned.setBindingName("call");
 			returned.setMandatory(true);
-			BindingValue bv = new BindingValue(this, FMLPrettyPrinter.getInstance());
+			BindingPath bv = new BindingPath(this, FMLPrettyPrinter.getInstance());
 
 			List<DataBinding<?>> args = new ArrayList<>();
 			if (parameters != null) {
@@ -663,9 +663,9 @@ public interface FMLDiagramPaletteElementBinding extends FlexoConceptObject {
 		}
 
 		private CreationSchemePathElement getDropSchemePathElement() {
-			if (getCall() != null && getCall().isBindingValue()
-					&& ((BindingValue) getCall().getExpression()).getBindingPathElementAtIndex(0) instanceof CreationSchemePathElement) {
-				return (CreationSchemePathElement) ((BindingValue) getCall().getExpression()).getBindingPathElementAtIndex(0);
+			if (getCall() != null && getCall().isBindingPath()
+					&& ((BindingPath) getCall().getExpression()).getBindingPathElementAtIndex(0) instanceof CreationSchemePathElement) {
+				return (CreationSchemePathElement) ((BindingPath) getCall().getExpression()).getBindingPathElementAtIndex(0);
 			}
 			return null;
 		}

@@ -43,7 +43,7 @@ import java.beans.PropertyChangeListener;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.openflexo.connie.binding.BindingValueChangeListener;
+import org.openflexo.connie.binding.BindingPathChangeListener;
 import org.openflexo.connie.exception.NotSettableContextException;
 import org.openflexo.connie.exception.NullReferenceException;
 import org.openflexo.connie.exception.TypeMismatchException;
@@ -150,7 +150,7 @@ public interface FMLControlledDiagramElement<E extends DiagramElement<GR>, GR ex
 	public static abstract class FMLControlledDiagramElementImpl<E extends DiagramElement<GR>, GR extends GraphicalRepresentation>
 			implements FMLControlledDiagramElement<E, GR> {
 
-		private final Map<GraphicalElementSpecification<?, GR>, BindingValueChangeListener<?>> listeners = new HashMap<>();
+		private final Map<GraphicalElementSpecification<?, GR>, BindingPathChangeListener<?>> listeners = new HashMap<>();
 
 		@Override
 		public void setDiagramElement(E diagramElement) {
@@ -229,7 +229,7 @@ public interface FMLControlledDiagramElement<E extends DiagramElement<GR>, GR ex
 		@Override
 		public void setRole(GraphicalElementRole<E, GR> aRole) {
 			if (aRole != getRole()) {
-				for (BindingValueChangeListener<?> l : listeners.values()) {
+				for (BindingPathChangeListener<?> l : listeners.values()) {
 					l.stopObserving();
 					l.delete();
 				}
@@ -244,7 +244,7 @@ public interface FMLControlledDiagramElement<E extends DiagramElement<GR>, GR ex
 		}
 
 		private <T> void listenToGRSpecification(final GraphicalElementSpecification<T, GR> grSpec) {
-			BindingValueChangeListener<T> l = new BindingValueChangeListener<T>(grSpec.getValue(), getFlexoConceptInstance()) {
+			BindingPathChangeListener<T> l = new BindingPathChangeListener<T>(grSpec.getValue(), getFlexoConceptInstance()) {
 				@Override
 				public void bindingValueChanged(Object source, T newValue) {
 					// Hack to force element name (non FML-controlled) to take the name of federated diagram element
@@ -264,7 +264,7 @@ public interface FMLControlledDiagramElement<E extends DiagramElement<GR>, GR ex
 
 		@Override
 		public boolean delete(Object... context) {
-			for (BindingValueChangeListener<?> l : listeners.values()) {
+			for (BindingPathChangeListener<?> l : listeners.values()) {
 				l.stopObserving();
 				l.delete();
 			}
