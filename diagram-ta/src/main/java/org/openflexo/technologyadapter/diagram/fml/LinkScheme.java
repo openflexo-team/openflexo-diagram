@@ -90,7 +90,7 @@ public interface LinkScheme extends AbstractCreationScheme, DiagramFlexoBehaviou
 
 	@Getter(value = FROM_TARGET_KEY)
 	@XMLAttribute
-	@FMLAttribute(value = FROM_TARGET_KEY, required = false)
+	@FMLAttribute(value = FROM_TARGET_KEY, required = true)
 	public String _getFromTarget();
 
 	@Setter(FROM_TARGET_KEY)
@@ -98,7 +98,7 @@ public interface LinkScheme extends AbstractCreationScheme, DiagramFlexoBehaviou
 
 	@Getter(value = TO_TARGET_KEY)
 	@XMLAttribute
-	@FMLAttribute(value = TO_TARGET_KEY, required = false)
+	@FMLAttribute(value = TO_TARGET_KEY, required = true)
 	public String _getToTarget();
 
 	@Setter(TO_TARGET_KEY)
