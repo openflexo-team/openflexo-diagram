@@ -72,10 +72,12 @@ import org.openflexo.p2pp.RawSource;
 import org.openflexo.pamela.exceptions.ModelDefinitionException;
 import org.openflexo.technologyadapter.diagram.DiagramTechnologyAdapter;
 import org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
+import org.openflexo.technologyadapter.diagram.fml.editionaction.AddConnector;
 import org.openflexo.technologyadapter.diagram.fml.editionaction.AddShape;
 import org.openflexo.technologyadapter.diagram.fml.editionaction.CreateDiagram;
 import org.openflexo.technologyadapter.diagram.metamodel.DiagramPaletteElement;
 import org.openflexo.technologyadapter.diagram.model.Diagram;
+import org.openflexo.technologyadapter.diagram.model.DiagramConnector;
 import org.openflexo.technologyadapter.diagram.model.DiagramShape;
 import org.openflexo.technologyadapter.diagram.rm.DiagramPaletteResource;
 import org.openflexo.technologyadapter.diagram.rm.DiagramResource;
@@ -105,10 +107,11 @@ public class TestFMLDiagramPrettyPrint2 extends FMLParserTestCase {
 
 	private static DiagramTechnologyAdapter diagramTA;
 
-	static private TypedDiagramModelSlot diagramModelSlot;
-	static private FlexoConcept conceptA, conceptB;
-	static private DropScheme dropSchemeA, dropSchemeB;
-	static private DiagramPaletteElement paletteElement1, paletteElement2;
+	private static TypedDiagramModelSlot diagramModelSlot;
+	private static FlexoConcept conceptA, conceptB, conceptC;
+	private static DropScheme dropSchemeA, dropSchemeB;
+	private static LinkScheme linkScheme;
+	private static DiagramPaletteElement paletteElement1, paletteElement2;
 
 	@Test
 	@TestOrder(1)
@@ -349,6 +352,55 @@ public class TestFMLDiagramPrettyPrint2 extends FMLParserTestCase {
 
 		System.out.println("Normalized=\n" + compilationUnit.getNormalizedFML());
 		testNormalizedFMLRepresentationEquals(compilationUnit, "TestFMLDiagramPrettyPrint2/Step6Normalized.fml");
+
+	}
+
+	@Test
+	@TestOrder(7)
+	public void createFlexoConceptC() {
+
+		log("createFlexoConceptC()");
+
+		CreateFlexoConcept addConceptC = CreateFlexoConcept.actionType.makeNewAction(virtualModel, null, editor);
+		addConceptC.setNewFlexoConceptName("FlexoConceptC");
+		addConceptC.doAction();
+		conceptC = addConceptC.getNewFlexoConcept();
+
+		CreateTechnologyRole createConnectorRole = CreateTechnologyRole.actionType.makeNewAction(conceptC, null, editor);
+		createConnectorRole.setRoleName("connector");
+		createConnectorRole.setFlexoRoleClass(ConnectorRole.class);
+		createConnectorRole.doAction();
+		assertTrue(createConnectorRole.hasActionExecutionSucceeded());
+
+		ConnectorRole role = (ConnectorRole) createConnectorRole.getNewFlexoRole();
+
+		DiagramConnector connector = exampleDiagram.getConnectors().get(0);
+		System.out.println("connector=" + connector);
+		role.bindTo(connector);
+
+		CreateFlexoBehaviour createLinkScheme = CreateFlexoBehaviour.actionType.makeNewAction(conceptC, null, editor);
+		createLinkScheme.setFlexoBehaviourName("link");
+		createLinkScheme.setFlexoBehaviourClass(LinkScheme.class);
+		createLinkScheme.doAction();
+		assertTrue(createLinkScheme.hasActionExecutionSucceeded());
+		linkScheme = (LinkScheme) createLinkScheme.getNewFlexoBehaviour();
+		linkScheme.setFromTargetFlexoConcept(conceptA);
+		linkScheme.setToTargetFlexoConcept(conceptA);
+
+		CreateEditionAction createAddConnector = CreateEditionAction.actionType.makeNewAction(linkScheme.getControlGraph(), null, editor);
+		// createAddConnector.actionChoice =
+		// CreateEditionActionChoice.ModelSlotSpecificAction;
+		createAddConnector.setModelSlot(diagramModelSlot);
+		createAddConnector.setEditionActionClass(AddConnector.class);
+		createAddConnector.setAssignation(new DataBinding<>("connector"));
+		createAddConnector.doAction();
+		assertTrue(createAddConnector.hasActionExecutionSucceeded());
+
+		System.out.println("FML=\n" + compilationUnit.getFMLPrettyPrint());
+		// testFMLPrettyPrintEquals(compilationUnit, "TestFMLDiagramPrettyPrint2/Step7PrettyPrint.fml");
+
+		// System.out.println("Normalized=\n" + compilationUnit.getNormalizedFML());
+		// testNormalizedFMLRepresentationEquals(compilationUnit, "TestFMLDiagramPrettyPrint2/Step7Normalized.fml");
 
 	}
 

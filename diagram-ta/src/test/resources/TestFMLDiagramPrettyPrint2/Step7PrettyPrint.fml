@@ -1,0 +1,38 @@
+use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot as DIAGRAM;
+
+import ["http://openflexo.org/test/TestDiagramSpecification"] as TEST_DIAGRAM_SPECIFICATION;
+import ["http://openflexo.org/test/TestDiagramSpecification/ExampleDiagram.diagram"] as EXAMPLE_DIAGRAM;
+import [EXAMPLE_DIAGRAM:"SYL-2"] as DIAGRAM_SHAPE;
+import [EXAMPLE_DIAGRAM:"SYL-3"] as DIAGRAM_SHAPE2;
+import [EXAMPLE_DIAGRAM:"SYL-4"] as DIAGRAM_CONNECTOR;
+
+@URI("http://openflexo.org/test/TestResourceCenter/TestDiagramVM1.fml")
+@Version("0.1")
+model TestDiagramVM1 {
+	Diagram diagram with TypedDiagram(diagramSpecification=TEST_DIAGRAM_SPECIFICATION,paletteElementBindings={PaletteElementBinding:(call=new FlexoConceptA::drop(), paletteElementId="http://openflexo.org/test/TestDiagramSpecification/TestPalette.palette#TestPaletteElement1"), PaletteElementBinding:(call=new FlexoConceptB::drop(), paletteElementId="http://openflexo.org/test/TestDiagramSpecification/TestPalette.palette#TestPaletteElement2")});
+
+	create::createInstance() {
+		diagram = DIAGRAM::CreateDiagram(resourceName="diagram",resourceCenter=this.resourceCenter,relativePath="Diagrams");
+	}
+
+	public concept FlexoConceptA {
+		DiagramShape shape with ShapeRole(metamodelElement=DIAGRAM_SHAPE,exampleLabel="Shape");
+		FlexoConceptA drop() with DropScheme(target="top") {
+			shape = DIAGRAM::AddShape() in diagram;
+		}
+	}
+
+	public concept FlexoConceptB {
+		DiagramShape shape with ShapeRole(metamodelElement=DIAGRAM_SHAPE2,exampleLabel="Shape");
+		FlexoConceptB drop() with DropScheme(target="http://openflexo.org/test/TestResourceCenter/TestDiagramVM1.fml#FlexoConceptA") {
+			shape = DIAGRAM::AddShape() in diagram;
+		}
+	}
+
+	public concept FlexoConceptC {
+		DiagramConnector connector with ConnectorRole(metamodelElement=DIAGRAM_CONNECTOR,exampleLabel="Connector");
+		FlexoConceptC link() with LinkScheme(fromTarget="http://openflexo.org/test/TestResourceCenter/TestDiagramVM1.fml#FlexoConceptA",toTarget="http://openflexo.org/test/TestResourceCenter/TestDiagramVM1.fml#FlexoConceptA") {
+			connector = DIAGRAM::AddConnector() in diagram;
+		}
+	}
+}
