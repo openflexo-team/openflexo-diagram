@@ -14,7 +14,7 @@ model TestVirtualModel {
 	Diagram diagram with TypedDiagram(paletteElementBindings={PaletteElementBinding:(call=new TestConcept::drop(), paletteElementId="http://openflexo.org/test/TestDiagramSpecification/TestPalette.palette#TestPaletteElement")},diagramSpecification=TEST_DIAGRAM_SPECIFICATION,isRequired=true);
 
 	create() {
-		diagram = DIAGRAM::CreateDiagram(relativePath="Diagrams",resourceCenter=this.resourceCenter,resourceName="TestDiagram");
+		diagram = DIAGRAM::CreateDiagram(resourceCenter=this.resourceCenter,resourceName="TestDiagram",relativePath="Diagrams");
 	}
 
 	concept TestConcept {

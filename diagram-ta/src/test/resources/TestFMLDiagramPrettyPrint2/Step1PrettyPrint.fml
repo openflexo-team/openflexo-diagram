@@ -1,0 +1,4 @@
+@URI("http://openflexo.org/test/TestResourceCenter/TestDiagramVM1.fml")
+@Version("0.1")
+model TestDiagramVM1 {
+}

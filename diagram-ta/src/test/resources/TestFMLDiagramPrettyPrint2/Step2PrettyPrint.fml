@@ -1,0 +1,9 @@
+use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot as DIAGRAM;
+
+import ["http://openflexo.org/test/TestDiagramSpecification"] as TEST_DIAGRAM_SPECIFICATION;
+
+@URI("http://openflexo.org/test/TestResourceCenter/TestDiagramVM1.fml")
+@Version("0.1")
+model TestDiagramVM1 {
+	Diagram diagram with TypedDiagram(diagramSpecification=TEST_DIAGRAM_SPECIFICATION,paletteElementBindings={});
+}

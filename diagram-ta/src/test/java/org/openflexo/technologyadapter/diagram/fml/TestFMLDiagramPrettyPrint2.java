@@ -51,6 +51,7 @@ import org.openflexo.foundation.FlexoException;
 import org.openflexo.foundation.fml.FMLCompilationUnit;
 import org.openflexo.foundation.fml.VirtualModel;
 import org.openflexo.foundation.fml.VirtualModelLibrary;
+import org.openflexo.foundation.fml.action.CreateModelSlot;
 import org.openflexo.foundation.fml.parser.ParseException;
 import org.openflexo.foundation.fml.parser.fmlnodes.FMLCompilationUnitNode;
 import org.openflexo.foundation.fml.parser.fmlnodes.VirtualModelNode;
@@ -59,6 +60,9 @@ import org.openflexo.foundation.resource.ResourceLoadingCancelledException;
 import org.openflexo.foundation.test.parser.FMLParserTestCase;
 import org.openflexo.p2pp.RawSource;
 import org.openflexo.pamela.exceptions.ModelDefinitionException;
+import org.openflexo.technologyadapter.diagram.DiagramTechnologyAdapter;
+import org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
+import org.openflexo.technologyadapter.diagram.rm.DiagramSpecificationResource;
 import org.openflexo.test.OrderedRunner;
 import org.openflexo.test.TestOrder;
 
@@ -69,7 +73,7 @@ import org.openflexo.test.TestOrder;
  *
  */
 @RunWith(OrderedRunner.class)
-public class TestFMLDiagramPrettyPrint1 extends FMLParserTestCase {
+public class TestFMLDiagramPrettyPrint2 extends FMLParserTestCase {
 
 	private static FMLCompilationUnit compilationUnit;
 	private static VirtualModel virtualModel;
@@ -78,6 +82,10 @@ public class TestFMLDiagramPrettyPrint1 extends FMLParserTestCase {
 
 	private static CompilationUnitResource fmlResource;
 	private static VirtualModelNode vmNode;
+
+	private static DiagramSpecificationResource dsResource;
+
+	private static DiagramTechnologyAdapter diagramTA;
 
 	@Test
 	@TestOrder(1)
@@ -96,23 +104,16 @@ public class TestFMLDiagramPrettyPrint1 extends FMLParserTestCase {
 		instanciateTestServiceManager();
 
 		log("Initial version");
+		diagramTA = serviceManager.getTechnologyAdapterService().getTechnologyAdapter(DiagramTechnologyAdapter.class);
+		serviceManager.getTechnologyAdapterService().activateTechnologyAdapter(diagramTA, true);
 
-		/*for (FlexoResource<?> resource : serviceManager.getResourceManager().getRegisteredResources()) {
-			System.out.println(" > "+resource);
-		}
-		DiagramTechnologyAdapter diagramTechnologyAdapter = serviceManager.getTechnologyAdapterService().getTechnologyAdapter(DiagramTechnologyAdapter.class);
-		//serviceManager.getTechnologyAdapterService().activateTechnologyAdapter(diagramTechnologyAdapter,true);
-		for (FlexoResource<?> resource : serviceManager.getResourceManager().getRegisteredResources()) {
-			System.out.println(" > "+resource);
-		}*/
+		dsResource = (DiagramSpecificationResource) serviceManager.getResourceManager()
+				.getResource("http://openflexo.org/test/TestDiagramSpecification");
+		assertNotNull(dsResource);
 
 		VirtualModelLibrary vpLib = serviceManager.getVirtualModelLibrary();
 		assertNotNull(vpLib);
-		VirtualModel rootVM = vpLib
-				.getVirtualModel("http://openflexo.org/test/TestResourceCenter/TestControlledDiagramViewPoint.fml/TestVirtualModel.fml");
-		assertNotNull(rootVM);
-		VirtualModel virtualModel = vpLib
-				.getVirtualModel("http://openflexo.org/test/TestResourceCenter/TestControlledDiagramViewPoint.fml/TestVirtualModel.fml");
+		virtualModel = vpLib.getVirtualModel("http://openflexo.org/test/TestResourceCenter/TestDiagramVM1.fml");
 		assertNotNull(virtualModel);
 
 		fmlResource = virtualModel.getResource();
@@ -121,7 +122,7 @@ public class TestFMLDiagramPrettyPrint1 extends FMLParserTestCase {
 		compilationUnit = fmlResource.getCompilationUnit();
 
 		assertNotNull(virtualModel = compilationUnit.getVirtualModel());
-		assertEquals("TestVirtualModel", virtualModel.getName());
+		assertEquals("TestDiagramVM1", virtualModel.getName());
 
 		assertNotNull(rootNode = (FMLCompilationUnitNode) compilationUnit.getPrettyPrintDelegate());
 		assertNotNull(vmNode = (VirtualModelNode) rootNode.getObjectNode(virtualModel));
@@ -130,20 +131,34 @@ public class TestFMLDiagramPrettyPrint1 extends FMLParserTestCase {
 		System.out.println(rawSource.debug());
 		debug(rootNode, 0);
 
-		/*FlexoConcept transitionConcept = virtualModel.getFlexoConcept("Transition");
-		FlexoConceptNode conceptNode = (FlexoConceptNode) rootNode.getObjectNode(transitionConcept);
-		FlexoConceptInstanceRole incomings = (FlexoConceptInstanceRole) transitionConcept.getDeclaredProperty("incomings");
-		FlexoRolePropertyNode incomingsNode = (FlexoRolePropertyNode) rootNode.getObjectNode(incomings);
-		assertEquals("(28:2)-(28:92)", incomingsNode.getLastParsedFragment().toString());
-		FlexoConceptInstanceRole outgoings = (FlexoConceptInstanceRole) transitionConcept.getDeclaredProperty("outgoings");
-		FlexoRolePropertyNode outgoingsNode = (FlexoRolePropertyNode) rootNode.getObjectNode(outgoings);
-		assertEquals("(29:2)-(29:92)", outgoingsNode.getLastParsedFragment().toString());*/
-
 		System.out.println("FML=\n" + compilationUnit.getFMLPrettyPrint());
-		testFMLPrettyPrintEquals(compilationUnit, "TestFMLDiagramPrettyPrint1/Step1PrettyPrint.fml");
+		testFMLPrettyPrintEquals(compilationUnit, "TestFMLDiagramPrettyPrint2/Step1PrettyPrint.fml");
 
 		System.out.println("Normalized=\n" + compilationUnit.getNormalizedFML());
-		testNormalizedFMLRepresentationEquals(compilationUnit, "TestFMLDiagramPrettyPrint1/Step1Normalized.fml");
+		testNormalizedFMLRepresentationEquals(compilationUnit, "TestFMLDiagramPrettyPrint2/Step1Normalized.fml");
+	}
+
+	@Test
+	@TestOrder(3)
+	public void createModelSlot() {
+
+		log("On debugge le vmNode");
+		System.out.println(vmNode.debug());
+
+		log("createModelSlot()");
+		CreateModelSlot action = CreateModelSlot.actionType.makeNewAction(virtualModel, null, editor);
+		action.setModelSlotName("diagram");
+		action.setTechnologyAdapter(diagramTA);
+		action.setModelSlotClass(TypedDiagramModelSlot.class);
+		action.setMmRes(dsResource);
+		action.doAction();
+		TypedDiagramModelSlot diagramModelSlot = (TypedDiagramModelSlot) action.getNewModelSlot();
+
+		System.out.println("FML=\n" + compilationUnit.getFMLPrettyPrint());
+		testFMLPrettyPrintEquals(compilationUnit, "TestFMLDiagramPrettyPrint2/Step2PrettyPrint.fml");
+
+		System.out.println("Normalized=\n" + compilationUnit.getNormalizedFML());
+		testNormalizedFMLRepresentationEquals(compilationUnit, "TestFMLDiagramPrettyPrint2/Step2Normalized.fml");
 
 	}
 
