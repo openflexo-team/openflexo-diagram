@@ -112,7 +112,7 @@ import org.openflexo.technologyadapter.diagram.fml.editionaction.GraphicalAction
 import org.openflexo.technologyadapter.diagram.gui.DiagramIconLibrary;
 import org.openflexo.technologyadapter.diagram.gui.view.DiagramSpecificationView;
 import org.openflexo.technologyadapter.diagram.metamodel.DiagramPalette;
-import org.openflexo.technologyadapter.diagram.metamodel.DiagramPaletteElement;
+import org.openflexo.technologyadapter.diagram.metamodel.DiagramPaletteObject;
 import org.openflexo.technologyadapter.diagram.metamodel.DiagramSpecification;
 import org.openflexo.technologyadapter.diagram.model.Diagram;
 import org.openflexo.technologyadapter.diagram.model.DiagramConnector;
@@ -420,23 +420,23 @@ public class DiagramTechnologyAdapterController extends TechnologyAdapterControl
 
 	@Override
 	public boolean isRepresentableInModuleView(TechnologyObject<DiagramTechnologyAdapter> object) {
-		return object instanceof DiagramElement || object instanceof DiagramPaletteElement || object instanceof DiagramSpecification;
+		return object instanceof DiagramElement || object instanceof DiagramPaletteObject || object instanceof DiagramSpecification;
 	}
-	
+
 	@Override
 	public FlexoObject getRepresentableMasterObject(TechnologyObject<DiagramTechnologyAdapter> object) {
 		if (object instanceof DiagramElement) {
-			return ((DiagramElement<?>)object).getDiagram();
+			return ((DiagramElement<?>) object).getDiagram();
 		}
-		if (object instanceof DiagramPaletteElement) {
-			return ((DiagramPaletteElement)object).getPalette();
+		if (object instanceof DiagramPaletteObject) {
+			return ((DiagramPaletteObject) object).getPalette();
 		}
 		if (object instanceof DiagramSpecification) {
 			return object;
 		}
 		return null;
 	}
-	
+
 	@Override
 	public String getWindowTitleforObject(TechnologyObject<DiagramTechnologyAdapter> object, FlexoController controller) {
 
