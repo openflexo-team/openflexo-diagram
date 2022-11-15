@@ -149,7 +149,7 @@ public class TestInstantiateControlledDiagramVirtualModel extends OpenflexoProje
 		assertNotNull(diagramSpecification = diagramSpecificationResource.getDiagramSpecification());
 		assertEquals(1, diagramSpecificationResource.getDiagramSpecification().getPalettes().size());
 		assertNotNull(palette = diagramSpecificationResource.getDiagramSpecification().getPalettes().get(0));
-		assertEquals(1, palette.getElements().size());
+		assertEquals(2, palette.getElements().size());
 		assertNotNull(paletteElement = palette.getElements().get(0));
 
 	}
