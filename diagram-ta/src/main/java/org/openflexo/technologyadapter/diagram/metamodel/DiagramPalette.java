@@ -59,6 +59,7 @@ import org.openflexo.pamela.annotations.Getter.Cardinality;
 import org.openflexo.pamela.annotations.ImplementationClass;
 import org.openflexo.pamela.annotations.ModelEntity;
 import org.openflexo.pamela.annotations.PropertyIdentifier;
+import org.openflexo.pamela.annotations.Reindexer;
 import org.openflexo.pamela.annotations.Remover;
 import org.openflexo.pamela.annotations.Setter;
 import org.openflexo.pamela.annotations.XMLAttribute;
@@ -106,6 +107,9 @@ public interface DiagramPalette extends DiagramPaletteObject, ResourceData<Diagr
 
 	@Remover(PALETTE_ELEMENTS_KEY)
 	public boolean removeFromElements(DiagramPaletteElement obj);
+
+	@Reindexer(PALETTE_ELEMENTS_KEY)
+	public void moveElementToIndex(DiagramPaletteElement obj, int index);
 
 	@Getter(value = GRAPHICAL_REPRESENTATION_KEY)
 	@XMLElement

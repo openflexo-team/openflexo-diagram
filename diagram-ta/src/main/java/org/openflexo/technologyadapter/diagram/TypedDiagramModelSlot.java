@@ -66,6 +66,7 @@ import org.openflexo.pamela.annotations.Getter.Cardinality;
 import org.openflexo.pamela.annotations.ImplementationClass;
 import org.openflexo.pamela.annotations.ModelEntity;
 import org.openflexo.pamela.annotations.PropertyIdentifier;
+import org.openflexo.pamela.annotations.Reindexer;
 import org.openflexo.pamela.annotations.Remover;
 import org.openflexo.pamela.annotations.Setter;
 import org.openflexo.pamela.annotations.XMLAttribute;
@@ -156,6 +157,9 @@ public interface TypedDiagramModelSlot extends TypeAwareModelSlot<Diagram, Diagr
 
 	@Remover(PALETTE_ELEMENTS_BINDING_KEY)
 	public void removeFromPaletteElementBindings(FMLDiagramPaletteElementBinding paletteElementBinding);
+
+	@Reindexer(PALETTE_ELEMENTS_BINDING_KEY)
+	public void movePaletteElementBindingToIndex(FMLDiagramPaletteElementBinding paletteElementBinding, int index);
 
 	public FMLDiagramPaletteElementBinding getPaletteElementBinding(DiagramPaletteElement paletteElement);
 
