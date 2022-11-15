@@ -331,8 +331,6 @@ public class TestFMLDiagramPrettyPrint2 extends FMLParserTestCase {
 		dropSchemeB.setTargetFlexoConcept(conceptA);
 
 		CreateEditionAction createAddShape = CreateEditionAction.actionType.makeNewAction(dropSchemeB.getControlGraph(), null, editor);
-		// createAddShape.actionChoice =
-		// CreateEditionActionChoice.ModelSlotSpecificAction;
 		createAddShape.setModelSlot(diagramModelSlot);
 		createAddShape.setEditionActionClass(AddShape.class);
 		createAddShape.setAssignation(new DataBinding<>("shape"));
@@ -388,8 +386,6 @@ public class TestFMLDiagramPrettyPrint2 extends FMLParserTestCase {
 		linkScheme.setToTargetFlexoConcept(conceptA);
 
 		CreateEditionAction createAddConnector = CreateEditionAction.actionType.makeNewAction(linkScheme.getControlGraph(), null, editor);
-		// createAddConnector.actionChoice =
-		// CreateEditionActionChoice.ModelSlotSpecificAction;
 		createAddConnector.setModelSlot(diagramModelSlot);
 		createAddConnector.setEditionActionClass(AddConnector.class);
 		createAddConnector.setAssignation(new DataBinding<>("connector"));
@@ -397,10 +393,10 @@ public class TestFMLDiagramPrettyPrint2 extends FMLParserTestCase {
 		assertTrue(createAddConnector.hasActionExecutionSucceeded());
 
 		System.out.println("FML=\n" + compilationUnit.getFMLPrettyPrint());
-		// testFMLPrettyPrintEquals(compilationUnit, "TestFMLDiagramPrettyPrint2/Step7PrettyPrint.fml");
+		testFMLPrettyPrintEquals(compilationUnit, "TestFMLDiagramPrettyPrint2/Step7PrettyPrint.fml");
 
-		// System.out.println("Normalized=\n" + compilationUnit.getNormalizedFML());
-		// testNormalizedFMLRepresentationEquals(compilationUnit, "TestFMLDiagramPrettyPrint2/Step7Normalized.fml");
+		System.out.println("Normalized=\n" + compilationUnit.getNormalizedFML());
+		testNormalizedFMLRepresentationEquals(compilationUnit, "TestFMLDiagramPrettyPrint2/Step7Normalized.fml");
 
 	}
 

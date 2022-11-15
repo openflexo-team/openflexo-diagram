@@ -39,9 +39,12 @@
 package org.openflexo.technologyadapter.diagram.fml;
 
 import org.openflexo.foundation.fml.AbstractCreationScheme;
+import org.openflexo.foundation.fml.FMLMigration;
 import org.openflexo.foundation.fml.FlexoConcept;
+import org.openflexo.foundation.fml.FlexoConceptInstanceType;
 import org.openflexo.foundation.fml.annotations.FML;
 import org.openflexo.foundation.fml.annotations.FMLAttribute;
+import org.openflexo.foundation.fml.annotations.FMLAttribute.AttributeKind;
 import org.openflexo.gina.annotation.FIBPanel;
 import org.openflexo.pamela.annotations.Getter;
 import org.openflexo.pamela.annotations.ImplementationClass;
@@ -66,6 +69,10 @@ import org.openflexo.toolbox.StringUtils;
 @FML("LinkScheme")
 public interface LinkScheme extends AbstractCreationScheme, DiagramFlexoBehaviour {
 
+	@PropertyIdentifier(type = FlexoConceptInstanceType.class)
+	public static final String FROM_TYPE_KEY = "fromType";
+	@PropertyIdentifier(type = FlexoConceptInstanceType.class)
+	public static final String TO_TYPE_KEY = "toType";
 	@PropertyIdentifier(type = String.class)
 	public static final String FROM_TARGET_KEY = "fromTarget";
 	@PropertyIdentifier(type = String.class)
@@ -88,19 +95,39 @@ public interface LinkScheme extends AbstractCreationScheme, DiagramFlexoBehaviou
 	@PropertyIdentifier(type = FlexoConcept.class)
 	public static final String TO_TARGET_FLEXO_CONCEPT_KEY = "toTargetFlexoConcept";
 
+	@Getter(value = FROM_TYPE_KEY, ignoreType = true)
+	@FMLAttribute(value = FROM_TYPE_KEY, kind = AttributeKind.Type, required = true)
+	public FlexoConceptInstanceType getFromType();
+
+	@Setter(FROM_TYPE_KEY)
+	public void setFromType(FlexoConceptInstanceType from);
+
+	@Getter(value = TO_TYPE_KEY, ignoreType = true)
+	@FMLAttribute(value = TO_TYPE_KEY, kind = AttributeKind.Type, required = true)
+	public FlexoConceptInstanceType getToType();
+
+	@Setter(TO_TYPE_KEY)
+	public void setToType(FlexoConceptInstanceType to);
+
+	@FMLMigration
+	@Deprecated
 	@Getter(value = FROM_TARGET_KEY)
 	@XMLAttribute
-	@FMLAttribute(value = FROM_TARGET_KEY, required = true)
 	public String _getFromTarget();
 
+	@FMLMigration
+	@Deprecated
 	@Setter(FROM_TARGET_KEY)
 	public void _setFromTarget(String fromTarget);
 
+	@FMLMigration
+	@Deprecated
 	@Getter(value = TO_TARGET_KEY)
 	@XMLAttribute
-	@FMLAttribute(value = TO_TARGET_KEY, required = true)
 	public String _getToTarget();
 
+	@FMLMigration
+	@Deprecated
 	@Setter(TO_TARGET_KEY)
 	public void _setToTarget(String toTarget);
 
@@ -146,12 +173,20 @@ public interface LinkScheme extends AbstractCreationScheme, DiagramFlexoBehaviou
 	@Setter(WEST_DIRECTION_SUPPORTED_KEY)
 	public void setWestDirectionSupported(boolean westDirectionSupported);
 
+	@FMLMigration
+	@Deprecated
 	public FlexoConcept getFromTargetFlexoConcept();
 
+	@FMLMigration
+	@Deprecated
 	public void setFromTargetFlexoConcept(FlexoConcept targetFlexoConcept);
 
+	@FMLMigration
+	@Deprecated
 	public FlexoConcept getToTargetFlexoConcept();
 
+	@FMLMigration
+	@Deprecated
 	public void setToTargetFlexoConcept(FlexoConcept targetFlexoConcept);
 
 	public boolean isValidTarget(FlexoConcept actualFromTarget, FlexoConcept actualToTarget);
@@ -211,6 +246,32 @@ public interface LinkScheme extends AbstractCreationScheme, DiagramFlexoBehaviou
 			super.finalizeDeserialization();
 			getFromTargetFlexoConcept();
 			getToTargetFlexoConcept();
+		}
+
+		@Override
+		public FlexoConceptInstanceType getFromType() {
+			if (getFromTargetFlexoConcept() != null) {
+				return getFromTargetFlexoConcept().getInstanceType();
+			}
+			return null;
+		}
+
+		@Override
+		public void setFromType(FlexoConceptInstanceType from) {
+			setFromTargetFlexoConcept(from != null ? from.getFlexoConcept() : null);
+		}
+
+		@Override
+		public FlexoConceptInstanceType getToType() {
+			if (getToTargetFlexoConcept() != null) {
+				return getToTargetFlexoConcept().getInstanceType();
+			}
+			return null;
+		}
+
+		@Override
+		public void setToType(FlexoConceptInstanceType to) {
+			setToTargetFlexoConcept(to != null ? to.getFlexoConcept() : null);
 		}
 
 		@Override

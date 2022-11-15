@@ -41,10 +41,13 @@ package org.openflexo.technologyadapter.diagram.fml;
 import java.util.List;
 
 import org.openflexo.foundation.fml.AbstractCreationScheme;
+import org.openflexo.foundation.fml.FMLMigration;
 import org.openflexo.foundation.fml.FlexoConcept;
+import org.openflexo.foundation.fml.FlexoConceptInstanceType;
 import org.openflexo.foundation.fml.FlexoRole;
 import org.openflexo.foundation.fml.annotations.FML;
 import org.openflexo.foundation.fml.annotations.FMLAttribute;
+import org.openflexo.foundation.fml.annotations.FMLAttribute.AttributeKind;
 import org.openflexo.gina.annotation.FIBPanel;
 import org.openflexo.pamela.annotations.Getter;
 import org.openflexo.pamela.annotations.ImplementationClass;
@@ -69,6 +72,8 @@ import org.openflexo.toolbox.StringUtils;
 @FML("DropScheme")
 public interface DropScheme extends AbstractCreationScheme, DiagramFlexoBehaviour {
 
+	@PropertyIdentifier(type = FlexoConceptInstanceType.class)
+	public static final String TARGET_TYPE_KEY = "targetType";
 	@PropertyIdentifier(type = String.class)
 	public static final String TARGET_KEY = "target";
 	@PropertyIdentifier(type = ShapeRole.class)
@@ -78,11 +83,26 @@ public interface DropScheme extends AbstractCreationScheme, DiagramFlexoBehaviou
 
 	public static final String TOP_TARGET_KEY = "topTarget";
 
+	/**
+	 * Type (FlexoConcept) which may receive this drop, null value means top level
+	 * 
+	 * @return
+	 */
+	@Getter(value = TARGET_TYPE_KEY, ignoreType = true)
+	@FMLAttribute(value = TARGET_TYPE_KEY, kind = AttributeKind.Type, required = false)
+	public FlexoConceptInstanceType getTargetType();
+
+	@Setter(TARGET_TYPE_KEY)
+	public void setTargetType(FlexoConceptInstanceType from);
+
+	@FMLMigration
+	@Deprecated
 	@Getter(value = TARGET_KEY)
 	@XMLAttribute
-	@FMLAttribute(value = TARGET_KEY, required = false)
 	public String _getTarget();
 
+	@FMLMigration
+	@Deprecated
 	@Setter(TARGET_KEY)
 	public void _setTarget(String target);
 
@@ -102,8 +122,12 @@ public interface DropScheme extends AbstractCreationScheme, DiagramFlexoBehaviou
 	// @Setter(TOP_TARGET_KEY)
 	public void setTopTarget(boolean flag);
 
+	@FMLMigration
+	@Deprecated
 	public FlexoConcept getTargetFlexoConcept();
 
+	@FMLMigration
+	@Deprecated
 	public void setTargetFlexoConcept(FlexoConcept targetFlexoConcept);
 
 	public boolean isValidTarget(FlexoConcept aTarget, FlexoRole<?> contextRole);
@@ -122,6 +146,19 @@ public interface DropScheme extends AbstractCreationScheme, DiagramFlexoBehaviou
 
 		public DropSchemeImpl() {
 			super();
+		}
+
+		@Override
+		public FlexoConceptInstanceType getTargetType() {
+			if (getTargetFlexoConcept() != null) {
+				return getTargetFlexoConcept().getInstanceType();
+			}
+			return null;
+		}
+
+		@Override
+		public void setTargetType(FlexoConceptInstanceType target) {
+			setTargetFlexoConcept(target != null ? target.getFlexoConcept() : null);
 		}
 
 		@Override

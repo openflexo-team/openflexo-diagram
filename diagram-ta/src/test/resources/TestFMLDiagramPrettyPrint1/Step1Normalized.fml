@@ -19,7 +19,7 @@ model TestVirtualModel {
 
 	concept TestConcept {
 		DiagramShape shape with ShapeRole(exampleLabel="label",metamodelElement=DIAGRAM_SHAPE);
-		TestConcept drop() with DropScheme(skipConfirmationPanel=false,target="top") {
+		TestConcept drop() with DropScheme(skipConfirmationPanel=false) {
 			shape = DIAGRAM::AddShape(container=topLevel);
 		}
 	}
@@ -30,7 +30,7 @@ model TestVirtualModel {
 
 	concept TestLink {
 		DiagramConnector connector with ConnectorRole(exampleLabel="label",metamodelElement=DIAGRAM_CONNECTOR);
-		TestLink link() with LinkScheme(fromTarget="http://openflexo.org/test/TestResourceCenter/TestControlledDiagramViewPoint.fml/TestVirtualModel.fml#TestConcept",skipConfirmationPanel=false,toTarget="http://openflexo.org/test/TestResourceCenter/TestControlledDiagramViewPoint.fml/TestVirtualModel.fml#TestConcept") {
+		TestLink link() with LinkScheme(fromType=TestConcept,toType=TestConcept,skipConfirmationPanel=false) {
 			connector = DIAGRAM::AddConnector(fromShape=fromTarget.shape,toShape=toTarget.shape);
 		}
 	}

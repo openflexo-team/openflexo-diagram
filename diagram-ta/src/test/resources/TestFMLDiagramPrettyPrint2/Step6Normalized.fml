@@ -16,14 +16,14 @@ model TestDiagramVM1 {
 
 	public concept FlexoConceptA {
 		DiagramShape shape with ShapeRole(metamodelElement=DIAGRAM_SHAPE,exampleLabel="Shape");
-		FlexoConceptA drop() with DropScheme(target="top") {
+		FlexoConceptA drop() with DropScheme() {
 			shape = DIAGRAM::AddShape() in diagram;
 		}
 	}
 
 	public concept FlexoConceptB {
 		DiagramShape shape with ShapeRole(metamodelElement=DIAGRAM_SHAPE2,exampleLabel="Shape");
-		FlexoConceptB drop() with DropScheme(target="http://openflexo.org/test/TestResourceCenter/TestDiagramVM1.fml#FlexoConceptA") {
+		FlexoConceptB drop() with DropScheme(targetType=FlexoConceptA) {
 			shape = DIAGRAM::AddShape() in diagram;
 		}
 	}
