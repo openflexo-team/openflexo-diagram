@@ -1,0 +1,19 @@
+use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot as DIAGRAM;
+
+import ["http://openflexo.org/test/TestDiagramSpecification"] as TEST_DIAGRAM_SPECIFICATION;
+import ["http://openflexo.org/test/TestDiagramSpecification/ExampleDiagram.diagram"] as EXAMPLE_DIAGRAM;
+import [EXAMPLE_DIAGRAM:"SYL-2"] as DIAGRAM_SHAPE;
+
+@URI("http://openflexo.org/test/TestResourceCenter/TestDiagramVM1.fml")
+@Version("0.1")
+model TestDiagramVM1 {
+	Diagram diagram with TypedDiagram(diagramSpecification=TEST_DIAGRAM_SPECIFICATION,paletteElementBindings={});
+
+	create::createInstance() {
+		diagram = DIAGRAM::CreateDiagram(resourceName="diagram",resourceCenter=this.resourceCenter,relativePath="Diagrams");
+	}
+
+	public concept FlexoConceptA {
+		DiagramShape shape with ShapeRole(metamodelElement=DIAGRAM_SHAPE,exampleLabel="Shape");
+	}
+}
