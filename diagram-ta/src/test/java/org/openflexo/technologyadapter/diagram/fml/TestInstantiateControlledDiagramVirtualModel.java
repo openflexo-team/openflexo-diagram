@@ -305,6 +305,16 @@ public class TestInstantiateControlledDiagramVirtualModel extends OpenflexoProje
 		assertTrue(((FMLRTVirtualModelInstanceResource) newVirtualModelInstance.getResource()).getIODelegate().exists());
 		assertFalse(newVirtualModelInstance.isModified());
 
+		/*try {
+			System.out.println(
+					FileUtils.fileContents((File) newVirtualModelInstance.getResource().getIODelegate().getSerializationArtefact()));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+
+		System.exit(-1);
+
 		diagram.getResource().save();
 		assertTrue(((DiagramResource) diagram.getResource()).getIODelegate().exists());
 		assertFalse(diagram.isModified());
