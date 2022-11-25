@@ -51,6 +51,7 @@ import org.openflexo.technologyadapter.diagram.metamodel.DiagramSpecification;
 import org.openflexo.technologyadapter.diagram.rm.DiagramSpecificationResource;
 import org.openflexo.toolbox.StringUtils;
 
+@Deprecated
 public class DiagramType implements TechnologySpecificType<DiagramTechnologyAdapter> {
 
 	protected DiagramSpecification diagramSpecification;
@@ -82,7 +83,7 @@ public class DiagramType implements TechnologySpecificType<DiagramTechnologyAdap
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	public DiagramSpecification getDiagramSpecification() {
 		return diagramSpecification;
 	}
