@@ -1,0 +1,40 @@
+namespace "http://openflexo.org/test/TestDiagramSpecification" as DIAGRAM_SPECIFICATION_NS; 
+
+use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot as DIAGRAM;
+
+import [DIAGRAM_SPECIFICATION_NS] as DIAGRAM_SPECIFICATION;
+import [DIAGRAM_SPECIFICATION_NS + "/ExampleDiagram.diagram"] as EXAMPLE_DIAGRAM;
+import [EXAMPLE_DIAGRAM:"SYL-2"] as DIAGRAM_SHAPE;
+import [EXAMPLE_DIAGRAM:"SYL-3"] as DIAGRAM_SHAPE2;
+
+@URI("http://openflexo.org/test/TestResourceCenter/TestDiagramVM2.fml")
+model TestDiagramVM2 {
+        Diagram diagram with TypedDiagram(
+                diagramSpecification=DIAGRAM_SPECIFICATION,
+                paletteElementBindings={
+                		PaletteElementBinding:(
+                                call=new TutuGR::dropTutuGRAtTopLevel(),
+                                paletteElementId="http://openflexo.org/test/TestDiagramSpecification/TestPalette.palette#TestPaletteElement1"),
+                        PaletteElementBinding:(
+                                call=new TotoGR::dropTotoGRAtTopLevel(),
+                                paletteElementId="http://openflexo.org/test/TestDiagramSpecification/TestPalette.palette#TestPaletteElement2")
+                });
+
+        create::init() {
+                diagram = DIAGRAM::CreateDiagram(resourceName="diagram",resourceCenter=this.resourceCenter,relativePath="Diagrams");
+        }
+
+        concept TutuGR {
+                DiagramShape shape with ShapeRole(metamodelElement=DIAGRAM_SHAPE,exampleLabel="Shape");
+                TutuGR dropTutuGRAtTopLevel() with DropScheme() {
+                	shape = DIAGRAM::AddShape(container=topLevel) in diagram;
+                }
+        }
+
+        concept TotoGR {
+                DiagramShape shape with ShapeRole(metamodelElement=DIAGRAM_SHAPE2,exampleLabel="Shape");
+                TotoGR dropTotoGRAtTopLevel() with DropScheme() {
+                	shape = DIAGRAM::AddShape(container=topLevel) in diagram;
+                }
+        }
+}
