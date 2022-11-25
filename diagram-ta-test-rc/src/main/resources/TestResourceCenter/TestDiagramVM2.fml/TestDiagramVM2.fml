@@ -20,9 +20,13 @@ model TestDiagramVM2 {
                                 paletteElementId="http://openflexo.org/test/TestDiagramSpecification/TestPalette.palette#TestPaletteElement2")
                 });
 
-        create::init() {
-                diagram = DIAGRAM::CreateDiagram(resourceName="diagram",resourceCenter=this.resourceCenter,relativePath="Diagrams");
+        create::newDiagram() {
+        	diagram = DIAGRAM::CreateDiagram(resourceName="diagram",resourceCenter=this.resourceCenter,relativePath="Diagrams");
         }
+        
+    	create::fromDiagram(Diagram diagram) {
+    		diagram = parameters.diagram;
+    	}
 
         concept TutuGR {
                 DiagramShape shape with ShapeRole(metamodelElement=DIAGRAM_SHAPE,exampleLabel="Shape");

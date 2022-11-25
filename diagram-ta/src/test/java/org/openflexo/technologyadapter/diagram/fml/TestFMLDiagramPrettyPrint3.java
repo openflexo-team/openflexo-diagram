@@ -174,7 +174,7 @@ public class TestFMLDiagramPrettyPrint3 extends FMLParserTestCase {
 		testFMLPrettyPrintEquals(compilationUnit, "TestFMLDiagramPrettyPrint3/Step1PrettyPrint.fml");
 
 		System.out.println("Normalized=\n" + compilationUnit.getNormalizedFML());
-		// testNormalizedFMLRepresentationEquals(compilationUnit, "TestFMLDiagramPrettyPrint3/Step1Normalized.fml");
+		testNormalizedFMLRepresentationEquals(compilationUnit, "TestFMLDiagramPrettyPrint3/Step1Normalized.fml");
 
 	}
 

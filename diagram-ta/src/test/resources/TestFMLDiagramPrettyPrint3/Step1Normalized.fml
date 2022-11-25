@@ -11,8 +11,12 @@ import [EXAMPLE_DIAGRAM:"SYL-3"] as DIAGRAM_SHAPE2;
 model TestDiagramVM2 {
 	Diagram diagram with TypedDiagram(diagramSpecification=DIAGRAM_SPECIFICATION,paletteElementBindings={PaletteElementBinding:(call=new TutuGR::dropTutuGRAtTopLevel(), paletteElementId="http://openflexo.org/test/TestDiagramSpecification/TestPalette.palette#TestPaletteElement1"), PaletteElementBinding:(call=new TotoGR::dropTotoGRAtTopLevel(), paletteElementId="http://openflexo.org/test/TestDiagramSpecification/TestPalette.palette#TestPaletteElement2")});
 
-	create::init() {
+	create::newDiagram() {
 		diagram = DIAGRAM::CreateDiagram(resourceName="diagram",resourceCenter=this.resourceCenter,relativePath="Diagrams");
+	}
+
+	create::fromDiagram(Diagram diagram) {
+		diagram = parameters.diagram;
 	}
 
 	concept TutuGR {
