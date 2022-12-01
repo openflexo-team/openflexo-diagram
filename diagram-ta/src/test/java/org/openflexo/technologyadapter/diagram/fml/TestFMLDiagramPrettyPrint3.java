@@ -45,7 +45,6 @@ import java.io.IOException;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openflexo.connie.DataBinding;
 import org.openflexo.foundation.DefaultFlexoEditor;
 import org.openflexo.foundation.FlexoEditor;
 import org.openflexo.foundation.FlexoException;
@@ -62,7 +61,6 @@ import org.openflexo.foundation.fml.parser.fmlnodes.FMLSimplePropertyValueNode;
 import org.openflexo.foundation.fml.parser.fmlnodes.ModelSlotPropertyNode;
 import org.openflexo.foundation.fml.parser.fmlnodes.VirtualModelNode;
 import org.openflexo.foundation.fml.rm.CompilationUnitResource;
-import org.openflexo.foundation.fml.rt.FlexoConceptInstance;
 import org.openflexo.foundation.resource.ResourceLoadingCancelledException;
 import org.openflexo.foundation.test.parser.FMLParserTestCase;
 import org.openflexo.p2pp.RawSource;
@@ -158,17 +156,17 @@ public class TestFMLDiagramPrettyPrint3 extends FMLParserTestCase {
 		WrappedFMLObject<FMLDiagramPaletteElementBinding> binding2 = (WrappedFMLObject<FMLDiagramPaletteElementBinding>) bindingsPropertyValue
 				.getInstances().get(1);
 
-		DataBinding<FlexoConceptInstance> call = binding1.getObject().getCall();
-		System.out.println("hop: call=" + call);
+		// DataBinding<FlexoConceptInstance> call = binding1.getObject().getCall();
+		/*System.out.println("hop: call=" + call);
 		call.debug();
 		System.out.println("valid: " + call.isValid());
 		System.out.println("reason: " + call.invalidBindingReason());
-
+		
 		System.out.println("call.getOwner()=" + call.getOwner());
 		System.out.println("BM=" + call.getOwner().getBindingModel());
-
+		
 		FMLDiagramPaletteElementBinding b = (FMLDiagramPaletteElementBinding) call.getOwner();
-		System.out.println("ms:" + b.getDiagramModelSlot());
+		System.out.println("ms:" + b.getDiagramModelSlot());*/
 
 		System.out.println("FML=\n" + compilationUnit.getFMLPrettyPrint());
 		testFMLPrettyPrintEquals(compilationUnit, "TestFMLDiagramPrettyPrint3/Step1PrettyPrint.fml");
