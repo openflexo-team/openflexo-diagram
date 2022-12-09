@@ -313,8 +313,6 @@ public class TestInstantiateControlledDiagramVirtualModel extends OpenflexoProje
 			e.printStackTrace();
 		}*/
 
-		System.exit(-1);
-
 		diagram.getResource().save();
 		assertTrue(((DiagramResource) diagram.getResource()).getIODelegate().exists());
 		assertFalse(diagram.isModified());
