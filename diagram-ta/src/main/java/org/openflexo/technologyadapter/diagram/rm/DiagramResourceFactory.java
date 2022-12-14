@@ -181,8 +181,8 @@ public class DiagramResourceFactory
 			DiagramSpecificationResource diagramSpecificationResource, FlexoResourceCenter<?> resourceCenter,
 			FlexoServiceManager serviceManager) {
 		try {
-			ModelFactory factory = new ModelFactory(
-					ModelContextLibrary.getCompoundModelContext(FileFlexoIODelegate.class, DiagramResource.class));
+			PamelaModelFactory factory = new PamelaModelFactory(
+					PamelaMetaModelLibrary.getCompoundModelContext(FileFlexoIODelegate.class, DiagramResource.class));
 			DiagramResourceImpl returned = (DiagramResourceImpl) factory.newInstance(DiagramResource.class);
 			returned.setFlexoIODelegate(FileFlexoIODelegateImpl.makeFileFlexoIODelegate(diagramFile, factory));
 			DiagramFactory diagramFactory = new DiagramFactory(returned, serviceManager.getEditingContext());
@@ -207,8 +207,8 @@ public class DiagramResourceFactory
 	public static DiagramResource retrieveDiagramResource(File diagramFile, FlexoResourceCenter<?> resourceCenter,
 			FlexoServiceManager serviceManager) {
 		try {
-			ModelFactory factory = new ModelFactory(
-					ModelContextLibrary.getCompoundModelContext(FileFlexoIODelegate.class, DiagramResource.class));
+			PamelaModelFactory factory = new PamelaModelFactory(
+					PamelaMetaModelLibrary.getCompoundModelContext(FileFlexoIODelegate.class, DiagramResource.class));
 			DiagramResourceImpl returned = (DiagramResourceImpl) factory.newInstance(DiagramResource.class);
 			returned.setFlexoIODelegate(FileFlexoIODelegateImpl.makeFileFlexoIODelegate(diagramFile, factory));
 			DiagramFactory diagramFactory = new DiagramFactory(returned, serviceManager.getEditingContext());
@@ -253,8 +253,8 @@ public class DiagramResourceFactory
 	public static DiagramResource retrieveDiagramResource(InJarResourceImpl inJarResource, FlexoResourceCenter<?> resourceCenter,
 			FlexoServiceManager serviceManager) {
 		try {
-			ModelFactory factory = new ModelFactory(
-					ModelContextLibrary.getCompoundModelContext(InJarFlexoIODelegate.class, DiagramResource.class));
+			PamelaModelFactory factory = new PamelaModelFactory(
+					PamelaMetaModelLibrary.getCompoundModelContext(InJarFlexoIODelegate.class, DiagramResource.class));
 			DiagramResourceImpl returned = (DiagramResourceImpl) factory.newInstance(DiagramResource.class);
 			returned.setFlexoIODelegate(InJarFlexoIODelegateImpl.makeInJarFlexoIODelegate(inJarResource, factory));
 			DiagramFactory diagramFactory = new DiagramFactory(returned, serviceManager.getEditingContext());

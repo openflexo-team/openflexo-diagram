@@ -63,9 +63,9 @@ import org.openflexo.foundation.fml.FMLBindingFactory;
 import org.openflexo.foundation.fml.rt.FMLRTVirtualModelInstance;
 import org.openflexo.foundation.fml.rt.FlexoConceptInstance;
 import org.openflexo.foundation.fml.rt.VirtualModelInstance.ObjectLookupResult;
-import org.openflexo.pamela.ModelContextLibrary;
+import org.openflexo.pamela.PamelaMetaModelLibrary;
 import org.openflexo.pamela.exceptions.ModelDefinitionException;
-import org.openflexo.pamela.factory.ModelFactory;
+import org.openflexo.pamela.factory.PamelaModelFactory;
 import org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
 import org.openflexo.technologyadapter.diagram.fml.ConnectorRole;
 import org.openflexo.technologyadapter.diagram.fml.FMLControlledDiagramVirtualModelInstanceNature;
@@ -92,7 +92,7 @@ public class FMLControlledDiagramDrawing extends AbstractDiagramDrawing {
 
 	private final FMLRTVirtualModelInstance virtualModelInstance;
 
-	private ModelFactory MODEL_FACTORY = null;
+	private PamelaModelFactory MODEL_FACTORY = null;
 
 	private final Map<FlexoConceptInstance, List<FMLControlledDiagramElement<?, ?>>> diagramElementsForFlexoConceptInstances;
 	private final Map<DiagramShape, FMLControlledDiagramShape> federatedShapes;
@@ -111,8 +111,8 @@ public class FMLControlledDiagramDrawing extends AbstractDiagramDrawing {
 		federatedShapes = new HashMap<>();
 		federatedConnectors = new HashMap<>();
 		try {
-			MODEL_FACTORY = new ModelFactory(
-					ModelContextLibrary.getCompoundModelContext(FMLControlledDiagramShape.class, FMLControlledDiagramConnector.class));
+			MODEL_FACTORY = new PamelaModelFactory(
+					PamelaMetaModelLibrary.getCompoundModelContext(FMLControlledDiagramShape.class, FMLControlledDiagramConnector.class));
 			MODEL_FACTORY.setEditingContext(vmInstance.getServiceManager().getEditingContext());
 		} catch (ModelDefinitionException e) {
 			e.printStackTrace();

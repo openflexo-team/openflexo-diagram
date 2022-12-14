@@ -186,8 +186,8 @@ public class DiagramPaletteResourceFactory extends
 		try {
 			File diagramPaletteFile = new File(ResourceLocator.retrieveResourceAsFile(dsResource.getDirectory()),
 					diagramPaletteName + ".palette");
-			ModelFactory factory = new ModelFactory(
-					ModelContextLibrary.getCompoundModelContext(FileFlexoIODelegate.class, DiagramPaletteResource.class));
+			PamelaModelFactory factory = new PamelaModelFactory(
+					PamelaMetaModelLibrary.getCompoundModelContext(FileFlexoIODelegate.class, DiagramPaletteResource.class));
 			DiagramPaletteResourceImpl returned = (DiagramPaletteResourceImpl) factory.newInstance(DiagramPaletteResource.class);
 			returned.initName(diagramPaletteFile.getName());
 			// returned.setFile(diagramPaletteFile);
@@ -213,8 +213,8 @@ public class DiagramPaletteResourceFactory extends
 	public static DiagramPaletteResource retrieveDiagramPaletteResource(DiagramSpecificationResource dsResource, File diagramPaletteFile,
 			FlexoServiceManager serviceManager) {
 		try {
-			ModelFactory factory = new ModelFactory(
-					ModelContextLibrary.getCompoundModelContext(FileFlexoIODelegate.class, DiagramPaletteResource.class));
+			PamelaModelFactory factory = new PamelaModelFactory(
+					PamelaMetaModelLibrary.getCompoundModelContext(FileFlexoIODelegate.class, DiagramPaletteResource.class));
 			DiagramPaletteResourceImpl returned = (DiagramPaletteResourceImpl) factory.newInstance(DiagramPaletteResource.class);
 			returned.initName(diagramPaletteFile.getName());
 			// returned.setFile(diagramPaletteFile);
@@ -249,8 +249,8 @@ public class DiagramPaletteResourceFactory extends
 	public static DiagramPaletteResource retrieveDiagramPaletteResource(DiagramSpecificationResource dsResource,
 			InJarResourceImpl diagramPaletteInJarResource, FlexoServiceManager serviceManager) {
 		try {
-			ModelFactory factory = new ModelFactory(
-					ModelContextLibrary.getCompoundModelContext(InJarFlexoIODelegate.class, DiagramPaletteResource.class));
+			PamelaModelFactory factory = new PamelaModelFactory(
+					PamelaMetaModelLibrary.getCompoundModelContext(InJarFlexoIODelegate.class, DiagramPaletteResource.class));
 			DiagramPaletteResourceImpl returned = (DiagramPaletteResourceImpl) factory.newInstance(DiagramPaletteResource.class);
 			// returned.setFile(diagramPaletteFile);
 			returned.setFlexoIODelegate(InJarFlexoIODelegateImpl.makeInJarFlexoIODelegate(diagramPaletteInJarResource, factory));

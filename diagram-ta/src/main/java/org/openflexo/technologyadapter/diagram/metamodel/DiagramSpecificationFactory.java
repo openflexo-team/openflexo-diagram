@@ -39,7 +39,7 @@
 package org.openflexo.technologyadapter.diagram.metamodel;
 
 import org.openflexo.foundation.DefaultPamelaResourceModelFactory;
-import org.openflexo.pamela.ModelContextLibrary;
+import org.openflexo.pamela.PamelaMetaModelLibrary;
 import org.openflexo.pamela.converter.RelativePathResourceConverter;
 import org.openflexo.pamela.exceptions.ModelDefinitionException;
 import org.openflexo.pamela.factory.EditingContext;
@@ -57,7 +57,7 @@ public class DiagramSpecificationFactory extends DefaultPamelaResourceModelFacto
 
 	public DiagramSpecificationFactory(DiagramSpecificationResource resource, EditingContext editingContext)
 			throws ModelDefinitionException {
-		super(resource, ModelContextLibrary.getModelContext(DiagramSpecification.class));
+		super(resource, PamelaMetaModelLibrary.getModelContext(DiagramSpecification.class));
 		setEditingContext(editingContext);
 		addConverter(relativePathResourceConverter = new RelativePathResourceConverter(null));
 		if (resource != null && resource.getIODelegate() != null
