@@ -57,7 +57,7 @@ public class DiagramSpecificationFactory extends DefaultPamelaResourceModelFacto
 
 	public DiagramSpecificationFactory(DiagramSpecificationResource resource, EditingContext editingContext)
 			throws ModelDefinitionException {
-		super(resource, PamelaMetaModelLibrary.getModelContext(DiagramSpecification.class));
+		super(resource, PamelaMetaModelLibrary.retrieveMetaModel(DiagramSpecification.class));
 		setEditingContext(editingContext);
 		addConverter(relativePathResourceConverter = new RelativePathResourceConverter(null));
 		if (resource != null && resource.getIODelegate() != null
