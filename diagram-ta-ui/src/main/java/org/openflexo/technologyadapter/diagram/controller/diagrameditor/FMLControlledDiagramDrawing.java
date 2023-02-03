@@ -112,7 +112,7 @@ public class FMLControlledDiagramDrawing extends AbstractDiagramDrawing {
 		federatedConnectors = new HashMap<>();
 		try {
 			MODEL_FACTORY = new PamelaModelFactory(
-					PamelaMetaModelLibrary.getCompoundModelContext(FMLControlledDiagramShape.class, FMLControlledDiagramConnector.class));
+					PamelaMetaModelLibrary.retrieveMetaModel(FMLControlledDiagramShape.class, FMLControlledDiagramConnector.class));
 			MODEL_FACTORY.setEditingContext(vmInstance.getServiceManager().getEditingContext());
 		} catch (ModelDefinitionException e) {
 			e.printStackTrace();
