@@ -41,24 +41,34 @@ package org.openflexo.technologyadapter.diagram;
 import java.io.File;
 
 import org.openflexo.diana.ScreenshotBuilder;
+import org.openflexo.foundation.FlexoEditor;
 import org.openflexo.foundation.FlexoProject;
+import org.openflexo.foundation.fml.AbstractCreationScheme;
 import org.openflexo.foundation.fml.annotations.DeclareModelSlots;
 import org.openflexo.foundation.fml.annotations.DeclareResourceFactories;
 import org.openflexo.foundation.fml.annotations.DeclareTechnologySpecificTypes;
 import org.openflexo.foundation.fml.annotations.DeclareVirtualModelInstanceNatures;
+import org.openflexo.foundation.fml.rt.FMLRTVirtualModelInstance;
+import org.openflexo.foundation.fml.rt.VirtualModelInstance;
+import org.openflexo.foundation.fml.rt.action.AbstractCreationSchemeAction;
+import org.openflexo.foundation.fml.rt.action.FlexoBehaviourAction;
 import org.openflexo.foundation.resource.FlexoResourceCenter;
 import org.openflexo.foundation.resource.FlexoResourceCenterService;
 import org.openflexo.foundation.technologyadapter.TechnologyAdapter;
 import org.openflexo.foundation.technologyadapter.TechnologyAdapterBindingFactory;
 import org.openflexo.foundation.technologyadapter.TechnologyAdapterInitializationException;
 import org.openflexo.foundation.technologyadapter.TechnologyAdapterService;
+import org.openflexo.technologyadapter.diagram.fml.DropScheme;
 import org.openflexo.technologyadapter.diagram.fml.FMLControlledDiagramVirtualModelInstanceNature;
+import org.openflexo.technologyadapter.diagram.fml.LinkScheme;
 import org.openflexo.technologyadapter.diagram.metamodel.DiagramPalette;
 import org.openflexo.technologyadapter.diagram.model.Diagram;
 import org.openflexo.technologyadapter.diagram.model.DiagramElement;
 import org.openflexo.technologyadapter.diagram.model.DiagramShape;
 import org.openflexo.technologyadapter.diagram.model.DiagramType;
 import org.openflexo.technologyadapter.diagram.model.DiagramType.DiagramTypeFactory;
+import org.openflexo.technologyadapter.diagram.model.action.DropSchemeAction;
+import org.openflexo.technologyadapter.diagram.model.action.LinkSchemeAction;
 import org.openflexo.technologyadapter.diagram.rm.DiagramRepository;
 import org.openflexo.technologyadapter.diagram.rm.DiagramResourceFactory;
 import org.openflexo.technologyadapter.diagram.rm.DiagramSpecificationRepository;
@@ -528,4 +538,35 @@ public class DiagramTechnologyAdapter extends TechnologyAdapter<DiagramTechnolog
 		return getResourceFactory(DiagramSpecificationResourceFactory.class);
 	}
 
+	@Override
+	public <A extends AbstractCreationSchemeAction<A, FB, O>, FB extends AbstractCreationScheme, O extends VirtualModelInstance<?, ?>> AbstractCreationSchemeAction<A, FB, O> makeCreationSchemeAction(
+			FB behaviour, O vmInstance, FlexoBehaviourAction<?, ?, ?> ownerAction) {
+		if (behaviour instanceof DropScheme) {
+			System.err.println("--------> Qui passe la ????");
+			Thread.dumpStack();
+			return (AbstractCreationSchemeAction<A, FB, O>) new DropSchemeAction((DropScheme) behaviour,
+					(FMLRTVirtualModelInstance) vmInstance, null, ownerAction);
+		}
+		if (behaviour instanceof LinkScheme) {
+			return (AbstractCreationSchemeAction<A, FB, O>) new LinkSchemeAction((LinkScheme) behaviour,
+					(FMLRTVirtualModelInstance) vmInstance, null, ownerAction);
+		}
+		return super.makeCreationSchemeAction(behaviour, vmInstance, ownerAction);
+	}
+
+	@Override
+	public <A extends AbstractCreationSchemeAction<A, FB, O>, FB extends AbstractCreationScheme, O extends VirtualModelInstance<?, ?>> AbstractCreationSchemeAction<A, FB, O> makeCreationSchemeAction(
+			FB behaviour, O vmInstance, FlexoEditor editor) {
+		if (behaviour instanceof DropScheme) {
+			System.err.println("--------> Qui passe ici ????");
+			Thread.dumpStack();
+			return (AbstractCreationSchemeAction<A, FB, O>) new DropSchemeAction((DropScheme) behaviour,
+					(FMLRTVirtualModelInstance) vmInstance, null, editor);
+		}
+		if (behaviour instanceof LinkScheme) {
+			return (AbstractCreationSchemeAction<A, FB, O>) new LinkSchemeAction((LinkScheme) behaviour,
+					(FMLRTVirtualModelInstance) vmInstance, null, editor);
+		}
+		return super.makeCreationSchemeAction(behaviour, vmInstance, editor);
+	}
 }

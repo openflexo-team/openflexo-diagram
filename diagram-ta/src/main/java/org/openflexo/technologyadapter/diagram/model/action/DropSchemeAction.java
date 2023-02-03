@@ -121,40 +121,6 @@ public class DropSchemeAction extends DiagramFlexoBehaviourAction<DropSchemeActi
 		return true;
 	}
 
-	/*@Override
-	public LocalizedDelegate getLocales() {
-		if (getServiceManager() != null) {
-			return getServiceManager().getTechnologyAdapterService().getTechnologyAdapter(DiagramTechnologyAdapter.class).getLocales();
-		}
-		return super.getLocales();
-	}*/
-
-	// private Hashtable<EditionAction,FlexoObject> createdObjects;
-
-	// private FlexoConceptInstance flexoConceptInstance;
-
-	/*@Override
-	protected void doAction(Object context) throws NotImplementedException, InvalidParametersException, FlexoException {
-		logger.info("Drop palette element");
-	
-		// logger.info("project=" + getProject());
-		// getFlexoConcept().getViewPoint().getViewpointOntology().loadWhenUnloaded();
-	
-		System.out.println("1-isModified=" + getVirtualModelInstance().isModified());
-	
-		flexoConceptInstance = getVirtualModelInstance().makeNewFlexoConceptInstance(getFlexoConcept());
-	
-		// logger.info("flexoConceptInstance=" + flexoConceptInstance);
-		// logger.info("epi project=" + flexoConceptInstance.getProject());
-		// logger.info("epi resource data =" + flexoConceptInstance.getResourceData());
-	
-		// System.out.println("2-isModified=" + getVirtualModelInstance().isModified());
-	
-		executeControlGraph();
-	
-		// System.out.println("3-isModified=" + getVirtualModelInstance().isModified());
-	}*/
-
 	public void setParentInformations(FlexoConceptInstance parentConceptInstance, ShapeRole parentShapeRole) {
 		this.parentConceptInstance = parentConceptInstance;
 		this.parentShapeRole = parentShapeRole;
@@ -181,19 +147,6 @@ public class DropSchemeAction extends DiagramFlexoBehaviourAction<DropSchemeActi
 	public Diagram getDiagram() {
 		return getParent().getDiagram();
 	}
-
-	/*public DropScheme getDropScheme() {
-		return _dropScheme;
-	}
-	
-	public void setDropScheme(DropScheme dropScheme) {
-		_dropScheme = dropScheme;
-	}
-	
-	@Override
-	public DropScheme getFlexoBehaviour() {
-		return getDropScheme();
-	}*/
 
 	public DiagramPaletteElement getPaletteElement() {
 		return paletteElement;

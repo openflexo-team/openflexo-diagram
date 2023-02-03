@@ -187,7 +187,7 @@ public class ContextualPalette extends DiagramEditorPaletteModel implements Prop
 
 			if (getEditor() instanceof FMLControlledDiagramEditor) {
 				// System.out.println("Available DS = " + getAvailableDropSchemes(target, diagramPaletteElement));
-				return getAvailableDropSchemes(target, diagramPaletteElement).size() > 0;
+				return getApplicableBindings(target, diagramPaletteElement).size() > 0;
 			}
 
 			return getEditor() != null && target instanceof ContainerNode && (target.getDrawable() instanceof Diagram
@@ -199,6 +199,7 @@ public class ContextualPalette extends DiagramEditorPaletteModel implements Prop
 			if (target != null) {
 
 				if (getEditor() instanceof FMLControlledDiagramEditor) {
+					logger.warning("Ici avec " + diagramPaletteElement);
 					return handleFMLControlledDrop(target, diagramPaletteElement, dropLocation, (FMLControlledDiagramEditor) getEditor());
 				}
 				else {
@@ -223,14 +224,14 @@ public class ContextualPalette extends DiagramEditorPaletteModel implements Prop
 
 	}
 
-	public List<DropScheme> getAvailableDropSchemes(DrawingTreeNode<?, ?> target, DiagramPaletteElement paletteElement) {
+	public List<FMLDiagramPaletteElementBinding> getApplicableBindings(DrawingTreeNode<?, ?> target, DiagramPaletteElement paletteElement) {
 
 		if (getEditor() instanceof FMLControlledDiagramEditor) {
 
 			FMLRTVirtualModelInstance vmi = ((FMLControlledDiagramEditor) getEditor()).getVirtualModelInstance();
 			TypedDiagramModelSlot ms = FMLControlledDiagramVirtualModelNature.getTypedDiagramModelSlot(vmi.getVirtualModel());
 
-			ArrayList<DropScheme> availableDropSchemes = new ArrayList<>();
+			ArrayList<FMLDiagramPaletteElementBinding> applicableBindings = new ArrayList<>();
 
 			for (FMLDiagramPaletteElementBinding fmlDiagramPaletteElementBinding : ms.getPaletteElementBindings(paletteElement)) {
 
@@ -238,18 +239,18 @@ public class ContextualPalette extends DiagramEditorPaletteModel implements Prop
 
 				if (target.getDrawable() instanceof Diagram) {
 					if (ds.isTopTarget()) {
-						availableDropSchemes.add(ds);
+						applicableBindings.add(fmlDiagramPaletteElementBinding);
 					}
 				}
 				else if (target.getDrawable() instanceof FMLControlledDiagramShape) {
 					FMLControlledDiagramShape fmlControlledShape = (FMLControlledDiagramShape) target.getDrawable();
 					if (ds.isValidTarget(fmlControlledShape.getFlexoConceptInstance().getFlexoConcept(), fmlControlledShape.getRole())) {
-						availableDropSchemes.add(ds);
+						applicableBindings.add(fmlDiagramPaletteElementBinding);
 					}
 				}
 			}
 
-			return availableDropSchemes;
+			return applicableBindings;
 		}
 
 		return null;
@@ -274,26 +275,39 @@ public class ContextualPalette extends DiagramEditorPaletteModel implements Prop
 			container = (Diagram) target.getDrawable();
 		}
 
-		List<DropScheme> availableDropSchemes = getAvailableDropSchemes(target, paletteElement);
+		logger.info("----------------> ok qu'ai je a faire ???");
+		logger.info("container=" + container);
+		logger.info("dropLocation=" + dropLocation);
+		logger.info("paletteElement=" + paletteElement);
 
-		if (availableDropSchemes.size() == 0) {
+		List<FMLDiagramPaletteElementBinding> applicableBindings = getApplicableBindings(target, paletteElement);
+
+		if (applicableBindings.size() == 0) {
 			logger.warning("Unexpected empty list: availableDropSchemes");
 			return false;
 		}
-		else if (availableDropSchemes.size() > 1) {
+		else if (applicableBindings.size() > 1) {
 			JPopupMenu popup = new JPopupMenu();
-			for (final DropScheme dropScheme : availableDropSchemes) {
-				JMenuItem menuItem = new JMenuItem(dropScheme.getDeclaringCompilationUnit().getLocalizedDictionary()
-						.localizedForKey(dropScheme.getName() != null ? dropScheme.getName() : dropScheme.getName()));
-				menuItem.addActionListener(new DrawingShapeActionListener(editor, dropScheme, container, parentFlexoConceptInstance,
-						parentShapeRole, paletteElement, dropLocation));
+			for (final FMLDiagramPaletteElementBinding binding : applicableBindings) {
+				JMenuItem menuItem = new JMenuItem(
+						binding.getDeclaringCompilationUnit().getLocalizedDictionary().localizedForKey(binding.getDropScheme().getName()));
+				menuItem.addActionListener(new DrawingShapeActionListener(editor, binding.getDropScheme(), container,
+						parentFlexoConceptInstance, parentShapeRole, paletteElement, dropLocation));
 				popup.add(menuItem);
 			}
 			popup.show(editor.getDrawingView(), (int) dropLocation.x, (int) dropLocation.y);
 		}
 		else { // availableDropSchemes.size() == 1
-			DropSchemeAction action = new DropSchemeAction(availableDropSchemes.get(0), editor.getVirtualModelInstance(), null,
-					editor.getFlexoController().getEditor());
+
+			// Ce qui serait mieux :
+
+			/*applicableBindings.get(0).getCall()
+					.getBindingValue(new DerivedBindingEvaluationContext(editor.getVirtualModelInstance(), (bv) -> {
+						return null;
+					}));*/
+
+			DropSchemeAction action = new DropSchemeAction(applicableBindings.get(0).getDropScheme(), editor.getVirtualModelInstance(),
+					null, editor.getFlexoController().getEditor());
 			action.setParentInformations(parentFlexoConceptInstance, parentShapeRole);
 			action.setPaletteElement(paletteElement);
 			action.setDropLocation(dropLocation);
