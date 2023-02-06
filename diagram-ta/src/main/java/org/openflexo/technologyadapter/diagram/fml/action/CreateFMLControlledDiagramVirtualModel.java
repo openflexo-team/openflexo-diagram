@@ -42,9 +42,9 @@ import java.util.Vector;
 import java.util.logging.Logger;
 
 import org.openflexo.connie.DataBinding;
-import org.openflexo.diana.DrawingGraphicalRepresentation;
 import org.openflexo.diana.DianaModelFactory;
 import org.openflexo.diana.DianaModelFactoryImpl;
+import org.openflexo.diana.DrawingGraphicalRepresentation;
 import org.openflexo.foundation.FlexoEditor;
 import org.openflexo.foundation.FlexoException;
 import org.openflexo.foundation.FlexoObject;
@@ -60,7 +60,6 @@ import org.openflexo.foundation.fml.action.CreateFlexoBehaviour;
 import org.openflexo.foundation.fml.action.CreateModelSlot;
 import org.openflexo.foundation.fml.editionaction.AssignationAction;
 import org.openflexo.foundation.fml.rm.CompilationUnitResource;
-import org.openflexo.foundation.resource.FlexoResource;
 import org.openflexo.foundation.resource.FlexoResourceCenter;
 import org.openflexo.foundation.resource.RepositoryFolder;
 import org.openflexo.foundation.resource.SaveResourceException;
@@ -224,7 +223,7 @@ public class CreateFMLControlledDiagramVirtualModel extends AbstractCreateNature
 		CreateDiagram createDiagramAction = (CreateDiagram) ((AssignationAction<?>) configureModelSlotAction.getNewEditionAction())
 				.getAssignableAction();
 		createDiagramAction.setDiagramSpecificationResource(getDiagramSpecificationResource());
-		createDiagramAction.setDiagramName(new DataBinding<String>("'diagram'"));
+		createDiagramAction.setDiagramName(new DataBinding<String>("\"diagram\""));
 		createDiagramAction.setResourceCenter(new DataBinding<FlexoResourceCenter<?>>("this.resourceCenter"));
 		createDiagramAction.setRelativePath("/Diagrams");
 
