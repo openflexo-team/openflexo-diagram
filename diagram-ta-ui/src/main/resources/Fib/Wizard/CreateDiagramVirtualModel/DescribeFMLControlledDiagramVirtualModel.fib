@@ -1,32 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Panel id="0" borderLeft="0" layout="twocols"
-	controllerClassName="org.openflexo.view.controller.FlexoFIBController"
-	border="empty" borderRight="0" trackViewPortWidth="true" borderBottom="0"
-	titleFont="Lucida Grande,0,13" borderTop="0" trackViewPortHeight="true">
-	<LocalizedDictionary id="1" />
-	<Label id="2" name="VirtualModelNameLabel" index="1" align="right"
-		constraints="twocols(anchor=east;expandHorizontally=false;expandVertically=false;fill=none;gridHeight=1;gridWidth=1;gridX=-1;gridY=-1;index=1;insetsBottom=0;insetsLeft=20;insetsRight=0;insetsTop=0;location=left;padX=0;padY=0;weightX=0.0;weightY=0.0)"
-		label="virtual_model_name" />
-	<TextField id="3" data="data.newVirtualModelName" columns="40"
-		name="VirtualModelNameTF" text="TextField" index="2"
-		constraints="twocols(anchor=center;expandHorizontally=true;expandVertically=false;fill=horizontal;gridHeight=1;gridWidth=0;gridX=-1;gridY=-1;index=2;insetsBottom=0;insetsLeft=0;insetsRight=20;insetsTop=0;location=right;padX=0;padY=0;weightX=1.0;weightY=0.0)" />
-	<Label id="4" name="DescriptionLabel" index="12" align="right"
-		constraints="twocols(anchor=north_east;expandHorizontally=false;expandVertically=false;fill=none;gridHeight=1;gridWidth=1;gridX=-1;gridY=-1;index=12;insetsBottom=0;insetsLeft=0;insetsRight=0;insetsTop=10;location=left;padX=0;padY=0;weightX=0.0;weightY=0.0)"
-		label="description" />
-	<TextArea id="5" verticalScrollbarPolicy="VERTICAL_SCROLLBAR_AS_NEEDED"
-		useScrollBar="true" data="data.newVirtualModelDescription" columns="6"
-		name="TextArea" text="TextArea" index="13"
-		constraints="twocols(anchor=center;expandHorizontally=true;expandVertically=true;fill=both;gridHeight=1;gridWidth=0;gridX=-1;gridY=-1;index=13;insetsBottom=0;insetsLeft=0;insetsRight=20;insetsTop=0;location=right;padX=0;padY=0;weightX=1.0;weightY=1.0)"
-		rows="5" horizontalScrollbarPolicy="HORIZONTAL_SCROLLBAR_AS_NEEDED" />
-	<Label id="6" name="Label2" align="left"
-		constraints="twocols(expandHorizontally=true;expandVertically=false;insetsBottom=20;insetsLeft=20;insetsRight=0;insetsTop=20;location=left)"
-		label="what_would_you_like_to_do" />
-	<RadioButtonList id="7" columns="1"
-		constraints="twocols(expandHorizontally=true;expandVertically=false;insetsBottom=20;insetsLeft=0;insetsRight=0;insetsTop=20;location=right)"
-		showText="true"
-		iteratorClassName="org.openflexo.technologyadapter.diagram.fml.action.CreateFMLControlledDiagramVirtualModel$DiagramSpecificationChoice"
-		showIcon="false" vGap="-2" data="data.choice" autoSelectFirstRow="true"
-		name="PaletteRadioButtonList" />
-	<FIBVariable id="8" name="data"
-		type="org.openflexo.technologyadapter.diagram.controller.action.CreateFMLControlledDiagramVirtualModelWizard$DescribeFMLControlledDiagramVirtualModel" />
+<Panel id="0" align="left" borderTop="0" borderLeft="0" trackViewPortHeight="true" trackViewPortWidth="true" borderBottom="0" border="empty" sizeAdjustment="OriginalSize" titleFont="Lucida Grande,0,13" layout="twocols" borderRight="0" controllerClassName="org.openflexo.view.controller.FlexoFIBController" name="Panel">
+  <Label id="1" label="virtual_model_name" align="right" localize="true" constraints="twocols(anchor=east;expandHorizontally=false;expandVertically=false;fill=none;gridHeight=1;gridWidth=1;gridX=-1;gridY=-1;index=1;insetsBottom=0;insetsLeft=20;insetsRight=0;insetsTop=0;location=left;padX=0;padY=0;weightX=0.0;weightY=0.0)" index="1" name="VirtualModelNameLabel" />
+  <TextField id="2" columns="40" text="TextField" data="data.newVirtualModelName" constraints="twocols(anchor=center;expandHorizontally=true;expandVertically=false;fill=horizontal;gridHeight=1;gridWidth=0;gridX=-1;gridY=-1;index=2;insetsBottom=0;insetsLeft=0;insetsRight=20;insetsTop=0;location=right;padX=0;padY=0;weightX=1.0;weightY=0.0)" index="2" name="VirtualModelNameTF" />
+  <Label id="3" label="description" align="right" localize="true" constraints="twocols(anchor=north_east;expandHorizontally=false;expandVertically=false;fill=none;gridHeight=1;gridWidth=1;gridX=-1;gridY=-1;index=12;insetsBottom=0;insetsLeft=0;insetsRight=0;insetsTop=10;location=left;padX=0;padY=0;weightX=0.0;weightY=0.0)" index="12" name="DescriptionLabel" />
+  <TextArea id="4" rows="5" columns="6" text="TextArea" data="data.newVirtualModelDescription" useScrollBar="true" verticalScrollbarPolicy="VERTICAL_SCROLLBAR_AS_NEEDED" constraints="twocols(anchor=center;expandHorizontally=true;expandVertically=true;fill=both;gridHeight=1;gridWidth=0;gridX=-1;gridY=-1;index=13;insetsBottom=0;insetsLeft=0;insetsRight=20;insetsTop=0;location=right;padX=0;padY=0;weightX=1.0;weightY=1.0)" horizontalScrollbarPolicy="HORIZONTAL_SCROLLBAR_AS_NEEDED" index="13" name="TextArea" />
+  <Label id="5" label="what_would_you_like_to_do" align="left" localize="true" constraints="twocols(expandHorizontally=true;expandVertically=false;insetsBottom=20;insetsLeft=20;insetsRight=0;insetsTop=20;location=left)" name="Label2" />
+  <RadioButtonList id="6" autoSelectFirstRow="true" iteratorClassName="org.openflexo.technologyadapter.diagram.fml.action.CreateFMLControlledDiagramVirtualModel$DiagramSpecificationChoice" showText="true" showIcon="false" localize="true" data="data.choice" constraints="twocols(expandHorizontally=true;expandVertically=false;insetsBottom=20;insetsLeft=0;insetsRight=0;insetsTop=20;location=right)" name="PaletteRadioButtonList" />
+  <LocalizedDictionary id="7">
+    <Localized id="8" lang="English" value="Virtual model name" key="virtual_model_name" />
+    <Localized id="9" lang="Dutch" value="Virtual model name" key="virtual_model_name" />
+    <Localized id="10" lang="French" value="Nom du VirtualModel" key="virtual_model_name" />
+    <Localized id="11" lang="English" value="Description" key="description" />
+    <Localized id="12" lang="Dutch" value="Description" key="description" />
+    <Localized id="13" lang="French" value="Description" key="description" />
+    <Localized id="14" lang="English" value="What would you like to do ?" key="what_would_you_like_to_do" />
+    <Localized id="15" lang="Dutch" value="What would you like to do ?" key="what_would_you_like_to_do" />
+    <Localized id="16" lang="French" value="Que voulez vous faire ?" key="what_would_you_like_to_do" />
+  </LocalizedDictionary>
+  <FIBVariable id="17" type="org.openflexo.technologyadapter.diagram.controller.action.CreateFMLControlledDiagramVirtualModelWizard$DescribeFMLControlledDiagramVirtualModel" name="data" />
 </Panel>
