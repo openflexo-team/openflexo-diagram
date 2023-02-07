@@ -74,7 +74,6 @@ import org.openflexo.pamela.annotations.XMLAttribute;
 import org.openflexo.pamela.annotations.XMLElement;
 import org.openflexo.technologyadapter.diagram.DiagramTechnologyAdapter;
 import org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
-import org.openflexo.technologyadapter.diagram.fml.binding.DropSchemePathElement;
 import org.openflexo.technologyadapter.diagram.metamodel.DiagramPalette;
 import org.openflexo.technologyadapter.diagram.metamodel.DiagramPaletteElement;
 import org.openflexo.technologyadapter.diagram.metamodel.DiagramSpecification;
@@ -653,9 +652,13 @@ public interface FMLDiagramPaletteElementBinding extends FlexoConceptObject {
 				}
 			}
 
-			DropSchemePathElement dropSchemePathElement = getFMLModelFactory()
-					.newAbstractCreationSchemePathElement(DropSchemePathElement.class, null, dropScheme, args, this);
-			bv.addBindingPathElement(dropSchemePathElement);
+			// DropSchemePathElement dropSchemePathElement = getFMLModelFactory()
+			// .newAbstractCreationSchemePathElement(DropSchemePathElement.class, null, dropScheme, args, this);
+
+			CreationSchemePathElement creationSchemePathElement = getFMLModelFactory().newCreationSchemePathElement(null, dropScheme, args,
+					this);
+
+			bv.addBindingPathElement(creationSchemePathElement);
 
 			returned.setExpression(bv);
 
@@ -687,6 +690,15 @@ public interface FMLDiagramPaletteElementBinding extends FlexoConceptObject {
 		@Override
 		public void setCall(DataBinding<FlexoConceptInstance> call) {
 			if (call != null) {
+
+				/*System.out.println("---------> OK je viens faire un SET du call: " + call);
+				Thread.dumpStack();
+				
+				if (call.isBindingPath()) {
+					BindingPath bp = (BindingPath) call.getExpression();
+					System.out.println(bp.getBindingPathElementAtIndex(0) + " of " + bp.getBindingPathElementAtIndex(0).getClass());
+				}*/
+
 				call.setOwner(this);
 				call.setBindingName("call");
 				call.setDeclaredType(FlexoConceptInstance.class);

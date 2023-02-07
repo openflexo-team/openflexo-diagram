@@ -199,7 +199,8 @@ public class ContextualPalette extends DiagramEditorPaletteModel implements Prop
 			if (target != null) {
 
 				if (getEditor() instanceof FMLControlledDiagramEditor) {
-					logger.warning("Ici avec " + diagramPaletteElement);
+					logger.info("elementDragged() for " + diagramPaletteElement);
+					logger.info("handleFMLControlledDrop() for " + target + " in " + dropLocation);
 					return handleFMLControlledDrop(target, diagramPaletteElement, dropLocation, (FMLControlledDiagramEditor) getEditor());
 				}
 				else {
@@ -275,7 +276,7 @@ public class ContextualPalette extends DiagramEditorPaletteModel implements Prop
 			container = (Diagram) target.getDrawable();
 		}
 
-		logger.info("----------------> ok qu'ai je a faire ???");
+		logger.info("perform handleFMLControlledDrop()");
 		logger.info("container=" + container);
 		logger.info("dropLocation=" + dropLocation);
 		logger.info("paletteElement=" + paletteElement);

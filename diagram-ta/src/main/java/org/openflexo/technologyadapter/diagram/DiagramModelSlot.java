@@ -44,13 +44,10 @@ import org.openflexo.foundation.fml.FlexoRole;
 import org.openflexo.foundation.technologyadapter.ModelSlot;
 import org.openflexo.pamela.annotations.Implementation;
 import org.openflexo.pamela.annotations.ImplementationClass;
-import org.openflexo.pamela.annotations.Import;
-import org.openflexo.pamela.annotations.Imports;
 import org.openflexo.pamela.annotations.ModelEntity;
 import org.openflexo.technologyadapter.diagram.fml.ConnectorRole;
 import org.openflexo.technologyadapter.diagram.fml.DiagramRole;
 import org.openflexo.technologyadapter.diagram.fml.ShapeRole;
-import org.openflexo.technologyadapter.diagram.fml.binding.DropSchemePathElement;
 import org.openflexo.technologyadapter.diagram.model.Diagram;
 
 /**
@@ -62,7 +59,6 @@ import org.openflexo.technologyadapter.diagram.model.Diagram;
 
 @ModelEntity(isAbstract = true)
 @ImplementationClass(DiagramModelSlot.DiagramModelSlotImpl.class)
-@Imports({ @Import(DropSchemePathElement.class) })
 public interface DiagramModelSlot extends ModelSlot<Diagram> {
 
 	@Implementation
