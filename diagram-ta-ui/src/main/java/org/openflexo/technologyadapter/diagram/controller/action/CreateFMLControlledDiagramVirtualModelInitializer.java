@@ -85,7 +85,7 @@ public class CreateFMLControlledDiagramVirtualModelInitializer
 	protected FlexoActionRunnable<CreateFMLControlledDiagramVirtualModel, FlexoObject, FMLObject> getDefaultFinalizer() {
 		return (e, action) -> {
 			getController().focusOnTechnologyAdapter(getController().getTechnologyAdapter(DiagramTechnologyAdapter.class));
-			getController().selectAndFocusObject(action.getNewVirtualModel());
+			getController().selectAndFocusObject(action.getNewVirtualModel().getCompilationUnit());
 			return true;
 		};
 	}
