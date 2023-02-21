@@ -46,12 +46,16 @@ import org.openflexo.diana.ConnectorGraphicalRepresentation;
 import org.openflexo.diana.GraphicalRepresentation;
 import org.openflexo.diana.ShapeGraphicalRepresentation;
 import org.openflexo.foundation.fml.annotations.FML;
+import org.openflexo.pamela.annotations.DefineValidationRule;
 import org.openflexo.pamela.annotations.Getter;
 import org.openflexo.pamela.annotations.ImplementationClass;
 import org.openflexo.pamela.annotations.ModelEntity;
 import org.openflexo.pamela.annotations.PropertyIdentifier;
 import org.openflexo.pamela.annotations.Setter;
 import org.openflexo.pamela.annotations.XMLElement;
+import org.openflexo.pamela.validation.ValidationError;
+import org.openflexo.pamela.validation.ValidationIssue;
+import org.openflexo.pamela.validation.ValidationRule;
 import org.openflexo.technologyadapter.diagram.model.Diagram;
 import org.openflexo.technologyadapter.diagram.model.DiagramConnector;
 import org.openflexo.technologyadapter.diagram.model.dm.GraphicalRepresentationChanged;
@@ -300,4 +304,24 @@ public interface ConnectorRole extends GraphicalElementRole<DiagramConnector, Co
 		}
 
 	}
+
+	@DefineValidationRule
+	public static class ConnectorRoleMustHaveAValidMetaModelElement
+			extends ValidationRule<ConnectorRoleMustHaveAValidMetaModelElement, ConnectorRole> {
+		public ConnectorRoleMustHaveAValidMetaModelElement() {
+			super(ConnectorRole.class, "connector_role_must_reference_a_consistent_metamodel_element");
+		}
+
+		@Override
+		public ValidationIssue<ConnectorRoleMustHaveAValidMetaModelElement, ConnectorRole> applyValidation(ConnectorRole role) {
+
+			if (!(role.getGraphicalRepresentation() instanceof ConnectorGraphicalRepresentation)) {
+				return new ValidationError<>(this, role, "connector_role_does_not_declare_a_valid_metamodel_element_(wrong_type)");
+
+			}
+			return null;
+		}
+
+	}
+
 }

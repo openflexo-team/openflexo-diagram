@@ -54,6 +54,9 @@ import org.openflexo.pamela.annotations.PropertyIdentifier;
 import org.openflexo.pamela.annotations.Setter;
 import org.openflexo.pamela.annotations.XMLAttribute;
 import org.openflexo.pamela.annotations.XMLElement;
+import org.openflexo.pamela.validation.ValidationError;
+import org.openflexo.pamela.validation.ValidationIssue;
+import org.openflexo.pamela.validation.ValidationRule;
 import org.openflexo.technologyadapter.diagram.model.Diagram;
 import org.openflexo.technologyadapter.diagram.model.DiagramShape;
 
@@ -517,6 +520,24 @@ public interface ShapeRole extends GraphicalElementRole<DiagramShape, ShapeGraph
 		@Override
 		public DataBinding<String> getBinding(ShapeRole object) {
 			return object.getLabel();
+		}
+
+	}
+
+	@DefineValidationRule
+	public static class ShapeRoleMustHaveAValidMetaModelElement extends ValidationRule<ShapeRoleMustHaveAValidMetaModelElement, ShapeRole> {
+		public ShapeRoleMustHaveAValidMetaModelElement() {
+			super(ShapeRole.class, "shape_role_must_reference_a_consistent_metamodel_element");
+		}
+
+		@Override
+		public ValidationIssue<ShapeRoleMustHaveAValidMetaModelElement, ShapeRole> applyValidation(ShapeRole role) {
+
+			if (!(role.getGraphicalRepresentation() instanceof ShapeGraphicalRepresentation)) {
+				return new ValidationError<>(this, role, "shape_role_does_not_declare_a_valid_metamodel_element_(wrong_type)");
+
+			}
+			return null;
 		}
 
 	}

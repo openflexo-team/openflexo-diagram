@@ -62,6 +62,7 @@ import org.openflexo.foundation.technologyadapter.ModelSlot;
 import org.openflexo.foundation.technologyadapter.TechnologyAdapter;
 import org.openflexo.foundation.utils.FlexoObjectReference;
 import org.openflexo.pamela.annotations.Adder;
+import org.openflexo.pamela.annotations.DefineValidationRule;
 import org.openflexo.pamela.annotations.Getter;
 import org.openflexo.pamela.annotations.Getter.Cardinality;
 import org.openflexo.pamela.annotations.ImplementationClass;
@@ -71,6 +72,9 @@ import org.openflexo.pamela.annotations.Remover;
 import org.openflexo.pamela.annotations.Setter;
 import org.openflexo.pamela.annotations.XMLAttribute;
 import org.openflexo.pamela.annotations.XMLElement;
+import org.openflexo.pamela.validation.ValidationError;
+import org.openflexo.pamela.validation.ValidationIssue;
+import org.openflexo.pamela.validation.ValidationRule;
 import org.openflexo.technologyadapter.diagram.DiagramTechnologyAdapter;
 import org.openflexo.technologyadapter.diagram.FreeDiagramModelSlot;
 import org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
@@ -618,4 +622,24 @@ public abstract interface GraphicalElementRole<T extends DiagramElement<GR>, GR 
 		}
 
 	}
+
+	@DefineValidationRule
+	public static class GraphicalElementRoleMustHaveAValidMetaModelElement
+			extends ValidationRule<GraphicalElementRoleMustHaveAValidMetaModelElement, GraphicalElementRole> {
+		public GraphicalElementRoleMustHaveAValidMetaModelElement() {
+			super(GraphicalElementRole.class, "graphical_element_role_must_reference_a_consistent_metamodel_element");
+		}
+
+		@Override
+		public ValidationIssue<GraphicalElementRoleMustHaveAValidMetaModelElement, GraphicalElementRole> applyValidation(
+				GraphicalElementRole role) {
+
+			if (role.getMetamodelElement() == null) {
+				return new ValidationError<>(this, role, "graphical_element_role_does_not_declare_any_metamodel_element");
+			}
+			return null;
+		}
+
+	}
+
 }
