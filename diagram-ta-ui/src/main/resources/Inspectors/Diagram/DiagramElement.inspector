@@ -11,16 +11,28 @@
 			verticalScrollbarPolicy="VERTICAL_SCROLLBAR_AS_NEEDED" name="BasicTab">
 			<Label label="name" index="0"
 				constraints="twocols(expandHorizontally=false;expandVertically=false;index=0;location=left)"
-				name="NameLabel" localize="true" />
+				name="nameLabel" localize="true" />
 			<TextField index="1" data="data.name"
 				constraints="twocols(expandHorizontally=true;expandVertically=false;index=1;location=right)"
-				name="NameTF" localize="true" columns="10" />
+				name="nameTF" localize="true" columns="10" />
+			<Label label="user_id" index="2"
+				constraints="twocols(expandHorizontally=false;expandVertically=false;index=0;location=left)"
+				name="userIDLabel" localize="true" />
+			<TextField index="3" data="data.userIdentifier"
+				constraints="twocols(expandHorizontally=true;expandVertically=false;index=1;location=right)"
+				name="userIDTF" localize="true" columns="10" readOnly="true"/>
+			<Label label="object_id" index="4"
+				constraints="twocols(expandHorizontally=false;expandVertically=false;index=0;location=left)"
+				name="idLabel" localize="true" />
+			<TextField index="5" data="data.flexoID.toString"
+				constraints="twocols(expandHorizontally=true;expandVertically=false;index=1;location=right)"
+				name="idTF" localize="true" columns="10" readOnly="true"/>
 			<Label label="text" index="100"
 				constraints="twocols(expandHorizontally=false;expandVertically=false;index=0;location=left)"
-				name="TextLabel" localize="true" />
+				name="textLabel" localize="true" />
 			<TextArea index="101" data="data.text"
 				constraints="twocols(expandHorizontally=true;expandVertically=true;index=1;location=right)"
-				name="TextTA" localize="true" columns="10" />
+				name="textTA" localize="true" columns="10" />
 		</Tab>
 	</TabPanel>
 	<LocalizedDictionary>
