@@ -43,16 +43,17 @@ import java.util.List;
 import org.openflexo.diana.GraphicalRepresentation;
 import org.openflexo.pamela.annotations.Adder;
 import org.openflexo.pamela.annotations.CloningStrategy;
+import org.openflexo.pamela.annotations.CloningStrategy.StrategyType;
 import org.openflexo.pamela.annotations.Embedded;
 import org.openflexo.pamela.annotations.Getter;
+import org.openflexo.pamela.annotations.Getter.Cardinality;
 import org.openflexo.pamela.annotations.ImplementationClass;
 import org.openflexo.pamela.annotations.ModelEntity;
 import org.openflexo.pamela.annotations.PastingPoint;
+import org.openflexo.pamela.annotations.Reindexer;
 import org.openflexo.pamela.annotations.Remover;
 import org.openflexo.pamela.annotations.Setter;
 import org.openflexo.pamela.annotations.XMLElement;
-import org.openflexo.pamela.annotations.CloningStrategy.StrategyType;
-import org.openflexo.pamela.annotations.Getter.Cardinality;
 
 /**
  * Implements containment in Openflexo Diagram built-in technology: a container may contains some shapes and connectors
@@ -90,6 +91,9 @@ public interface DiagramContainerElement<G extends GraphicalRepresentation> exte
 	@Remover(SHAPES)
 	public void removeFromShapes(DiagramShape aShape);
 
+	@Reindexer(SHAPES)
+	public void moveShapeToIndex(DiagramShape shape, int index);
+
 	/**
 	 * Return the list of connectors contained in this container
 	 * 
@@ -110,6 +114,9 @@ public interface DiagramContainerElement<G extends GraphicalRepresentation> exte
 
 	@Remover(CONNECTORS)
 	public void removeFromConnectors(DiagramConnector aConnector);
+
+	@Reindexer(CONNECTORS)
+	public void moveConnectorToIndex(DiagramConnector connector, int index);
 
 	/**
 	 * Return all descendants of this {@link DiagramElement} (recursive method)
