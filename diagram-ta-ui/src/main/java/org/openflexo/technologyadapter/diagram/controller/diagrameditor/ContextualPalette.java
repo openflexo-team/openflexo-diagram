@@ -283,6 +283,8 @@ public class ContextualPalette extends DiagramEditorPaletteModel implements Prop
 
 		List<FMLDiagramPaletteElementBinding> applicableBindings = getApplicableBindings(target, paletteElement);
 
+		//logger.info("applicableBindings=" + applicableBindings);
+
 		if (applicableBindings.size() == 0) {
 			logger.warning("Unexpected empty list: availableDropSchemes");
 			return false;
