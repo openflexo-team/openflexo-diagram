@@ -164,8 +164,10 @@ public abstract class FlexoConceptFromShapeCreationStrategy
 		// Add new drop scheme
 		newFlexoConcept.addToFlexoBehaviours(newDropScheme);
 
-		newDropScheme.setTopTarget(isTopLevel());
-		if (!isTopLevel()) {
+		if (isTopLevel()) {
+			newDropScheme.setAsTopTarget();
+		}
+		else {
 			newDropScheme.setTargetFlexoConcept(getContainerFlexoConcept());
 		}
 

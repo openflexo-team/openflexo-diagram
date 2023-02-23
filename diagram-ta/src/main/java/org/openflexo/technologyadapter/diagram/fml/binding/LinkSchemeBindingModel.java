@@ -42,9 +42,7 @@ import java.beans.PropertyChangeEvent;
 
 import org.openflexo.connie.BindingModel;
 import org.openflexo.connie.BindingVariable;
-import org.openflexo.foundation.fml.FlexoConceptInstanceType;
 import org.openflexo.technologyadapter.diagram.fml.LinkScheme;
-import org.openflexo.technologyadapter.diagram.model.DiagramShape;
 
 /**
  * This is the {@link BindingModel} exposed by a {@link LinkScheme}<br>
@@ -62,14 +60,8 @@ public class LinkSchemeBindingModel extends DiagramBehaviourBindingModel {
 	public LinkSchemeBindingModel(final LinkScheme linkScheme) {
 		super(linkScheme);
 
-		fromTargetBindingVariable = new BindingVariable(LinkSchemeBindingModel.FROM_TARGET,
-				linkScheme.getFromTargetFlexoConcept() != null
-						? FlexoConceptInstanceType.getFlexoConceptInstanceType(linkScheme.getFromTargetFlexoConcept())
-						: FlexoConceptInstanceType.UNDEFINED_FLEXO_CONCEPT_INSTANCE_TYPE);
-		toTargetBindingVariable = new BindingVariable(LinkSchemeBindingModel.TO_TARGET,
-				linkScheme.getToTargetFlexoConcept() != null
-						? FlexoConceptInstanceType.getFlexoConceptInstanceType(linkScheme.getToTargetFlexoConcept())
-						: FlexoConceptInstanceType.UNDEFINED_FLEXO_CONCEPT_INSTANCE_TYPE);
+		fromTargetBindingVariable = new BindingVariable(LinkSchemeBindingModel.FROM_TARGET, linkScheme.getFromType());
+		toTargetBindingVariable = new BindingVariable(LinkSchemeBindingModel.TO_TARGET, linkScheme.getToType());
 		addToBindingVariables(fromTargetBindingVariable);
 		addToBindingVariables(toTargetBindingVariable);
 	}
@@ -91,17 +83,15 @@ public class LinkSchemeBindingModel extends DiagramBehaviourBindingModel {
 			getFlexoBehaviour().getToTargetFlexoConcept();
 		}
 		if (evt.getSource() == getFlexoBehaviour()) {
-			if (evt.getPropertyName().equals(LinkScheme.FROM_TARGET_FLEXO_CONCEPT_KEY) && fromTargetBindingVariable != null) {
+			if ((evt.getPropertyName().equals(LinkScheme.FROM_TARGET_FLEXO_CONCEPT_KEY)
+					|| evt.getPropertyName().equals(LinkScheme.FROM_TYPE_KEY)) && fromTargetBindingVariable != null) {
 				// The LinkScheme changes it's FROM target's FlexoConcept
-				fromTargetBindingVariable.setType(getFlexoBehaviour().getFromTargetFlexoConcept() != null
-						? FlexoConceptInstanceType.getFlexoConceptInstanceType(getFlexoBehaviour().getFromTargetFlexoConcept())
-						: DiagramShape.class);
+				fromTargetBindingVariable.setType(getFlexoBehaviour().getFromType());
 			}
-			else if (evt.getPropertyName().equals(LinkScheme.TO_TARGET_FLEXO_CONCEPT_KEY) && toTargetBindingVariable != null) {
+			else if ((evt.getPropertyName().equals(LinkScheme.TO_TARGET_FLEXO_CONCEPT_KEY)
+					|| evt.getPropertyName().equals(LinkScheme.TO_TYPE_KEY)) && toTargetBindingVariable != null) {
 				// The LinkScheme changes it's TO target's FlexoConcept
-				toTargetBindingVariable.setType(getFlexoBehaviour().getToTargetFlexoConcept() != null
-						? FlexoConceptInstanceType.getFlexoConceptInstanceType(getFlexoBehaviour().getToTargetFlexoConcept())
-						: DiagramShape.class);
+				toTargetBindingVariable.setType(getFlexoBehaviour().getToType());
 			}
 		}
 	}

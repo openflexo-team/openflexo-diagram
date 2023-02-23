@@ -283,12 +283,12 @@ public abstract class FlexoConceptFromDiagramElementCreationStrategy<A extends D
 				}
 				if (type == FlexoBehaviourChoice.DROP_AND_CREATE) {
 					flexoBehaviour = getTransformationAction().getFactory().newInstance(DropScheme.class);
-					((DropScheme) flexoBehaviour).setTopTarget(true);
+					((DropScheme) flexoBehaviour).setAsTopTarget();
 					flexoBehaviour.setName("defaultDropAndCreate");
 				}
 				if (type == FlexoBehaviourChoice.DROP_AND_SELECT) {
 					flexoBehaviour = getTransformationAction().getFactory().newInstance(DropScheme.class);
-					((DropScheme) flexoBehaviour).setTopTarget(true);
+					((DropScheme) flexoBehaviour).setAsTopTarget();
 					flexoBehaviour.setName("defaultDropAndSelect");
 				}
 				if (type == FlexoBehaviourChoice.LINK) {

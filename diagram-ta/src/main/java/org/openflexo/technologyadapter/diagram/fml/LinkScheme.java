@@ -51,6 +51,7 @@ import org.openflexo.pamela.annotations.ImplementationClass;
 import org.openflexo.pamela.annotations.ModelEntity;
 import org.openflexo.pamela.annotations.PropertyIdentifier;
 import org.openflexo.pamela.annotations.Setter;
+import org.openflexo.pamela.annotations.Updater;
 import org.openflexo.pamela.annotations.XMLAttribute;
 import org.openflexo.pamela.annotations.XMLElement;
 import org.openflexo.technologyadapter.diagram.fml.binding.LinkSchemeBindingModel;
@@ -102,12 +103,28 @@ public interface LinkScheme extends AbstractCreationScheme, DiagramFlexoBehaviou
 	@Setter(FROM_TYPE_KEY)
 	public void setFromType(FlexoConceptInstanceType from);
 
+	/**
+	 * We define an updater for FROM_TYPE_KEY property because we need to translate supplied Type to valid TypingSpace
+	 * 
+	 * @param type
+	 */
+	@Updater(FROM_TYPE_KEY)
+	public void updateFromType(FlexoConceptInstanceType from);
+
 	@Getter(value = TO_TYPE_KEY, ignoreType = true)
 	@FMLAttribute(value = TO_TYPE_KEY, kind = AttributeKind.Type, required = true)
 	public FlexoConceptInstanceType getToType();
 
 	@Setter(TO_TYPE_KEY)
 	public void setToType(FlexoConceptInstanceType to);
+
+	/**
+	 * We define an updater for TO_TYPE_KEY property because we need to translate supplied Type to valid TypingSpace
+	 * 
+	 * @param type
+	 */
+	@Updater(TO_TYPE_KEY)
+	public void updateToType(FlexoConceptInstanceType to);
 
 	@FMLMigration
 	@Deprecated
@@ -209,16 +226,17 @@ public interface LinkScheme extends AbstractCreationScheme, DiagramFlexoBehaviou
 		private FlexoConcept lastKnownFromTargetFlexoConcept = null;
 		private FlexoConcept lastKnownToTargetFlexoConcept = null;
 
-		public LinkSchemeImpl() {
-			super();
-		}
+		private FlexoConceptInstanceType fromType;
+		private FlexoConceptInstanceType toType;
 
 		@Override
+		@Deprecated
 		public String _getFromTarget() {
 			return fromTarget;
 		}
 
 		@Override
+		@Deprecated
 		public void _setFromTarget(String fromTarget) {
 			if (requireChange(this.fromTarget, fromTarget)) {
 				FlexoConcept oldValue = lastKnownFromTargetFlexoConcept;
@@ -228,11 +246,13 @@ public interface LinkScheme extends AbstractCreationScheme, DiagramFlexoBehaviou
 		}
 
 		@Override
+		@Deprecated
 		public String _getToTarget() {
 			return toTarget;
 		}
 
 		@Override
+		@Deprecated
 		public void _setToTarget(String toTarget) {
 			if (requireChange(this.toTarget, toTarget)) {
 				FlexoConcept oldValue = lastKnownToTargetFlexoConcept;
@@ -250,6 +270,9 @@ public interface LinkScheme extends AbstractCreationScheme, DiagramFlexoBehaviou
 
 		@Override
 		public FlexoConceptInstanceType getFromType() {
+			if (fromType != null) {
+				return fromType;
+			}
 			if (getFromTargetFlexoConcept() != null) {
 				return getFromTargetFlexoConcept().getInstanceType();
 			}
@@ -257,12 +280,37 @@ public interface LinkScheme extends AbstractCreationScheme, DiagramFlexoBehaviou
 		}
 
 		@Override
-		public void setFromType(FlexoConceptInstanceType from) {
-			setFromTargetFlexoConcept(from != null ? from.getFlexoConcept() : null);
+		public void setFromType(FlexoConceptInstanceType fromType) {
+			if ((fromType == null && this.fromType != null) || (fromType != null && !fromType.equals(this.fromType))) {
+				FlexoConceptInstanceType oldValue = this.fromType;
+				this.fromType = fromType;
+				getPropertyChangeSupport().firePropertyChange(FROM_TYPE_KEY, oldValue, fromType);
+			}
+		}
+
+		/**
+		 * We define an updater for FROM_TYPE_KEY property because we need to translate supplied Type to valid TypingSpace
+		 * 
+		 * This updater is called during updateWith() processing (generally applied during the FML parsing phases)
+		 * 
+		 * @param type
+		 */
+		@Override
+		public void updateFromType(FlexoConceptInstanceType type) {
+
+			if (getDeclaringCompilationUnit() != null && type != null) {
+				setFromType(type.translateTo(getDeclaringCompilationUnit().getTypingSpace()));
+			}
+			else {
+				setFromType(type);
+			}
 		}
 
 		@Override
 		public FlexoConceptInstanceType getToType() {
+			if (toType != null) {
+				return toType;
+			}
 			if (getToTargetFlexoConcept() != null) {
 				return getToTargetFlexoConcept().getInstanceType();
 			}
@@ -270,12 +318,39 @@ public interface LinkScheme extends AbstractCreationScheme, DiagramFlexoBehaviou
 		}
 
 		@Override
-		public void setToType(FlexoConceptInstanceType to) {
-			setToTargetFlexoConcept(to != null ? to.getFlexoConcept() : null);
+		public void setToType(FlexoConceptInstanceType toType) {
+			if ((toType == null && this.toType != null) || (toType != null && !toType.equals(this.toType))) {
+				FlexoConceptInstanceType oldValue = this.toType;
+				this.toType = toType;
+				getPropertyChangeSupport().firePropertyChange(TO_TYPE_KEY, oldValue, toType);
+			}
+		}
+
+		/**
+		 * We define an updater for TO_TYPE_KEY property because we need to translate supplied Type to valid TypingSpace
+		 * 
+		 * This updater is called during updateWith() processing (generally applied during the FML parsing phases)
+		 * 
+		 * @param type
+		 */
+		@Override
+		public void updateToType(FlexoConceptInstanceType type) {
+
+			if (getDeclaringCompilationUnit() != null && type != null) {
+				setToType(type.translateTo(getDeclaringCompilationUnit().getTypingSpace()));
+			}
+			else {
+				setToType(type);
+			}
 		}
 
 		@Override
+		@Deprecated
 		public FlexoConcept getFromTargetFlexoConcept() {
+
+			if (fromType != null && fromType.getFlexoConcept() != null) {
+				return fromType.getFlexoConcept();
+			}
 
 			if (fromTargetFlexoConcept != null) {
 				return fromTargetFlexoConcept;
@@ -293,15 +368,24 @@ public interface LinkScheme extends AbstractCreationScheme, DiagramFlexoBehaviou
 		}
 
 		@Override
+		@Deprecated
 		public void setFromTargetFlexoConcept(FlexoConcept targetFlexoConcept) {
 			FlexoConcept oldFromTargetFlexoConcept = fromTargetFlexoConcept;
 			fromTargetFlexoConcept = targetFlexoConcept;
+			if (fromTargetFlexoConcept != null) {
+				setFromType(fromTargetFlexoConcept.getInstanceType());
+			}
 			_setFromTarget(targetFlexoConcept != null ? targetFlexoConcept.getURI() : null);
 			getPropertyChangeSupport().firePropertyChange(FROM_TARGET_FLEXO_CONCEPT_KEY, oldFromTargetFlexoConcept, fromTargetFlexoConcept);
 		}
 
 		@Override
+		@Deprecated
 		public FlexoConcept getToTargetFlexoConcept() {
+
+			if (toType != null && toType.getFlexoConcept() != null) {
+				return toType.getFlexoConcept();
+			}
 
 			if (toTargetFlexoConcept != null) {
 				return toTargetFlexoConcept;
@@ -319,9 +403,13 @@ public interface LinkScheme extends AbstractCreationScheme, DiagramFlexoBehaviou
 		}
 
 		@Override
+		@Deprecated
 		public void setToTargetFlexoConcept(FlexoConcept targetFlexoConcept) {
 			FlexoConcept oldToTargetFlexoConcept = toTargetFlexoConcept;
 			toTargetFlexoConcept = targetFlexoConcept;
+			if (toTargetFlexoConcept != null) {
+				setToType(toTargetFlexoConcept.getInstanceType());
+			}
 			_setToTarget(targetFlexoConcept != null ? targetFlexoConcept.getURI() : null);
 			getPropertyChangeSupport().firePropertyChange(TO_TARGET_FLEXO_CONCEPT_KEY, oldToTargetFlexoConcept, toTargetFlexoConcept);
 		}

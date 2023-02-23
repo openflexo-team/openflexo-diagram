@@ -45,6 +45,7 @@ import org.openflexo.foundation.fml.FMLMigration;
 import org.openflexo.foundation.fml.FlexoConcept;
 import org.openflexo.foundation.fml.FlexoConceptInstanceType;
 import org.openflexo.foundation.fml.FlexoRole;
+import org.openflexo.foundation.fml.VirtualModel;
 import org.openflexo.foundation.fml.annotations.FML;
 import org.openflexo.foundation.fml.annotations.FMLAttribute;
 import org.openflexo.foundation.fml.annotations.FMLAttribute.AttributeKind;
@@ -54,6 +55,7 @@ import org.openflexo.pamela.annotations.ImplementationClass;
 import org.openflexo.pamela.annotations.ModelEntity;
 import org.openflexo.pamela.annotations.PropertyIdentifier;
 import org.openflexo.pamela.annotations.Setter;
+import org.openflexo.pamela.annotations.Updater;
 import org.openflexo.pamela.annotations.XMLAttribute;
 import org.openflexo.pamela.annotations.XMLElement;
 import org.openflexo.technologyadapter.diagram.fml.binding.DropSchemeBindingModel;
@@ -95,6 +97,14 @@ public interface DropScheme extends AbstractCreationScheme, DiagramFlexoBehaviou
 	@Setter(TARGET_TYPE_KEY)
 	public void setTargetType(FlexoConceptInstanceType from);
 
+	/**
+	 * We define an updater for TARGET_TYPE property because we need to translate supplied Type to valid TypingSpace
+	 * 
+	 * @param type
+	 */
+	@Updater(TARGET_TYPE_KEY)
+	public void updateTargetType(FlexoConceptInstanceType type);
+
 	@FMLMigration
 	@Deprecated
 	@Getter(value = TARGET_KEY)
@@ -113,15 +123,6 @@ public interface DropScheme extends AbstractCreationScheme, DiagramFlexoBehaviou
 	@Setter(TARGET_SHAPE_ROLE_KEY)
 	public void setTargetShapeRole(ShapeRole targetShapeRole);
 
-	public boolean isTopTarget();
-
-	// @Getter(value = TOP_TARGET_KEY, defaultValue = "true")
-	// @FMLAttribute(value = TOP_TARGET_KEY, required = true)
-	public boolean getTopTarget();
-
-	// @Setter(TOP_TARGET_KEY)
-	public void setTopTarget(boolean flag);
-
 	@FMLMigration
 	@Deprecated
 	public FlexoConcept getTargetFlexoConcept();
@@ -136,13 +137,19 @@ public interface DropScheme extends AbstractCreationScheme, DiagramFlexoBehaviou
 
 	public boolean targetHasMultipleRoles();
 
+	public boolean isTopTarget();
+
+	public void setAsTopTarget();
+
 	public static abstract class DropSchemeImpl extends AbstractCreationSchemeImpl implements DropScheme {
 
 		private static final String TOP = "top";
 
 		private String target = TOP;
-		private ShapeRole targetPatternRole;
+		private ShapeRole targetShapeRole;
 		private FlexoConcept lastKnownTargetFlexoConcept;
+
+		private FlexoConceptInstanceType targetType;
 
 		public DropSchemeImpl() {
 			super();
@@ -150,15 +157,40 @@ public interface DropScheme extends AbstractCreationScheme, DiagramFlexoBehaviou
 
 		@Override
 		public FlexoConceptInstanceType getTargetType() {
+			if (targetType != null) {
+				return targetType;
+			}
 			if (getTargetFlexoConcept() != null) {
 				return getTargetFlexoConcept().getInstanceType();
 			}
-			return null;
+			return getTopLevelInstanceType();
 		}
 
 		@Override
-		public void setTargetType(FlexoConceptInstanceType target) {
-			setTargetFlexoConcept(target != null ? target.getFlexoConcept() : null);
+		public void setTargetType(FlexoConceptInstanceType targetType) {
+			if ((targetType == null && this.targetType != null) || (targetType != null && !targetType.equals(this.targetType))) {
+				FlexoConceptInstanceType oldValue = this.targetType;
+				this.targetType = targetType;
+				getPropertyChangeSupport().firePropertyChange(TARGET_TYPE_KEY, oldValue, targetType);
+			}
+		}
+
+		/**
+		 * We define an updater for TARGET_TYPE property because we need to translate supplied Type to valid TypingSpace
+		 * 
+		 * This updater is called during updateWith() processing (generally applied during the FML parsing phases)
+		 * 
+		 * @param type
+		 */
+		@Override
+		public void updateTargetType(FlexoConceptInstanceType type) {
+
+			if (getDeclaringCompilationUnit() != null && type != null) {
+				setTargetType(type.translateTo(getDeclaringCompilationUnit().getTypingSpace()));
+			}
+			else {
+				setTargetType(type);
+			}
 		}
 
 		@Override
@@ -172,7 +204,6 @@ public interface DropScheme extends AbstractCreationScheme, DiagramFlexoBehaviou
 				FlexoConcept oldValue = getTargetFlexoConcept();
 				this.target = target;
 				getPropertyChangeSupport().firePropertyChange(TARGET_FLEXO_CONCEPT_KEY, oldValue, getTargetFlexoConcept());
-				getPropertyChangeSupport().firePropertyChange(TOP_TARGET_KEY, !isTopTarget(), isTopTarget());
 			}
 		}
 
@@ -185,9 +216,10 @@ public interface DropScheme extends AbstractCreationScheme, DiagramFlexoBehaviou
 		private FlexoConcept targetFlexoConcept;
 
 		@Override
+		@Deprecated
 		public FlexoConcept getTargetFlexoConcept() {
-			if (isTopTarget()) {
-				return null;
+			if (targetType != null && targetType.getFlexoConcept() != null) {
+				return targetType.getFlexoConcept();
 			}
 			if (targetFlexoConcept != null) {
 				return targetFlexoConcept;
@@ -209,12 +241,13 @@ public interface DropScheme extends AbstractCreationScheme, DiagramFlexoBehaviou
 		}
 
 		@Override
+		@Deprecated
 		public void setTargetFlexoConcept(FlexoConcept aTargetFlexoConcept) {
-			/*if (targetFlexoConcept != null) {
-				setTopTarget(false);
-			}*/
 			FlexoConcept oldTargetFlexoConcept = this.targetFlexoConcept;
 			this.targetFlexoConcept = aTargetFlexoConcept;
+			if (aTargetFlexoConcept != null) {
+				setTargetType(aTargetFlexoConcept.getInstanceType());
+			}
 			_setTarget(aTargetFlexoConcept != null ? aTargetFlexoConcept.getURI() : null);
 			getPropertyChangeSupport().firePropertyChange(TARGET_FLEXO_CONCEPT_KEY, oldTargetFlexoConcept, aTargetFlexoConcept);
 			// updateBindingModels();
@@ -222,25 +255,37 @@ public interface DropScheme extends AbstractCreationScheme, DiagramFlexoBehaviou
 
 		@Override
 		public boolean isTopTarget() {
-			return getTopTarget();
+			return getTargetType() == null || getTargetType().equals(getTopLevelInstanceType());
 		}
 
 		@Override
-		public boolean getTopTarget() {
-			if (StringUtils.isEmpty(_getTarget())) {
-				return false;
-			}
-			return _getTarget().equalsIgnoreCase(TOP);
+		public void setAsTopTarget() {
+			setTargetType(getTopLevelInstanceType());
 		}
 
-		@Override
-		public void setTopTarget(boolean flag) {
-			if (flag) {
-				_setTarget(TOP);
+		private FlexoConceptInstanceType getTopLevelInstanceType() {
+			VirtualModel rootVM = getVirtualModelWithDiagramNature();
+			if (rootVM != null) {
+				return rootVM.getInstanceType();
 			}
-			else {
-				_setTarget("");
+			return null;
+		}
+
+		private VirtualModel getVirtualModelWithDiagramNature() {
+			if (getFlexoConcept() != null) {
+				return getVirtualModelWithDiagramNature(getFlexoConcept().getOwningVirtualModel());
 			}
+			return null;
+		}
+
+		private VirtualModel getVirtualModelWithDiagramNature(VirtualModel vm) {
+			if (vm == null) {
+				return null;
+			}
+			if (vm.hasNature(FMLControlledDiagramVirtualModelNature.INSTANCE)) {
+				return vm;
+			}
+			return getVirtualModelWithDiagramNature(vm.getContainerVirtualModel());
 		}
 
 		@Override
@@ -258,12 +303,12 @@ public interface DropScheme extends AbstractCreationScheme, DiagramFlexoBehaviou
 
 		@Override
 		public ShapeRole getTargetShapeRole() {
-			return targetPatternRole;
+			return targetShapeRole;
 		}
 
 		@Override
 		public void setTargetShapeRole(ShapeRole targetPatternRole) {
-			this.targetPatternRole = targetPatternRole;
+			this.targetShapeRole = targetPatternRole;
 		}
 
 		@Override

@@ -84,20 +84,17 @@ public class DropSchemeBindingModel extends DiagramBehaviourBindingModel {
 		}
 		if (evt.getSource() == getFlexoBehaviour()) {
 			if (evt.getPropertyName().equals(DropScheme.TARGET_FLEXO_CONCEPT_KEY)
+					|| evt.getPropertyName().equals(DropScheme.TARGET_TYPE_KEY)
 					|| evt.getPropertyName().equals(DropScheme.FLEXO_CONCEPT_KEY)
 					|| evt.getPropertyName().equals(DropScheme.TOP_TARGET_KEY)) {
 				// The DropScheme changes it's target's FlexoConcept
 				if (targetBindingVariable == null) {
-					if (getFlexoBehaviour().getTargetFlexoConcept() != null) {
-						targetBindingVariable = new BindingVariable(DropSchemeBindingModel.TARGET,
-								FlexoConceptInstanceType.getFlexoConceptInstanceType(getFlexoBehaviour().getTargetFlexoConcept()));
-						addToBindingVariables(targetBindingVariable);
-					}
+					targetBindingVariable = new BindingVariable(DropSchemeBindingModel.TARGET, getFlexoBehaviour().getTargetType());
+					addToBindingVariables(targetBindingVariable);
 				}
 				else {
-					if (getFlexoBehaviour().getTargetFlexoConcept() != null) {
-						targetBindingVariable
-								.setType(FlexoConceptInstanceType.getFlexoConceptInstanceType(getFlexoBehaviour().getTargetFlexoConcept()));
+					if (getFlexoBehaviour().getTargetType() != null) {
+						targetBindingVariable.setType(getFlexoBehaviour().getTargetType());
 					}
 					else {
 						removeFromBindingVariables(targetBindingVariable);

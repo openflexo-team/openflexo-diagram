@@ -164,7 +164,7 @@ public interface FMLControlledDiagramShape extends FMLControlledDiagramElement<D
 
 			for (FlexoConcept c : virtualModel.getFlexoConcepts()) {
 				for (DropScheme ds : c.getFlexoBehaviours(DropScheme.class)) {
-					if (ds.getTargetFlexoConcept() == targetFlexoConcept || (ds.getTopTarget() && targetFlexoConcept == null)) {
+					if (ds.getTargetFlexoConcept() == targetFlexoConcept || (ds.isTopTarget() && targetFlexoConcept == null)) {
 						for (FlexoConcept c2 : virtualModel.getFlexoConcepts()) {
 							List<LinkScheme> acceptableLinkSchemes = new ArrayList<>();
 							for (LinkScheme ls : c2.getFlexoBehaviours(LinkScheme.class)) {
