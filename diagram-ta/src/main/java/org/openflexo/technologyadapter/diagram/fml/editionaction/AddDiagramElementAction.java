@@ -55,6 +55,11 @@ public abstract interface AddDiagramElementAction<T extends DiagramElement<?>> e
 			extends TechnologySpecificActionDefiningReceiverImpl<DiagramModelSlot, Diagram, T> implements AddDiagramElementAction<T> {
 
 		@Override
+		public boolean isReceiverMandatory() {
+			return false;
+		}
+
+		@Override
 		public DiagramTechnologyAdapter getModelSlotTechnologyAdapter() {
 			return (DiagramTechnologyAdapter) super.getModelSlotTechnologyAdapter();
 		}
