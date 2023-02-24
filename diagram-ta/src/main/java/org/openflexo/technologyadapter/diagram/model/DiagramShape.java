@@ -40,19 +40,20 @@ package org.openflexo.technologyadapter.diagram.model;
 
 import java.util.List;
 
-import org.openflexo.diana.ShapeGraphicalRepresentation;
 import org.openflexo.diana.ScreenshotBuilder.ScreenshotImage;
+import org.openflexo.diana.ShapeGraphicalRepresentation;
 import org.openflexo.foundation.fml.rt.FMLRTVirtualModelInstance;
 import org.openflexo.pamela.annotations.Adder;
 import org.openflexo.pamela.annotations.CloningStrategy;
+import org.openflexo.pamela.annotations.CloningStrategy.StrategyType;
 import org.openflexo.pamela.annotations.Getter;
+import org.openflexo.pamela.annotations.Getter.Cardinality;
 import org.openflexo.pamela.annotations.ImplementationClass;
 import org.openflexo.pamela.annotations.ModelEntity;
+import org.openflexo.pamela.annotations.Reindexer;
 import org.openflexo.pamela.annotations.Remover;
 import org.openflexo.pamela.annotations.Setter;
 import org.openflexo.pamela.annotations.XMLElement;
-import org.openflexo.pamela.annotations.CloningStrategy.StrategyType;
-import org.openflexo.pamela.annotations.Getter.Cardinality;
 import org.openflexo.technologyadapter.diagram.fml.ShapeRole;
 
 /**
@@ -90,6 +91,9 @@ public interface DiagramShape extends DiagramContainerElement<ShapeGraphicalRepr
 	@Remover(START_CONNECTORS)
 	public void removeFromStartConnectors(DiagramConnector aConnector);
 
+	@Reindexer(START_CONNECTORS)
+	public void moveStartConnectorToIndex(DiagramConnector connector, int index);
+
 	@Getter(value = END_CONNECTORS, cardinality = Cardinality.LIST, inverse = DiagramConnector.END_SHAPE)
 	@CloningStrategy(StrategyType.IGNORE)
 	public List<DiagramConnector> getEndConnectors();
@@ -102,7 +106,10 @@ public interface DiagramShape extends DiagramContainerElement<ShapeGraphicalRepr
 
 	@Remover(END_CONNECTORS)
 	public void removeFromEndConnectors(DiagramConnector aConnector);
-	
+
+	@Reindexer(END_CONNECTORS)
+	public void moveEndConnectorToIndex(DiagramConnector connector, int index);
+
 	public ScreenshotImage<DiagramShape> getScreenshotImage();
 
 }
