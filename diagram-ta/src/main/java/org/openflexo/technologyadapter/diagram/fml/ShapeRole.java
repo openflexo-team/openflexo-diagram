@@ -44,8 +44,12 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import org.openflexo.connie.DataBinding;
+import org.openflexo.connie.DataBinding.BindingDefinitionType;
+import org.openflexo.connie.expr.BindingPath;
 import org.openflexo.diana.ShapeGraphicalRepresentation;
+import org.openflexo.foundation.fml.FMLMigration;
 import org.openflexo.foundation.fml.annotations.FML;
+import org.openflexo.foundation.fml.annotations.FMLAttribute;
 import org.openflexo.pamela.annotations.DefineValidationRule;
 import org.openflexo.pamela.annotations.Getter;
 import org.openflexo.pamela.annotations.ImplementationClass;
@@ -58,6 +62,7 @@ import org.openflexo.pamela.validation.ValidationError;
 import org.openflexo.pamela.validation.ValidationIssue;
 import org.openflexo.pamela.validation.ValidationRule;
 import org.openflexo.technologyadapter.diagram.model.Diagram;
+import org.openflexo.technologyadapter.diagram.model.DiagramContainerElement;
 import org.openflexo.technologyadapter.diagram.model.DiagramShape;
 
 @ModelEntity
@@ -77,6 +82,8 @@ public interface ShapeRole extends GraphicalElementRole<DiagramShape, ShapeGraph
 
 	// @PropertyIdentifier(type = GraphicalRepresentation.class)
 	// public static final String GRAPHICAL_REPRESENTATION_KEY = "graphicalRepresentation";
+	@FMLMigration
+	@Deprecated
 	@PropertyIdentifier(type = ShapeRole.class)
 	public static final String PARENT_SHAPE_ROLE_KEY = "parentShapeRole";
 
@@ -187,17 +194,51 @@ public interface ShapeRole extends GraphicalElementRole<DiagramShape, ShapeGraph
 	public static GraphicalFeature<?, ?>[] AVAILABLE_SHAPE_FEATURES = { POS_X_FEATURE, POS_Y_FEATURE, WIDTH_FEATURE, HEIGHT_FEATURE,
 			RELATIVE_TEXT_X_FEATURE, RELATIVE_TEXT_Y_FEATURE, ABSOLUTE_TEXT_X_FEATURE, ABSOLUTE_TEXT_Y_FEATURE };
 
+	@PropertyIdentifier(type = DataBinding.class)
+	public static final String CONTAINER_ELEMENT_KEY = "containerElement";
+	@PropertyIdentifier(type = boolean.class)
+	public static final String DEFINE_CONTAINER_KEY = "defineContainer";
+
+	@Getter(value = CONTAINER_ELEMENT_KEY)
+	@XMLAttribute
+	@FMLAttribute(value = CONTAINER_ELEMENT_KEY, required = false, description = "<html>container of shape (contracting assertion)</html>")
+	public DataBinding<DiagramContainerElement<?>> getContainerElement();
+
+	@Setter(CONTAINER_ELEMENT_KEY)
+	public void setContainerElement(DataBinding<DiagramContainerElement<?>> container);
+
+	@Getter(value = DEFINE_CONTAINER_KEY, defaultValue = "false")
+	@XMLAttribute
+	/*@FMLAttribute(
+			value = DEFINE_CONTAINER_KEY,
+			defaultValue = "false",
+			description = "<html>flag indicating if container should be contractually defined</html>")*/
+	public boolean getDefineContainer();
+
+	@Setter(DEFINE_CONTAINER_KEY)
+	public void setDefineContainer(boolean flag);
+
+	@FMLMigration
+	@Deprecated
 	@Getter(value = PARENT_SHAPE_ROLE_KEY)
 	@XMLElement(context = "Parent")
 	public ShapeRole getParentShapeRole();
 
+	@FMLMigration
+	@Deprecated
 	@Setter(PARENT_SHAPE_ROLE_KEY)
 	public void setParentShapeRole(ShapeRole parentShapeRole);
 
+	@FMLMigration
+	@Deprecated
 	public boolean isContainedIn(ShapeRole container);
 
+	@FMLMigration
+	@Deprecated
 	public boolean getParentShapeAsDefinedInAction();
 
+	@FMLMigration
+	@Deprecated
 	public void setParentShapeAsDefinedInAction(boolean flag);
 
 	/**
@@ -356,14 +397,55 @@ public interface ShapeRole extends GraphicalElementRole<DiagramShape, ShapeGraph
 			return false;
 		}
 
+		private DataBinding<DiagramContainerElement<?>> containerElement;
+
 		@Override
-		public ShapeRole getParentShapeRole() {
-			return parentShapeRole;
+		public DataBinding<DiagramContainerElement<?>> getContainerElement() {
+			if (containerElement == null) {
+				containerElement = new DataBinding<>(this, DiagramContainerElement.class, BindingDefinitionType.GET);
+				containerElement.setBindingName(CONTAINER_ELEMENT_KEY);
+			}
+			return containerElement;
 		}
 
 		@Override
+		public void setContainerElement(DataBinding<DiagramContainerElement<?>> container) {
+			if (container != null) {
+				container.setOwner(this);
+				container.setBindingName(CONTAINER_ELEMENT_KEY);
+				container.setDeclaredType(DiagramContainerElement.class);
+				container.setBindingDefinitionType(BindingDefinitionType.GET);
+			}
+			this.containerElement = container;
+			notifiedBindingChanged(this.containerElement);
+		}
+
+		@FMLMigration
+		@Deprecated
+		@Override
+		public ShapeRole getParentShapeRole() {
+			if (parentShapeRole == null && getContainerElement().isSet() && getContainerElement().isValid()) {
+				if (getContainerElement().isBindingPath()) {
+					BindingPath bp = (BindingPath) getContainerElement().getExpression();
+					if (bp != null && bp.getBindingVariable() != null
+							&& getFlexoConcept().getDeclaredProperty(bp.getBindingVariable().getVariableName()) instanceof ShapeRole)
+						parentShapeRole = (ShapeRole) getFlexoConcept().getDeclaredProperty(bp.getBindingVariable().getVariableName());
+				}
+			}
+			return parentShapeRole;
+		}
+
+		@FMLMigration
+		@Deprecated
+		@Override
 		public void setParentShapeRole(ShapeRole parentShapeRole) {
 			if (parentShapeRole != this.parentShapeRole) {
+				if (parentShapeRole != null) {
+					setContainerElement(new DataBinding<>(parentShapeRole.getName()));
+				}
+				else {
+					setContainerElement(null);
+				}
 				ShapeRole oldParentShapeRole = this.parentShapeRole;
 				// logger.info(">>>> setParentShapePatternRole() with " + parentShapeRole);
 				this.parentShapeRole = parentShapeRole;
@@ -390,6 +472,7 @@ public interface ShapeRole extends GraphicalElementRole<DiagramShape, ShapeGraph
 				// setChanged();
 				// notifyObservers();
 				getPropertyChangeSupport().firePropertyChange(PARENT_SHAPE_ROLE_KEY, oldParentShapeRole, parentShapeRole);
+				getPropertyChangeSupport().firePropertyChange(DEFINE_CONTAINER_KEY, !getDefineContainer(), getDefineContainer());
 				getPropertyChangeSupport().firePropertyChange("parentShapeAsDefinedInAction", !getParentShapeAsDefinedInAction(),
 						getParentShapeAsDefinedInAction());
 				if (getFlexoConcept() != null) {
@@ -399,11 +482,15 @@ public interface ShapeRole extends GraphicalElementRole<DiagramShape, ShapeGraph
 			}
 		}
 
+		@FMLMigration
+		@Deprecated
 		@Override
 		public boolean getParentShapeAsDefinedInAction() {
 			return getParentShapeRole() == null;
 		}
 
+		@FMLMigration
+		@Deprecated
 		@Override
 		public void setParentShapeAsDefinedInAction(boolean flag) {
 			// System.out.println(">>>> setParentShapeAsDefinedInAction() with " + flag);
@@ -418,8 +505,23 @@ public interface ShapeRole extends GraphicalElementRole<DiagramShape, ShapeGraph
 				setParentShapeRole(null);
 				// flag = true;
 			}
+			getPropertyChangeSupport().firePropertyChange("parentShapeAsDefinedInAction", !flag, flag);
+			getPropertyChangeSupport().firePropertyChange(DEFINE_CONTAINER_KEY, flag, !flag);
 		}
 
+		@Override
+		public boolean getDefineContainer() {
+			return !getParentShapeAsDefinedInAction();
+		}
+
+		@Override
+		public void setDefineContainer(boolean flag) {
+			setParentShapeAsDefinedInAction(!flag);
+			getPropertyChangeSupport().firePropertyChange(DEFINE_CONTAINER_KEY, !flag, flag);
+		}
+
+		@FMLMigration
+		@Deprecated
 		@Override
 		public boolean isContainedIn(ShapeRole container) {
 			if (container == this) {
