@@ -194,9 +194,17 @@ public class DropSchemeAction extends DiagramFlexoBehaviourAction<DropSchemeActi
 
 	@Override
 	public Object getValue(BindingVariable variable) {
-		if (variable.getVariableName().equals(DropSchemeBindingModel.TARGET) && getFlexoBehaviour().getTargetFlexoConcept() != null) {
-			return parentConceptInstance;
+		if (variable.getVariableName().equals(DropSchemeBindingModel.TARGET)) {
+			if (getFlexoBehaviour().isTopTarget()) {
+				return getFocusedObject();
+			}
+			if (getFlexoBehaviour().getTargetFlexoConcept() != null) {
+				return parentConceptInstance;
+			}
 		}
+		/*if (variable.getVariableName().equals(DropSchemeBindingModel.TARGET) && getFlexoBehaviour().getTargetFlexoConcept() != null) {
+			return parentConceptInstance;
+		}*/
 		return super.getValue(variable);
 	}
 
