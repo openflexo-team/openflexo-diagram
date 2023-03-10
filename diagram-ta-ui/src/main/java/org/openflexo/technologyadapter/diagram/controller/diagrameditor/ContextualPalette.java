@@ -283,7 +283,7 @@ public class ContextualPalette extends DiagramEditorPaletteModel implements Prop
 
 		List<FMLDiagramPaletteElementBinding> applicableBindings = getApplicableBindings(target, paletteElement);
 
-		//logger.info("applicableBindings=" + applicableBindings);
+		// logger.info("applicableBindings=" + applicableBindings);
 
 		if (applicableBindings.size() == 0) {
 			logger.warning("Unexpected empty list: availableDropSchemes");
@@ -308,6 +308,8 @@ public class ContextualPalette extends DiagramEditorPaletteModel implements Prop
 					.getBindingValue(new DerivedBindingEvaluationContext(editor.getVirtualModelInstance(), (bv) -> {
 						return null;
 					}));*/
+
+			//System.out.println("Hop, on execute le DropScheme pour VMI=" + editor.getVirtualModelInstance());
 
 			DropSchemeAction action = new DropSchemeAction(applicableBindings.get(0).getDropScheme(), editor.getVirtualModelInstance(),
 					null, editor.getFlexoController().getEditor());

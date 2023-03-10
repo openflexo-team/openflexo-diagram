@@ -306,7 +306,7 @@ public interface AddShape extends AddDiagramElementAction<DiagramShape> {
 			// sure that the Drawing can discover that the new shape is FML-controlled
 			newShape.getParent().getPropertyChangeSupport().firePropertyChange(DiagramElement.INVALIDATE, null, newShape.getParent());
 
-			System.out.println("Added shape " + newShape);
+			// System.out.println("Added shape " + newShape);
 			return newShape;
 		}
 		/*@Override
