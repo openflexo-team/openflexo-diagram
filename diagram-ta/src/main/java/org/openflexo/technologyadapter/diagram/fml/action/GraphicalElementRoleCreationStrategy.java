@@ -68,7 +68,7 @@ public abstract class GraphicalElementRoleCreationStrategy<A extends DeclareDiag
 		newRole = getTransformationAction().getFactory().newInstance(getRoleType());
 		newRole.setRoleName(newRoleName);
 		newRole.setModelSlot(getTransformationAction().getTypedDiagramModelSlot());
-		newRole.setReadOnlyLabel(true);
+		// newRole.setReadOnlyLabel(true);
 
 		newRole.bindTo(getTransformationAction().getFocusedObject());
 

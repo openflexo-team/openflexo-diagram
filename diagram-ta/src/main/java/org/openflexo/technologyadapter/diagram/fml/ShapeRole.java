@@ -318,7 +318,7 @@ public interface ShapeRole extends GraphicalElementRole<DiagramShape, ShapeGraph
 							.newInstance(GraphicalElementSpecification.class);
 					newGraphicalElementSpecification.setFlexoRole(this);
 					newGraphicalElementSpecification.setFeature(GF);
-					newGraphicalElementSpecification.setReadOnly(false);
+					// newGraphicalElementSpecification.setReadOnly(false);
 					newGraphicalElementSpecification.setMandatory(true);
 					grSpecifications.add(newGraphicalElementSpecification);
 				}
@@ -610,19 +610,6 @@ public interface ShapeRole extends GraphicalElementRole<DiagramShape, ShapeGraph
 				getGraphicalElementSpecification(HEIGHT_FEATURE).setValue(height);
 			}
 		}*/
-
-	}
-
-	@DefineValidationRule
-	public static class LabelBindingdMustBeValid extends BindingMustBeValid<ShapeRole> {
-		public LabelBindingdMustBeValid() {
-			super("'label'_binding_must_be_valid", ShapeRole.class);
-		}
-
-		@Override
-		public DataBinding<String> getBinding(ShapeRole object) {
-			return object.getLabel();
-		}
 
 	}
 

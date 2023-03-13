@@ -166,6 +166,8 @@ public abstract interface GraphicalElementRole<T extends DiagramElement<GR>, GR 
 	String METAMODEL_ELEMENT_REFERENCE_KEY = "metamodelElementReference";
 	@PropertyIdentifier(type = DataBinding.class)
 	String LABEL_KEY = "label";
+	@PropertyIdentifier(type = DataBinding.class)
+	String TRANSPARENCY_KEY = "transparency";
 
 	@Getter(EXAMPLE_LABEL_KEY)
 	@XMLAttribute
@@ -227,10 +229,19 @@ public abstract interface GraphicalElementRole<T extends DiagramElement<GR>, GR 
 	public void setLabel(DataBinding<String> label);
 
 	// Convenient method to access read-only property for spec for label feature
-	public boolean getReadOnlyLabel();
+	// public boolean getReadOnlyLabel();
 
 	// Convenient method to access read-only property for spec for label feature
-	public void setReadOnlyLabel(boolean readOnlyLabel);
+	// public void setReadOnlyLabel(boolean readOnlyLabel);
+
+	// Convenient method to access spec for transparency feature
+	@Getter(TRANSPARENCY_KEY)
+	@FMLAttribute(value = TRANSPARENCY_KEY, required = false)
+	public DataBinding<Double> getTransparency();
+
+	// Convenient method to access spec for transparency feature
+	@Setter(TRANSPARENCY_KEY)
+	public void setTransparency(DataBinding<Double> transparency);
 
 	public List<GraphicalElementSpecification<?, GR>> getGrSpecifications();
 
@@ -293,7 +304,7 @@ public abstract interface GraphicalElementRole<T extends DiagramElement<GR>, GR 
 							.newInstance(GraphicalElementSpecification.class);
 					newGraphicalElementSpecification.setFlexoRole(this);
 					newGraphicalElementSpecification.setFeature(GF);
-					newGraphicalElementSpecification.setReadOnly(false);
+					// newGraphicalElementSpecification.setReadOnly(false);
 					newGraphicalElementSpecification.setMandatory(true);
 					grSpecifications.add(newGraphicalElementSpecification);
 				}
@@ -425,19 +436,35 @@ public abstract interface GraphicalElementRole<T extends DiagramElement<GR>, GR 
 		}
 
 		// Convenient method to access read-only property for spec for label feature
-		@Override
+		/*@Override
 		public boolean getReadOnlyLabel() {
 			if (getGraphicalElementSpecification(LABEL_FEATURE) != null) {
 				return getGraphicalElementSpecification(LABEL_FEATURE).getReadOnly();
 			}
 			return true;
-		}
+		}*/
 
 		// Convenient method to access read-only property for spec for label feature
-		@Override
+		/*@Override
 		public void setReadOnlyLabel(boolean readOnlyLabel) {
 			if (getGraphicalElementSpecification(LABEL_FEATURE) != null) {
 				getGraphicalElementSpecification(LABEL_FEATURE).setReadOnly(readOnlyLabel);
+			}
+		}*/
+
+		@Override
+		public DataBinding<Double> getTransparency() {
+			if (getGraphicalElementSpecification(TRANSPARENCY_FEATURE) != null) {
+				return getGraphicalElementSpecification(TRANSPARENCY_FEATURE).getValue();
+			}
+			return null;
+		}
+
+		@Override
+		public void setTransparency(DataBinding<Double> transparency) {
+
+			if (getGraphicalElementSpecification(TRANSPARENCY_FEATURE) != null) {
+				getGraphicalElementSpecification(TRANSPARENCY_FEATURE).setValue(transparency);
 			}
 		}
 
@@ -554,7 +581,7 @@ public abstract interface GraphicalElementRole<T extends DiagramElement<GR>, GR 
 			}
 			else {
 				existingSpec.setValue(aSpec.getValue());
-				existingSpec.setReadOnly(aSpec.getReadOnly());
+				// existingSpec.setReadOnly(aSpec.getReadOnly());
 			}
 		}
 
@@ -638,6 +665,32 @@ public abstract interface GraphicalElementRole<T extends DiagramElement<GR>, GR 
 				return new ValidationError<>(this, role, "graphical_element_role_does_not_declare_any_metamodel_element");
 			}
 			return null;
+		}
+
+	}
+
+	@DefineValidationRule
+	public static class LabelBindingdMustBeValid extends BindingMustBeValid<GraphicalElementRole> {
+		public LabelBindingdMustBeValid() {
+			super("'label'_binding_must_be_valid", GraphicalElementRole.class);
+		}
+
+		@Override
+		public DataBinding<String> getBinding(GraphicalElementRole object) {
+			return object.getLabel();
+		}
+
+	}
+
+	@DefineValidationRule
+	public static class TransparencyBindingdMustBeValid extends BindingMustBeValid<GraphicalElementRole> {
+		public TransparencyBindingdMustBeValid() {
+			super("'transparency'_binding_must_be_valid", GraphicalElementRole.class);
+		}
+
+		@Override
+		public DataBinding<Double> getBinding(GraphicalElementRole object) {
+			return object.getTransparency();
 		}
 
 	}

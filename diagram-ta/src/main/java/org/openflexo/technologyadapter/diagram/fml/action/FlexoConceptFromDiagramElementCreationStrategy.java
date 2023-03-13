@@ -96,7 +96,7 @@ public abstract class FlexoConceptFromDiagramElementCreationStrategy<A extends D
 					ShapeRole newShapeRole = getTransformationAction().getFactory().newInstance(ShapeRole.class);
 					newShapeRole.setRoleName(entry.flexoRoleName);
 					newShapeRole.setModelSlot(getTransformationAction().getTypedDiagramModelSlot());
-					newShapeRole.setReadOnlyLabel(true);
+					// newShapeRole.setReadOnlyLabel(true);
 					if (StringUtils.isNotEmpty(entry.graphicalObject.getName())) {
 						newShapeRole.setLabel(new DataBinding<String>("\"" + entry.graphicalObject.getName() + "\""));
 					}
@@ -116,7 +116,7 @@ public abstract class FlexoConceptFromDiagramElementCreationStrategy<A extends D
 					DiagramConnector grConnector = (DiagramConnector) entry.graphicalObject;
 					ConnectorRole newConnectorRole = getTransformationAction().getFactory().newInstance(ConnectorRole.class);
 					newConnectorRole.setRoleName(entry.flexoRoleName);
-					newConnectorRole.setReadOnlyLabel(true);
+					// newConnectorRole.setReadOnlyLabel(true);
 					if (StringUtils.isNotEmpty(entry.graphicalObject.getName())) {
 						newConnectorRole.setLabel(new DataBinding<String>("\"" + entry.graphicalObject.getName() + "\""));
 					}

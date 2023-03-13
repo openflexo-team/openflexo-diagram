@@ -52,6 +52,7 @@ import org.openflexo.diana.GraphicalRepresentation;
 import org.openflexo.foundation.fml.FlexoConcept;
 import org.openflexo.foundation.fml.FlexoConceptObject;
 import org.openflexo.foundation.fml.rt.FlexoConceptInstance;
+import org.openflexo.pamela.annotations.DefineValidationRule;
 import org.openflexo.pamela.annotations.Getter;
 import org.openflexo.pamela.annotations.ImplementationClass;
 import org.openflexo.pamela.annotations.ModelEntity;
@@ -98,12 +99,12 @@ public interface GraphicalElementSpecification<T, GR extends GraphicalRepresenta
 	@Setter(VALUE_KEY)
 	public void setValue(DataBinding<T> value);
 
-	@Getter(value = READ_ONLY_KEY, defaultValue = "false")
+	/*@Getter(value = READ_ONLY_KEY, defaultValue = "true")
 	@XMLAttribute
 	public boolean getReadOnly();
-
+	
 	@Setter(READ_ONLY_KEY)
-	public void setReadOnly(boolean readOnly);
+	public void setReadOnly(boolean readOnly);*/
 
 	public GraphicalElementRole<?, GR> getFlexoRole();
 
@@ -123,7 +124,7 @@ public interface GraphicalElementSpecification<T, GR extends GraphicalRepresenta
 		private GraphicalFeature<T, GR> feature;
 		private String featureName;
 		private DataBinding<T> value;
-		private boolean readOnly;
+		// private boolean readOnly;
 		private boolean mandatory;
 
 		// Use it only for deserialization
@@ -131,14 +132,14 @@ public interface GraphicalElementSpecification<T, GR extends GraphicalRepresenta
 			super();
 		}
 
-		public GraphicalElementSpecificationImpl(GraphicalElementRole<?, GR> patternRole, GraphicalFeature<T, GR> feature, boolean readOnly,
+		/*public GraphicalElementSpecificationImpl(GraphicalElementRole<?, GR> patternRole, GraphicalFeature<T, GR> feature, boolean readOnly,
 				boolean mandatory) {
 			super();
 			this.patternRole = patternRole;
 			this.feature = feature;
-			this.readOnly = readOnly;
+			//this.readOnly = readOnly;
 			this.mandatory = mandatory;
-		}
+		}*/
 
 		@Override
 		public Collection<Validable> getEmbeddedValidableObjects() {
@@ -175,8 +176,9 @@ public interface GraphicalElementSpecification<T, GR extends GraphicalRepresenta
 		public DataBinding<T> getValue() {
 			if (value == null) {
 				value = new DataBinding<>(this, (getFeature() != null ? getFeature().getType() : Object.class),
-						getReadOnly() ? BindingDefinitionType.GET : BindingDefinitionType.GET_SET);
-				value.setBindingName(featureName);
+						// getReadOnly() ? BindingDefinitionType.GET : BindingDefinitionType.GET_SET);
+						BindingDefinitionType.GET);
+				value.setBindingName(getFeatureName());
 				value.setMandatory(mandatory);
 			}
 			return value;
@@ -187,18 +189,19 @@ public interface GraphicalElementSpecification<T, GR extends GraphicalRepresenta
 			if (value != null) {
 				value.setOwner(this);
 				value.setDeclaredType((getFeature() != null ? getFeature().getType() : Object.class));
-				value.setBindingName(featureName);
+				value.setBindingName(getFeatureName());
 				value.setMandatory(mandatory);
-				value.setBindingDefinitionType(getReadOnly() ? BindingDefinitionType.GET : BindingDefinitionType.GET_SET);
+				value.setBindingDefinitionType(BindingDefinitionType.GET);
+				// value.setBindingDefinitionType(getReadOnly() ? BindingDefinitionType.GET : BindingDefinitionType.GET_SET);
 			}
 			this.value = value;
 		}
 
-		@Override
+		/*@Override
 		public boolean getReadOnly() {
 			return readOnly;
 		}
-
+		
 		@Override
 		public void setReadOnly(boolean readOnly) {
 			if (this.readOnly != readOnly) {
@@ -206,7 +209,7 @@ public interface GraphicalElementSpecification<T, GR extends GraphicalRepresenta
 				getValue().setBindingDefinitionType(getReadOnly() ? BindingDefinitionType.GET : BindingDefinitionType.GET_SET);
 				notifiedBindingChanged(getValue());
 			}
-		}
+		}*/
 
 		@Override
 		public boolean getMandatory() {
@@ -235,7 +238,10 @@ public interface GraphicalElementSpecification<T, GR extends GraphicalRepresenta
 
 		@Override
 		public BindingFactory getBindingFactory() {
-			return getFlexoConcept().getInspector().getBindingFactory();
+			if (getFlexoConcept() != null && getFlexoConcept().getInspector() != null) {
+				return getFlexoConcept().getInspector().getBindingFactory();
+			}
+			return null;
 		}
 
 		@Override
@@ -310,4 +316,17 @@ public interface GraphicalElementSpecification<T, GR extends GraphicalRepresenta
 		}
 
 	}
+
+	@DefineValidationRule
+	public static class ValueBindingIsRequiredAndMustBeValid extends BindingIsRequiredAndMustBeValid<GraphicalElementSpecification> {
+		public ValueBindingIsRequiredAndMustBeValid() {
+			super("'value'_binding_is_not_valid", GraphicalElementSpecification.class);
+		}
+
+		@Override
+		public DataBinding<FlexoConceptInstance> getBinding(GraphicalElementSpecification object) {
+			return object.getValue();
+		}
+	}
+
 }

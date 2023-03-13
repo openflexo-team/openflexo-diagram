@@ -149,7 +149,7 @@ public interface ConnectorRole extends GraphicalElementRole<DiagramConnector, Co
 							.newInstance(GraphicalElementSpecification.class);
 					newGraphicalElementSpecification.setFlexoRole(this);
 					newGraphicalElementSpecification.setFeature(GF);
-					newGraphicalElementSpecification.setReadOnly(false);
+					// newGraphicalElementSpecification.setReadOnly(false);
 					newGraphicalElementSpecification.setMandatory(true);
 					grSpecifications.add(newGraphicalElementSpecification);
 				}
