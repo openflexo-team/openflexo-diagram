@@ -33,14 +33,14 @@ model TestDiagramVM2 {
 
         concept TutuGR {
                 DiagramShape shape with ShapeRole(metamodelElement=DIAGRAM_SHAPE,exampleLabel="Shape");
-                TutuGR dropTutuGRAtTopLevel() with DropScheme() {
+                TutuGR dropTutuGRAtTopLevel() with DropScheme(targetType=TestDiagramVM2) {
                 	shape = DIAGRAM::AddShape(container=topLevel) in diagram;
                 }
         }
 
         concept TotoGR {
                 DiagramShape shape with ShapeRole(metamodelElement=DIAGRAM_SHAPE2,exampleLabel="Shape");
-                TotoGR dropTotoGRAtTopLevel() with DropScheme() {
+                TotoGR dropTotoGRAtTopLevel() with DropScheme(targetType=TestDiagramVM2) {
                 	shape = DIAGRAM::AddShape(container=topLevel) in diagram;
                 }
         }

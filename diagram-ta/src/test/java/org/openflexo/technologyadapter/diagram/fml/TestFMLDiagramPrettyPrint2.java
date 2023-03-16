@@ -205,7 +205,7 @@ public class TestFMLDiagramPrettyPrint2 extends FMLParserTestCase {
 		// Create init behaviour
 		CreateFlexoBehaviour createCreationScheme = CreateFlexoBehaviour.actionType.makeNewAction(virtualModel, null, editor);
 		createCreationScheme.setFlexoBehaviourClass(CreationScheme.class);
-		// createCreationScheme.setFlexoBehaviourName("init");
+		createCreationScheme.setFlexoBehaviourName("createInstance");
 		createCreationScheme.doAction();
 		CreationScheme initBehaviour = (CreationScheme) createCreationScheme.getNewFlexoBehaviour();
 

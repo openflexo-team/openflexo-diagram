@@ -2,6 +2,10 @@ namespace "http://openflexo.org/test/TestDiagramSpecification" as DIAGRAM_SPECIF
 
 use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot as DIAGRAM;
 
+import org.openflexo.technologyadapter.diagram.model.DiagramShape;
+import org.openflexo.technologyadapter.diagram.model.Diagram;
+import org.openflexo.technologyadapter.diagram.model.DiagramConnector;
+
 import [DIAGRAM_SPECIFICATION] as TEST_DIAGRAM_SPECIFICATION;
 import [DIAGRAM_SPECIFICATION + "/ExampleDiagram.diagram"] as EXAMPLE_DIAGRAM;
 import [EXAMPLE_DIAGRAM:"SYL-2"] as DIAGRAM_SHAPE;
@@ -19,7 +23,7 @@ model TestVirtualModel {
 
 	concept TestConcept {
 		DiagramShape shape with ShapeRole(exampleLabel="label",metamodelElement=DIAGRAM_SHAPE);
-		TestConcept drop() with DropScheme(skipConfirmationPanel=false) {
+		TestConcept drop() with DropScheme(skipConfirmationPanel=false,targetType=TestVirtualModel) {
 			shape = DIAGRAM::AddShape(container=topLevel);
 		}
 	}

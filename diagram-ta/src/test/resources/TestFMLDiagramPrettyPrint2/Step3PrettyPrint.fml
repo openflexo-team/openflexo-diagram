@@ -1,5 +1,7 @@
 use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot as DIAGRAM;
 
+import org.openflexo.technologyadapter.diagram.model.Diagram;
+
 import ["http://openflexo.org/test/TestDiagramSpecification"] as TEST_DIAGRAM_SPECIFICATION;
 
 @URI("http://openflexo.org/test/TestResourceCenter/TestDiagramVM1.fml")

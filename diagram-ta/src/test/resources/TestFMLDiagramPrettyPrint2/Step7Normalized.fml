@@ -1,5 +1,9 @@
 use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot as DIAGRAM;
 
+import org.openflexo.technologyadapter.diagram.model.Diagram;
+import org.openflexo.technologyadapter.diagram.model.DiagramShape;
+import org.openflexo.technologyadapter.diagram.model.DiagramConnector;
+
 import ["http://openflexo.org/test/TestDiagramSpecification"] as TEST_DIAGRAM_SPECIFICATION;
 import ["http://openflexo.org/test/TestDiagramSpecification/ExampleDiagram.diagram"] as EXAMPLE_DIAGRAM;
 import [EXAMPLE_DIAGRAM:"SYL-2"] as DIAGRAM_SHAPE;
@@ -16,21 +20,21 @@ model TestDiagramVM1 {
 	}
 
 	public concept FlexoConceptA {
-		DiagramShape shape with ShapeRole(metamodelElement=DIAGRAM_SHAPE,exampleLabel="Shape");
-		FlexoConceptA drop() with DropScheme() {
+		DiagramShape shape with ShapeRole(metamodelElement=DIAGRAM_SHAPE,container=diagram,exampleLabel="Shape");
+		FlexoConceptA drop() with DropScheme(targetType=TestDiagramVM1) {
 			shape = DIAGRAM::AddShape() in diagram;
 		}
 	}
 
 	public concept FlexoConceptB {
-		DiagramShape shape with ShapeRole(metamodelElement=DIAGRAM_SHAPE2,exampleLabel="Shape");
+		DiagramShape shape with ShapeRole(metamodelElement=DIAGRAM_SHAPE2,container=diagram,exampleLabel="Shape");
 		FlexoConceptB drop() with DropScheme(targetType=FlexoConceptA) {
 			shape = DIAGRAM::AddShape() in diagram;
 		}
 	}
 
 	public concept FlexoConceptC {
-		DiagramConnector connector with ConnectorRole(metamodelElement=DIAGRAM_CONNECTOR,exampleLabel="Connector");
+		DiagramConnector connector with ConnectorRole(metamodelElement=DIAGRAM_CONNECTOR,container=diagram,exampleLabel="Connector");
 		FlexoConceptC link() with LinkScheme(fromType=FlexoConceptA,toType=FlexoConceptA) {
 			connector = DIAGRAM::AddConnector() in diagram;
 		}
