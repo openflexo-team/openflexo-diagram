@@ -46,6 +46,7 @@ import java.util.Map;
 import org.openflexo.connie.type.CustomTypeFactory;
 import org.openflexo.foundation.fml.TechnologyAdapterTypeFactory;
 import org.openflexo.foundation.fml.TechnologySpecificType;
+import org.openflexo.foundation.technologyadapter.SpecificTypeInfo;
 import org.openflexo.technologyadapter.diagram.DiagramTechnologyAdapter;
 import org.openflexo.technologyadapter.diagram.metamodel.DiagramSpecification;
 import org.openflexo.technologyadapter.diagram.rm.DiagramSpecificationResource;
@@ -185,6 +186,17 @@ public class DiagramType implements TechnologySpecificType<DiagramTechnologyAdap
 			}
 		}
 	}
+
+	@Override
+	public void registerSpecificTypeInfo(SpecificTypeInfo<DiagramTechnologyAdapter> typeInfo) {
+		this.typeInfo = typeInfo;
+	}
+
+	public SpecificTypeInfo<DiagramTechnologyAdapter> getSpecificTypeInfo() {
+		return typeInfo;
+	}
+
+	private SpecificTypeInfo<DiagramTechnologyAdapter> typeInfo;
 
 	/**
 	 * Factory for DiagramType instances
