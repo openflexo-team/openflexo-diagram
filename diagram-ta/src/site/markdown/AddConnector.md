@@ -57,8 +57,8 @@ Creates a new connector in Diagram identified by ‘myDiagram’ expression, bin
 
 ## See also
 
- - <img src="/images/ConnectorRole.png" alt="ConnectorRole"/> [`ConnectorRole`](ConnectorRole.md) : No documentation yet
- - <img src="/images/CreateDiagram.png" alt="CreateDiagram"/> [`CreateDiagram`](CreateDiagram.md) : This edition primitive addresses the creation of a new diagram.
- - <img src="/images/AddShape.png" alt="AddShape"/> [`AddShape`](AddShape.md) : This edition primitive addresses the creation of a new shape in a diagram.
- - <img src="/images/GraphicalAction.png" alt="GraphicalAction"/> [`GraphicalAction`](GraphicalAction.md) : No documentation yet
+ - <img src="/openflexo-diagram/images/ConnectorRole.png" alt="ConnectorRole"/> [`ConnectorRole`](ConnectorRole.md) : No documentation yet
+ - <img src="/openflexo-diagram/images/CreateDiagram.png" alt="CreateDiagram"/> [`CreateDiagram`](CreateDiagram.md) : This edition primitive addresses the creation of a new diagram.
+ - <img src="/openflexo-diagram/images/AddShape.png" alt="AddShape"/> [`AddShape`](AddShape.md) : This edition primitive addresses the creation of a new shape in a diagram.
+ - <img src="/openflexo-diagram/images/GraphicalAction.png" alt="GraphicalAction"/> [`GraphicalAction`](GraphicalAction.md) : No documentation yet
 

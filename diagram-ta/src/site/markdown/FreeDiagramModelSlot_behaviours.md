@@ -7,8 +7,8 @@ This ModelSlot represents access to a Diagram without any DiagramSpecification c
 
 ## Behaviours
 
- - <img src="/images/DropScheme.png" alt="DropScheme"/> [`DropScheme`](./DropScheme.md) : No documentation yet
- - <img src="/images/DrawRectangleScheme.png" alt="DrawRectangleScheme"/> [`DrawRectangleScheme`](./DrawRectangleScheme.md) : No documentation yet
- - <img src="/images/LinkScheme.png" alt="LinkScheme"/> [`LinkScheme`](./LinkScheme.md) : No documentation yet
- - <img src="/images/DiagramNavigationScheme.png" alt="DiagramNavigationScheme"/> [`DiagramNavigationScheme`](./DiagramNavigationScheme.md) : No documentation yet
+ - ‎<img src="/openflexo-diagram/images/DropScheme.png" alt="DropScheme"/> [DropScheme](DropScheme.md) : No documentation yet
+ - ‎<img src="/openflexo-diagram/images/DrawRectangleScheme.png" alt="DrawRectangleScheme"/> [DrawRectangleScheme](DrawRectangleScheme.md) : No documentation yet
+ - ‎<img src="/openflexo-diagram/images/LinkScheme.png" alt="LinkScheme"/> [LinkScheme](LinkScheme.md) : No documentation yet
+ - ‎<img src="/openflexo-diagram/images/DiagramNavigationScheme.png" alt="DiagramNavigationScheme"/> [DiagramNavigationScheme](DiagramNavigationScheme.md) : No documentation yet
 

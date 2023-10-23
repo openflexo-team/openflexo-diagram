@@ -55,27 +55,27 @@ Declares a model slot called 'myDiagram' with resulting type 'Diagram', realized
 
 ## Roles
 
- - <img src="/images/ShapeRole.png" alt="ShapeRole"/> [`ShapeRole`](./ShapeRole.md) : No documentation yet
- - <img src="/images/ConnectorRole.png" alt="ConnectorRole"/> [`ConnectorRole`](./ConnectorRole.md) : No documentation yet
- - <img src="/images/DiagramRole.png" alt="DiagramRole"/> [`DiagramRole`](./DiagramRole.md) : No documentation yet
+ - ‎<img src="/openflexo-diagram/images/ShapeRole.png" alt="ShapeRole"/> [ShapeRole](ShapeRole.md) : No documentation yet
+ - ‎<img src="/openflexo-diagram/images/ConnectorRole.png" alt="ConnectorRole"/> [ConnectorRole](ConnectorRole.md) : No documentation yet
+ - ‎<img src="/openflexo-diagram/images/DiagramRole.png" alt="DiagramRole"/> [DiagramRole](DiagramRole.md) : No documentation yet
 
 ---
 
 ## Behaviours
 
- - <img src="/images/DropScheme.png" alt="DropScheme"/> [`DropScheme`](./DropScheme.md) : No documentation yet
- - <img src="/images/DrawRectangleScheme.png" alt="DrawRectangleScheme"/> [`DrawRectangleScheme`](./DrawRectangleScheme.md) : No documentation yet
- - <img src="/images/LinkScheme.png" alt="LinkScheme"/> [`LinkScheme`](./LinkScheme.md) : No documentation yet
- - <img src="/images/DiagramNavigationScheme.png" alt="DiagramNavigationScheme"/> [`DiagramNavigationScheme`](./DiagramNavigationScheme.md) : No documentation yet
+ - ‎<img src="/openflexo-diagram/images/DropScheme.png" alt="DropScheme"/> [DropScheme](DropScheme.md) : No documentation yet
+ - ‎<img src="/openflexo-diagram/images/DrawRectangleScheme.png" alt="DrawRectangleScheme"/> [DrawRectangleScheme](DrawRectangleScheme.md) : No documentation yet
+ - ‎<img src="/openflexo-diagram/images/LinkScheme.png" alt="LinkScheme"/> [LinkScheme](LinkScheme.md) : No documentation yet
+ - ‎<img src="/openflexo-diagram/images/DiagramNavigationScheme.png" alt="DiagramNavigationScheme"/> [DiagramNavigationScheme](DiagramNavigationScheme.md) : No documentation yet
 
 ---
 
 ## Edition actions
 
- - <img src="/images/CreateDiagram.png" alt="CreateDiagram"/> [`CreateDiagram`](./CreateDiagram.md) : This edition primitive addresses the creation of a new diagram.
- - <img src="/images/AddShape.png" alt="AddShape"/> [`AddShape`](./AddShape.md) : This edition primitive addresses the creation of a new shape in a diagram.
- - <img src="/images/AddConnector.png" alt="AddConnector"/> [`AddConnector`](./AddConnector.md) : This edition primitive addresses the creation of a new connector linking two shapes in a diagram
- - <img src="/images/GraphicalAction.png" alt="GraphicalAction"/> [`GraphicalAction`](./GraphicalAction.md) : No documentation yet
+ - ‎<img src="/openflexo-diagram/images/CreateDiagram.png" alt="CreateDiagram"/> [CreateDiagram](CreateDiagram.md) : This edition primitive addresses the creation of a new diagram.
+ - ‎<img src="/openflexo-diagram/images/AddShape.png" alt="AddShape"/> [AddShape](AddShape.md) : This edition primitive addresses the creation of a new shape in a diagram.
+ - ‎<img src="/openflexo-diagram/images/AddConnector.png" alt="AddConnector"/> [AddConnector](AddConnector.md) : This edition primitive addresses the creation of a new connector linking two shapes in a diagram
+ - ‎<img src="/openflexo-diagram/images/GraphicalAction.png" alt="GraphicalAction"/> [GraphicalAction](GraphicalAction.md) : No documentation yet
 
 ---
 
