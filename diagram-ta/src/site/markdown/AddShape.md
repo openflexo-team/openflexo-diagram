@@ -60,3 +60,12 @@ Creates a new shape in Diagram identified by ‘myDiagram’ expression, inside 
 
 [org.openflexo.technologyadapter.diagram.fml.editionaction.AddShape](./apidocs/org/openflexo/technologyadapter/diagram/fml/editionaction/AddShape.md)
 
+---
+
+## See also
+
+ - <img src="/images/ShapeRole.png" alt="ShapeRole"/> [`ShapeRole`](ShapeRole.md) : No documentation yet
+ - <img src="/images/CreateDiagram.png" alt="CreateDiagram"/> [`CreateDiagram`](CreateDiagram.md) : This edition primitive addresses the creation of a new diagram.
+ - <img src="/images/AddConnector.png" alt="AddConnector"/> [`AddConnector`](AddConnector.md) : This edition primitive addresses the creation of a new connector linking two shapes in a diagram
+ - <img src="/images/GraphicalAction.png" alt="GraphicalAction"/> [`GraphicalAction`](GraphicalAction.md) : No documentation yet
+

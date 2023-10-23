@@ -7,8 +7,8 @@ This ModelSlot represents access to a Diagram without any DiagramSpecification c
 
 ## Edition actions
 
- - <img src="../resources/images/CreateDiagram.png" alt="CreateDiagram"/> [`CreateDiagram`](CreateDiagram.md) : This edition primitive addresses the creation of a new diagram.
- - <img src="../resources/images/AddShape.png" alt="AddShape"/> [`AddShape`](AddShape.md) : This edition primitive addresses the creation of a new shape in a diagram.
- - <img src="../resources/images/AddConnector.png" alt="AddConnector"/> [`AddConnector`](AddConnector.md) : This edition primitive addresses the creation of a new connector linking two shapes in a diagram
- - <img src="../resources/images/GraphicalAction.png" alt="GraphicalAction"/> [`GraphicalAction`](GraphicalAction.md) : No documentation yet
+ - <img src="/images/CreateDiagram.png" alt="CreateDiagram"/> [`CreateDiagram`](./CreateDiagram.md) : This edition primitive addresses the creation of a new diagram.
+ - <img src="/images/AddShape.png" alt="AddShape"/> [`AddShape`](./AddShape.md) : This edition primitive addresses the creation of a new shape in a diagram.
+ - <img src="/images/AddConnector.png" alt="AddConnector"/> [`AddConnector`](./AddConnector.md) : This edition primitive addresses the creation of a new connector linking two shapes in a diagram
+ - <img src="/images/GraphicalAction.png" alt="GraphicalAction"/> [`GraphicalAction`](./GraphicalAction.md) : No documentation yet
 

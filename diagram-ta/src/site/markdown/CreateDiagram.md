@@ -81,3 +81,11 @@ Creates a new Diagram in resource center referenced as 'myRc', in folder '/Diagr
 
 [org.openflexo.technologyadapter.diagram.fml.editionaction.CreateDiagram](./apidocs/org/openflexo/technologyadapter/diagram/fml/editionaction/CreateDiagram.md)
 
+---
+
+## See also
+
+ - <img src="/images/TypedDiagramModelSlot.png" alt="TypedDiagramModelSlot"/> [`TypedDiagram`](TypedDiagramModelSlot.md) : This ModelSlot represents access to a Diagram conform to a DiagramSpecification
+ - <img src="/images/FreeDiagramModelSlot.png" alt="FreeDiagramModelSlot"/> [`FreeDiagram`](FreeDiagramModelSlot.md) : This ModelSlot represents access to a Diagram without any DiagramSpecification conformance
+ - <img src="/images/GraphicalAction.png" alt="GraphicalAction"/> [`GraphicalAction`](GraphicalAction.md) : No documentation yet
+

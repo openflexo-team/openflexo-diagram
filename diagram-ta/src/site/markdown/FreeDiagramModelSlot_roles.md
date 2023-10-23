@@ -7,7 +7,7 @@ This ModelSlot represents access to a Diagram without any DiagramSpecification c
 
 ## Roles
 
- - <img src="../resources/images/ShapeRole.png" alt="ShapeRole"/> [`ShapeRole`](ShapeRole.md) : No documentation yet
- - <img src="../resources/images/ConnectorRole.png" alt="ConnectorRole"/> [`ConnectorRole`](ConnectorRole.md) : No documentation yet
- - <img src="../resources/images/DiagramRole.png" alt="DiagramRole"/> [`DiagramRole`](DiagramRole.md) : No documentation yet
+ - <img src="/images/ShapeRole.png" alt="ShapeRole"/> [`ShapeRole`](./ShapeRole.md) : No documentation yet
+ - <img src="/images/ConnectorRole.png" alt="ConnectorRole"/> [`ConnectorRole`](./ConnectorRole.md) : No documentation yet
+ - <img src="/images/DiagramRole.png" alt="DiagramRole"/> [`DiagramRole`](./DiagramRole.md) : No documentation yet
 
