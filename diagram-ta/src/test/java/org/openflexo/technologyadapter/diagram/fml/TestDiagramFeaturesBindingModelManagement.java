@@ -500,8 +500,8 @@ public class TestDiagramFeaturesBindingModelManagement extends DiagramTestCase {
 		CompilationUnitResource retrievedVPResource = serviceManager.getVirtualModelLibrary().getCompilationUnitResource(VIEWPOINT_URI);
 		assertNotNull(retrievedVPResource);
 
-		assertEquals(1, retrievedVPResource.getContainedVirtualModelResources().size());
-		CompilationUnitResource retrievedVMResource = retrievedVPResource.getContainedVirtualModelResources().get(0);
+		assertEquals(1, retrievedVPResource.getContainedCompilationUnitResources().size());
+		CompilationUnitResource retrievedVMResource = retrievedVPResource.getContainedCompilationUnitResources().get(0);
 
 		System.out.println("Loading file: " + retrievedVMResource.getIODelegate().getSerializationArtefact());
 
