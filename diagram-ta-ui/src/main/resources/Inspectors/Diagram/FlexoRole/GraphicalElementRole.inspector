@@ -9,7 +9,7 @@
         <CustomColumn componentClassName="org.openflexo.gina.swing.utils.JavaBindingSelector" customRendering="false" disableTerminateEditOnFocusLost="false" data="iterator.value" title="value" columnWidth="150" resizable="true" displayTitle="true" name="value">
           <ColumnAssignment variable="component.bindable" value="iterator" />
         </CustomColumn>
-        <CheckBoxColumn data="iterator.readOnly" title="RO" columnWidth="30" resizable="false" displayTitle="true" name="checkbox" />
+<!--          <CheckBoxColumn data="iterator.readOnly" title="RO" columnWidth="30" resizable="false" displayTitle="true" name="checkbox" /> -->
         <LocalizedDictionary />
       </Table>
       <Label label="actions" index="16" constraints="twocols(expandHorizontally=false;expandVertically=false;index=16;location=left)" localize="true" />
