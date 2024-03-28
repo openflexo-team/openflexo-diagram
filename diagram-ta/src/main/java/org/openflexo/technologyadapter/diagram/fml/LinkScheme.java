@@ -276,7 +276,7 @@ public interface LinkScheme extends AbstractCreationScheme, DiagramFlexoBehaviou
 			if (getFromTargetFlexoConcept() != null) {
 				return getFromTargetFlexoConcept().getInstanceType();
 			}
-			return null;
+			return FlexoConceptInstanceType.UNDEFINED_FLEXO_CONCEPT_INSTANCE_TYPE;
 		}
 
 		@Override
@@ -314,7 +314,7 @@ public interface LinkScheme extends AbstractCreationScheme, DiagramFlexoBehaviou
 			if (getToTargetFlexoConcept() != null) {
 				return getToTargetFlexoConcept().getInstanceType();
 			}
-			return null;
+			return FlexoConceptInstanceType.UNDEFINED_FLEXO_CONCEPT_INSTANCE_TYPE;
 		}
 
 		@Override
