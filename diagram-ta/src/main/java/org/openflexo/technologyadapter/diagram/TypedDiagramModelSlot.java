@@ -168,7 +168,7 @@ public interface TypedDiagramModelSlot extends TypeAwareModelSlot<Diagram, Diagr
 	public FMLDiagramPaletteElementBinding addFMLDiagramPaletteElementBinding();
 
 	@Getter(value = DIAGRAM_SPECIFICATION_KEY, ignoreType = true)
-	@FMLAttribute(value = DIAGRAM_SPECIFICATION_KEY, required = true)
+	@FMLAttribute(value = DIAGRAM_SPECIFICATION_KEY, required = true, description = "DiagramSpecification this diagram must conform to")
 	public DiagramSpecification getDiagramSpecification();
 
 	@Setter(DIAGRAM_SPECIFICATION_KEY)
