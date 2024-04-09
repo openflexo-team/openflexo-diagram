@@ -3,7 +3,6 @@
 
 <img src="/openflexo-diagram/images/GraphicalAction_BIG.png" alt="GraphicalAction"/> No documentation yet
 
-
 ---
 
 ## Usage
@@ -20,9 +19,28 @@ or
 DIAGRAM::GraphicalAction()
 ```
 
+where
+
+
+---
+
+## Configuration
+
+| Property        | Type                    | &nbsp;Required&nbsp;  |
+| --------------- |-------------------------| :------:|
+
+---
+
+
+---
+
+## Examples
+
+
 ---
 
 ## Javadoc
 
 [org.openflexo.technologyadapter.diagram.fml.editionaction.GraphicalAction](./apidocs/org/openflexo/technologyadapter/diagram/fml/editionaction/GraphicalAction.md)
 
+[//]: # --------------------- SEE ALSO
