@@ -1,0 +1,44 @@
+<h2><img src="https://openflexo.org/openflexo-diagram/images/AddConnector_BIG.png" alt="AddConnector"/>&nbsp;AddConnector</h2>
+
+This edition primitive addresses the creation of a new connector linking two shapes in a diagram
+
+<br><br>
+<b>Usage:</b>
+
+<code>
+<pre>
+[DiagramConnector &lt;value&gt; =]
+DIAGRAM::AddConnector(fromShape=&lt;fromShape_path&gt;,toShape=&lt;toShape_path&gt;)
+</pre>
+</code>
+
+<ul>
+<li> &lt;fromShape_path&gt; addresses a <code>DiagramShape</code></li>
+<li> &lt;toShape_path&gt; addresses a <code>DiagramShape</code></li>
+</ul>
+
+<b>Configuration:</b>
+<ul>
+<li> &lt;fromShape_path&gt; : <code>DiagramShape</code> (required) - </li>
+<li> &lt;toShape_path&gt; : <code>DiagramShape</code> (required) - </li>
+</ul>
+<b>Examples:</b>
+<br>
+<code>
+<pre>
+myConnector = AddConnector(fromShape=myFirstShape,toShape=mySecondShape) in (myDiagram);
+</pre>
+</code>
+Creates a new connector in Diagram identified by ‘myDiagram’ expression, binding the shapes respectively identified by 'myFirstShape' and 'mySecondShape', and assign this new connector to ‘myConnector’
+<br>
+<br>
+
+<b>Reference documentation:</b> <a href="https://openflexo.org/openflexo-diagram/docs/diagram-ta/AddConnector">AddConnector</a><br>
+
+<br>
+<b>See also:</b>
+<a href="https://openflexo.org/openflexo-diagram/docs/diagram-ta/ConnectorRole">ConnectorRole</a>
+<a href="https://openflexo.org/openflexo-diagram/docs/diagram-ta/CreateDiagram">CreateDiagram</a>
+<a href="https://openflexo.org/openflexo-diagram/docs/diagram-ta/AddShape">AddShape</a>
+<a href="https://openflexo.org/openflexo-diagram/docs/diagram-ta/GraphicalAction">GraphicalAction</a>
+

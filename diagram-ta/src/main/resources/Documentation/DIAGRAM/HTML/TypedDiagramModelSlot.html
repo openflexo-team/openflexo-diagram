@@ -1,0 +1,69 @@
+<h2><img src="https://openflexo.org/openflexo-diagram/images/TypedDiagramModelSlot_BIG.png" alt="TypedDiagramModelSlot"/>&nbsp;TypedDiagram</h2>
+
+This ModelSlot represents access to a Diagram conform to a DiagramSpecification<br>Such diagram refers to a diagram metamodel which is composed of a example diagram and a collection of palettes both encoding template shapes and connectors
+
+<br><br>
+<b>Usage:</b>
+
+<code>
+<pre>
+[visibility] [cardinality] Diagram &lt;identifier&gt;
+with DIAGRAM::TypedDiagram(diagramSpecification=&lt;diagramSpecification_path&gt;[,options]);
+</pre>
+</code>
+
+<ul>
+<li> <code>visibility</code> is default (unspecified), <code>public</code>, <code>protected</code> or <code>private</code></li>
+<li> <code>cardinality</code> is [0,1] (unspecified), [0,*] or [1,*]</li>
+<li> &lt;identifier&gt; is the name of declared model slot variable</li>
+<li> &lt;diagramSpecification_path&gt; addresses a <code>DiagramSpecification</code></li>
+</ul>
+
+<b>Configuration:</b>
+<ul>
+<li> &lt;diagramSpecification_path&gt; : <code>DiagramSpecification</code> (required) - DiagramSpecification this diagram must conform to</li>
+<li> &lt;container_path&gt; : <code>Object</code> (optional) - </li>
+<li> &lt;isReadOnly_path&gt; : <code>boolean</code> (optional) - </li>
+<li> &lt;isRequired_path&gt; : <code>boolean</code> (optional) - </li>
+<li> &lt;paletteElementBindings_path&gt; : <code>List&lt;FMLDiagramPaletteElementBinding&gt;</code> (optional) - </li>
+</ul>
+<b>Examples:</b>
+<br>
+<code>
+<pre>
+Diagram myDiagram with DIAGRAM::TypedDiagram(diagramSpecification = myDiagramSpecification,paletteElementBindings = {
+            FMLDiagramPaletteElementBinding:(elementId="MyPaletteElement",dropAction="MyConcept.drop()",overridingGR=RED_SHAPE2),
+            FMLDiagramPaletteElementBinding:(elementId="MyPaletteElement2",dropAction="MyConcept.drop()")
+});
+</pre>
+</code>
+Declares a model slot called 'myDiagram' with resulting type 'Diagram', realized through the 'TypedDiagram' model slot, conform to 'myDiagramSpecification' and specified palette element bindings
+<br>
+<br>
+
+
+<b>Features:</b>
+<ul>
+<li><b>Roles</b> : <a href="https://openflexo.org/openflexo-diagram/docs/diagram-ta/ShapeRole">ShapeRole</a>
+<a href="https://openflexo.org/openflexo-diagram/docs/diagram-ta/ConnectorRole">ConnectorRole</a>
+<a href="https://openflexo.org/openflexo-diagram/docs/diagram-ta/DiagramRole">DiagramRole</a>
+</li>
+<li><b>Behaviours</b> : <a href="https://openflexo.org/openflexo-diagram/docs/diagram-ta/DropScheme">DropScheme</a>
+<a href="https://openflexo.org/openflexo-diagram/docs/diagram-ta/DrawRectangleScheme">DrawRectangleScheme</a>
+<a href="https://openflexo.org/openflexo-diagram/docs/diagram-ta/LinkScheme">LinkScheme</a>
+<a href="https://openflexo.org/openflexo-diagram/docs/diagram-ta/DiagramNavigationScheme">DiagramNavigationScheme</a>
+</li>
+<li><b>Edition actions</b> : <a href="https://openflexo.org/openflexo-diagram/docs/diagram-ta/CreateDiagram">CreateDiagram</a>
+<a href="https://openflexo.org/openflexo-diagram/docs/diagram-ta/AddShape">AddShape</a>
+<a href="https://openflexo.org/openflexo-diagram/docs/diagram-ta/AddConnector">AddConnector</a>
+<a href="https://openflexo.org/openflexo-diagram/docs/diagram-ta/GraphicalAction">GraphicalAction</a>
+</li>
+</ul>
+
+<b>Reference documentation:</b> <a href="https://openflexo.org/openflexo-diagram/docs/diagram-ta/TypedDiagramModelSlot">TypedDiagramModelSlot</a><br>
+
+<br>
+<b>See also:</b>
+<a href="https://openflexo.org/openflexo-diagram/docs/diagram-ta/FreeDiagramModelSlot">FreeDiagramModelSlot</a>
+<a href="https://openflexo.org/openflexo-diagram/docs/diagram-ta/CreateDiagram">CreateDiagram</a>
+

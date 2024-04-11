@@ -1,0 +1,62 @@
+<h2><img src="https://openflexo.org/openflexo-diagram/images/FreeDiagramModelSlot_BIG.png" alt="FreeDiagramModelSlot"/>&nbsp;FreeDiagram</h2>
+
+This ModelSlot represents access to a Diagram without any DiagramSpecification conformance
+
+<br><br>
+<b>Usage:</b>
+
+<code>
+<pre>
+[visibility] [cardinality] Diagram &lt;identifier&gt; with DIAGRAM::FreeDiagram([options]);
+</pre>
+</code>
+
+<ul>
+<li> <code>visibility</code> is default (unspecified), <code>public</code>, <code>protected</code> or <code>private</code></li>
+<li> <code>cardinality</code> is [0,1] (unspecified), [0,*] or [1,*]</li>
+<li> &lt;identifier&gt; is the name of declared model slot variable</li>
+</ul>
+
+<b>Configuration:</b>
+<ul>
+<li> &lt;container_path&gt; : <code>Object</code> (optional) - </li>
+<li> &lt;isReadOnly_path&gt; : <code>boolean</code> (optional) - </li>
+<li> &lt;isRequired_path&gt; : <code>boolean</code> (optional) - </li>
+</ul>
+<b>Examples:</b>
+<br>
+<code>
+<pre>
+Diagram myDiagram with DIAGRAM::FreeDiagram();
+</pre>
+</code>
+Declares a model slot called 'myDiagram' with resulting type 'Diagram', realized through the 'FreeDiagram' model slot
+<br>
+<br>
+
+
+<b>Features:</b>
+<ul>
+<li><b>Roles</b> : <a href="https://openflexo.org/openflexo-diagram/docs/diagram-ta/ShapeRole">ShapeRole</a>
+<a href="https://openflexo.org/openflexo-diagram/docs/diagram-ta/ConnectorRole">ConnectorRole</a>
+<a href="https://openflexo.org/openflexo-diagram/docs/diagram-ta/DiagramRole">DiagramRole</a>
+</li>
+<li><b>Behaviours</b> : <a href="https://openflexo.org/openflexo-diagram/docs/diagram-ta/DropScheme">DropScheme</a>
+<a href="https://openflexo.org/openflexo-diagram/docs/diagram-ta/DrawRectangleScheme">DrawRectangleScheme</a>
+<a href="https://openflexo.org/openflexo-diagram/docs/diagram-ta/LinkScheme">LinkScheme</a>
+<a href="https://openflexo.org/openflexo-diagram/docs/diagram-ta/DiagramNavigationScheme">DiagramNavigationScheme</a>
+</li>
+<li><b>Edition actions</b> : <a href="https://openflexo.org/openflexo-diagram/docs/diagram-ta/CreateDiagram">CreateDiagram</a>
+<a href="https://openflexo.org/openflexo-diagram/docs/diagram-ta/AddShape">AddShape</a>
+<a href="https://openflexo.org/openflexo-diagram/docs/diagram-ta/AddConnector">AddConnector</a>
+<a href="https://openflexo.org/openflexo-diagram/docs/diagram-ta/GraphicalAction">GraphicalAction</a>
+</li>
+</ul>
+
+<b>Reference documentation:</b> <a href="https://openflexo.org/openflexo-diagram/docs/diagram-ta/FreeDiagramModelSlot">FreeDiagramModelSlot</a><br>
+
+<br>
+<b>See also:</b>
+<a href="https://openflexo.org/openflexo-diagram/docs/diagram-ta/TypedDiagramModelSlot">TypedDiagramModelSlot</a>
+<a href="https://openflexo.org/openflexo-diagram/docs/diagram-ta/CreateDiagram">CreateDiagram</a>
+
