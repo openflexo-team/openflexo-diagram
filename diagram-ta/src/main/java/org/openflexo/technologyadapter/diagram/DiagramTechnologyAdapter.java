@@ -48,6 +48,7 @@ import org.openflexo.foundation.fml.annotations.DeclareModelSlots;
 import org.openflexo.foundation.fml.annotations.DeclareResourceFactories;
 import org.openflexo.foundation.fml.annotations.DeclareTechnologySpecificTypes;
 import org.openflexo.foundation.fml.annotations.DeclareVirtualModelInstanceNatures;
+import org.openflexo.foundation.fml.annotations.FML;
 import org.openflexo.foundation.fml.rt.FMLRTVirtualModelInstance;
 import org.openflexo.foundation.fml.rt.VirtualModelInstance;
 import org.openflexo.foundation.fml.rt.action.AbstractCreationSchemeAction;
@@ -80,6 +81,11 @@ import org.openflexo.technologyadapter.diagram.rm.DiagramSpecificationResourceFa
  * @author sylvain
  * 
  */
+@FML(
+		value = "Diagramming technology adapter",
+		description = "<html>This technology adapter provides model federation facilities to manage boxes/arrows oriented diagrams.<br>"
+				+ "This technology adapter is based on DIANA technology. It's possible to work either with diagram conform to a diagram specification (TypedDiagram) or with free diagrams (FreeDiagram)"
+				+ "</html>")
 @DeclareModelSlots({ TypedDiagramModelSlot.class, FreeDiagramModelSlot.class })
 @DeclareTechnologySpecificTypes({ DiagramType.class })
 @DeclareResourceFactories({ DiagramSpecificationResourceFactory.class, DiagramResourceFactory.class })
