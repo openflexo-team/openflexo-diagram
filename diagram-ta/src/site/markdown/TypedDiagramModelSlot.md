@@ -5,6 +5,8 @@
 
 Such diagram refers to a diagram metamodel which is composed of a example diagram and a collection of palettes both encoding template shapes and connectors
 
+Coucou les amis !
+
 ---
 
 ## Usage
