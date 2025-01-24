@@ -264,7 +264,8 @@ public class TestDiagramFeaturesBindingModelManagement extends DiagramTestCase {
 		assertTrue(ResourceLocator.retrieveResourceAsFile(virtualModel.getResource().getDirectory()).exists());
 		assertTrue(virtualModel.getResource().getIODelegate().exists());
 
-		AddUseDeclaration useDeclarationAction = AddUseDeclaration.actionType.makeNewAction(virtualModel, null, editor);
+		AddUseDeclaration useDeclarationAction = AddUseDeclaration.actionType.makeNewAction(virtualModel.getCompilationUnit(), null,
+				editor);
 		useDeclarationAction.setModelSlotClass(TypedDiagramModelSlot.class);
 		useDeclarationAction.doAction();
 
