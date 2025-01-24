@@ -2,11 +2,11 @@ namespace "http://openflexo.org/test/TestDiagramSpecification" as DIAGRAM_SPECIF
 
 use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot as DIAGRAM;
 
-import [DIAGRAM_SPECIFICATION] as TEST_DIAGRAM_SPECIFICATION;
-import [DIAGRAM_SPECIFICATION + "/ExampleDiagram.diagram"] as EXAMPLE_DIAGRAM;
-import [EXAMPLE_DIAGRAM:"SYL-2"] as DIAGRAM_SHAPE;
-import [EXAMPLE_DIAGRAM:"SYL-3"] as DIAGRAM_SHAPE2;
-import [EXAMPLE_DIAGRAM:"SYL-4"] as DIAGRAM_CONNECTOR;
+import DiagramSpecification TEST_DIAGRAM_SPECIFICATION from [DIAGRAM_SPECIFICATION];
+import Diagram EXAMPLE_DIAGRAM from [DIAGRAM_SPECIFICATION + "/ExampleDiagram.diagram"];
+import DiagramShape DIAGRAM_SHAPE from [EXAMPLE_DIAGRAM:"SYL-2"];
+import DiagramShape DIAGRAM_SHAPE2 from [EXAMPLE_DIAGRAM:"SYL-3"];
+import DiagramConnector DIAGRAM_CONNECTOR from [EXAMPLE_DIAGRAM:"SYL-4"];
 
 @URI("http://openflexo.org/test/TestResourceCenter/TestControlledDiagramViewPoint.fml/TestVirtualModel.fml")
 @Version("0.1")

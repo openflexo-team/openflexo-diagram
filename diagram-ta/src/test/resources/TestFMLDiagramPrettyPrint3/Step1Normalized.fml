@@ -4,11 +4,12 @@ use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot as DIAGRAM;
 
 import org.openflexo.technologyadapter.diagram.model.DiagramShape;
 import org.openflexo.technologyadapter.diagram.model.Diagram;
+import org.openflexo.technologyadapter.diagram.metamodel.DiagramSpecification;
 
-import [DIAGRAM_SPECIFICATION_NS] as DIAGRAM_SPECIFICATION;
-import [DIAGRAM_SPECIFICATION_NS + "/ExampleDiagram.diagram"] as EXAMPLE_DIAGRAM;
-import [EXAMPLE_DIAGRAM:"SYL-2"] as DIAGRAM_SHAPE;
-import [EXAMPLE_DIAGRAM:"SYL-3"] as DIAGRAM_SHAPE2;
+import DiagramSpecification DIAGRAM_SPECIFICATION from [DIAGRAM_SPECIFICATION_NS];
+import Diagram EXAMPLE_DIAGRAM from [DIAGRAM_SPECIFICATION_NS + "/ExampleDiagram.diagram"];
+import DiagramShape DIAGRAM_SHAPE from [EXAMPLE_DIAGRAM:"SYL-2"];
+import DiagramShape DIAGRAM_SHAPE2 from [EXAMPLE_DIAGRAM:"SYL-3"];
 
 @URI("http://openflexo.org/test/TestResourceCenter/TestDiagramVM2.fml")
 model TestDiagramVM2 {
