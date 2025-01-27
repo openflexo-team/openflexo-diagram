@@ -364,7 +364,7 @@ public abstract interface GraphicalElementRole<T extends DiagramElement<GR>, GR 
 		public void setMetamodelElement(T anElement) {
 
 			if (getDeclaringCompilationUnit() != null && anElement != null) {
-				getDeclaringCompilationUnit().ensureElementImport(anElement);
+				getDeclaringCompilationUnit().ensureElementImport(anElement, false);
 			}
 
 			T old = (metaModelElementReference != null ? metaModelElementReference.getObject() : null);
@@ -645,7 +645,7 @@ public abstract interface GraphicalElementRole<T extends DiagramElement<GR>, GR 
 		public void handleRequiredImports(FMLCompilationUnit compilationUnit) {
 			super.handleRequiredImports(compilationUnit);
 			if (compilationUnit != null && getMetamodelElement() != null) {
-				compilationUnit.ensureElementImport(getMetamodelElement());
+				compilationUnit.ensureElementImport(getMetamodelElement(), false);
 			}
 		}
 

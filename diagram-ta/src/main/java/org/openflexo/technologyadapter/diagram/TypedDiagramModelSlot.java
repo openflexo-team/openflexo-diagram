@@ -386,7 +386,7 @@ public interface TypedDiagramModelSlot extends TypeAwareModelSlot<Diagram, Diagr
 		public void handleRequiredImports(FMLCompilationUnit compilationUnit) {
 			super.handleRequiredImports(compilationUnit);
 			if (compilationUnit != null && getDiagramSpecification() != null) {
-				compilationUnit.ensureResourceImport(getDiagramSpecification());
+				compilationUnit.ensureResourceImport(getDiagramSpecification(), false);
 			}
 		}
 
