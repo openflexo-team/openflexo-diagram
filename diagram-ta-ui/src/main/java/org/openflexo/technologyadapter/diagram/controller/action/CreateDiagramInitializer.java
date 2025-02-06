@@ -115,7 +115,7 @@ public class CreateDiagramInitializer extends ActionInitializer<CreateDiagram, R
 		if (FreeModelSlot.class.isAssignableFrom(modelSlotClass)) {
 			return CommonFIB.CONFIGURE_FREE_MODEL_SLOT_INSTANCE_DIALOG_FIB;
 		}
-		if (FMLRTModelSlot.class.isAssignableFrom(modelSlotClass)) {
+		if (AbstractFMLRTModelSlot.class.isAssignableFrom(modelSlotClass)) {
 			return CommonFIB.CONFIGURE_VIRTUAL_MODEL_SLOT_INSTANCE_DIALOG_FIB;
 		}
 		return null;

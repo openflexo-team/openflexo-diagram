@@ -192,7 +192,7 @@ public class TestFMLEditorWithDiagramTA2 extends OpenflexoFIBTestCase {
 		assertNotNull(aRole = (PrimitiveRole<Integer>) compilationUnit.getVirtualModel().getAccessibleProperty("a"));
 		assertNotNull(aFooRole = (FlexoConceptInstanceRole) compilationUnit.getVirtualModel().getAccessibleProperty("aFoo"));
 		assertNotNull(allARole = (FlexoConceptInstanceRole) compilationUnit.getVirtualModel().getAccessibleProperty("allA"));
-		assertNotNull(vmDModelSlot = (FMLRTVirtualModelInstanceModelSlot) compilationUnit.getVirtualModel().getAccessibleProperty("vmD"));
+		assertNotNull(vmDModelSlot = (FMLRTModelSlot) compilationUnit.getVirtualModel().getAccessibleProperty("vmD"));
 		assertNotNull(sequencingListProperty = (GetProperty<?>) compilationUnit.getVirtualModel().getAccessibleProperty("sequencingList"));
 */
 		

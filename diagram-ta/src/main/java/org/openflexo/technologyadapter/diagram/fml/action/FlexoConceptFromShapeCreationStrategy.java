@@ -263,13 +263,13 @@ public abstract class FlexoConceptFromShapeCreationStrategy
 	
 		if (patternChoice == NewFlexoConceptChoices.MAP_SINGLE_FLEXO_CONCEPT) {
 			if (isVirtualModelModelSlot()) {
-				FMLRTModelSlot virtualModelModelSlot = (FMLRTModelSlot) getInformationSourceModelSlot();
+				AbstractFMLRTModelSlot virtualModelModelSlot = (AbstractFMLRTModelSlot) getInformationSourceModelSlot();
 	
 				if (editionSchemeConfiguration.getType() == FlexoBehaviourChoice.DROP_AND_SELECT) {
 					FlexoConceptInstanceParameter flexoConceptInstanceParameter = getFactory().newFlexoConceptInstanceParameter();
 					flexoConceptInstanceParameter.setName(flexoConceptInstanceRole.getName());
 					flexoConceptInstanceParameter.setLabel(flexoConceptInstanceRole.getName());
-					flexoConceptInstanceParameter.setModelSlot((FMLRTModelSlot) flexoConceptInstanceRole.getModelSlot());
+					flexoConceptInstanceParameter.setModelSlot((AbstractFMLRTModelSlot) flexoConceptInstanceRole.getModelSlot());
 					// editionPatternInstanceParameter.setFlexoConceptType(editionPatternFlexoRole.getFlexoConceptType());
 					editionScheme.addToParameters(flexoConceptInstanceParameter);
 					// Add individual action

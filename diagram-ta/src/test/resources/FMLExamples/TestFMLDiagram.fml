@@ -2,7 +2,7 @@
  * Testing FML-controlled diagram
  */
 
-use org.openflexo.foundation.fml.rt.FMLRTModelSlot as FMLRT;
+use org.openflexo.foundation.fml.rt.AbstractFMLRTModelSlot as FMLRT;
 use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot as DIAGRAM;
 
 import DiagramSpecification DIAGRAM_SPECIFICATION from ["http://some_uri/ADiagSpecification.diagramspecification"];

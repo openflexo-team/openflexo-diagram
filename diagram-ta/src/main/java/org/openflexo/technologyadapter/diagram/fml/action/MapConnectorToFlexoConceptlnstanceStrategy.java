@@ -48,7 +48,7 @@ import org.openflexo.foundation.fml.FlexoConceptInstanceRole;
 import org.openflexo.foundation.fml.VirtualModel;
 import org.openflexo.foundation.fml.VirtualModelInstanceType;
 import org.openflexo.foundation.fml.editionaction.AssignationAction;
-import org.openflexo.foundation.fml.rt.FMLRTModelSlot;
+import org.openflexo.foundation.fml.rt.AbstractFMLRTModelSlot;
 import org.openflexo.foundation.fml.rt.FMLRTVirtualModelInstance;
 import org.openflexo.foundation.fml.rt.FlexoConceptInstance;
 import org.openflexo.foundation.fml.rt.VirtualModelInstance;
@@ -141,7 +141,7 @@ public class MapConnectorToFlexoConceptlnstanceStrategy extends FlexoConceptFrom
 	}
 
 	/**
-	 * Return flag indicating if currently selected {@link ModelSlot} is a {@link FMLRTModelSlot}
+	 * Return flag indicating if currently selected {@link ModelSlot} is a {@link AbstractFMLRTModelSlot}
 	 * 
 	 * @return
 	 */
