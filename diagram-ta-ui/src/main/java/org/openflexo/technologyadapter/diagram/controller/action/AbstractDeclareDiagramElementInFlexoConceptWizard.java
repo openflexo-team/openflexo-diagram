@@ -79,13 +79,13 @@ public abstract class AbstractDeclareDiagramElementInFlexoConceptWizard<A extend
 			return getAction().getAdressedVirtualModel();
 		}
 
-		public ModelSlot<?> getModelSlot() {
+		public ModelSlot<?,?> getModelSlot() {
 			return getAction().getInformationSourceModelSlot();
 		}
 
-		public void setModelSlot(ModelSlot<?> modelSlot) {
+		public void setModelSlot(ModelSlot<?,?> modelSlot) {
 			if (modelSlot != getModelSlot()) {
-				ModelSlot<?> oldValue = getModelSlot();
+				ModelSlot<?,?> oldValue = getModelSlot();
 				getAction().setInformationSourceModelSlot(modelSlot);
 				getPropertyChangeSupport().firePropertyChange("modelSlot", oldValue, modelSlot);
 				getPropertyChangeSupport().firePropertyChange("adressedFlexoMetaModel", null, getAdressedFlexoMetaModel());

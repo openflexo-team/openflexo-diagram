@@ -45,9 +45,11 @@ import org.openflexo.foundation.fml.rt.FMLRTVirtualModelInstance;
 import org.openflexo.foundation.fml.rt.TypeAwareModelSlotInstance;
 import org.openflexo.foundation.fml.rt.VirtualModelInstanceNature;
 import org.openflexo.foundation.nature.ScreenshotableNature;
+import org.openflexo.technologyadapter.diagram.DiagramTechnologyAdapter;
 import org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
 import org.openflexo.technologyadapter.diagram.metamodel.DiagramSpecification;
 import org.openflexo.technologyadapter.diagram.model.Diagram;
+import org.openflexo.technologyadapter.diagram.rm.DiagramResource;
 
 /**
  * Define the "controlled-diagram" nature of a {@link FMLRTVirtualModelInstance}<br>
@@ -80,7 +82,7 @@ public class FMLControlledDiagramVirtualModelInstanceNature
 
 		TypedDiagramModelSlot diagramMS = virtualModel.getModelSlots(TypedDiagramModelSlot.class).get(0);
 
-		TypeAwareModelSlotInstance<Diagram, DiagramSpecification, TypedDiagramModelSlot> msInstance = (TypeAwareModelSlotInstance<Diagram, DiagramSpecification, TypedDiagramModelSlot>) virtualModelInstance
+		TypeAwareModelSlotInstance<Diagram, DiagramSpecification, TypedDiagramModelSlot, DiagramResource, DiagramTechnologyAdapter> msInstance = (TypeAwareModelSlotInstance<Diagram, DiagramSpecification, TypedDiagramModelSlot, DiagramResource, DiagramTechnologyAdapter>) virtualModelInstance
 				.getModelSlotInstance(diagramMS);
 
 		if (msInstance == null) {
@@ -94,7 +96,7 @@ public class FMLControlledDiagramVirtualModelInstanceNature
 		return true;
 	}
 
-	public static TypeAwareModelSlotInstance<Diagram, DiagramSpecification, TypedDiagramModelSlot> getModelSlotInstance(
+	public static TypeAwareModelSlotInstance<Diagram, DiagramSpecification, TypedDiagramModelSlot, DiagramResource, DiagramTechnologyAdapter> getModelSlotInstance(
 			FMLRTVirtualModelInstance virtualModelInstance) {
 		return INSTANCE._getModelSlotInstance(virtualModelInstance);
 
@@ -104,17 +106,17 @@ public class FMLControlledDiagramVirtualModelInstanceNature
 		return INSTANCE._getDiagram(virtualModelInstance);
 	}
 
-	private static TypeAwareModelSlotInstance<Diagram, DiagramSpecification, TypedDiagramModelSlot> _getModelSlotInstance(
+	private static TypeAwareModelSlotInstance<Diagram, DiagramSpecification, TypedDiagramModelSlot, DiagramResource, DiagramTechnologyAdapter> _getModelSlotInstance(
 			FMLRTVirtualModelInstance virtualModelInstance) {
 		TypedDiagramModelSlot diagramMS = virtualModelInstance.getVirtualModel().getModelSlots(TypedDiagramModelSlot.class).get(0);
 
-		return (TypeAwareModelSlotInstance<Diagram, DiagramSpecification, TypedDiagramModelSlot>) virtualModelInstance
+		return (TypeAwareModelSlotInstance<Diagram, DiagramSpecification, TypedDiagramModelSlot, DiagramResource, DiagramTechnologyAdapter>) virtualModelInstance
 				.getModelSlotInstance(diagramMS);
 
 	}
 
 	private static Diagram _getDiagram(FMLRTVirtualModelInstance virtualModelInstance) {
-		TypeAwareModelSlotInstance<Diagram, DiagramSpecification, TypedDiagramModelSlot> diagramModelSlotInstance = _getModelSlotInstance(
+		TypeAwareModelSlotInstance<Diagram, DiagramSpecification, TypedDiagramModelSlot, DiagramResource, DiagramTechnologyAdapter> diagramModelSlotInstance = _getModelSlotInstance(
 				virtualModelInstance);
 		if (diagramModelSlotInstance != null) {
 			return diagramModelSlotInstance.getAccessedResourceData();

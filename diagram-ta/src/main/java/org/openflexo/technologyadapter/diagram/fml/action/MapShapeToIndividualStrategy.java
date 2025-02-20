@@ -120,12 +120,12 @@ public class MapShapeToIndividualStrategy extends FlexoConceptFromShapeCreationS
 		this.model = aModel;
 	}
 
-	public FlexoOntologyModelSlot<?, ?, ?> getFlexoOntologyModelSlot() {
+	public FlexoOntologyModelSlot<?, ?, ?, ?> getFlexoOntologyModelSlot() {
 		if (getModel().isSet() && getModel().isValid()) {
 			if (getModel().isBindingPath()) {
 				BindingPath bv = (BindingPath) getModel().getExpression();
 				IBindingPathElement bpe = bv.getLastBindingPathElement();
-				ModelSlot<?> ms = null;
+				ModelSlot<?, ?> ms = null;
 				if (bpe instanceof ModelSlotBindingVariable) {
 					ms = ((ModelSlotBindingVariable) bpe).getModelSlot();
 				}
@@ -133,7 +133,7 @@ public class MapShapeToIndividualStrategy extends FlexoConceptFromShapeCreationS
 					ms = ((ModelSlotPathElement<?>) bpe).getModelSlot();
 				}
 				if (ms instanceof FlexoOntologyModelSlot) {
-					return (FlexoOntologyModelSlot<?, ?, ?>) ms;
+					return (FlexoOntologyModelSlot<?, ?, ?, ?>) ms;
 				}
 			}
 		}
@@ -197,7 +197,7 @@ public class MapShapeToIndividualStrategy extends FlexoConceptFromShapeCreationS
 
 		FlexoConcept newFlexoConcept = super.performStrategy();
 
-		FlexoOntologyModelSlot<?, ?, ?> flexoOntologyModelSlot = getFlexoOntologyModelSlot();
+		FlexoOntologyModelSlot<?, ?, ?, ?> flexoOntologyModelSlot = getFlexoOntologyModelSlot();
 
 		if (flexoOntologyModelSlot != null) {
 			individualFlexoRole = flexoOntologyModelSlot.makeIndividualRole(getConcept());
@@ -216,7 +216,7 @@ public class MapShapeToIndividualStrategy extends FlexoConceptFromShapeCreationS
 	@Override
 	protected void initializeDropScheme(DropScheme newDropScheme) {
 
-		FlexoOntologyModelSlot<?, ?, ?> flexoOntologyModelSlot = getFlexoOntologyModelSlot();
+		FlexoOntologyModelSlot<?, ?, ?, ?> flexoOntologyModelSlot = getFlexoOntologyModelSlot();
 
 		if (flexoOntologyModelSlot != null) {
 			FlexoBehaviourParameter uriParameter = getTransformationAction().getFactory().newParameter(newDropScheme);

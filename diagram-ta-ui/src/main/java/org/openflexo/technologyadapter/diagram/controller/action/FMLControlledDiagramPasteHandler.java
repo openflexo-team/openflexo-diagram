@@ -51,12 +51,14 @@ import org.openflexo.foundation.fml.rt.TypeAwareModelSlotInstance;
 import org.openflexo.foundation.fml.rt.VirtualModelInstance;
 import org.openflexo.pamela.factory.Clipboard;
 import org.openflexo.selection.MouseSelectionManager;
+import org.openflexo.technologyadapter.diagram.DiagramTechnologyAdapter;
 import org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
 import org.openflexo.technologyadapter.diagram.controller.diagrameditor.FMLControlledDiagramEditor;
 import org.openflexo.technologyadapter.diagram.fml.FMLControlledDiagramVirtualModelInstanceNature;
 import org.openflexo.technologyadapter.diagram.metamodel.DiagramSpecification;
 import org.openflexo.technologyadapter.diagram.model.Diagram;
 import org.openflexo.technologyadapter.diagram.model.DiagramShape;
+import org.openflexo.technologyadapter.diagram.rm.DiagramResource;
 
 /**
  * Paste Handler suitable for pasting something into a FMLControlledDiagram
@@ -144,7 +146,7 @@ public class FMLControlledDiagramPasteHandler extends VirtualModelInstancePasteH
 	public Object getModelSlotSpecificPastingPointHolder(ModelSlotInstance<?, ?> modelSlotInstance,
 			HeterogeneousPastingContext pastingContext) {
 		if (modelSlotInstance.getModelSlot() instanceof TypedDiagramModelSlot) {
-			return ((TypeAwareModelSlotInstance<Diagram, DiagramSpecification, TypedDiagramModelSlot>) modelSlotInstance)
+			return ((TypeAwareModelSlotInstance<Diagram, DiagramSpecification, TypedDiagramModelSlot, DiagramResource, DiagramTechnologyAdapter>) modelSlotInstance)
 					.getAccessedResourceData();
 		}
 		return super.getModelSlotSpecificPastingPointHolder(modelSlotInstance, pastingContext);

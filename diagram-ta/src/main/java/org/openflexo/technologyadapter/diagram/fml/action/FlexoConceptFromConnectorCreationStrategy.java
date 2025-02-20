@@ -285,7 +285,7 @@ public abstract class FlexoConceptFromConnectorCreationStrategy
 		// Parameters
 		if (patternChoice == NewFlexoConceptChoices.MAP_SINGLE_INDIVIDUAL) {
 			if (isTypeAwareModelSlot()) {
-				TypeAwareModelSlot<?, ?> flexoOntologyModelSlot = (TypeAwareModelSlot<?, ?>) getInformationSourceModelSlot();
+				TypeAwareModelSlot<?, ?, ?> flexoOntologyModelSlot = (TypeAwareModelSlot<?, ?, ?>) getInformationSourceModelSlot();
 	
 				if (editionSchemeConfiguration.getType() == FlexoBehaviourChoice.DROP_AND_SELECT) {
 					IndividualParameter individualParameter = getFactory().newIndividualParameter();

@@ -623,8 +623,8 @@ public abstract interface GraphicalElementRole<T extends DiagramElement<GR>, GR 
 		}
 
 		@Override
-		public ModelSlot<?> getModelSlot() {
-			ModelSlot<?> returned = super.getModelSlot();
+		public ModelSlot<?,?> getModelSlot() {
+			ModelSlot<?,?> returned = super.getModelSlot();
 			if (returned == null) {
 				if (getOwningVirtualModel() != null && getOwningVirtualModel().getModelSlots(TypedDiagramModelSlot.class).size() > 0) {
 					return getOwningVirtualModel().getModelSlots(TypedDiagramModelSlot.class).get(0);

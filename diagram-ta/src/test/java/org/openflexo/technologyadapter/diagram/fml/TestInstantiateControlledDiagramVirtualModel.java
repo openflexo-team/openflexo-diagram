@@ -227,12 +227,12 @@ public class TestInstantiateControlledDiagramVirtualModel extends OpenflexoProje
 		assertTrue(((FMLRTVirtualModelInstanceResource) newView.getResource()).getIODelegate().exists());
 		assertEquals(1, newVirtualModelInstance.getModelSlotInstances().size());
 
-		TypeAwareModelSlotInstance<Diagram, DiagramSpecification, TypedDiagramModelSlot> diagramMSInstance = (TypeAwareModelSlotInstance<Diagram, DiagramSpecification, TypedDiagramModelSlot>) newVirtualModelInstance
+		TypeAwareModelSlotInstance<Diagram, DiagramSpecification, TypedDiagramModelSlot, DiagramResource, DiagramTechnologyAdapter> diagramMSInstance = (TypeAwareModelSlotInstance<Diagram, DiagramSpecification, TypedDiagramModelSlot, DiagramResource, DiagramTechnologyAdapter>) newVirtualModelInstance
 				.getModelSlotInstances().get(0);
 		assertNotNull(diagramMSInstance);
 		assertNotNull(diagram = diagramMSInstance.getAccessedResourceData());
 		assertNotNull(diagramMSInstance.getResource());
-		assertTrue(((DiagramResource) diagramMSInstance.getResource()).getIODelegate().exists());
+		assertTrue(diagramMSInstance.getResource().getIODelegate().exists());
 
 		assertTrue(newVirtualModelInstance.hasNature(FMLControlledDiagramVirtualModelInstanceNature.INSTANCE));
 

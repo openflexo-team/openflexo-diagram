@@ -65,6 +65,7 @@ import org.openflexo.technologyadapter.diagram.fml.editionaction.CreateDiagram;
 import org.openflexo.technologyadapter.diagram.fml.editionaction.GraphicalAction;
 import org.openflexo.technologyadapter.diagram.metamodel.DiagramSpecification;
 import org.openflexo.technologyadapter.diagram.model.Diagram;
+import org.openflexo.technologyadapter.diagram.rm.DiagramResource;
 
 /**
  * Implementation of the ModelSlot class for the Openflexo built-in diagram technology adapter<br>
@@ -88,9 +89,9 @@ import org.openflexo.technologyadapter.diagram.model.Diagram;
 				example = "Diagram myDiagram with DIAGRAM::FreeDiagram();",
 				description = "Declares a model slot called 'myDiagram' with resulting type 'Diagram', realized through the 'FreeDiagram' model slot") },
 		references = { @SeeAlso(TypedDiagramModelSlot.class), @SeeAlso(CreateDiagram.class) })
-public interface FreeDiagramModelSlot extends FreeModelSlot<Diagram>, DiagramModelSlot {
+public interface FreeDiagramModelSlot extends FreeModelSlot<Diagram, DiagramResource>, DiagramModelSlot {
 
-	public abstract class FreeDiagramModelSlotImpl extends FreeModelSlotImpl<Diagram> implements FreeDiagramModelSlot {
+	public abstract class FreeDiagramModelSlotImpl extends FreeModelSlotImpl<Diagram, DiagramResource> implements FreeDiagramModelSlot {
 
 		private static final Logger logger = Logger.getLogger(FreeDiagramModelSlot.class.getPackage().getName());
 

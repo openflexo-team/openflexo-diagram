@@ -49,6 +49,7 @@ import org.openflexo.technologyadapter.diagram.fml.ConnectorRole;
 import org.openflexo.technologyadapter.diagram.fml.DiagramRole;
 import org.openflexo.technologyadapter.diagram.fml.ShapeRole;
 import org.openflexo.technologyadapter.diagram.model.Diagram;
+import org.openflexo.technologyadapter.diagram.rm.DiagramResource;
 
 /**
  * Implemented by all ModelSlot class for the Openflexo built-in diagram technology adapter<br>
@@ -59,7 +60,7 @@ import org.openflexo.technologyadapter.diagram.model.Diagram;
 
 @ModelEntity(isAbstract = true)
 @ImplementationClass(DiagramModelSlot.DiagramModelSlotImpl.class)
-public interface DiagramModelSlot extends ModelSlot<Diagram> {
+public interface DiagramModelSlot extends ModelSlot<Diagram, DiagramResource> {
 
 	@Implementation
 	abstract class DiagramModelSlotImpl implements DiagramModelSlot {

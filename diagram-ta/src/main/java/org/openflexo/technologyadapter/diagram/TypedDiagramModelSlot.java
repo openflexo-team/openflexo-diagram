@@ -118,7 +118,7 @@ import org.openflexo.technologyadapter.diagram.rm.DiagramResourceFactory;
 						+ "});",
 				description = "Declares a model slot called 'myDiagram' with resulting type 'Diagram', realized through the 'TypedDiagram' model slot, conform to 'myDiagramSpecification' and specified palette element bindings") },
 		references = { @SeeAlso(FreeDiagramModelSlot.class), @SeeAlso(CreateDiagram.class) })
-public interface TypedDiagramModelSlot extends TypeAwareModelSlot<Diagram, DiagramSpecification>, DiagramModelSlot {
+public interface TypedDiagramModelSlot extends TypeAwareModelSlot<Diagram, DiagramSpecification, DiagramResource>, DiagramModelSlot {
 
 	@PropertyIdentifier(type = DiagramSpecification.class)
 	public static final String DIAGRAM_SPECIFICATION_KEY = "diagramSpecification";
@@ -194,7 +194,7 @@ public interface TypedDiagramModelSlot extends TypeAwareModelSlot<Diagram, Diagr
 	@Setter(INITIALIZE_WITH_CONTENTS_KEY)
 	public void setInitializeWithContents(boolean value);
 
-	public static abstract class TypedDiagramModelSlotImpl extends TypeAwareModelSlotImpl<Diagram, DiagramSpecification>
+	public static abstract class TypedDiagramModelSlotImpl extends TypeAwareModelSlotImpl<Diagram, DiagramSpecification, DiagramResource>
 			implements TypedDiagramModelSlot {
 
 		private static final Logger logger = Logger.getLogger(TypedDiagramModelSlot.class.getPackage().getName());

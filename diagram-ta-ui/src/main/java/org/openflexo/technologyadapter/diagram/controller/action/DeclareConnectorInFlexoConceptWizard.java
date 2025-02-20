@@ -400,7 +400,7 @@ public class DeclareConnectorInFlexoConceptWizard
 		}
 
 		/*@Override
-		public void setModelSlot(ModelSlot<?> modelSlot) {
+		public void setModelSlot(ModelSlot<?,?> modelSlot) {
 			super.setModelSlot(modelSlot);
 			getPropertyChangeSupport().firePropertyChange("typeConcept", null, getTypeConcept());
 		}*/
@@ -453,7 +453,7 @@ public class DeclareConnectorInFlexoConceptWizard
 		}
 
 		@Override
-		public void setModelSlot(ModelSlot<?> modelSlot) {
+		public void setModelSlot(ModelSlot<?,?> modelSlot) {
 			super.setModelSlot(modelSlot);
 			getPropertyChangeSupport().firePropertyChange("concept", null, getConcept());
 		}
