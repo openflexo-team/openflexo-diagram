@@ -7,6 +7,13 @@ dependencies {
    implementation fmlTechnologyAdapterUi()
    implementation fmlRtTechnologyAdapterUi()
    // external dep
+   implementation group: 'org.apache.xmlgraphics', name: 'batik-svggen', version: '1.13',  {
+       exclude group: "xml-apis", module: "xml-apis"
+   }
+   implementation group: 'org.apache.xmlgraphics', name: 'batik-dom', version: '1.13',  {
+       exclude group: "xml-apis", module: "xml-apis"
+   }
+   
    // testing dep
    testImplementation flexoFoundationTest()
    testImplementation ginaTest()
