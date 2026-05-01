@@ -44,6 +44,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+import org.openflexo.foundation.FlexoObject;
 import org.openflexo.foundation.fml.FMLCompilationUnit;
 import org.openflexo.foundation.fml.annotations.DeclareEditionActions;
 import org.openflexo.foundation.fml.annotations.DeclareFetchRequests;
@@ -388,6 +389,52 @@ public interface TypedDiagramModelSlot extends TypeAwareModelSlot<Diagram, Diagr
 			if (compilationUnit != null && getDiagramSpecification() != null) {
 				compilationUnit.ensureResourceImport(getDiagramSpecification(), false);
 			}
+		}
+
+		@Override
+		public Object retrieveObjectWithURI(Diagram diagram, String objectURI) {
+
+			if (objectURI == null || diagram == null) {
+				return null;
+			}
+
+			if (diagram.getResource() != null) {
+
+				String identifier = objectURI.contains("/") ? objectURI.substring(objectURI.lastIndexOf("/")) : objectURI;
+
+				String userIdentifier = null;
+				String objectIdentifier;
+
+				if (identifier.contains("-")) {
+					userIdentifier = identifier.substring(0, identifier.indexOf("-"));
+					objectIdentifier = identifier.substring(identifier.indexOf("-") + 1);
+				}
+				else {
+					objectIdentifier = identifier;
+				}
+				return diagram.getResource().findObject(objectIdentifier, userIdentifier);
+			}
+			logger.warning("Cannot retrieve retrieveObjectWithURI() " + objectURI + " : cannot access the resource");
+			return null;
+		}
+
+		@Override
+		public String getURIForObject(Diagram diagram, Object o) {
+
+			if (o == null || diagram == null) {
+				return null;
+			}
+
+			if (diagram.getResource() != null) {
+				if (o instanceof FlexoObject) {
+					return diagram.getResource().getURI() + "/" + ((FlexoObject) o).getUserIdentifier() + "-"
+							+ ((FlexoObject) o).getFlexoID();
+				}
+				logger.warning("Not implemented : getURIForObject() for non FlexoObject");
+				return null;
+			}
+			logger.warning("Cannot retrieve URI for " + o + " : cannot access the resource");
+			return null;
 		}
 
 	}

@@ -185,7 +185,7 @@ public interface DiagramRole extends GraphicalElementRole<Diagram, DrawingGraphi
 
 		@Override
 		public ModelObjectActorReference<Diagram> makeActorReference(Diagram object, FlexoConceptInstance fci) {
-			AbstractVirtualModelInstanceModelFactory<?> factory = fci.getFactory();
+			AbstractVirtualModelInstanceModelFactory factory = fci.getFactory();
 			ModelObjectActorReference<Diagram> returned = factory.newInstance(ModelObjectActorReference.class);
 			returned.setFlexoRole(this);
 			returned.setFlexoConceptInstance(fci);
