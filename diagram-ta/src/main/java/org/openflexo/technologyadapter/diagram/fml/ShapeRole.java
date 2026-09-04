@@ -195,6 +195,51 @@ public interface ShapeRole extends GraphicalElementRole<DiagramShape, ShapeGraph
 			RELATIVE_TEXT_X_FEATURE, RELATIVE_TEXT_Y_FEATURE, ABSOLUTE_TEXT_X_FEATURE, ABSOLUTE_TEXT_Y_FEATURE };
 
 	@PropertyIdentifier(type = DataBinding.class)
+	public static final String POS_X_KEY = "x";
+	@PropertyIdentifier(type = DataBinding.class)
+	public static final String POS_Y_KEY = "y";
+	@PropertyIdentifier(type = DataBinding.class)
+	public static final String WIDTH_KEY = "width";
+	@PropertyIdentifier(type = DataBinding.class)
+	public static final String HEIGHT_KEY = "height";
+
+	// Convenient method to access spec for x feature
+	@Getter(POS_X_KEY)
+	@FMLAttribute(value = POS_X_KEY, required = false, description = "<html>abscissa of the shape</html>")
+	public DataBinding<Double> getPosX();
+
+	// Convenient method to access spec for x feature
+	@Setter(POS_X_KEY)
+	public void setPosX(DataBinding<Double> posX);
+
+	// Convenient method to access spec for y feature
+	@Getter(POS_Y_KEY)
+	@FMLAttribute(value = POS_Y_KEY, required = false, description = "<html>ordinate of the shape</html>")
+	public DataBinding<Double> getPosY();
+
+	// Convenient method to access spec for y feature
+	@Setter(POS_Y_KEY)
+	public void setPosY(DataBinding<Double> posY);
+
+	// Convenient method to access spec for width feature
+	@Getter(WIDTH_KEY)
+	@FMLAttribute(value = WIDTH_KEY, required = false, description = "<html>width of the shape</html>")
+	public DataBinding<Double> getShapeWidth();
+
+	// Convenient method to access spec for width feature
+	@Setter(WIDTH_KEY)
+	public void setShapeWidth(DataBinding<Double> width);
+
+	// Convenient method to access spec for height feature
+	@Getter(HEIGHT_KEY)
+	@FMLAttribute(value = HEIGHT_KEY, required = false, description = "<html>height of the shape</html>")
+	public DataBinding<Double> getShapeHeight();
+
+	// Convenient method to access spec for height feature
+	@Setter(HEIGHT_KEY)
+	public void setShapeHeight(DataBinding<Double> height);
+
+	@PropertyIdentifier(type = DataBinding.class)
 	public static final String CONTAINER_ELEMENT_KEY = "containerElement";
 	@PropertyIdentifier(type = boolean.class)
 	public static final String DEFINE_CONTAINER_KEY = "defineContainer";
@@ -297,6 +342,70 @@ public interface ShapeRole extends GraphicalElementRole<DiagramShape, ShapeGraph
 
 	public static abstract class ShapeRoleImpl extends GraphicalElementRoleImpl<DiagramShape, ShapeGraphicalRepresentation>
 			implements ShapeRole {
+
+		// Convenient methods giving textual FML access to the x/y/width/height graphical element
+		// specifications, exactly as GraphicalElementRole does for the label and transparency ones.
+
+		@Override
+		public DataBinding<Double> getPosX() {
+			if (getGraphicalElementSpecification(POS_X_FEATURE) != null) {
+				return getGraphicalElementSpecification(POS_X_FEATURE).getValue();
+			}
+			return null;
+		}
+
+		@Override
+		public void setPosX(DataBinding<Double> posX) {
+			if (getGraphicalElementSpecification(POS_X_FEATURE) != null) {
+				getGraphicalElementSpecification(POS_X_FEATURE).setValue(posX);
+			}
+		}
+
+		@Override
+		public DataBinding<Double> getPosY() {
+			if (getGraphicalElementSpecification(POS_Y_FEATURE) != null) {
+				return getGraphicalElementSpecification(POS_Y_FEATURE).getValue();
+			}
+			return null;
+		}
+
+		@Override
+		public void setPosY(DataBinding<Double> posY) {
+			if (getGraphicalElementSpecification(POS_Y_FEATURE) != null) {
+				getGraphicalElementSpecification(POS_Y_FEATURE).setValue(posY);
+			}
+		}
+
+		@Override
+		public DataBinding<Double> getShapeWidth() {
+			if (getGraphicalElementSpecification(WIDTH_FEATURE) != null) {
+				return getGraphicalElementSpecification(WIDTH_FEATURE).getValue();
+			}
+			return null;
+		}
+
+		@Override
+		public void setShapeWidth(DataBinding<Double> width) {
+			if (getGraphicalElementSpecification(WIDTH_FEATURE) != null) {
+				getGraphicalElementSpecification(WIDTH_FEATURE).setValue(width);
+			}
+		}
+
+		@Override
+		public DataBinding<Double> getShapeHeight() {
+			if (getGraphicalElementSpecification(HEIGHT_FEATURE) != null) {
+				return getGraphicalElementSpecification(HEIGHT_FEATURE).getValue();
+			}
+			return null;
+		}
+
+		@Override
+		public void setShapeHeight(DataBinding<Double> height) {
+			if (getGraphicalElementSpecification(HEIGHT_FEATURE) != null) {
+				getGraphicalElementSpecification(HEIGHT_FEATURE).setValue(height);
+			}
+		}
+
 
 		private static final Logger logger = Logger.getLogger(ShapeRole.class.getPackage().getName());
 
