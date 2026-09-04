@@ -176,6 +176,10 @@ public interface TypedDiagramModelSlot extends TypeAwareModelSlot<Diagram, Diagr
 	public void setDiagramSpecification(DiagramSpecification aDiagramSpecification);
 
 	@Getter(value = TEMPLATE_DIAGRAM_KEY, ignoreType = true)
+	@FMLAttribute(
+			value = TEMPLATE_DIAGRAM_KEY,
+			required = false,
+			description = "<html>diagram whose contents a newly created diagram is initialized with</html>")
 	public Diagram getTemplateDiagram();
 
 	@Setter(TEMPLATE_DIAGRAM_KEY)
@@ -190,6 +194,10 @@ public interface TypedDiagramModelSlot extends TypeAwareModelSlot<Diagram, Diagr
 
 	@Getter(value = INITIALIZE_WITH_CONTENTS_KEY, defaultValue = "false")
 	@XMLAttribute
+	@FMLAttribute(
+			value = INITIALIZE_WITH_CONTENTS_KEY,
+			required = false,
+			description = "<html>flag indicating if a newly created diagram should be initialized with the contents of the template diagram</html>")
 	public boolean initializeWithContents();
 
 	@Setter(INITIALIZE_WITH_CONTENTS_KEY)
