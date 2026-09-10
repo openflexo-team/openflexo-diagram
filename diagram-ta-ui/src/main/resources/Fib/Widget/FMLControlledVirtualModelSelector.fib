@@ -33,7 +33,7 @@
 			dataClassName="org.openflexo.foundation.resource.RepositoryFolder"
 			label="viewPointFolder.displayableName"
 			icon="controller.iconForObject(viewPointFolder)" tooltip=""
-			enabled="" visible="" isEditable="false" editableLabel=""
+			enabled="" visible="viewPointFolder.containsResources()" isEditable="false" editableLabel=""
 			filtered="false" defaultVisible="true" dynamicFont=""
 			name="viewPointFolder">
 			<Children data="viewPointFolder.children" visible="" cast=""
