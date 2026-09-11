@@ -44,11 +44,11 @@
 		<BrowserElement
 			dataClassName="org.openflexo.foundation.fml.rm.CompilationUnitResource"
 			label="viewPoint.name" icon="controller.iconForObject(viewPoint)"
-			tooltip="" enabled="viewPoint.isLoaded" visible="" isEditable="false"
+			tooltip="" enabled="" visible="" isEditable="false"
 			editableLabel="" filtered="false" defaultVisible="true"
 			dynamicFont="" name="viewPoint">
 			<Children data="viewPoint.contents"
-				visible="viewPoint.isLoaded" cast="" name="subResources" />
+				visible="" cast="" name="subResources" />
 		</BrowserElement>
 	</Browser>
 	<Panel layout="flow" hGap="5" vGap="0" flowAlignment="CENTER"
