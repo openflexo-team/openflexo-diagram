@@ -40,13 +40,19 @@ package org.openflexo.technologyadapter.diagram.fml;
 
 import org.openflexo.foundation.fml.AbstractCreationScheme;
 import org.openflexo.foundation.fml.FlexoConcept;
+import org.openflexo.foundation.fml.FMLMigration;
+import org.openflexo.foundation.fml.FlexoConceptInstanceType;
+import org.openflexo.foundation.fml.VirtualModel;
 import org.openflexo.foundation.fml.annotations.FML;
+import org.openflexo.foundation.fml.annotations.FMLAttribute;
+import org.openflexo.foundation.fml.annotations.FMLAttribute.AttributeKind;
 import org.openflexo.gina.annotation.FIBPanel;
 import org.openflexo.pamela.annotations.Getter;
 import org.openflexo.pamela.annotations.ImplementationClass;
 import org.openflexo.pamela.annotations.ModelEntity;
 import org.openflexo.pamela.annotations.PropertyIdentifier;
 import org.openflexo.pamela.annotations.Setter;
+import org.openflexo.pamela.annotations.Updater;
 import org.openflexo.pamela.annotations.XMLAttribute;
 import org.openflexo.pamela.annotations.XMLElement;
 import org.openflexo.technologyadapter.diagram.fml.binding.DrawRectangleBindingModel;
@@ -65,6 +71,10 @@ import org.openflexo.toolbox.StringUtils;
 @FML("DrawRectangleScheme")
 public interface DrawRectangleScheme extends AbstractCreationScheme, DiagramFlexoBehaviour {
 
+	@PropertyIdentifier(type = FlexoConceptInstanceType.class)
+	public static final String TARGET_TYPE_KEY = "targetType";
+	@PropertyIdentifier(type = FlexoConceptInstanceType.class)
+	public static final String CHILDREN_TYPE_KEY = "childrenType";
 	@PropertyIdentifier(type = String.class)
 	public static final String TARGET_KEY = "target";
 	@PropertyIdentifier(type = String.class)
@@ -78,22 +88,70 @@ public interface DrawRectangleScheme extends AbstractCreationScheme, DiagramFlex
 
 	public static final String TOP_TARGET_KEY = "topTarget";
 
+	/**
+	 * Type (FlexoConcept) of the instance receiving the drawn rectangle, null value means top level
+	 */
+	@Getter(value = TARGET_TYPE_KEY, ignoreType = true)
+	@FMLAttribute(value = TARGET_TYPE_KEY, kind = AttributeKind.Type, required = false)
+	public FlexoConceptInstanceType getTargetType();
+
+	@Setter(TARGET_TYPE_KEY)
+	public void setTargetType(FlexoConceptInstanceType targetType);
+
+	/**
+	 * We define an updater for TARGET_TYPE property because we need to translate supplied Type to valid TypingSpace
+	 * 
+	 * @param type
+	 */
+	@Updater(TARGET_TYPE_KEY)
+	public void updateTargetType(FlexoConceptInstanceType type);
+
+	/**
+	 * Type (FlexoConcept) of the instances the drawn rectangle encloses, and which the selection is made of
+	 */
+	@Getter(value = CHILDREN_TYPE_KEY, ignoreType = true)
+	@FMLAttribute(value = CHILDREN_TYPE_KEY, kind = AttributeKind.Type, required = false)
+	public FlexoConceptInstanceType getChildrenType();
+
+	@Setter(CHILDREN_TYPE_KEY)
+	public void setChildrenType(FlexoConceptInstanceType childrenType);
+
+	/**
+	 * We define an updater for CHILDREN_TYPE property because we need to translate supplied Type to valid TypingSpace
+	 * 
+	 * @param type
+	 */
+	@Updater(CHILDREN_TYPE_KEY)
+	public void updateChildrenType(FlexoConceptInstanceType type);
+
+	@FMLMigration
+	@Deprecated
 	@Getter(value = TARGET_KEY)
 	@XMLAttribute
 	public String _getTarget();
 
+	@FMLMigration
+	@Deprecated
 	@Setter(TARGET_KEY)
 	public void _setTarget(String target);
 
+	@FMLMigration
+	@Deprecated
 	@Getter(value = CHILDREN_KEY)
 	@XMLAttribute
 	public String _getChildren();
 
+	@FMLMigration
+	@Deprecated
 	@Setter(CHILDREN_KEY)
 	public void _setChildren(String children);
 
+	/**
+	 * Whether the objects enclosed in the drawn rectangle are offered to the behaviour as the "selection" variable
+	 */
 	@Getter(value = SELECT_OBJECTS_KEY, defaultValue = "false")
 	@XMLAttribute
+	@FMLAttribute(value = SELECT_OBJECTS_KEY, required = false)
 	public boolean getSelectObjects();
 
 	@Setter(SELECT_OBJECTS_KEY)
@@ -122,10 +180,113 @@ public interface DrawRectangleScheme extends AbstractCreationScheme, DiagramFlex
 		private String target = TOP;
 		private FlexoConcept lastKnownTargetFlexoConcept;
 		private FlexoConcept targetFlexoConcept;
+		private FlexoConceptInstanceType targetType;
 
 		private String children = null;
 		private FlexoConcept lastKnownChildrenFlexoConcept;
 		private FlexoConcept childrenFlexoConcept;
+		private FlexoConceptInstanceType childrenType;
+
+		@Override
+		public FlexoConceptInstanceType getTargetType() {
+			if (targetType != null) {
+				return targetType;
+			}
+			if (getTargetFlexoConcept() != null) {
+				return getTargetFlexoConcept().getInstanceType();
+			}
+			return getTopLevelInstanceType();
+		}
+
+		@Override
+		public void setTargetType(FlexoConceptInstanceType targetType) {
+			if ((targetType == null && this.targetType != null) || (targetType != null && !targetType.equals(this.targetType))) {
+				FlexoConceptInstanceType oldValue = this.targetType;
+				this.targetType = targetType;
+				getPropertyChangeSupport().firePropertyChange(TARGET_TYPE_KEY, oldValue, targetType);
+			}
+		}
+
+		/**
+		 * We define an updater for TARGET_TYPE property because we need to translate supplied Type to valid TypingSpace
+		 * 
+		 * This updater is called during updateWith() processing (generally applied during the FML parsing phases)
+		 * 
+		 * @param type
+		 */
+		@Override
+		public void updateTargetType(FlexoConceptInstanceType type) {
+			if (getDeclaringCompilationUnit() != null && type != null) {
+				setTargetType(type.translateTo(getDeclaringCompilationUnit().getTypingSpace()));
+			}
+			else {
+				setTargetType(type);
+			}
+		}
+
+		@Override
+		public FlexoConceptInstanceType getChildrenType() {
+			if (childrenType != null) {
+				return childrenType;
+			}
+			if (getChildrenFlexoConcept() != null) {
+				return getChildrenFlexoConcept().getInstanceType();
+			}
+			return null;
+		}
+
+		@Override
+		public void setChildrenType(FlexoConceptInstanceType childrenType) {
+			if ((childrenType == null && this.childrenType != null) || (childrenType != null && !childrenType.equals(this.childrenType))) {
+				FlexoConceptInstanceType oldValue = this.childrenType;
+				this.childrenType = childrenType;
+				getPropertyChangeSupport().firePropertyChange(CHILDREN_TYPE_KEY, oldValue, childrenType);
+				getPropertyChangeSupport().firePropertyChange(CHILDREN_FLEXO_CONCEPT_KEY, oldValue != null ? oldValue.getFlexoConcept() : null,
+						getChildrenFlexoConcept());
+			}
+		}
+
+		/**
+		 * We define an updater for CHILDREN_TYPE property because we need to translate supplied Type to valid TypingSpace
+		 * 
+		 * This updater is called during updateWith() processing (generally applied during the FML parsing phases)
+		 * 
+		 * @param type
+		 */
+		@Override
+		public void updateChildrenType(FlexoConceptInstanceType type) {
+			if (getDeclaringCompilationUnit() != null && type != null) {
+				setChildrenType(type.translateTo(getDeclaringCompilationUnit().getTypingSpace()));
+			}
+			else {
+				setChildrenType(type);
+			}
+		}
+
+		private FlexoConceptInstanceType getTopLevelInstanceType() {
+			VirtualModel rootVM = getVirtualModelWithDiagramNature();
+			if (rootVM != null) {
+				return rootVM.getInstanceType();
+			}
+			return null;
+		}
+
+		private VirtualModel getVirtualModelWithDiagramNature() {
+			if (getFlexoConcept() != null) {
+				return getVirtualModelWithDiagramNature(getFlexoConcept().getOwningVirtualModel());
+			}
+			return null;
+		}
+
+		private VirtualModel getVirtualModelWithDiagramNature(VirtualModel vm) {
+			if (vm == null) {
+				return null;
+			}
+			if (vm.hasNature(FMLControlledDiagramVirtualModelNature.INSTANCE)) {
+				return vm;
+			}
+			return getVirtualModelWithDiagramNature(vm.getContainerVirtualModel());
+		}
 
 		@Override
 		public String _getTarget() {
@@ -144,6 +305,9 @@ public interface DrawRectangleScheme extends AbstractCreationScheme, DiagramFlex
 
 		@Override
 		public FlexoConcept getTargetFlexoConcept() {
+			if (targetType != null) {
+				return targetType.getFlexoConcept();
+			}
 			if (isTopTarget()) {
 				return null;
 			}
@@ -170,6 +334,9 @@ public interface DrawRectangleScheme extends AbstractCreationScheme, DiagramFlex
 		public void setTargetFlexoConcept(FlexoConcept aTargetFlexoConcept) {
 			FlexoConcept oldTargetFlexoConcept = this.targetFlexoConcept;
 			this.targetFlexoConcept = aTargetFlexoConcept;
+			if (aTargetFlexoConcept != null) {
+				setTargetType(aTargetFlexoConcept.getInstanceType());
+			}
 			_setTarget(aTargetFlexoConcept != null ? aTargetFlexoConcept.getURI() : null);
 			getPropertyChangeSupport().firePropertyChange(TARGET_FLEXO_CONCEPT_KEY, oldTargetFlexoConcept, aTargetFlexoConcept);
 			// updateBindingModels();
@@ -220,6 +387,9 @@ public interface DrawRectangleScheme extends AbstractCreationScheme, DiagramFlex
 
 		@Override
 		public FlexoConcept getChildrenFlexoConcept() {
+			if (childrenType != null) {
+				return childrenType.getFlexoConcept();
+			}
 			if (StringUtils.isEmpty(_getChildren())) {
 				return null;
 			}
@@ -249,6 +419,9 @@ public interface DrawRectangleScheme extends AbstractCreationScheme, DiagramFlex
 			}*/
 			FlexoConcept oldChildrenFlexoConcept = this.childrenFlexoConcept;
 			this.childrenFlexoConcept = aChildrenFlexoConcept;
+			if (aChildrenFlexoConcept != null) {
+				setChildrenType(aChildrenFlexoConcept.getInstanceType());
+			}
 			_setChildren(aChildrenFlexoConcept != null ? aChildrenFlexoConcept.getURI() : null);
 			getPropertyChangeSupport().firePropertyChange(CHILDREN_FLEXO_CONCEPT_KEY, oldChildrenFlexoConcept, aChildrenFlexoConcept);
 			// updateBindingModels();

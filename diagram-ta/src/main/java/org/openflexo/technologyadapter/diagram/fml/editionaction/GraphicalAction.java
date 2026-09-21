@@ -310,8 +310,20 @@ public interface GraphicalAction extends DiagramAction<TypedDiagramModelSlot, Di
 				logger.fine("Value is " + value);
 			}
 
+			if (graphicalElement == null || graphicalElement.getGraphicalRepresentation() == null) {
+				logger.warning("No graphical element to apply " + getGraphicalFeature() + " to: action ignored");
+				return graphicalElement;
+			}
+
 			Object castedValue = null;
 			castedValue = TypeUtils.castTo(value, ((GraphicalFeature) getGraphicalFeature()).getType());
+
+			// A numeric value that could not be computed (typically read from a graphical representation that does not exist yet, as
+			// in a diagram created headlessly) leaves the feature unchanged, rather than failing the whole behaviour on unboxing
+			if (castedValue == null && TypeUtils.isNumber(((GraphicalFeature) getGraphicalFeature()).getType())) {
+				logger.warning("No value computed for " + getGraphicalFeature() + " (" + getValue() + "): action ignored");
+				return graphicalElement;
+			}
 
 			((GraphicalFeature) getGraphicalFeature()).applyToGraphicalRepresentation(graphicalElement.getGraphicalRepresentation(),
 					castedValue);

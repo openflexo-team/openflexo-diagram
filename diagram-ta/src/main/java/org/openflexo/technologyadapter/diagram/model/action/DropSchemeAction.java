@@ -174,10 +174,14 @@ public class DropSchemeAction extends DiagramFlexoBehaviourAction<DropSchemeActi
 				// System.out.println(
 				// "getParentShapeAsDefinedInAction()=" + action.getAssignedFlexoProperty().getParentShapeAsDefinedInAction());
 
-				if (action.getAssignedFlexoProperty().getParentShapeAsDefinedInAction()) {
+				if (action.getAssignedFlexoProperty() != null && action.getAssignedFlexoProperty().getParentShapeAsDefinedInAction()) {
 					primaryShape = newShape;
-					gr.setX(dropLocation.getX());
-					gr.setY(dropLocation.getY());
+					// A drop scheme called from FML or from a test has no drop location: the new shape then keeps the position its
+					// graphical representation declares, instead of being moved where the user dropped it
+					if (dropLocation != null) {
+						gr.setX(dropLocation.getX());
+						gr.setY(dropLocation.getY());
+					}
 				}
 
 			}
