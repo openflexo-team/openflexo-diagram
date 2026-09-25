@@ -203,7 +203,8 @@ public class DiagramTechnologyAdapter extends TechnologyAdapter<DiagramTechnolog
 		DiagramRepository<I> returned = resourceCenter.retrieveRepository(DiagramRepository.class, this);
 		if (returned == null) {
 			returned = DiagramRepository.instanciateNewRepository(this, resourceCenter);
-			resourceCenter.registerRepository(returned, DiagramRepository.class, this);
+			// Another thread may have registered one meanwhile: use the registered one (CORE-D-25)
+			returned = resourceCenter.registerRepository(returned, DiagramRepository.class, this);
 		}
 		return returned;
 	}
@@ -230,7 +231,8 @@ public class DiagramTechnologyAdapter extends TechnologyAdapter<DiagramTechnolog
 		DiagramSpecificationRepository<I> returned = resourceCenter.retrieveRepository(DiagramSpecificationRepository.class, this);
 		if (returned == null) {
 			returned = DiagramSpecificationRepository.instanciateNewRepository(this, resourceCenter);
-			resourceCenter.registerRepository(returned, DiagramSpecificationRepository.class, this);
+			// Another thread may have registered one meanwhile: use the registered one (CORE-D-25)
+			returned = resourceCenter.registerRepository(returned, DiagramSpecificationRepository.class, this);
 		}
 		return returned;
 	}
