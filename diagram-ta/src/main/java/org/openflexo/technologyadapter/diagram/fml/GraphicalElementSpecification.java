@@ -239,16 +239,16 @@ public interface GraphicalElementSpecification<T, GR extends GraphicalRepresenta
 
 		@Override
 		public BindingFactory getBindingFactory() {
-			if (getFlexoConcept() != null && getFlexoConcept().getInspector() != null) {
-				return getFlexoConcept().getInspector().getBindingFactory();
+			if (getFlexoConcept() != null) {
+				return getFlexoConcept().getRendererContext().getBindingFactory();
 			}
 			return null;
 		}
 
 		@Override
 		public BindingModel getBindingModel() {
-			if (getFlexoConcept() != null && getFlexoConcept().getInspector() != null) {
-				return getFlexoConcept().getInspector().getBindingModel();
+			if (getFlexoConcept() != null) {
+				return getFlexoConcept().getRendererContext().getBindingModel();
 			}
 			return null;
 		}

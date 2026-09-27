@@ -471,8 +471,8 @@ public abstract interface GraphicalElementRole<T extends DiagramElement<GR>, GR 
 
 		@Override
 		public BindingFactory getBindingFactory() {
-			if (getFlexoConcept() != null && getFlexoConcept().getInspector() != null) {
-				return getFlexoConcept().getInspector().getBindingFactory();
+			if (getFlexoConcept() != null) {
+				return getFlexoConcept().getRendererContext().getBindingFactory();
 			}
 			return null;
 		}

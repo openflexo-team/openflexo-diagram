@@ -137,7 +137,7 @@ public abstract class FlexoConceptFromDiagramElementCreationStrategy<A extends D
 		// newFlexoConcept.setPrimaryRepresentationRole(primaryRepresentationRole);
 
 		// Add inspector
-		FlexoConceptInspector inspector = newFlexoConcept.getInspector();
+		FlexoConceptInspector inspector = newFlexoConcept.getOrCreateInspector();
 		inspector.setInspectorTitle(getFlexoConceptName());
 
 		/*for (PropertyEntry e : propertyEntries) {
