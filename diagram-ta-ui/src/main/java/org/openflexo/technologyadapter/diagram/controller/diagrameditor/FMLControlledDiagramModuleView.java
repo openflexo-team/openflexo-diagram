@@ -153,6 +153,24 @@ public class FMLControlledDiagramModuleView extends JPanel implements ModuleView
 
 	}
 
+	/**
+	 * The editing context is shared by all modules: the other module must not paste through this editor. The side columns stay.
+	 */
+	@Override
+	public void moduleDeactivated() {
+		getEditor().getFlexoController().getEditingContext().unregisterPasteHandler(getEditor().getPasteHandler());
+	}
+
+	/**
+	 * The inspectors, the dialog inspectors and the scale selector of the diagram technology adapter are shared by the whole application:
+	 * a diagram editor of the other module took them meanwhile. willShow() attaches them to this editor again and puts them back.
+	 */
+	@Override
+	public void moduleActivated(FlexoController controller) {
+		willShow();
+		show(controller, controller.getCurrentPerspective());
+	}
+
 	@Override
 	public void willShow() {
 
