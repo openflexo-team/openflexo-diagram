@@ -44,6 +44,7 @@ import java.beans.PropertyChangeEvent;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Vector;
 import java.util.logging.Logger;
 
@@ -61,10 +62,13 @@ import org.openflexo.diana.Drawing.ShapeNode;
 import org.openflexo.diana.ShapeGraphicalRepresentation.LocationConstraints;
 import org.openflexo.diana.control.actions.DrawShapeAction;
 import org.openflexo.diana.geom.DianaPoint;
+import org.openflexo.diana.palettes.DianaPalettes;
+import org.openflexo.diana.palettes.DianaPalettes.PaletteDefinition;
 import org.openflexo.diana.shapes.ShapeSpecification.ShapeType;
 import org.openflexo.diana.swing.control.SwingToolFactory;
 import org.openflexo.diana.swing.control.tools.JDianaLayoutWidget;
 import org.openflexo.diana.swing.control.tools.JDianaPalette;
+import org.openflexo.diana.swing.control.tools.JDianaPaletteGroup;
 import org.openflexo.diana.swing.control.tools.JDianaStyles;
 import org.openflexo.diana.swing.control.tools.JDianaToolSelector;
 import org.openflexo.diana.swing.view.JDrawingView;
@@ -108,15 +112,21 @@ public abstract class DiagramEditor extends SelectionManagingDianaEditor<Diagram
 	private JDianaToolSelector toolSelector;
 	private JDianaLayoutWidget layoutWidget;
 	private JDianaStyles stylesWidget;
-	private JDianaPalette commonPalette;
-	private DiagramEditorPaletteModel commonPaletteModel;
+	private JDianaPaletteGroup commonPaletteGroup;
 	private Hashtable<DiagramPalette, ContextualPalette> contextualPaletteModels;
 	private Hashtable<DiagramPalette, JDianaPalette> contextualPalettes;
 
 	private final SwingToolFactory swingToolFactory;
 
-	public DiagramEditorPaletteModel makeCommonPalette() {
-		return new CommonPalette(this);
+	/**
+	 * Return the palettes shown in the common tab, as collapsible panels: the palettes shipped with DIANA
+	 */
+	public List<PaletteDefinition> getCommonPaletteDefinitions() {
+		return DianaPalettes.PALETTES;
+	}
+
+	public DiagramEditorPaletteModel makeCommonPalette(PaletteDefinition palette) {
+		return new CommonPalette(this, palette);
 	}
 
 	public ContextualPalette makeContextualPalette(DiagramPalette palette) {
@@ -148,10 +158,13 @@ public abstract class DiagramEditor extends SelectionManagingDianaEditor<Diagram
 			// toolsPanel.add(stylesWidget.getComponent());
 			toolsPanel.add(layoutWidget.getComponent());
 
-			commonPaletteModel = makeCommonPalette();
-
-			commonPalette = swingToolFactory.makeDianaPalette(commonPaletteModel);
-			commonPalette.attachToEditor(this);
+			// Several common palettes may be opened together: a palette becomes the active one when elements are dragged from it
+			commonPaletteGroup = new JDianaPaletteGroup();
+			for (PaletteDefinition palette : getCommonPaletteDefinitions()) {
+				commonPaletteGroup.addPalette(palette.getTitle(), swingToolFactory.makeDianaPalette(makeCommonPalette(palette)),
+						palette == getCommonPaletteDefinitions().get(0));
+			}
+			commonPaletteGroup.attachToEditor(this);
 
 			contextualPaletteModels = new Hashtable<>();
 			contextualPalettes = new Hashtable<>();
@@ -313,8 +326,15 @@ public abstract class DiagramEditor extends SelectionManagingDianaEditor<Diagram
 		return moduleView;
 	}*/
 
+	/**
+	 * Return the first common palette (Basic)
+	 */
 	public JDianaPalette getCommonPalette() {
-		return commonPalette;
+		return commonPaletteGroup != null && !commonPaletteGroup.getPalettes().isEmpty() ? commonPaletteGroup.getPalettes().get(0) : null;
+	}
+
+	public JDianaPaletteGroup getCommonPaletteGroup() {
+		return commonPaletteGroup;
 	}
 
 	public String getCommonPaletteTitle() {
@@ -342,7 +362,7 @@ public abstract class DiagramEditor extends SelectionManagingDianaEditor<Diagram
 		for (DiagramPalette palette : orderedPalettes) {
 			paletteView.add(palette.getName(), contextualPalettes.get(palette).getPaletteViewInScrollPane());
 		}
-		paletteView.add(getCommonPaletteTitle(), getCommonPalette().getPaletteViewInScrollPane());
+		paletteView.add(getCommonPaletteTitle(), getCommonPaletteGroup().getComponent());
 		paletteView.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
