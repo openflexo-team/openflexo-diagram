@@ -109,19 +109,40 @@ public class TestCommonPalettes extends OpenflexoTestCase {
 		SwingUtilities.invokeAndWait(() -> editor = new FreeDiagramEditor(diagramResource.getDiagram(), false, null, SwingToolFactory.DEFAULT));
 		JDianaPaletteGroup group = editor.getCommonPaletteGroup();
 		assertNotNull(group);
-		assertEquals(DianaPalettes.PALETTES.size(), group.getPalettes().size());
-		for (int i = 0; i < group.getPalettes().size(); i++) {
-			JDianaPalette palette = group.getPalettes().get(i);
-			assertEquals(DianaPalettes.PALETTES.get(i).getTitle(), palette.getPalette().getTitle());
-			assertTrue(palette.getPalette().getTitle() + " is empty", palette.getPalette().getElements().size() > 0);
-			assertEquals(palette.getPalette().getTitle() + " is not attached", editor, palette.getEditor());
-			// Basic only is opened
-			assertEquals(palette.getPalette().getTitle(), i == 0, group.isOpened(i));
+		assertEquals(DianaPalettes.PALETTES.size(), group.getPaletteCount());
+		for (int i = 0; i < group.getPaletteCount(); i++) {
+			assertEquals(DianaPalettes.PALETTES.get(i).getTitle(), group.getTitle(i));
+			// Basic only is opened, and loaded
+			assertEquals(group.getTitle(i), i == 0, group.isOpened(i));
+			assertEquals(group.getTitle(i), i == 0, group.isLoaded(i));
 		}
-		assertEquals(group.getPalettes().get(0), editor.getCommonPalette());
+		assertEquals(group.getPalette(0), editor.getCommonPalette());
+		// Opening a panel loads its palette
+		for (int i = 1; i < group.getPaletteCount(); i++) {
+			open(i);
+		}
+		for (int i = 0; i < group.getPaletteCount(); i++) {
+			JDianaPalette palette = group.getPalette(i);
+			assertEquals(group.getTitle(i), palette.getPalette().getTitle());
+			assertTrue(group.getTitle(i) + " is empty", palette.getPalette().getElements().size() > 0);
+			assertEquals(group.getTitle(i) + " is not attached", editor, palette.getEditor());
+		}
 		int commonTab = editor.getPaletteView().indexOfTab(editor.getCommonPaletteTitle());
 		assertTrue(commonTab >= 0);
 		assertEquals(group.getComponent(), editor.getPaletteView().getComponentAt(commonTab));
+	}
+
+	/**
+	 * Open the panel of the palette at supplied index, and wait for the palette to be loaded (at the end of the expansion)
+	 */
+	private static void open(int index) throws Exception {
+		JDianaPaletteGroup group = editor.getCommonPaletteGroup();
+		SwingUtilities.invokeAndWait(() -> group.setOpened(index, true));
+		long end = System.currentTimeMillis() + 10000;
+		while (!group.isLoaded(index) && System.currentTimeMillis() < end) {
+			Thread.sleep(50);
+		}
+		assertTrue(group.getTitle(index) + " not loaded once opened", group.isLoaded(index));
 	}
 
 	private static PaletteElement emoji(String name) {

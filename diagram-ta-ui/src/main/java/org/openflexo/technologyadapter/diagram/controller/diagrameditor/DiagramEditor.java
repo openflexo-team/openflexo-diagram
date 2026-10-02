@@ -158,10 +158,11 @@ public abstract class DiagramEditor extends SelectionManagingDianaEditor<Diagram
 			// toolsPanel.add(stylesWidget.getComponent());
 			toolsPanel.add(layoutWidget.getComponent());
 
-			// Several common palettes may be opened together: a palette becomes the active one when elements are dragged from it
+			// Several common palettes may be opened together: a palette becomes the active one when elements are dragged from it.
+			// The first one is opened (and loaded) first, the other ones are loaded the first time their panel is opened
 			commonPaletteGroup = new JDianaPaletteGroup();
 			for (PaletteDefinition palette : getCommonPaletteDefinitions()) {
-				commonPaletteGroup.addPalette(palette.getTitle(), swingToolFactory.makeDianaPalette(makeCommonPalette(palette)),
+				commonPaletteGroup.addPalette(palette.getTitle(), () -> swingToolFactory.makeDianaPalette(makeCommonPalette(palette)),
 						palette == getCommonPaletteDefinitions().get(0));
 			}
 			commonPaletteGroup.attachToEditor(this);
@@ -330,7 +331,7 @@ public abstract class DiagramEditor extends SelectionManagingDianaEditor<Diagram
 	 * Return the first common palette (Basic)
 	 */
 	public JDianaPalette getCommonPalette() {
-		return commonPaletteGroup != null && !commonPaletteGroup.getPalettes().isEmpty() ? commonPaletteGroup.getPalettes().get(0) : null;
+		return commonPaletteGroup != null && commonPaletteGroup.getPaletteCount() > 0 ? commonPaletteGroup.getPalette(0) : null;
 	}
 
 	public JDianaPaletteGroup getCommonPaletteGroup() {
