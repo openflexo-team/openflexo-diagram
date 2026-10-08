@@ -41,6 +41,7 @@ package org.openflexo.technologyadapter.diagram.controller.action;
 import java.util.logging.Logger;
 
 import javax.swing.Icon;
+import javax.swing.SwingUtilities;
 
 import org.openflexo.components.wizard.WizardDialog;
 import org.openflexo.diana.Drawing.ShapeNode;
@@ -52,6 +53,9 @@ import org.openflexo.foundation.action.NotImplementedException;
 import org.openflexo.foundation.fml.rt.FMLRTVirtualModelInstance;
 import org.openflexo.foundation.fml.rt.VirtualModelInstanceObject;
 import org.openflexo.gina.controller.FIBController.Status;
+import org.openflexo.foundation.fml.rt.FlexoConceptInstance;
+import org.openflexo.foundation.fml.rt.VirtualModelInstance.ObjectLookupResult;
+import org.openflexo.technologyadapter.diagram.controller.diagrameditor.FMLControlledDiagramShape;
 import org.openflexo.technologyadapter.diagram.controller.diagrameditor.FreeDiagramModuleView;
 import org.openflexo.technologyadapter.diagram.gui.DiagramIconLibrary;
 import org.openflexo.technologyadapter.diagram.model.DiagramShape;
@@ -111,6 +115,11 @@ public class DropSchemeActionInitializer
 					logger.info("ShapeSpecification has been relocated");
 				}*/
 
+			// Whatever the way the drop was triggered (contextual palette, floating palette, drag from a browser), the new object gets selected
+			if (selectDroppedInstance(action)) {
+				return true;
+			}
+
 			getController().getSelectionManager().setSelectedObject(action.getPrimaryShape());
 			if (action.getPrimaryShape() != null) {
 				ModuleView<?> moduleView = getController().moduleViewForObject(action.getPrimaryShape().getDiagram(), false);
@@ -132,6 +141,37 @@ public class DropSchemeActionInitializer
 
 			return true;
 		};
+	}
+
+	/**
+	 * In a FML-controlled diagram, what a drop creates is an instance of a concept, represented by a shape, and it is that instance that has
+	 * to be selected: the drawable of the shape in the drawing is the {@link FMLControlledDiagramShape} federating it, not the raw
+	 * {@link DiagramShape} the action knows about, so selecting the shape selects nothing (and the inspector keeps showing the previous
+	 * object). The selection manager translates an instance into the diagram element representing it.
+	 *
+	 * <p>
+	 * The instance is found the way the drawing finds it, by asking the diagram's {@link FMLRTVirtualModelInstance} which instance holds the
+	 * new shape as the value of one of its shape roles: no module view and no editor are needed, so this works whatever the way the drop was
+	 * triggered, and wherever the diagram is shown (in the Formose module, the view of a diagram is not stored under the diagram itself).
+	 *
+	 * <p>
+	 * The selection is deferred: the drawing discovers that the new shape is FML-controlled only once the drop has been completed by the
+	 * caller (the parent container is notified after the action has run), and the diagram element representing the instance does not exist
+	 * before.
+	 *
+	 * @return whether the new shape is held by an instance, in which case the selection has been taken care of
+	 */
+	private boolean selectDroppedInstance(DropSchemeAction action) {
+		if (action.getPrimaryShape() == null || action.getFocusedObject() == null) {
+			return false;
+		}
+		ObjectLookupResult lookup = action.getFocusedObject().lookup(action.getPrimaryShape());
+		if (lookup == null || lookup.flexoConceptInstance == null) {
+			return false;
+		}
+		FlexoConceptInstance droppedInstance = lookup.flexoConceptInstance;
+		SwingUtilities.invokeLater(() -> getController().getSelectionManager().setSelectedObject(droppedInstance));
+		return true;
 	}
 
 	@Override
