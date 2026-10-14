@@ -42,7 +42,6 @@ import org.openflexo.foundation.fml.AbstractCreationScheme;
 import org.openflexo.foundation.fml.FlexoConcept;
 import org.openflexo.foundation.fml.FMLMigration;
 import org.openflexo.foundation.fml.FlexoConceptInstanceType;
-import org.openflexo.foundation.fml.VirtualModel;
 import org.openflexo.foundation.fml.annotations.FML;
 import org.openflexo.foundation.fml.annotations.FMLAttribute;
 import org.openflexo.foundation.fml.annotations.FMLAttribute.AttributeKind;
@@ -187,6 +186,11 @@ public interface DrawRectangleScheme extends AbstractCreationScheme, DiagramFlex
 		private FlexoConcept childrenFlexoConcept;
 		private FlexoConceptInstanceType childrenType;
 
+		/**
+		 * Return the type declared for the target, or null for a scheme drawing at top level.<br>
+		 * That value is the one the FML attribute shows: computing the top level type here made a scheme written without
+		 * <code>targetType</code> look as if it had declared one, which the pretty-print had no node for (and wrote on save).
+		 */
 		@Override
 		public FlexoConceptInstanceType getTargetType() {
 			if (targetType != null) {
@@ -195,7 +199,7 @@ public interface DrawRectangleScheme extends AbstractCreationScheme, DiagramFlex
 			if (getTargetFlexoConcept() != null) {
 				return getTargetFlexoConcept().getInstanceType();
 			}
-			return getTopLevelInstanceType();
+			return null;
 		}
 
 		@Override
@@ -261,31 +265,6 @@ public interface DrawRectangleScheme extends AbstractCreationScheme, DiagramFlex
 			else {
 				setChildrenType(type);
 			}
-		}
-
-		private FlexoConceptInstanceType getTopLevelInstanceType() {
-			VirtualModel rootVM = getVirtualModelWithDiagramNature();
-			if (rootVM != null) {
-				return rootVM.getInstanceType();
-			}
-			return null;
-		}
-
-		private VirtualModel getVirtualModelWithDiagramNature() {
-			if (getFlexoConcept() != null) {
-				return getVirtualModelWithDiagramNature(getFlexoConcept().getOwningVirtualModel());
-			}
-			return null;
-		}
-
-		private VirtualModel getVirtualModelWithDiagramNature(VirtualModel vm) {
-			if (vm == null) {
-				return null;
-			}
-			if (vm.hasNature(FMLControlledDiagramVirtualModelNature.INSTANCE)) {
-				return vm;
-			}
-			return getVirtualModelWithDiagramNature(vm.getContainerVirtualModel());
 		}
 
 		@Override
