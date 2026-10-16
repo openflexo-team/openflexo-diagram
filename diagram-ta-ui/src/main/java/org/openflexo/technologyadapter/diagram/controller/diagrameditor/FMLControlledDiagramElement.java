@@ -280,6 +280,7 @@ public interface FMLControlledDiagramElement<E extends DiagramElement<GR>, GR ex
 		// TODO: do it generically for all GRSpecs
 		@Override
 		public String getLabel() {
+			ensureRoleMatchesConcept();
 			if (getRole() != null && getRole().getLabel() != null) {
 
 				try {
@@ -318,21 +319,28 @@ public interface FMLControlledDiagramElement<E extends DiagramElement<GR>, GR ex
 			return null;
 		}
 
-		// TODO: to it generically for all GRSpecs
-		@Override
-		public void setLabel(String aLabel) {
-
-			// We handle here a special use case encountered in FME
-			// When a FlexoConceptInstance changes its type (its FlexoConcept)
-			// The role that was registered is not good anymore
-			// What we do here is checking that it's the "good" role
-			if (getRole().getFlexoConcept() != getFlexoConceptInstance().getFlexoConcept()) {
+		/**
+		 * We handle here a special use case encountered in FME: when a FlexoConceptInstance changes its type (its FlexoConcept), the role
+		 * that was registered is not good anymore. What we do here is checking that it's the "good" role, and retrieve it otherwise.<br>
+		 * Needed to read the label as well: evaluated with the role of the former concept, it reads what the instance does not have any
+		 * more, and the shape loses its text.
+		 */
+		private void ensureRoleMatchesConcept() {
+			if (getRole() != null && getFlexoConceptInstance() != null && getDrawing() != null
+					&& getRole().getFlexoConcept() != getFlexoConceptInstance().getFlexoConcept()) {
 				ObjectLookupResult r = getDrawing().getObjectLookupResult(getDiagramElement());
 				if (r != null) {
 					GraphicalElementRole<E, GR> newRole = (GraphicalElementRole<E, GR>) r.property;
 					setRole(newRole);
 				}
 			}
+		}
+
+		// TODO: to it generically for all GRSpecs
+		@Override
+		public void setLabel(String aLabel) {
+
+			ensureRoleMatchesConcept();
 
 			if (getRole().getLabel() != null) {
 				try {

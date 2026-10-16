@@ -364,6 +364,15 @@ public interface FMLDiagramPaletteElementBinding extends FlexoConceptObject {
 				boundFlexoConcept = getOwningVirtualModel().getFlexoConcept(_boundFlexoConceptId);
 				updateParameters();
 			}
+			if (boundFlexoConcept == null) {
+				// A binding read from FML - call=new TutuGR::drop() - is not given its drop scheme: getDropScheme() reads it from the
+				// call, without ever storing it in the dropScheme field. The call is the reference (as in getDropScheme()), and asked
+				// directly: getDropScheme() itself asks for the bound concept in its fallbacks.
+				CreationSchemePathElement dropSchemePathElement = getDropSchemePathElement();
+				if (dropSchemePathElement != null && dropSchemePathElement.getCreationScheme() != null) {
+					return dropSchemePathElement.getCreationScheme().getFlexoConcept();
+				}
+			}
 			if (boundFlexoConcept == null && dropScheme != null) {
 				boundFlexoConcept = dropScheme.getFlexoConcept();
 			}

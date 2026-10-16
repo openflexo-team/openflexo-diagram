@@ -471,8 +471,8 @@ public abstract interface GraphicalElementRole<T extends DiagramElement<GR>, GR 
 
 		@Override
 		public BindingFactory getBindingFactory() {
-			if (getFlexoConcept() != null && getFlexoConcept().getInspector() != null) {
-				return getFlexoConcept().getInspector().getBindingFactory();
+			if (getFlexoConcept() != null) {
+				return getFlexoConcept().getRendererContext().getBindingFactory();
 			}
 			return null;
 		}
@@ -614,7 +614,7 @@ public abstract interface GraphicalElementRole<T extends DiagramElement<GR>, GR 
 
 		@Override
 		public ModelObjectActorReference<T> makeActorReference(T object, FlexoConceptInstance fci) {
-			AbstractVirtualModelInstanceModelFactory<?> factory = fci.getFactory();
+			AbstractVirtualModelInstanceModelFactory factory = fci.getFactory();
 			ModelObjectActorReference<T> returned = factory.newInstance(ModelObjectActorReference.class);
 			returned.setFlexoRole(this);
 			returned.setFlexoConceptInstance(fci);

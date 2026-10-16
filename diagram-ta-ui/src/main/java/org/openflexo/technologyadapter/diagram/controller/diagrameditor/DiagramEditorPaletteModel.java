@@ -40,6 +40,7 @@ package org.openflexo.technologyadapter.diagram.controller.diagrameditor;
 
 import java.util.logging.Logger;
 
+import org.openflexo.diana.DianaUtils;
 import org.openflexo.diana.Drawing.ContainerNode;
 import org.openflexo.diana.Drawing.DrawingTreeNode;
 import org.openflexo.diana.ShapeGraphicalRepresentation;
@@ -47,7 +48,6 @@ import org.openflexo.diana.ShapeGraphicalRepresentation.LocationConstraints;
 import org.openflexo.diana.control.DianaInteractiveEditor.EditorTool;
 import org.openflexo.diana.control.PaletteModel;
 import org.openflexo.diana.geom.DianaPoint;
-import org.openflexo.diana.shapes.ShapeSpecification.ShapeType;
 import org.openflexo.foundation.action.FlexoUndoManager.FlexoActionCompoundEdit;
 import org.openflexo.gina.model.FIBComponent;
 import org.openflexo.gina.swing.utils.JFIBDialog;
@@ -143,15 +143,8 @@ public abstract class DiagramEditorPaletteModel extends PaletteModel {
 		shapeGR.setLocationConstraints(LocationConstraints.FREELY_MOVABLE);
 
 		if (resize) {
-			if (shapeGR.getShapeSpecification().getShapeType() == ShapeType.SQUARE
-					|| shapeGR.getShapeSpecification().getShapeType() == ShapeType.CIRCLE) {
-				shapeGR.setWidth(40);
-				shapeGR.setHeight(40);
-			}
-			else {
-				shapeGR.setWidth(50);
-				shapeGR.setHeight(40);
-			}
+			// Keep the aspect ratio of the palette element, and its floating label centered
+			DianaUtils.fitInBox(shapeGR, 50, 40);
 		}
 		if (applyCurrentForeground) {
 			shapeGR.setForeground(getEditor().getInspectedForegroundStyle().cloneStyle());

@@ -51,6 +51,7 @@ import org.openflexo.connie.exception.NullReferenceException;
 import org.openflexo.connie.exception.TypeMismatchException;
 import org.openflexo.connie.type.TypeUtils;
 import org.openflexo.foundation.fml.annotations.FML;
+import org.openflexo.foundation.fml.annotations.FMLAttribute;
 import org.openflexo.foundation.fml.rt.RunTimeEvaluationContext;
 import org.openflexo.foundation.fml.rt.action.FlexoBehaviourAction;
 import org.openflexo.foundation.fml.validation.BindingIsRequiredAndMustBeValid;
@@ -92,6 +93,7 @@ public interface GraphicalAction extends DiagramAction<TypedDiagramModelSlot, Di
 
 	@Getter(value = SUBJECT_KEY)
 	@XMLAttribute
+	@FMLAttribute(value = SUBJECT_KEY, required = true, description = "<html>the diagram element whose graphical feature is set</html>")
 	public DataBinding<DiagramElement<?>> getSubject();
 
 	@Setter(SUBJECT_KEY)
@@ -99,6 +101,7 @@ public interface GraphicalAction extends DiagramAction<TypedDiagramModelSlot, Di
 
 	@Getter(value = VALUE_KEY)
 	@XMLAttribute
+	@FMLAttribute(value = VALUE_KEY, required = true, description = "<html>value to be set for that graphical feature</html>")
 	public DataBinding<Object> getValue();
 
 	@Setter(VALUE_KEY)
@@ -106,6 +109,7 @@ public interface GraphicalAction extends DiagramAction<TypedDiagramModelSlot, Di
 
 	@Getter(value = GRAPHICAL_FEATURE_NAME_KEY)
 	@XMLAttribute(xmlTag = "feature")
+	@FMLAttribute(value = GRAPHICAL_FEATURE_NAME_KEY, required = true, description = "<html>name of the graphical feature to set (eg 'label')</html>")
 	public String _getGraphicalFeatureName();
 
 	@Setter(GRAPHICAL_FEATURE_NAME_KEY)
@@ -306,8 +310,20 @@ public interface GraphicalAction extends DiagramAction<TypedDiagramModelSlot, Di
 				logger.fine("Value is " + value);
 			}
 
+			if (graphicalElement == null || graphicalElement.getGraphicalRepresentation() == null) {
+				logger.warning("No graphical element to apply " + getGraphicalFeature() + " to: action ignored");
+				return graphicalElement;
+			}
+
 			Object castedValue = null;
 			castedValue = TypeUtils.castTo(value, ((GraphicalFeature) getGraphicalFeature()).getType());
+
+			// A numeric value that could not be computed (typically read from a graphical representation that does not exist yet, as
+			// in a diagram created headlessly) leaves the feature unchanged, rather than failing the whole behaviour on unboxing
+			if (castedValue == null && TypeUtils.isNumber(((GraphicalFeature) getGraphicalFeature()).getType())) {
+				logger.warning("No value computed for " + getGraphicalFeature() + " (" + getValue() + "): action ignored");
+				return graphicalElement;
+			}
 
 			((GraphicalFeature) getGraphicalFeature()).applyToGraphicalRepresentation(graphicalElement.getGraphicalRepresentation(),
 					castedValue);

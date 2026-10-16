@@ -238,15 +238,18 @@ public class ContextualPalette extends DiagramEditorPaletteModel implements Prop
 
 				DropScheme ds = fmlDiagramPaletteElementBinding.getDropScheme();
 
-				if (target.getDrawable() instanceof Diagram) {
-					if (ds.isTopTarget()) {
-						applicableBindings.add(fmlDiagramPaletteElementBinding);
+				if (ds != null) {
+					if (target.getDrawable() instanceof Diagram) {
+						if (ds.isTopTarget()) {
+							applicableBindings.add(fmlDiagramPaletteElementBinding);
+						}
 					}
-				}
-				else if (target.getDrawable() instanceof FMLControlledDiagramShape) {
-					FMLControlledDiagramShape fmlControlledShape = (FMLControlledDiagramShape) target.getDrawable();
-					if (ds.isValidTarget(fmlControlledShape.getFlexoConceptInstance().getFlexoConcept(), fmlControlledShape.getRole())) {
-						applicableBindings.add(fmlDiagramPaletteElementBinding);
+					else if (target.getDrawable() instanceof FMLControlledDiagramShape) {
+						FMLControlledDiagramShape fmlControlledShape = (FMLControlledDiagramShape) target.getDrawable();
+						if (ds.isValidTarget(fmlControlledShape.getFlexoConceptInstance().getFlexoConcept(),
+								fmlControlledShape.getRole())) {
+							applicableBindings.add(fmlDiagramPaletteElementBinding);
+						}
 					}
 				}
 			}
@@ -309,7 +312,7 @@ public class ContextualPalette extends DiagramEditorPaletteModel implements Prop
 						return null;
 					}));*/
 
-			//System.out.println("Hop, on execute le DropScheme pour VMI=" + editor.getVirtualModelInstance());
+			// System.out.println("Hop, on execute le DropScheme pour VMI=" + editor.getVirtualModelInstance());
 
 			DropSchemeAction action = new DropSchemeAction(applicableBindings.get(0).getDropScheme(), editor.getVirtualModelInstance(),
 					null, editor.getFlexoController().getEditor());

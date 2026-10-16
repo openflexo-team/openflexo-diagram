@@ -4,6 +4,7 @@ use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot as DIAGRAM;
 
 import org.openflexo.technologyadapter.diagram.model.DiagramShape;
 import org.openflexo.technologyadapter.diagram.model.Diagram;
+import org.openflexo.technologyadapter.diagram.model.DiagramConnector;
 import org.openflexo.technologyadapter.diagram.metamodel.DiagramSpecification;
 
 import DiagramSpecification DIAGRAM_SPECIFICATION from [DIAGRAM_SPECIFICATION_NS];

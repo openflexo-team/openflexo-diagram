@@ -45,6 +45,8 @@ import org.openflexo.diana.PaletteElementSpecification;
 import org.openflexo.diana.ShapeGraphicalRepresentation;
 import org.openflexo.diana.control.PaletteElement;
 import org.openflexo.diana.geom.DianaPoint;
+import org.openflexo.diana.palettes.DianaPalettes;
+import org.openflexo.diana.palettes.DianaPalettes.PaletteDefinition;
 import org.openflexo.logging.FlexoLogger;
 import org.openflexo.pamela.converter.RelativePathResourceConverter;
 import org.openflexo.rm.ResourceLocator;
@@ -55,10 +57,18 @@ public class CommonPalette extends DiagramEditorPaletteModel {
 	private static final Logger logger = FlexoLogger.getLogger(CommonPalette.class.getPackage().getName());
 
 	public CommonPalette(DiagramEditor editor) {
-		super(editor, "default", 210, 210, 40, 30, 10, 10);
+		this(editor, DianaPalettes.BASIC);
+	}
+
+	/**
+	 * Build the palette whose elements are the .pel files of supplied palette definition
+	 */
+	public CommonPalette(DiagramEditor editor, PaletteDefinition palette) {
+		super(editor, palette.getTitle(), 210, 210, 40, 30, 10, 10);
+		// Image files of palette elements are relative to the resources directory
 		FACTORY.addConverter(
-				new RelativePathResourceConverter(ResourceLocator.locateResource("Palettes/Basic").getContainer().getContainer()));
-		readFromDirectory(ResourceLocator.locateResource("Palettes/Basic"));
+				new RelativePathResourceConverter(ResourceLocator.locateResource(palette.getPath()).getContainer().getContainer()));
+		readFromDirectory(ResourceLocator.locateResource(palette.getPath()));
 	}
 
 	@Override

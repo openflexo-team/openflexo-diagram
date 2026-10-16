@@ -135,18 +135,18 @@ public class TestFMLDiagramPrettyPrint3 extends FMLParserTestCase {
 
 		TypedDiagramModelSlotImpl modelSlot = (TypedDiagramModelSlotImpl) virtualModel.getModelSlots().get(0);
 		assertNotNull(modelSlot);
-		ModelSlotPropertyNode msNode = checkNodeForObject("(12:8)-(21:19)", "(12:8)-(12:8)", "(21:19)-(22:0)", null, modelSlot);
+		ModelSlotPropertyNode msNode = checkNodeForObject("(17:8)-(26:19)", "(17:8)-(17:8)", "(26:19)-(27:0)", null, modelSlot);
 
 		FMLSimplePropertyValue dsPropertyValue = (FMLSimplePropertyValue) modelSlot.getFMLPropertyValues(modelSlot.getFMLModelFactory())
 				.get(0);
 		assertNotNull(dsPropertyValue);
-		FMLSimplePropertyValueNode dsPropertyValueNode = checkNodeForObject("(13:16)-(13:58)", null, "(13:58)-(13:59)", null,
+		FMLSimplePropertyValueNode dsPropertyValueNode = checkNodeForObject("(18:16)-(18:58)", null, "(18:58)-(18:59)", null,
 				dsPropertyValue);
 
 		FMLInstancesListPropertyValue bindingsPropertyValue = (FMLInstancesListPropertyValue) modelSlot
 				.getFMLPropertyValues(modelSlot.getFMLModelFactory()).get(1);
 		assertNotNull(bindingsPropertyValue);
-		FMLInstancesListPropertyValueNode bindingsPropertyValueNode = checkNodeForObject("(14:16)-(21:17)", null, null, null,
+		FMLInstancesListPropertyValueNode bindingsPropertyValueNode = checkNodeForObject("(19:16)-(26:17)", null, null, null,
 				bindingsPropertyValue);
 
 		assertEquals(2, bindingsPropertyValue.getInstances().size());
