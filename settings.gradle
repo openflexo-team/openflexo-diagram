@@ -1,5 +1,4 @@
 include 'diagram-ta',
-    'diagram-ta-test',
     'diagram-ta-test-rc',
     'diagram-ta-ui',
     'fml-diagramming-extension'
