@@ -7,7 +7,8 @@ dependencies {
   api diana()
 
   // external dep
-  implementation group: 'org.apache.poi', name: 'poi-scratchpad', version: '3.12'
+  implementation poi()
+  implementation poiScratchpad()
 
   // testing dep (for the tests only: as 'implementation' it was shipped to every application using this module)
   testImplementation flexoFoundationTest()

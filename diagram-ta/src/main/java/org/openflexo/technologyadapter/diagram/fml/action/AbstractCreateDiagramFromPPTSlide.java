@@ -60,23 +60,22 @@ import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
 
-import org.apache.poi.ddf.EscherProperties;
-import org.apache.poi.hslf.model.AutoShape;
-import org.apache.poi.hslf.model.Line;
-import org.apache.poi.hslf.model.MasterSheet;
-import org.apache.poi.hslf.model.Picture;
-import org.apache.poi.hslf.model.Shape;
-import org.apache.poi.hslf.model.ShapeGroup;
-import org.apache.poi.hslf.model.ShapeTypes;
-import org.apache.poi.hslf.model.SimpleShape;
-import org.apache.poi.hslf.model.Slide;
-import org.apache.poi.hslf.model.Table;
-import org.apache.poi.hslf.model.TableCell;
-import org.apache.poi.hslf.model.TextBox;
-import org.apache.poi.hslf.model.TextRun;
-import org.apache.poi.hslf.model.TextShape;
-import org.apache.poi.hslf.usermodel.RichTextRun;
-import org.apache.poi.hslf.usermodel.SlideShow;
+import org.apache.poi.ddf.EscherPropertyTypes;
+import org.apache.poi.hslf.usermodel.HSLFAutoShape;
+import org.apache.poi.hslf.usermodel.HSLFLine;
+import org.apache.poi.hslf.usermodel.HSLFMasterSheet;
+import org.apache.poi.hslf.usermodel.HSLFPictureShape;
+import org.apache.poi.hslf.usermodel.HSLFShape;
+import org.apache.poi.hslf.usermodel.HSLFGroupShape;
+import org.apache.poi.hslf.usermodel.HSLFSimpleShape;
+import org.apache.poi.hslf.usermodel.HSLFSlide;
+import org.apache.poi.hslf.usermodel.HSLFTable;
+import org.apache.poi.hslf.usermodel.HSLFTableCell;
+import org.apache.poi.hslf.usermodel.HSLFTextBox;
+import org.apache.poi.hslf.usermodel.HSLFTextParagraph;
+import org.apache.poi.hslf.usermodel.HSLFTextShape;
+import org.apache.poi.hslf.usermodel.HSLFTextRun;
+import org.apache.poi.hslf.usermodel.HSLFSlideShow;
 import org.apache.poi.sl.usermodel.Background;
 import org.openflexo.diana.BackgroundImageBackgroundStyle;
 import org.openflexo.diana.ConnectorGraphicalRepresentation;
@@ -128,10 +127,10 @@ public abstract class AbstractCreateDiagramFromPPTSlide<A extends AbstractCreate
 	// private File diagramFile;
 	private Diagram diagram;
 
-	private SlideShow selectedSlideShow;
-	private ArrayList<Slide> currentSlides;
+	private HSLFSlideShow selectedSlideShow;
+	private ArrayList<HSLFSlide> currentSlides;
 	private File file;
-	private Slide slide;
+	private HSLFSlide slide;
 
 	protected AbstractCreateDiagramFromPPTSlide(FlexoActionFactory actionType, T focusedObject, Vector<FMLObject> globalSelection,
 			FlexoEditor editor) {
@@ -193,11 +192,11 @@ public abstract class AbstractCreateDiagramFromPPTSlide<A extends AbstractCreate
 
 	}
 
-	public List<Shape> getPoiShapes() {
+	public List<HSLFShape> getPoiShapes() {
 		return poiShapes;
 	}
 
-	public void setPoiShapes(List<Shape> poiShapes) {
+	public void setPoiShapes(List<HSLFShape> poiShapes) {
 		this.poiShapes = poiShapes;
 	}
 
@@ -355,14 +354,14 @@ public abstract class AbstractCreateDiagramFromPPTSlide<A extends AbstractCreate
 
 	public void loadSlideShow() {
 		try (FileInputStream fis = new FileInputStream(getFile())) {
-			selectedSlideShow = new SlideShow(fis);
+			selectedSlideShow = new HSLFSlideShow(fis);
 			if (currentSlides == null) {
 				currentSlides = new ArrayList<>();
 			}
 			else {
 				currentSlides.clear();
 			}
-			for (Slide slide : selectedSlideShow.getSlides()) {
+			for (HSLFSlide slide : selectedSlideShow.getSlides()) {
 				currentSlides.add(slide);
 			}
 			setCurrentSlides(currentSlides);
@@ -390,11 +389,11 @@ public abstract class AbstractCreateDiagramFromPPTSlide<A extends AbstractCreate
 		getPropertyChangeSupport().firePropertyChange("valid", null, isValid());
 	}
 
-	public Slide getSlide() {
+	public HSLFSlide getSlide() {
 		return slide;
 	}
 
-	public void setSlide(Slide slide) {
+	public void setSlide(HSLFSlide slide) {
 		this.slide = slide;
 		// Unused boolean wasValid = isValid();
 		getPropertyChangeSupport().firePropertyChange("slide", null, getSlide());
@@ -402,31 +401,31 @@ public abstract class AbstractCreateDiagramFromPPTSlide<A extends AbstractCreate
 		getPropertyChangeSupport().firePropertyChange("errorMessage", null, getErrorMessage());
 	}
 
-	public SlideShow getSelectedSlideShow() {
+	public HSLFSlideShow getSelectedSlideShow() {
 		return selectedSlideShow;
 	}
 
-	public void setSelectedSlideShow(SlideShow selectedSlideShow) {
+	public void setSelectedSlideShow(HSLFSlideShow selectedSlideShow) {
 		this.selectedSlideShow = selectedSlideShow;
 	}
 
-	public ArrayList<Slide> getCurrentSlides() {
+	public ArrayList<HSLFSlide> getCurrentSlides() {
 		return currentSlides;
 	}
 
-	public void setCurrentSlides(ArrayList<Slide> currentSlides) {
+	public void setCurrentSlides(ArrayList<HSLFSlide> currentSlides) {
 		this.currentSlides = currentSlides;
 	}
 
-	public ImageIcon getMiniature(Slide s) {
+	public ImageIcon getMiniature(HSLFSlide s) {
 		return getScreenShot(s, 75);
 	}
 
-	public ImageIcon getOverview(Slide s) {
+	public ImageIcon getOverview(HSLFSlide s) {
 		return getScreenShot(s, 400);
 	}
 
-	public ImageIcon getScreenShot(Slide s, double size) {
+	public ImageIcon getScreenShot(HSLFSlide s, double size) {
 		if (s != null && s.getSlideShow() != null) {
 			try {
 				Dimension d = s.getSlideShow().getPageSize();
@@ -470,36 +469,36 @@ public abstract class AbstractCreateDiagramFromPPTSlide<A extends AbstractCreate
 		return null;
 	}
 
-	private HashMap<DiagramShape, Shape> shapesMap;
-	private HashMap<DiagramConnector, Shape> connectorsMap;
-	private List<Shape> poiShapes;
+	private HashMap<DiagramShape, HSLFShape> shapesMap;
+	private HashMap<DiagramConnector, HSLFShape> connectorsMap;
+	private List<HSLFShape> poiShapes;
 
 	// This cannot be determinated safely
 	private final boolean computeOrderOfShape = true;
 	// This cannot be determinated safely
 	private final boolean computeStartEndShapesOfConnectors = true;
 
-	public HashMap<DiagramShape, Shape> getDiagramShapesMap() {
+	public HashMap<DiagramShape, HSLFShape> getDiagramShapesMap() {
 		return shapesMap;
 	}
 
-	public void setDiagramShapesMap(HashMap<DiagramShape, Shape> shapesMap) {
+	public void setDiagramShapesMap(HashMap<DiagramShape, HSLFShape> shapesMap) {
 		this.shapesMap = shapesMap;
 	}
 
-	public HashMap<DiagramConnector, Shape> getDiagramConnectorsMap() {
+	public HashMap<DiagramConnector, HSLFShape> getDiagramConnectorsMap() {
 		return connectorsMap;
 	}
 
-	public void setDiagramConnectorsMap(HashMap<DiagramConnector, Shape> connectorsMap) {
+	public void setDiagramConnectorsMap(HashMap<DiagramConnector, HSLFShape> connectorsMap) {
 		this.connectorsMap = connectorsMap;
 	}
 
 	/*
 	 * Transfo PPT to Diagram
 	 */
-	public void convertSlideToDiagram(Slide slide) {
-		MasterSheet master = slide.getMasterSheet();
+	public void convertSlideToDiagram(HSLFSlide slide) {
+		HSLFMasterSheet master = slide.getMasterSheet();
 		shapesMap = new LinkedHashMap<>();
 		connectorsMap = new LinkedHashMap<>();
 		poiShapes = new ArrayList<>();
@@ -507,21 +506,21 @@ public abstract class AbstractCreateDiagramFromPPTSlide<A extends AbstractCreate
 		// Retrieve all transformable elements
 		if (slide.getFollowMasterObjects()) {
 			if (master.getShapes() != null) {
-				Shape[] sh = master.getShapes();
-				for (int i = sh.length - 1; i >= 0; i--) {
-					if (MasterSheet.isPlaceholder(sh[i])) {
+				List<HSLFShape> sh = master.getShapes();
+				for (int i = sh.size() - 1; i >= 0; i--) {
+					if (sh.get(i).isPlaceholder()) {
 						continue;
 					}
-					poiShapes.add(sh[i]);
+					poiShapes.add(sh.get(i));
 				}
 			}
 		}
-		for (Shape shape : slide.getShapes()) {
+		for (HSLFShape shape : slide.getShapes()) {
 			poiShapes.add(shape);
 		}
 
 		// Transform POI shapes into Flexo Shapes
-		for (Shape shape : poiShapes) {
+		for (HSLFShape shape : poiShapes) {
 			transformPPTShapeInDiagramElement(getDiagram(), shape);
 		}
 
@@ -531,7 +530,7 @@ public abstract class AbstractCreateDiagramFromPPTSlide<A extends AbstractCreate
 
 		// Attach connectors.
 		if (computeStartEndShapesOfConnectors) {
-			for (Map.Entry<DiagramConnector, Shape> diagramConnectorEntry : getDiagramConnectorsMap().entrySet()) {
+			for (Map.Entry<DiagramConnector, HSLFShape> diagramConnectorEntry : getDiagramConnectorsMap().entrySet()) {
 				attachConnector(diagramConnectorEntry.getKey(), diagramConnectorEntry.getValue());
 			}
 		}
@@ -540,10 +539,10 @@ public abstract class AbstractCreateDiagramFromPPTSlide<A extends AbstractCreate
 
 	private void computeLayers() {
 		int currentLayer = 0;// getDiagramShapesMap().size() + getDiagramConnectorsMap().size();
-		for (Map.Entry<DiagramShape, Shape> diagramShapeEntry : getDiagramShapesMap().entrySet()) {
+		for (Map.Entry<DiagramShape, HSLFShape> diagramShapeEntry : getDiagramShapesMap().entrySet()) {
 			diagramShapeEntry.getKey().getGraphicalRepresentation().setLayer(currentLayer++);
 		}
-		for (Map.Entry<DiagramConnector, Shape> diagramConnectorEntry : getDiagramConnectorsMap().entrySet()) {
+		for (Map.Entry<DiagramConnector, HSLFShape> diagramConnectorEntry : getDiagramConnectorsMap().entrySet()) {
 			diagramConnectorEntry.getKey().getGraphicalRepresentation().setLayer(currentLayer++);
 		}
 	}
@@ -555,52 +554,52 @@ public abstract class AbstractCreateDiagramFromPPTSlide<A extends AbstractCreate
 	 * @param shape
 	 * @return
 	 */
-	private DiagramElement<?> transformPPTShapeInDiagramElement(DiagramContainerElement<?> container, Shape shape) {
+	private DiagramElement<?> transformPPTShapeInDiagramElement(DiagramContainerElement<?> container, HSLFShape shape) {
 		DiagramElement<?> diagramElement = null;
-		if (shape instanceof SimpleShape) {
-			diagramElement = transformSimpleShape((SimpleShape) shape);
+		if (shape instanceof HSLFSimpleShape) {
+			diagramElement = transformSimpleShape((HSLFSimpleShape) shape);
 
 		}
 		else if (shape instanceof Background) {
 			diagramElement = transformBackground((Background) shape);
 		}
-		else if (shape instanceof ShapeGroup) {
-			diagramElement = transformShapeGroup((ShapeGroup) shape);
+		else if (shape instanceof HSLFGroupShape) {
+			diagramElement = transformShapeGroup((HSLFGroupShape) shape);
 		}
 		return diagramElement;
 	}
 
-	private DiagramElement<?> transformSimpleShape(SimpleShape shape) {
+	private DiagramElement<?> transformSimpleShape(HSLFSimpleShape shape) {
 		DiagramElement<?> diagramElement = null;
-		if (shape instanceof Line) {
+		if (shape instanceof HSLFLine) {
 			diagramElement = makeDiagramConnector(shape);
 		}
-		else if (shape instanceof Picture) {
-			diagramElement = transformPicture((Picture) shape);
+		else if (shape instanceof HSLFPictureShape) {
+			diagramElement = transformPicture((HSLFPictureShape) shape);
 		}
-		else if (shape instanceof TextShape) {
-			diagramElement = transformTextShape((TextShape) shape);
+		else if (shape instanceof HSLFTextShape) {
+			diagramElement = transformTextShape((HSLFTextShape) shape);
 		}
 		return diagramElement;
 	}
 
-	private DiagramElement<?> transformPicture(Picture shape) {
+	private DiagramElement<?> transformPicture(HSLFPictureShape shape) {
 		DiagramElement<?> diagramElement = makePictureShape(shape);
 		return diagramElement;
 	}
 
-	private DiagramElement<?> transformTextShape(TextShape shape) {
+	private DiagramElement<?> transformTextShape(HSLFTextShape shape) {
 		DiagramElement<?> diagramElement = null;
-		if (shape instanceof AutoShape) {
-			diagramElement = transformAutoShape((AutoShape) shape);
+		if (shape instanceof HSLFAutoShape) {
+			diagramElement = transformAutoShape((HSLFAutoShape) shape);
 		}
-		else if (shape instanceof TextBox) {
-			diagramElement = makeTextBox((TextBox) shape);
+		else if (shape instanceof HSLFTextBox) {
+			diagramElement = makeTextBox((HSLFTextBox) shape);
 		}
 		return diagramElement;
 	}
 
-	private DiagramElement<?> transformAutoShape(AutoShape shape) {
+	private DiagramElement<?> transformAutoShape(HSLFAutoShape shape) {
 		DiagramElement<?> diagramElement = null;
 		if (isConnector(shape.getShapeType())) {
 			diagramElement = makeDiagramConnector(shape);
@@ -618,17 +617,17 @@ public abstract class AbstractCreateDiagramFromPPTSlide<A extends AbstractCreate
 		return diagramElement;
 	}
 
-	private DiagramElement<?> transformShapeGroup(ShapeGroup shape) {
+	private DiagramElement<?> transformShapeGroup(HSLFGroupShape shape) {
 		DiagramElement<?> diagramElement = null;
-		if (shape instanceof Table) {
-			diagramElement = makeTable((Table) shape);
+		if (shape instanceof HSLFTable) {
+			diagramElement = makeTable((HSLFTable) shape);
 		}
 		else
 			diagramElement = makeGroupShape(shape);
 		return diagramElement;
 	}
 
-	private DiagramShape makeTextBox(TextBox textBox) {
+	private DiagramShape makeTextBox(HSLFTextBox textBox) {
 		DiagramShape newShape = makeDiagramShape(textBox);
 		applyTextShapeGr(newShape.getGraphicalRepresentation(), textBox);
 		newShape.getGraphicalRepresentation().setLayer(2);
@@ -637,21 +636,21 @@ public abstract class AbstractCreateDiagramFromPPTSlide<A extends AbstractCreate
 
 	// To optimize the group shape convertion, if there is a textbox and a shape, then the shape is the container of the text
 	// This should cover a large set of cases
-	private DiagramElement<?> makeGroupShape(ShapeGroup shapeGroup) {
+	private DiagramElement<?> makeGroupShape(HSLFGroupShape shapeGroup) {
 		// If we find a shape without text and a text, then it could be optimized as a shape containing this text
 		boolean isShapeAndText = false;
-		if (shapeGroup.getShapes().length == 2) {
-			TextShape textShape = null;
-			SimpleShape containerShape = null;
-			for (Shape shape : shapeGroup.getShapes()) {
-				if ((shape instanceof TextShape) && (((TextShape) shape).getTextRun() != null)) {
-					textShape = (TextShape) shape;
+		if (shapeGroup.getShapes().size() == 2) {
+			HSLFTextShape textShape = null;
+			HSLFSimpleShape containerShape = null;
+			for (HSLFShape shape : shapeGroup.getShapes()) {
+				if ((shape instanceof HSLFTextShape) && (hasText((HSLFTextShape) shape))) {
+					textShape = (HSLFTextShape) shape;
 				}
-				else if ((shape instanceof TextShape) && (((TextShape) shape).getTextRun() == null)) {
-					containerShape = (TextShape) shape;
+				else if ((shape instanceof HSLFTextShape) && (!hasText((HSLFTextShape) shape))) {
+					containerShape = (HSLFTextShape) shape;
 				}
-				else if ((shape instanceof SimpleShape)) {
-					containerShape = (SimpleShape) shape;
+				else if ((shape instanceof HSLFSimpleShape)) {
+					containerShape = (HSLFSimpleShape) shape;
 				}
 			}
 			if (containerShape != null && textShape != null) {
@@ -662,8 +661,8 @@ public abstract class AbstractCreateDiagramFromPPTSlide<A extends AbstractCreate
 					applySimpleShapeGr(shape.getGraphicalRepresentation(), containerShape);
 				}
 				else {
-					if (containerShape instanceof Picture) {
-						applyPictureGr((ShapeGraphicalRepresentation) shape.getGraphicalRepresentation(), (Picture) containerShape);
+					if (containerShape instanceof HSLFPictureShape) {
+						applyPictureGr((ShapeGraphicalRepresentation) shape.getGraphicalRepresentation(), (HSLFPictureShape) containerShape);
 					}
 					else {
 						applySimpleShapeGr(shape.getGraphicalRepresentation(), containerShape);
@@ -675,20 +674,20 @@ public abstract class AbstractCreateDiagramFromPPTSlide<A extends AbstractCreate
 		}
 		if (!isShapeAndText) {
 			// Transform shapes
-			for (Shape shape : shapeGroup.getShapes()) {
+			for (HSLFShape shape : shapeGroup.getShapes()) {
 				transformPPTShapeInDiagramElement(getDiagram(), shape);
 			}
 		}
 		return null;
 	}
 
-	private DiagramShape makeTable(Table table) {
+	private DiagramShape makeTable(HSLFTable table) {
 
 		DiagramShape shape = makeDiagramShape(table);
 		applyTableGr(shape.getGraphicalRepresentation(), table);
 		for (int col = 0; col < table.getNumberOfColumns(); col++) {
 			for (int row = 0; row < table.getNumberOfRows(); row++) {
-				TableCell cell = table.getCell(row, col);
+				HSLFTableCell cell = table.getCell(row, col);
 				if (cell != null) {
 					DiagramShape newCell = makeTextBox(cell);
 					applyTableCellGr(newCell.getGraphicalRepresentation(), cell);
@@ -699,7 +698,7 @@ public abstract class AbstractCreateDiagramFromPPTSlide<A extends AbstractCreate
 		return shape;
 	}
 
-	private DiagramShape makePictureShape(Picture pictureShape) {
+	private DiagramShape makePictureShape(HSLFPictureShape pictureShape) {
 		DiagramShape shape = makeDiagramShape(pictureShape);
 		applyPictureGr(shape.getGraphicalRepresentation(), pictureShape);
 		return shape;
@@ -745,7 +744,7 @@ public abstract class AbstractCreateDiagramFromPPTSlide<A extends AbstractCreate
 	}
 	*/
 
-	private DiagramShape makeDiagramShape(Shape shape) {
+	private DiagramShape makeDiagramShape(HSLFShape shape) {
 		DiagramShape newShape = getDiagramFactory().makeNewShape(getShapeName(shape), getDiagram());
 		shapesMap.put(newShape, shape);
 		return newShape;
@@ -757,45 +756,49 @@ public abstract class AbstractCreateDiagramFromPPTSlide<A extends AbstractCreate
 	 * @param line
 	 * @return
 	 */
-	private DiagramConnector makeDiagramConnector(SimpleShape line) {
+	private DiagramConnector makeDiagramConnector(HSLFSimpleShape line) {
 		DiagramConnector newConnector = getDiagramFactory().makeNewConnector(getShapeName(line), null, null, getDiagram());
 		connectorsMap.put(newConnector, line);
 		return newConnector;
 	}
 
-	private static String getShapeName(Shape shape) {
-		if (shape != null && shape instanceof TextShape && ((TextShape) shape).getText() != null) {
-			return ((TextShape) shape).getText();
+	private static boolean hasText(HSLFTextShape shape) {
+		return shape.getTextParagraphs() != null && !shape.getTextParagraphs().isEmpty();
+	}
+
+	private static String getShapeName(HSLFShape shape) {
+		if (shape != null && shape instanceof HSLFTextShape && ((HSLFTextShape) shape).getText() != null) {
+			return ((HSLFTextShape) shape).getText();
 		}
 		return "";
 	}
 
-	private void attachConnector(DiagramConnector connector, Shape poiConnector) {
+	private void attachConnector(DiagramConnector connector, HSLFShape poiConnector) {
 		DiagramShape sourceShape = null, targetShape = null;
 		List<DiagramShape> potentialShapes = new ArrayList<>();
 
 		// We must count the size of the arrow head
-		double arrowStartWidth = poiConnector.getEscherProperty(EscherProperties.LINESTYLE__LINESTARTARROWWIDTH) + 1;
-		double arrowEndWidth = poiConnector.getEscherProperty(EscherProperties.LINESTYLE__LINEENDARROWWIDTH) + 1 + arrowStartWidth;
+		double arrowStartWidth = poiConnector.getEscherProperty(EscherPropertyTypes.LINESTYLE__LINESTARTARROWWIDTH) + 1;
+		double arrowEndWidth = poiConnector.getEscherProperty(EscherPropertyTypes.LINESTYLE__LINEENDARROWWIDTH) + 1 + arrowStartWidth;
 		// Connectors which are closed to the shape are considered as linked to this shape.
 		Rectangle2D connectorBorder = null;
-		if (poiConnector instanceof Line) {
-			connectorBorder = new Rectangle2D.Double(poiConnector.getOutline().getBounds().getX() - arrowStartWidth,
-					poiConnector.getOutline().getBounds().getY() - arrowStartWidth,
-					poiConnector.getOutline().getBounds().getWidth() + arrowEndWidth,
-					poiConnector.getOutline().getBounds().getHeight() + arrowEndWidth);
+		if (poiConnector instanceof HSLFLine) {
+			connectorBorder = new Rectangle2D.Double(poiConnector.getAnchor().getX() - arrowStartWidth,
+					poiConnector.getAnchor().getY() - arrowStartWidth,
+					poiConnector.getAnchor().getWidth() + arrowEndWidth,
+					poiConnector.getAnchor().getHeight() + arrowEndWidth);
 		}
 		else {
-			connectorBorder = new Rectangle2D.Double(poiConnector.getAnchor2D().getX() - arrowStartWidth,
-					poiConnector.getAnchor2D().getY() - arrowStartWidth, poiConnector.getAnchor2D().getWidth() + arrowEndWidth,
-					poiConnector.getAnchor2D().getHeight() + arrowEndWidth);
+			connectorBorder = new Rectangle2D.Double(poiConnector.getAnchor().getX() - arrowStartWidth,
+					poiConnector.getAnchor().getY() - arrowStartWidth, poiConnector.getAnchor().getWidth() + arrowEndWidth,
+					poiConnector.getAnchor().getHeight() + arrowEndWidth);
 		}
 
 		// Find the closest source and target shape
-		for (Map.Entry<DiagramShape, Shape> diagramShapeEntry : getDiagramShapesMap().entrySet()) {
-			Shape poiShape = diagramShapeEntry.getValue();
+		for (Map.Entry<DiagramShape, HSLFShape> diagramShapeEntry : getDiagramShapesMap().entrySet()) {
+			HSLFShape poiShape = diagramShapeEntry.getValue();
 			DiagramShape diagramShape = diagramShapeEntry.getKey();
-			if (poiShape.getOutline().intersects(connectorBorder)) {
+			if (poiShape.getAnchor().intersects(connectorBorder)) {
 				potentialShapes.add(diagramShape);
 			}
 		}
@@ -827,14 +830,14 @@ public abstract class AbstractCreateDiagramFromPPTSlide<A extends AbstractCreate
 			sourceShape = getDiagramFactory().makeNewShape("", getDiagram());
 			targetShape = getDiagramFactory().makeNewShape("", getDiagram());
 			ShapeGraphicalRepresentation sourceShapeGR = sourceShape.getGraphicalRepresentation();
-			sourceShapeGR.setX(poiConnector.getLogicalAnchor2D().getMinX());
-			sourceShapeGR.setY(poiConnector.getLogicalAnchor2D().getMaxY());
+			sourceShapeGR.setX(poiConnector.getAnchor().getMinX());
+			sourceShapeGR.setY(poiConnector.getAnchor().getMaxY());
 			sourceShapeGR.setWidth(2);
 			sourceShapeGR.setHeight(2);
 			sourceShapeGR.setDimensionConstraints(DimensionConstraints.UNRESIZABLE);
 			ShapeGraphicalRepresentation targetShapeGR = targetShape.getGraphicalRepresentation();
-			targetShapeGR.setX(poiConnector.getLogicalAnchor2D().getMaxX());
-			targetShapeGR.setY(poiConnector.getLogicalAnchor2D().getMinY());
+			targetShapeGR.setX(poiConnector.getAnchor().getMaxX());
+			targetShapeGR.setY(poiConnector.getAnchor().getMinY());
 			targetShapeGR.setWidth(2);
 			targetShapeGR.setHeight(2);
 			targetShapeGR.setDimensionConstraints(DimensionConstraints.UNRESIZABLE);
@@ -844,78 +847,78 @@ public abstract class AbstractCreateDiagramFromPPTSlide<A extends AbstractCreate
 		connector.setEndShape(targetShape);
 	}
 
-	private static void setDiagramElementType(GraphicalRepresentation gr, Shape shape) {
+	private static void setDiagramElementType(GraphicalRepresentation gr, HSLFShape shape) {
 		switch (shape.getShapeType()) {
-			case ShapeTypes.Chevron:
+			case CHEVRON:
 				((ShapeGraphicalRepresentation) gr).setShapeType(ShapeType.CHEVRON);
 				break;
-			case ShapeTypes.Plus:
+			case PLUS:
 				((ShapeGraphicalRepresentation) gr).setShapeType(ShapeType.PLUS);
 				break;
-			case ShapeTypes.Rectangle:
+			case RECT:
 				((ShapeGraphicalRepresentation) gr).setShapeType(ShapeType.RECTANGLE);
 				break;
-			case ShapeTypes.RoundRectangle:
+			case ROUND_RECT:
 				((ShapeGraphicalRepresentation) gr).setShapeType(ShapeType.RECTANGLE);
 				((Rectangle) ((ShapeGraphicalRepresentation) gr).getShapeSpecification()).setIsRounded(true);
 				((Rectangle) ((ShapeGraphicalRepresentation) gr).getShapeSpecification()).setArcSize(20);
 				break;
-			case ShapeTypes.Star:
+			case STAR_5:
 				((ShapeGraphicalRepresentation) gr).setShapeType(ShapeType.STAR);
 				break;
-			case ShapeTypes.Ellipse:
+			case ELLIPSE:
 				((ShapeGraphicalRepresentation) gr).setShapeType(ShapeType.OVAL);
 				break;
-			case ShapeTypes.IsocelesTriangle:
+			case TRIANGLE:
 				((ShapeGraphicalRepresentation) gr).setShapeType(ShapeType.TRIANGLE);
 				break;
-			case ShapeTypes.CurvedConnector2:
+			case CURVED_CONNECTOR_2:
 				((ConnectorGraphicalRepresentation) gr).setConnectorType(ConnectorType.CURVE);
 				break;
-			case ShapeTypes.CurvedConnector3:
+			case CURVED_CONNECTOR_3:
 				((ConnectorGraphicalRepresentation) gr).setConnectorType(ConnectorType.CURVE);
 				break;
-			case ShapeTypes.CurvedConnector4:
+			case CURVED_CONNECTOR_4:
 				((ConnectorGraphicalRepresentation) gr).setConnectorType(ConnectorType.CURVE);
 				break;
-			case ShapeTypes.CurvedConnector5:
+			case CURVED_CONNECTOR_5:
 				((ConnectorGraphicalRepresentation) gr).setConnectorType(ConnectorType.CURVE);
 				break;
-			case ShapeTypes.Line:
+			case LINE:
 				((ConnectorGraphicalRepresentation) gr).setConnectorType(ConnectorType.LINE);
 				break;
-			case ShapeTypes.StraightConnector1:
+			case STRAIGHT_CONNECTOR_1:
 				((ConnectorGraphicalRepresentation) gr).setConnectorType(ConnectorType.LINE);
 				break;
-			case ShapeTypes.BentConnector2:
+			case BENT_CONNECTOR_2:
 				((ConnectorGraphicalRepresentation) gr).setConnectorType(ConnectorType.RECT_POLYLIN);
 				break;
-			case ShapeTypes.BentConnector3:
+			case BENT_CONNECTOR_3:
 				((ConnectorGraphicalRepresentation) gr).setConnectorType(ConnectorType.RECT_POLYLIN);
 				break;
-			case ShapeTypes.BentConnector4:
+			case BENT_CONNECTOR_4:
 				((ConnectorGraphicalRepresentation) gr).setConnectorType(ConnectorType.RECT_POLYLIN);
 				break;
-			case ShapeTypes.BentConnector5:
+			case BENT_CONNECTOR_5:
 				((ConnectorGraphicalRepresentation) gr).setConnectorType(ConnectorType.RECT_POLYLIN);
 				break;
 		}
 	}
 
-	private void applySimpleShapeGr(GraphicalRepresentation gr, SimpleShape shape) {
+	private void applySimpleShapeGr(GraphicalRepresentation gr, HSLFSimpleShape shape) {
 
 		if (gr instanceof ShapeGraphicalRepresentation) {
-			((ShapeGraphicalRepresentation) gr).setX(shape.getLogicalAnchor2D().getX());
-			((ShapeGraphicalRepresentation) gr).setY(shape.getLogicalAnchor2D().getY());
-			((ShapeGraphicalRepresentation) gr).setWidth(shape.getLogicalAnchor2D().getWidth());
-			((ShapeGraphicalRepresentation) gr).setHeight(shape.getLogicalAnchor2D().getHeight());
+			((ShapeGraphicalRepresentation) gr).setX(shape.getAnchor().getX());
+			((ShapeGraphicalRepresentation) gr).setY(shape.getAnchor().getY());
+			((ShapeGraphicalRepresentation) gr).setWidth(shape.getAnchor().getWidth());
+			((ShapeGraphicalRepresentation) gr).setHeight(shape.getAnchor().getHeight());
 			// ((ShapeGraphicalRepresentation) gr).setBorder(getDiagramFactory().makeShapeBorder(0, 0, 0, 0));
 			((ShapeGraphicalRepresentation) gr).setShadowStyle(getDiagramFactory().makeDefaultShadowStyle());
 			((ShapeGraphicalRepresentation) gr).setForeground(getDiagramFactory().makeNoneForegroundStyle());
 			((ShapeGraphicalRepresentation) gr).setShadowStyle(getDiagramFactory().makeNoneShadowStyle());
 			if (shape.getLineColor() != null) {
 				((ShapeGraphicalRepresentation) gr).setForeground(getDiagramFactory().makeForegroundStyle(shape.getLineColor(),
-						(float) shape.getLineWidth(), convertDashLineStyles(shape.getLineDashing())));
+						(float) shape.getLineWidth(), convertDashLineStyles(shape.getLineDash())));
 			}
 			if (shape.getFillColor() != null) {
 				((ShapeGraphicalRepresentation) gr).setBackground(getDiagramFactory().makeColoredBackground(shape.getFillColor()));
@@ -927,42 +930,41 @@ public abstract class AbstractCreateDiagramFromPPTSlide<A extends AbstractCreate
 		if (gr instanceof ConnectorGraphicalRepresentation) {
 			if (shape.getLineColor() != null) {
 				((ConnectorGraphicalRepresentation) gr).setForeground(getDiagramFactory().makeForegroundStyle(shape.getLineColor(),
-						(float) shape.getLineWidth(), convertDashLineStyles(shape.getLineDashing())));
+						(float) shape.getLineWidth(), convertDashLineStyles(shape.getLineDash())));
 			}
 			// For now it we don't know how to determinate to whom end of the connector is affected the symbol
 			// Because in the case of connectors, we don't knwo the end/start shape, which is computed by intersection.
 			// So we can only handle correctly two cases, when there is no arrows ends at all and when there is two arrows ends
-			if (shape.getEscherProperty(EscherProperties.LINESTYLE__LINESTARTARROWHEAD) != 0
-					&& shape.getEscherProperty(EscherProperties.LINESTYLE__LINEENDARROWHEAD) != 0) {
-				if (shape.getEscherProperty(EscherProperties.LINESTYLE__LINESTARTARROWHEAD) != 0) {
+			if (shape.getEscherProperty(EscherPropertyTypes.LINESTYLE__LINESTARTARROWHEAD) != 0
+					&& shape.getEscherProperty(EscherPropertyTypes.LINESTYLE__LINEENDARROWHEAD) != 0) {
+				if (shape.getEscherProperty(EscherPropertyTypes.LINESTYLE__LINESTARTARROWHEAD) != 0) {
 					((ConnectorGraphicalRepresentation) gr).getConnectorSpecification().setStartSymbol(StartSymbolType.ARROW);
 				}
-				if (shape.getEscherProperty(EscherProperties.LINESTYLE__LINESTARTARROWWIDTH) != 0) {
+				if (shape.getEscherProperty(EscherPropertyTypes.LINESTYLE__LINESTARTARROWWIDTH) != 0) {
 					((ConnectorGraphicalRepresentation) gr).getConnectorSpecification()
-							.setStartSymbolSize(shape.getEscherProperty(EscherProperties.LINESTYLE__LINESTARTARROWWIDTH) * 10);
+							.setStartSymbolSize(shape.getEscherProperty(EscherPropertyTypes.LINESTYLE__LINESTARTARROWWIDTH) * 10);
 				}
-				if (shape.getEscherProperty(EscherProperties.LINESTYLE__LINEENDARROWHEAD) != 0) {
+				if (shape.getEscherProperty(EscherPropertyTypes.LINESTYLE__LINEENDARROWHEAD) != 0) {
 					((ConnectorGraphicalRepresentation) gr).getConnectorSpecification().setEndSymbol(EndSymbolType.ARROW);
 				}
-				if (shape.getEscherProperty(EscherProperties.LINESTYLE__LINEENDARROWWIDTH) != 0) {
+				if (shape.getEscherProperty(EscherPropertyTypes.LINESTYLE__LINEENDARROWWIDTH) != 0) {
 					((ConnectorGraphicalRepresentation) gr).getConnectorSpecification()
-							.setEndSymbolSize(shape.getEscherProperty(EscherProperties.LINESTYLE__LINEENDARROWWIDTH) * 10);
+							.setEndSymbolSize(shape.getEscherProperty(EscherPropertyTypes.LINESTYLE__LINEENDARROWWIDTH) * 10);
 				}
 			}
 		}
 		setDiagramElementType(gr, shape);
 	}
 
-	private void applyTextShapeGr(ShapeGraphicalRepresentation gr, TextShape shape) {
+	private void applyTextShapeGr(ShapeGraphicalRepresentation gr, HSLFTextShape shape) {
 		applySimpleShapeGr(gr, shape);
-		if (shape.getTextRun() != null) {
-			TextRun textRun = shape.getTextRun();
-			RichTextRun[] rts = textRun.getRichTextRuns();
-			if (rts.length > 0) {
-				RichTextRun rtr = rts[0];
-				String fontName = rtr.getFontName();
-				int fontSize = rtr.getFontSize();
-				Color color = rtr.getFontColor();
+		if (hasText(shape)) {
+			List<HSLFTextRun> rts = shape.getTextParagraphs().get(0).getTextRuns();
+			if (rts != null && rts.size() > 0) {
+				HSLFTextRun rtr = rts.get(0);
+				String fontName = rtr.getFontFamily();
+				int fontSize = rtr.getFontSize() != null ? (int) Math.round(rtr.getFontSize()) : 12;
+				Color color = rtr.getFontColor() != null ? rtr.getFontColor().getSolidColor().getColor() : null;
 				int fontStyle = Font.PLAIN | (rtr.isBold() ? Font.BOLD : Font.PLAIN) | (rtr.isItalic() ? Font.ITALIC : Font.PLAIN);
 				Font f = new Font(fontName, fontStyle, fontSize);
 				TextStyle textStyle = getDiagramFactory().makeTextStyle(color, f);
@@ -976,36 +978,18 @@ public abstract class AbstractCreateDiagramFromPPTSlide<A extends AbstractCreate
 		}
 		gr.setIsMultilineAllowed(true);
 		try {
+			// POI 3 exposed the anchor constants (AnchorTop...), POI 5 an enum: the whole family (centered, baseline) folds into it
 			switch (shape.getVerticalAlignment()) {
-				case TextShape.AnchorTop:
+				case TOP:
 					gr.setVerticalTextAlignment(VerticalTextAlignment.BOTTOM);
 					break;
-				case TextShape.AnchorMiddle:
+				case MIDDLE:
 					gr.setVerticalTextAlignment(VerticalTextAlignment.MIDDLE);
 					break;
-				case TextShape.AnchorBottom:
+				case BOTTOM:
 					gr.setVerticalTextAlignment(VerticalTextAlignment.TOP);
 					break;
-				case TextShape.AnchorTopCentered:
-					gr.setVerticalTextAlignment(VerticalTextAlignment.BOTTOM);
-					break;
-				case TextShape.AnchorMiddleCentered:
-					gr.setVerticalTextAlignment(VerticalTextAlignment.MIDDLE);
-					break;
-				case TextShape.AnchorBottomCentered:
-					gr.setVerticalTextAlignment(VerticalTextAlignment.TOP);
-					break;
-				case TextShape.AnchorTopBaseline:
-					gr.setVerticalTextAlignment(VerticalTextAlignment.BOTTOM);
-					break;
-				case TextShape.AnchorBottomBaseline:
-					gr.setVerticalTextAlignment(VerticalTextAlignment.TOP);
-					break;
-				case TextShape.AnchorTopCenteredBaseline:
-					gr.setVerticalTextAlignment(VerticalTextAlignment.BOTTOM);
-					break;
-				case TextShape.AnchorBottomCenteredBaseline:
-					gr.setVerticalTextAlignment(VerticalTextAlignment.TOP);
+				default:
 					break;
 			}
 		} catch (Exception e) {
@@ -1014,22 +998,25 @@ public abstract class AbstractCreateDiagramFromPPTSlide<A extends AbstractCreate
 		}
 
 		try {
-			switch (shape.getHorizontalAlignment()) {
-				case TextShape.AlignLeft:
+			// The alignment is a property of the paragraphs: use the first one
+			switch (shape.getTextParagraphs().get(0).getTextAlign()) {
+				case LEFT:
 					gr.setHorizontalTextAlignment(HorizontalTextAlignment.LEFT);
 					gr.setParagraphAlignment(ParagraphAlignment.LEFT);
 					break;
-				case TextShape.AlignCenter:
+				case CENTER:
 					gr.setHorizontalTextAlignment(HorizontalTextAlignment.CENTER);
 					gr.setParagraphAlignment(ParagraphAlignment.CENTER);
 					break;
-				case TextShape.AlignRight:
+				case RIGHT:
 					gr.setHorizontalTextAlignment(HorizontalTextAlignment.RIGHT);
 					gr.setParagraphAlignment(ParagraphAlignment.RIGHT);
 					break;
-				case TextShape.AlignJustify:
+				case JUSTIFY:
 					gr.setParagraphAlignment(ParagraphAlignment.RIGHT);
 					gr.setParagraphAlignment(ParagraphAlignment.JUSTIFY);
+					break;
+				default:
 					break;
 			}
 		} catch (Exception e) {
@@ -1040,23 +1027,23 @@ public abstract class AbstractCreateDiagramFromPPTSlide<A extends AbstractCreate
 		gr.setLineWrap(true);
 	}
 
-	private void applyTableGr(ShapeGraphicalRepresentation gr, Table shape) {
+	private void applyTableGr(ShapeGraphicalRepresentation gr, HSLFTable shape) {
 		gr.getForeground().setNoStroke(true);
 		gr.setTransparency(1);
 		gr.setBackground(getDiagramFactory().makeEmptyBackground());
 	}
 
-	private static void applyTableCellGr(ShapeGraphicalRepresentation gr, TableCell shape) {
+	private static void applyTableCellGr(ShapeGraphicalRepresentation gr, HSLFTableCell shape) {
 		gr.getForeground().setNoStroke(false);
 		gr.setDimensionConstraints(DimensionConstraints.UNRESIZABLE);
 	}
 
-	private void applyPictureGr(ShapeGraphicalRepresentation gr, Picture shape) {
+	private void applyPictureGr(ShapeGraphicalRepresentation gr, HSLFPictureShape shape) {
 		applySimpleShapeGr(gr, shape);
-		int width = (int) shape.getLogicalAnchor2D().getWidth() < 0 ? 0 : (int) shape.getLogicalAnchor2D().getWidth();
-		int height = (int) shape.getLogicalAnchor2D().getHeight() < 0 ? 0 : (int) shape.getLogicalAnchor2D().getHeight();
-		int x = (int) shape.getLogicalAnchor2D().getX() < 0 ? 0 : (int) shape.getLogicalAnchor2D().getX();
-		int y = (int) shape.getLogicalAnchor2D().getY() < 0 ? 0 : (int) shape.getLogicalAnchor2D().getY();
+		int width = (int) shape.getAnchor().getWidth() < 0 ? 0 : (int) shape.getAnchor().getWidth();
+		int height = (int) shape.getAnchor().getHeight() < 0 ? 0 : (int) shape.getAnchor().getHeight();
+		int x = (int) shape.getAnchor().getX() < 0 ? 0 : (int) shape.getAnchor().getX();
+		int y = (int) shape.getAnchor().getY() < 0 ? 0 : (int) shape.getAnchor().getY();
 		if (width * height < Integer.MAX_VALUE) {
 			gr.setX(x);
 			gr.setY(y);
@@ -1069,7 +1056,7 @@ public abstract class AbstractCreateDiagramFromPPTSlide<A extends AbstractCreate
 			graphics.clipRect(x, y, width, height);
 			graphics.setPaint(Color.WHITE);
 			graphics.fillRect(x, y, width, height);
-			shape.getPictureData().draw(graphics, shape);
+			org.apache.poi.sl.draw.DrawFactory.getInstance(graphics).getDrawable(shape).draw(graphics);
 			File imageFile = saveImageFile(image, getDiagramName() + getSlide().getTitle() + shape.getShapeId());
 			gr.setBackground(getDiagramFactory().makeImageBackground(ResourceLocator.locateResource(imageFile.getAbsolutePath())));
 			gr.setForeground(getDiagramFactory().makeNoneForegroundStyle());
@@ -1078,13 +1065,13 @@ public abstract class AbstractCreateDiagramFromPPTSlide<A extends AbstractCreate
 		}
 	}
 
-	/*private void setTextProperties(DiagramElement<?> shape, TextShape textShape, boolean convertBulletsToShapes) {
+	/*private void setTextProperties(DiagramElement<?> shape, HSLFTextShape textShape, boolean convertBulletsToShapes) {
 		GraphicalRepresentation gr = shape.getGraphicalRepresentation();
 		if (textShape.getTextRun() != null) {
-			TextRun textRun = textShape.getTextRun();
-			RichTextRun[] rts = textRun.getRichTextRuns();
+			HSLFTextParagraph textRun = textShape.getTextRun();
+			HSLFTextRun[] rts = textRun.getRichTextRuns();
 			if (rts.length > 0) {
-				RichTextRun rtr = rts[0];
+				HSLFTextRun rtr = rts[0];
 				String fontName = rtr.getFontName();
 				int fontSize = rtr.getFontSize();
 				Color color = rtr.getFontColor();
@@ -1102,34 +1089,34 @@ public abstract class AbstractCreateDiagramFromPPTSlide<A extends AbstractCreate
 		gr.setIsMultilineAllowed(true);
 		try {
 			switch (textShape.getVerticalAlignment()) {
-				case TextShape.AnchorTop:
+				case HSLFTextShape.AnchorTop:
 					gr.setVerticalTextAlignment(VerticalTextAlignment.BOTTOM);
 					break;
-				case TextShape.AnchorMiddle:
+				case HSLFTextShape.AnchorMiddle:
 					gr.setVerticalTextAlignment(VerticalTextAlignment.MIDDLE);
 					break;
-				case TextShape.AnchorBottom:
+				case HSLFTextShape.AnchorBottom:
 					gr.setVerticalTextAlignment(VerticalTextAlignment.TOP);
 					break;
-				case TextShape.AnchorTopCentered:
+				case HSLFTextShape.AnchorTopCentered:
 					gr.setVerticalTextAlignment(VerticalTextAlignment.BOTTOM);
 					break;
-				case TextShape.AnchorMiddleCentered:
+				case HSLFTextShape.AnchorMiddleCentered:
 					gr.setVerticalTextAlignment(VerticalTextAlignment.MIDDLE);
 					break;
-				case TextShape.AnchorBottomCentered:
+				case HSLFTextShape.AnchorBottomCentered:
 					gr.setVerticalTextAlignment(VerticalTextAlignment.TOP);
 					break;
-				case TextShape.AnchorTopBaseline:
+				case HSLFTextShape.AnchorTopBaseline:
 					gr.setVerticalTextAlignment(VerticalTextAlignment.BOTTOM);
 					break;
-				case TextShape.AnchorBottomBaseline:
+				case HSLFTextShape.AnchorBottomBaseline:
 					gr.setVerticalTextAlignment(VerticalTextAlignment.TOP);
 					break;
-				case TextShape.AnchorTopCenteredBaseline:
+				case HSLFTextShape.AnchorTopCenteredBaseline:
 					gr.setVerticalTextAlignment(VerticalTextAlignment.BOTTOM);
 					break;
-				case TextShape.AnchorBottomCenteredBaseline:
+				case HSLFTextShape.AnchorBottomCenteredBaseline:
 					gr.setVerticalTextAlignment(VerticalTextAlignment.TOP);
 					break;
 			}
@@ -1140,19 +1127,19 @@ public abstract class AbstractCreateDiagramFromPPTSlide<A extends AbstractCreate
 	
 		try {
 			switch (textShape.getHorizontalAlignment()) {
-				case TextShape.AlignLeft:
+				case HSLFTextShape.AlignLeft:
 					gr.setHorizontalTextAlignment(HorizontalTextAlignment.RIGHT);
 					gr.setParagraphAlignment(ParagraphAlignment.LEFT);
 					break;
-				case TextShape.AlignCenter:
+				case HSLFTextShape.AlignCenter:
 					gr.setHorizontalTextAlignment(HorizontalTextAlignment.CENTER);
 					gr.setParagraphAlignment(ParagraphAlignment.CENTER);
 					break;
-				case TextShape.AlignRight:
+				case HSLFTextShape.AlignRight:
 					gr.setHorizontalTextAlignment(HorizontalTextAlignment.LEFT);
 					gr.setParagraphAlignment(ParagraphAlignment.RIGHT);
 					break;
-				case TextShape.AlignJustify:
+				case HSLFTextShape.AlignJustify:
 					gr.setParagraphAlignment(ParagraphAlignment.RIGHT);
 					gr.setParagraphAlignment(ParagraphAlignment.JUSTIFY);
 					break;
@@ -1165,62 +1152,65 @@ public abstract class AbstractCreateDiagramFromPPTSlide<A extends AbstractCreate
 		gr.setLineWrap(true);
 	}*/
 
-	private static DashStyle convertDashLineStyles(int powerpointDashStyle) {
+	private static DashStyle convertDashLineStyles(org.apache.poi.sl.usermodel.StrokeStyle.LineDash powerpointDashStyle) {
 
+		if (powerpointDashStyle == null) {
+			return null;
+		}
 		switch (powerpointDashStyle) {
-			case Line.PEN_DASH:
+			case DASH:
 				return DashStyle.MEDIUM_DASHES;
-			case Line.PEN_DASHDOT:
+			case DASH_DOT:
 				return DashStyle.DOTS_DASHES;
-			case Line.PEN_DASHDOTDOT:
+			case SYS_DASH_DOT_DOT:
 				return DashStyle.DOT_LINES_DASHES;
-			case Line.PEN_DASHDOTGEL:
+			case SYS_DASH_DOT:
 				return DashStyle.SMALL_DASHES;
-			case Line.PEN_DOT:
+			case DOT:
 				return DashStyle.DOTS_DASHES;
-			case Line.PEN_DOTGEL:
+			case SYS_DOT:
 				return DashStyle.DOTS_DASHES;
-			case Line.PEN_LONGDASHDOTDOTGEL:
+			case LG_DASH_DOT_DOT:
 				return DashStyle.BIG_DASHES;
-			case Line.PEN_LONGDASHDOTGEL:
+			case LG_DASH_DOT:
 				return DashStyle.BIG_DASHES;
-			case Line.PEN_LONGDASHGEL:
+			case LG_DASH:
 				return DashStyle.BIG_DASHES;
-			case Line.PEN_PS_DASH:
+			case SYS_DASH:
 				return DashStyle.SMALL_DASHES;
-			case Line.PEN_SOLID:
+			case SOLID:
 				return DashStyle.PLAIN_STROKE;
 		}
 		return null;
 	}
 
-	private static boolean isConnector(int shapeType) {
+	private static boolean isConnector(org.apache.poi.sl.usermodel.ShapeType shapeType) {
 		switch (shapeType) {
-			case ShapeTypes.CurvedConnector2:
+			case CURVED_CONNECTOR_2:
 				return true;
-			case ShapeTypes.CurvedConnector3:
+			case CURVED_CONNECTOR_3:
 				return true;
-			case ShapeTypes.CurvedConnector4:
+			case CURVED_CONNECTOR_4:
 				return true;
-			case ShapeTypes.CurvedConnector5:
+			case CURVED_CONNECTOR_5:
 				return true;
-			case ShapeTypes.Line:
+			case LINE:
 				return true;
-			case ShapeTypes.StraightConnector1:
+			case STRAIGHT_CONNECTOR_1:
 				return true;
-			case ShapeTypes.BentConnector2:
+			case BENT_CONNECTOR_2:
 				return true;
-			case ShapeTypes.BentConnector3:
+			case BENT_CONNECTOR_3:
 				return true;
-			case ShapeTypes.BentConnector4:
+			case BENT_CONNECTOR_4:
 				return true;
-			case ShapeTypes.BentConnector5:
+			case BENT_CONNECTOR_5:
 				return true;
 		}
 		return false;
 	}
 
-	/*private void setDefaultGraphicalProperties(GraphicalRepresentation returned, SimpleShape shape) {
+	/*private void setDefaultGraphicalProperties(GraphicalRepresentation returned, HSLFSimpleShape shape) {
 	
 	if (returned instanceof ShapeGraphicalRepresentation) {
 	
@@ -1231,7 +1221,7 @@ public abstract class AbstractCreateDiagramFromPPTSlide<A extends AbstractCreate
 	returned.setHeight(shape.getLogicalAnchor2D().getHeight());
 	returned.setBorder(getDiagramFactory().makeShapeBorder(0, 0, 0, 0));
 	returned.setShadowStyle(getDiagramFactory().makeDefaultShadowStyle());
-	if (shape instanceof SimpleShape) {
+	if (shape instanceof HSLFSimpleShape) {
 		if (shape.getLineColor() != null) {
 			returned.setForeground(getDiagramFactory().makeForegroundStyle(shape.getLineColor(), (float) shape.getLineWidth(),
 					convertDashLineStyles(shape.getLineDashing())));
@@ -1254,7 +1244,7 @@ public abstract class AbstractCreateDiagramFromPPTSlide<A extends AbstractCreate
 	}
 	}*/
 
-	/*private DiagramShape makeShapeFromBullet(TextRun textRun, RichTextRun rtr, DiagramShape shape, TextShape textShape) {
+	/*private DiagramShape makeShapeFromBullet(HSLFTextParagraph textRun, HSLFTextRun rtr, DiagramShape shape, HSLFTextShape textShape) {
 		// Create Bullet
 		DianaPoint bulletPosition = new DianaPoint(textRun.getTextRuler().getBulletOffsets()[0] + rtr.getIndentLevel(), textRun.getTextRuler()
 				.getBulletOffsets()[1] + rtr.getLineSpacing() * 0.1 * rtr.getStartIndex());
@@ -1291,12 +1281,12 @@ public abstract class AbstractCreateDiagramFromPPTSlide<A extends AbstractCreate
 		return null;
 	}
 	
-	private boolean hasBullets(TextRun textRun) {
+	private boolean hasBullets(HSLFTextParagraph textRun) {
 		boolean hasBullets = false;
-		RichTextRun[] rts = textRun.getRichTextRuns();
+		HSLFTextRun[] rts = textRun.getRichTextRuns();
 		if (rts.length > 0) {
 			for (int i = 0; i < rts.length; i++) {
-				RichTextRun rtr = rts[i];
+				HSLFTextRun rtr = rts[i];
 				if (rtr.isBullet() || rtr.isBulletHard()) {
 					hasBullets = true;
 				}

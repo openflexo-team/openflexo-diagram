@@ -46,15 +46,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-import org.apache.poi.hslf.model.AutoShape;
-import org.apache.poi.hslf.model.Line;
-import org.apache.poi.hslf.model.MasterSheet;
-import org.apache.poi.hslf.model.Picture;
-import org.apache.poi.hslf.model.Shape;
-import org.apache.poi.hslf.model.ShapeTypes;
-import org.apache.poi.hslf.model.Slide;
-import org.apache.poi.hslf.model.Table;
-import org.apache.poi.hslf.model.TextBox;
+import org.apache.poi.hslf.usermodel.HSLFAutoShape;
+import org.apache.poi.hslf.usermodel.HSLFLine;
+import org.apache.poi.hslf.usermodel.HSLFPictureShape;
+import org.apache.poi.hslf.usermodel.HSLFShape;
+import org.apache.poi.hslf.usermodel.HSLFSlide;
+import org.apache.poi.hslf.usermodel.HSLFTable;
+import org.apache.poi.hslf.usermodel.HSLFTextBox;
 import org.junit.Assume;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -147,8 +145,8 @@ public class TestActions extends OpenflexoProjectAtRunTimeTestCase {
 			if (rc.retrieveName(pptFile).endsWith(".ppt")) {
 				logger.info("Testing file " + pptFile.getName());
 				createExampleDiagramFromPPTSlide.setFile(pptFile);
-				for (Slide slide : createExampleDiagramFromPPTSlide.getCurrentSlides()) {
-					logger.info("Testing Slide number " + slide.getSlideNumber() + " in file named " + pptFile.getName());
+				for (HSLFSlide slide : createExampleDiagramFromPPTSlide.getCurrentSlides()) {
+					logger.info("Testing HSLFSlide number " + slide.getSlideNumber() + " in file named " + pptFile.getName());
 					createExampleDiagramFromPPTSlide.setDiagramName("diagramName");
 					createExampleDiagramFromPPTSlide.setDiagramTitle("diagramTitle");
 					createExampleDiagramFromPPTSlide.setSlide(slide);
@@ -174,41 +172,41 @@ public class TestActions extends OpenflexoProjectAtRunTimeTestCase {
 		}
 	}
 
-	private ArrayList<Shape> expectedShapes;
+	private ArrayList<HSLFShape> expectedShapes;
 
-	private void computeExpectedNumberOfShapesAndConnectors(Slide slide) {
+	private void computeExpectedNumberOfShapesAndConnectors(HSLFSlide slide) {
 		expectedShapes = new ArrayList<>();
 		if (slide.getFollowMasterObjects()) {
-			Shape[] sh = slide.getMasterSheet().getShapes();
-			for (int i = sh.length - 1; i >= 0; i--) {
-				if (MasterSheet.isPlaceholder(sh[i])) {
+			List<HSLFShape> sh = slide.getMasterSheet().getShapes();
+			for (int i = sh.size() - 1; i >= 0; i--) {
+				if (sh.get(i).isPlaceholder()) {
 					continue;
 				}
 				else {
-					expectedShapes.add(sh[i]);
+					expectedShapes.add(sh.get(i));
 				}
 			}
 		}
-		for (Shape shape : slide.getShapes()) {
+		for (HSLFShape shape : slide.getShapes()) {
 			expectedShapes.add(shape);
 		}
-		for (Shape shape : expectedShapes) {
+		for (HSLFShape shape : expectedShapes) {
 			newExpectedShape(shape);
 		}
 	}
 
-	private void newExpectedShape(Shape shape) {
-		if (shape instanceof Table) {
+	private void newExpectedShape(HSLFShape shape) {
+		if (shape instanceof HSLFTable) {
 			expectedNumberOfShapesAndConnectors = expectedNumberOfShapesAndConnectors + 1
-					+ (((Table) shape).getNumberOfColumns() * ((Table) shape).getNumberOfRows());
+					+ (((HSLFTable) shape).getNumberOfColumns() * ((HSLFTable) shape).getNumberOfRows());
 		}
-		else if (shape instanceof TextBox || shape instanceof Picture) {
+		else if (shape instanceof HSLFTextBox || shape instanceof HSLFPictureShape) {
 			expectedNumberOfShapesAndConnectors++;
 		}
-		else if (shape instanceof Line) {
+		else if (shape instanceof HSLFLine) {
 			expectedNumberOfShapesAndConnectors = expectedNumberOfShapesAndConnectors + 3;
 		}
-		else if (shape instanceof AutoShape) {
+		else if (shape instanceof HSLFAutoShape) {
 			if (!isConnector(shape.getShapeType())) {
 				expectedNumberOfShapesAndConnectors++;
 			}
@@ -234,28 +232,28 @@ public class TestActions extends OpenflexoProjectAtRunTimeTestCase {
 		}
 	}
 
-	private static boolean isConnector(int shapeType) {
+	private static boolean isConnector(org.apache.poi.sl.usermodel.ShapeType shapeType) {
 		switch (shapeType) {
-			case ShapeTypes.CurvedConnector2:
+			case CURVED_CONNECTOR_2:
 				return true;
-			case ShapeTypes.CurvedConnector3:
+			case CURVED_CONNECTOR_3:
 				return true;
-			case ShapeTypes.CurvedConnector4:
+			case CURVED_CONNECTOR_4:
 				return true;
-			case ShapeTypes.CurvedConnector5:
+			case CURVED_CONNECTOR_5:
 				return true;
-			case ShapeTypes.Line:
+			case LINE:
 				return true;
-			case ShapeTypes.StraightConnector1:
+			case STRAIGHT_CONNECTOR_1:
 				return true;
 		}
 		return false;
 	}
 
-	private static int elementToCreate(Shape poiConnector, ArrayList<Shape> expectedShapes) {
+	private static int elementToCreate(HSLFShape poiConnector, ArrayList<HSLFShape> expectedShapes) {
 		int elementToCreate = 0;
-		Shape sourceShape = null, targetShape = null;
-		for (Shape diagramShape : expectedShapes) {
+		HSLFShape sourceShape = null, targetShape = null;
+		for (HSLFShape diagramShape : expectedShapes) {
 
 			if (poiConnector.getAnchor().intersects(diagramShape.getAnchor())) {
 				if (sourceShape == null && targetShape == null) {
