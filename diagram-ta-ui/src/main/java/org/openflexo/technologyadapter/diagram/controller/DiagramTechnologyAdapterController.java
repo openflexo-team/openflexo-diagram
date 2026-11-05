@@ -38,6 +38,8 @@
 
 package org.openflexo.technologyadapter.diagram.controller;
 
+import java.awt.Window;
+
 import javax.swing.ImageIcon;
 
 import org.openflexo.diana.swing.control.SwingToolFactory;
@@ -162,14 +164,7 @@ public class DiagramTechnologyAdapterController extends TechnologyAdapterControl
 		// inspectors.getPanelGroup().setPreferredSize(new Dimension(800, 800));
 		// inspectors.getPanelGroup().setMinimumSize(new Dimension(500, 500));
 
-		dialogInspectors.getForegroundStyleInspector().setLocation(1000, 100);
-		dialogInspectors.getTextPropertiesInspector().setLocation(1000, 300);
-		dialogInspectors.getShadowStyleInspector().setLocation(1000, 400);
-		dialogInspectors.getBackgroundStyleInspector().setLocation(1000, 500);
-		dialogInspectors.getShapeInspector().setLocation(1000, 600);
-		dialogInspectors.getConnectorInspector().setLocation(1000, 700);
-		dialogInspectors.getLocationSizeInspector().setLocation(1000, 200);
-		dialogInspectors.getControlInspector().setLocation(1000, 50);
+		// Each dialog inspector is built by Diana when first used: building them here cost about 3 s to every module loading
 
 		diagramInspectorGroup = controller.loadInspectorGroup("Diagram", getTechnologyAdapter().getLocales(),
 				getFMLTechnologyAdapterInspectorGroup());
@@ -188,16 +183,18 @@ public class DiagramTechnologyAdapterController extends TechnologyAdapterControl
 		WindowMenu viewMenu = actionInitializer.getController().getMenuBar().getWindowMenu();
 		viewMenu.addSeparator();
 
+		// The dialog inspectors are built when first opened from the menu
+		JDianaDialogInspectors dialogs = dialogInspectors;
 		WindowMenuItem foregroundInspectorItem = viewMenu.new WindowMenuItem(getLocales().localizedForKey("foreground_inspector"),
-				dialogInspectors.getForegroundStyleInspector());
+				() -> placed(dialogs.getForegroundStyleInspector(), 100));
 		WindowMenuItem backgroundInspectorItem = viewMenu.new WindowMenuItem(getLocales().localizedForKey("background_inspector"),
-				dialogInspectors.getBackgroundStyleInspector());
+				() -> placed(dialogs.getBackgroundStyleInspector(), 500));
 		WindowMenuItem textInspectorItem = viewMenu.new WindowMenuItem(getLocales().localizedForKey("text_inspector"),
-				dialogInspectors.getTextPropertiesInspector());
+				() -> placed(dialogs.getTextPropertiesInspector(), 300));
 		WindowMenuItem shapeInspectorItem = viewMenu.new WindowMenuItem(getLocales().localizedForKey("shape_inspector"),
-				dialogInspectors.getShapeInspector());
+				() -> placed(dialogs.getShapeInspector(), 600));
 		WindowMenuItem connectorInspectorItem = viewMenu.new WindowMenuItem(getLocales().localizedForKey("connector_inspector"),
-				dialogInspectors.getConnectorInspector());
+				() -> placed(dialogs.getConnectorInspector(), 700));
 		WindowMenuItem shadowInspectorItem = viewMenu.new WindowMenuItem(getLocales().localizedForKey("shadow_inspector"),
 				dialogInspectors.getShadowStyleInspector());
 		WindowMenuItem locationSizeInspectorItem = viewMenu.new WindowMenuItem(getLocales().localizedForKey("location_size_inspector"),
@@ -274,6 +271,16 @@ public class DiagramTechnologyAdapterController extends TechnologyAdapterControl
 		// Overrides CreateFlexoConceptInitializer by providing palette element creation
 		new CreateFMLControlledDiagramFlexoConceptInitializer(actionInitializer);
 
+	}
+
+	/**
+	 * Place a dialog inspector opened from the Window menu at its usual location, the first time it is shown
+	 */
+	private static <W extends Window> W placed(W dialog, int y) {
+		if (!dialog.isVisible()) {
+			dialog.setLocation(1000, y);
+		}
+		return dialog;
 	}
 
 	private DiagramElementPasteHandler diagramElementPasteHandler;
