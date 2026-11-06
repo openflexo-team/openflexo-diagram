@@ -45,7 +45,7 @@
     <Localized key="confirmation_text" lang="English" value="Would you really like to delete those view elements ?" />
     <Localized key="label" lang="English" value="Label" />
     <Localized key="select_all" lang="English" value="Select all" />
-    <Localized key="label" lang="French" value="Label" />
+    <Localized key="label" lang="French" value="Libellé" />
     <Localized key="select_all" lang="French" value="Sélectionner tout" />
     <Localized key="label" lang="Dutch" value="Label" />
     <Localized key="select_all" lang="Dutch" value="Select all" />

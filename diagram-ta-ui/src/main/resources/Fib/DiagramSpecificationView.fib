@@ -90,7 +90,7 @@
     <Localized key="example_diagram" lang="French" value="Diagramme d'Exemple" />
     <Localized key="example_diagram" lang="Dutch" value="example_diagram" />
     <Localized key="diagram_palette" lang="English" value="Palette" />
-    <Localized key="diagram_palette" lang="French" value="Palette" />
+    <Localized key="diagram_palette" lang="French" value="Palette du diagramme" />
     <Localized key="diagram_palette" lang="Dutch" value="diagram_palette" />
   </LocalizedDictionary>
 </Panel>

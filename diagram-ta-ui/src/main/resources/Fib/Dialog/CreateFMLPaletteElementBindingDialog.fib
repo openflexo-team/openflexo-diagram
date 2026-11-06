@@ -6,7 +6,7 @@
     <Localized key="validate" lang="English" value="Validate" />
     <Localized key="label" lang="English" value="Label" />
     <Localized key="validate" lang="French" value="Valider" />
-    <Localized key="label" lang="French" value="Label" />
+    <Localized key="label" lang="French" value="Libellé" />
     <Localized key="Cancel" lang="French" value="Annuler" />
     <Localized key="validate" lang="Dutch" value="Validate" />
     <Localized key="label" lang="Dutch" value="Label" />

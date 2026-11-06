@@ -220,13 +220,13 @@
 			key="flexo_concept" />
 		<Localized id="58" value="Flexo concept" lang="Dutch"
 			key="flexo_concept" />
-		<Localized id="59" value="Flexo concept" lang="French"
+		<Localized id="59" value="FlexoConcept" lang="French"
 			key="flexo_concept" />
 		<Localized id="60" value="Drop scheme" lang="English"
 			key="drop_scheme" />
 		<Localized id="61" value="Drop scheme" lang="Dutch"
 			key="drop_scheme" />
-		<Localized id="62" value="Drop scheme" lang="French"
+		<Localized id="62" value="DropScheme" lang="French"
 			key="drop_scheme" />
 		<Localized id="63" value="Representation" lang="English"
 			key="representation" />
