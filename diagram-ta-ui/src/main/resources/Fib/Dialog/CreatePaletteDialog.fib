@@ -23,7 +23,7 @@
   <LocalizedDictionary>
     <Localized key="creates_new_palette" lang="English" value="Create new Palette" />
     <Localized key="creates_new_palette" lang="French" value="Créer une nouvelle Palette" />
-    <Localized key="creates_new_palette" lang="Dutch" value="creates_new_palette" />
+    <Localized key="creates_new_palette" lang="Dutch" value="Nieuw palet maken" />
   </LocalizedDictionary>
 
 </Panel>

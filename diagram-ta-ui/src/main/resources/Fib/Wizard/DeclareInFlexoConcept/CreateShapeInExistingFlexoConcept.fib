@@ -137,26 +137,26 @@
 	<LocalizedDictionary id="37">
 		<Localized id="38" value="Flexo concept" lang="English"
 			key="flexo_concept" />
-		<Localized id="39" value="Flexo concept" lang="Dutch"
+		<Localized id="39" value="FlexoConcept" lang="Dutch"
 			key="flexo_concept" />
 		<Localized id="40" value="FlexoConcept" lang="French"
 			key="flexo_concept" />
 		<Localized id="41" value="New role name" lang="English"
 			key="new_role_name" />
-		<Localized id="42" value="New role name" lang="Dutch"
+		<Localized id="42" value="Naam van de nieuwe rol" lang="Dutch"
 			key="new_role_name" />
 		<Localized id="43" value="Nom du nouveau role" lang="French"
 			key="new_role_name" />
 		<Localized id="44" value="Preview" lang="English" key="preview" />
-		<Localized id="45" value="Preview" lang="Dutch" key="preview" />
+		<Localized id="45" value="Voorbeeld" lang="Dutch" key="preview" />
 		<Localized id="46" value="Prévisualisation" lang="French"
 			key="preview" />
 		<Localized id="47" value="Parent shape" lang="English" key="parent_shape" />
-		<Localized id="48" value="Parent shape" lang="Dutch" key="parent_shape" />
+		<Localized id="48" value="Bovenliggende vorm" lang="Dutch" key="parent_shape" />
 		<Localized id="49" value="Forme parente" lang="French" key="parent_shape" />
 		<Localized id="50" value="As described in action" lang="English"
 			key="as_described_in_action" />
-		<Localized id="51" value="As described in action" lang="Dutch"
+		<Localized id="51" value="Zoals beschreven in de actie" lang="Dutch"
 			key="as_described_in_action" />
 		<Localized id="52" value="comme décrit dans l'action" lang="French"
 			key="as_described_in_action" />

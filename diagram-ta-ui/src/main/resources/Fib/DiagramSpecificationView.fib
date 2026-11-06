@@ -85,12 +85,12 @@
   <LocalizedDictionary>
   	<Localized key="diagram_specification" lang="English" value="Diagram Specification" />
     <Localized key="diagram_specification" lang="French" value="Spécification de Diagramme" />
-    <Localized key="diagram_specification" lang="Dutch" value="diagram_specification" />
+    <Localized key="diagram_specification" lang="Dutch" value="Diagramspecificatie" />
     <Localized key="example_diagram" lang="English" value="Example Diagram" />
     <Localized key="example_diagram" lang="French" value="Diagramme d'Exemple" />
-    <Localized key="example_diagram" lang="Dutch" value="example_diagram" />
+    <Localized key="example_diagram" lang="Dutch" value="Voorbeelddiagram" />
     <Localized key="diagram_palette" lang="English" value="Palette" />
     <Localized key="diagram_palette" lang="French" value="Palette du diagramme" />
-    <Localized key="diagram_palette" lang="Dutch" value="diagram_palette" />
+    <Localized key="diagram_palette" lang="Dutch" value="Palet" />
   </LocalizedDictionary>
 </Panel>

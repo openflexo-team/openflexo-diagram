@@ -181,37 +181,37 @@
 	<LocalizedDictionary id="40">
 		<Localized id="41" value="Palette" lang="English"
 			key="palette" />
-		<Localized id="42" value="Palette" lang="Dutch"
+		<Localized id="42" value="Palet" lang="Dutch"
 			key="palette" />
 		<Localized id="43" value="Palette" lang="French"
 			key="palette" />
 		<Localized id="44" value="FML element" lang="English"
 			key="fml_element" />
-		<Localized id="45" value="FML element" lang="Dutch"
+		<Localized id="45" value="FML-element" lang="Dutch"
 			key="fml_element" />
 		<Localized id="46" value="Element FML" lang="French"
 			key="fml_element" />
 		<Localized id="47" value="Virtual model" lang="English"
 			key="virtual_model" />
-		<Localized id="48" value="Virtual model" lang="Dutch"
+		<Localized id="48" value="VirtualModel" lang="Dutch"
 			key="virtual_model" />
 		<Localized id="49" value="Modèle virtuel" lang="French"
 			key="virtual_model" />
 		<Localized id="50" value="Flexo concept" lang="English"
 			key="flexo_concept" />
-		<Localized id="51" value="Flexo concept" lang="Dutch"
+		<Localized id="51" value="FlexoConcept" lang="Dutch"
 			key="flexo_concept" />
 		<Localized id="52" value="FlexoConcept" lang="French"
 			key="flexo_concept" />
 		<Localized id="53" value="Drop scheme" lang="English"
 			key="drop_scheme" />
-		<Localized id="54" value="Drop scheme" lang="Dutch"
+		<Localized id="54" value="DropScheme" lang="Dutch"
 			key="drop_scheme" />
 		<Localized id="55" value="DropScheme" lang="French"
 			key="drop_scheme" />
 		<Localized id="56" value="Representation" lang="English"
 			key="representation" />
-		<Localized id="57" value="Representation" lang="Dutch"
+		<Localized id="57" value="Voorstelling" lang="Dutch"
 			key="representation" />
 		<Localized id="58" value="Représentation" lang="French"
 			key="representation" />
@@ -219,43 +219,43 @@
 			value="Use screenshot as top level representation" lang="English"
 			key="use_screenshot_as_top_level_representation" />
 		<Localized id="60"
-			value="Use screenshot as top level representation" lang="Dutch"
+			value="Schermafbeelding gebruiken als voorstelling op het hoogste niveau" lang="Dutch"
 			key="use_screenshot_as_top_level_representation" />
 		<Localized id="61" value="Utiliser une capture d'écran"
 			lang="French" key="use_screenshot_as_top_level_representation" />
 		<Localized id="62" value="Width" lang="English" key="width" />
-		<Localized id="63" value="Width" lang="Dutch" key="width" />
+		<Localized id="63" value="Breedte" lang="Dutch" key="width" />
 		<Localized id="64" value="Largeur" lang="French" key="width" />
 		<Localized id="65" value="Height" lang="English"
 			key="height" />
-		<Localized id="66" value="Height" lang="Dutch" key="height" />
+		<Localized id="66" value="Hoogte" lang="Dutch" key="height" />
 		<Localized id="67" value="Hauteur" lang="French"
 			key="height" />
 		<Localized id="68"
 			value="Override default graphical representations" lang="English"
 			key="override_default_graphical_representations" />
 		<Localized id="69"
-			value="Override default graphical representations" lang="Dutch"
+			value="Standaard grafische voorstellingen overschrijven" lang="Dutch"
 			key="override_default_graphical_representations" />
 		<Localized id="70"
 			value="Surcharger la représentation par défaut" lang="French"
 			key="override_default_graphical_representations" />
 		<Localized id="71" value="Icon" lang="English" key="icon" />
-		<Localized id="72" value="Icon" lang="Dutch" key="icon" />
+		<Localized id="72" value="Pictogram" lang="Dutch" key="icon" />
 		<Localized id="73" value="Icone" lang="French" key="icon" />
 		<Localized id="74" value="Element name" lang="English"
 			key="element_name" />
-		<Localized id="75" value="Element name" lang="Dutch"
+		<Localized id="75" value="Naam van het element" lang="Dutch"
 			key="element_name" />
 		<Localized id="76" value="Nom de l'élément" lang="French"
 			key="element_name" />
 		<Localized id="77" value="Parent" lang="English"
 			key="parent" />
-		<Localized id="78" value="Parent" lang="Dutch" key="parent" />
+		<Localized id="78" value="Bovenliggend" lang="Dutch" key="parent" />
 		<Localized id="79" value="Parent" lang="French" key="parent" />
 		<Localized id="80" value="Assign to role" lang="English"
 			key="assign_to_role" />
-		<Localized id="81" value="Assign to role" lang="Dutch"
+		<Localized id="81" value="Toewijzen aan de rol" lang="Dutch"
 			key="assign_to_role" />
 		<Localized id="82" value="Assigner à" lang="French"
 			key="assign_to_role" />

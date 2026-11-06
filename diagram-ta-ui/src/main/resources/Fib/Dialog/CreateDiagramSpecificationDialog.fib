@@ -70,6 +70,6 @@
 		<Localized key="creates_new_diagram_specification" lang="French"
 			value="Créer une nouvelle Spécification de Diagramme" />
 		<Localized key="creates_new_diagram_specification" lang="Dutch"
-			value="creates_new_diagram_specification" />
+			value="Maakt een nieuwe diagramspecificatie" />
 	</LocalizedDictionary>
 </Panel>

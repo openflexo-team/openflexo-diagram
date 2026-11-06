@@ -24,12 +24,12 @@
    <LocalizedDictionary>
     <Localized key="creates_example_drawing_from_ppt_slide" lang="English" value="Create example drawing from Powerpoint slide" />
     <Localized key="creates_example_drawing_from_ppt_slide" lang="French" value="Créer un dessin à partir d'une diapositive Powerpoint" />
-    <Localized key="creates_example_drawing_from_ppt_slide" lang="Dutch" value="creates_example_drawing_from_ppt_slide" />
+    <Localized key="creates_example_drawing_from_ppt_slide" lang="Dutch" value="Voorbeeldtekening maken vanuit een PowerPoint-dia" />
     <Localized key="select_a_ppt_file" lang="English" value="Select a Powerpoint file" />
     <Localized key="select_a_ppt_file" lang="French" value="Sélectionner un fichier Powerpoint" />
-    <Localized key="select_a_ppt_file" lang="Dutch" value="select_a_ppt_file" />
+    <Localized key="select_a_ppt_file" lang="Dutch" value="Selecteer een PowerPoint-bestand" />
     <Localized key="slide_snapshot" lang="English" value="Slide snapshot" />
     <Localized key="slide_snapshot" lang="French" value="Aperçut de la diapositive" />
-    <Localized key="slide_snapshot" lang="Dutch" value="slide_snapshot" />
+    <Localized key="slide_snapshot" lang="Dutch" value="Momentopname van de dia" />
   </LocalizedDictionary>
 </Panel>

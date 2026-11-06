@@ -126,39 +126,39 @@
 	<LocalizedDictionary id="29">
 		<Localized id="30" lang="English" value="Creates shape from image file"
 			key="creates_shape_from_image_file" />
-		<Localized id="31" lang="Dutch" value="creates_shape_from_image_file"
+		<Localized id="31" lang="Dutch" value="Een vorm maken vanuit een afbeeldingsbestand"
 			key="creates_shape_from_image_file" />
 		<Localized id="32" lang="French"
 			value="Créer une forme à partir d'une image" key="creates_shape_from_image_file" />
 		<Localized id="33" lang="English" value="Image" key="image" />
-		<Localized id="34" lang="Dutch" value="image" key="image" />
+		<Localized id="34" lang="Dutch" value="Afbeelding" key="image" />
 		<Localized id="35" lang="French" value="Image" key="image" />
 		<Localized id="36" lang="English" value="Select an image"
 			key="select_an_image" />
-		<Localized id="37" lang="Dutch" value="select_an_image" key="select_an_image" />
+		<Localized id="37" lang="Dutch" value="Selecteer een afbeelding" key="select_an_image" />
 		<Localized id="38" lang="French" value="Sélectionner une image"
 			key="select_an_image" />
 		<Localized id="39" lang="English" value="Fit to shape" key="fit_to_shape" />
-		<Localized id="40" lang="Dutch" value="fit_to_shape" key="fit_to_shape" />
+		<Localized id="40" lang="Dutch" value="Aan de vorm aanpassen" key="fit_to_shape" />
 		<Localized id="41" lang="French" value="Adapter à la taille de la forme"
 			key="fit_to_shape" />
 		<Localized id="42" lang="English" value="Scale" key="scale" />
-		<Localized id="43" lang="Dutch" value="scale" key="scale" />
+		<Localized id="43" lang="Dutch" value="Schaal" key="scale" />
 		<Localized id="44" lang="French" value="Grossissement" key="scale" />
 		<Localized id="45" lang="English" value="x" key="x" />
-		<Localized id="46" lang="Dutch" value="x" key="x" />
+		<Localized id="46" lang="Dutch" value="Positie x" key="x" />
 		<Localized id="47" lang="French" value="x" key="x" />
 		<Localized id="48" lang="English" value="Delta" key="delta" />
-		<Localized id="49" lang="Dutch" value="delta" key="delta" />
+		<Localized id="49" lang="Dutch" value="Delta" key="delta" />
 		<Localized id="50" lang="French" value="Décalage" key="delta" />
 		<Localized id="51" lang="English" value="Background" key="background" />
-		<Localized id="52" lang="Dutch" value="Background" key="background" />
+		<Localized id="52" lang="Dutch" value="Achtergrond" key="background" />
 		<Localized id="53" lang="French" value="Fond" key="background" />
 		<Localized id="54" lang="English" value="Cancel" key="Cancel" />
 		<Localized id="55" lang="Dutch" value="Cancel" key="Cancel" />
 		<Localized id="56" lang="French" value="Annuler" key="Cancel" />
 		<Localized id="57" lang="English" value="Validate" key="Validate" />
-		<Localized id="58" lang="Dutch" value="Validate" key="Validate" />
+		<Localized id="58" lang="Dutch" value="Valideren" key="Validate" />
 		<Localized id="59" lang="French" value="Valider" key="Validate" />
 	</LocalizedDictionary>
 	<FIBVariable id="60"

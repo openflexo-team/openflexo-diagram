@@ -8,16 +8,16 @@
     <Localized key="validate" lang="French" value="Valider" />
     <Localized key="label" lang="French" value="Libellé" />
     <Localized key="Cancel" lang="French" value="Annuler" />
-    <Localized key="validate" lang="Dutch" value="Validate" />
+    <Localized key="validate" lang="Dutch" value="Valideren" />
     <Localized key="label" lang="Dutch" value="Label" />
     <Localized key="finish" lang="English" value="Finish" />
     <Localized key="finish" lang="French" value="Terminer" />
-    <Localized key="finish" lang="Dutch" value="Finish" />
+    <Localized key="finish" lang="Dutch" value="Voltooien" />
     <Localized key="back" lang="English" value="&lt;&lt; Back" />
     <Localized key="back" lang="French" value="&lt;&lt; Précédent" />
-    <Localized key="back" lang="Dutch" value="back" />
+    <Localized key="back" lang="Dutch" value="&lt;&lt; Terug" />
     <Localized key="next" lang="English" value="&gt;&gt; Next" />
     <Localized key="next" lang="French" value="&gt;&gt; Suivant" />
-    <Localized key="next" lang="Dutch" value="next" />
+    <Localized key="next" lang="Dutch" value="&gt;&gt; Volgende" />
   </LocalizedDictionary>
 </Panel>

@@ -22,6 +22,6 @@
    <LocalizedDictionary>
     <Localized key="create_example_diagram" lang="English" value="Create Example Diagram" />
     <Localized key="create_example_diagram" lang="French" value="Créer un Diagramme d'Exemple" />
-    <Localized key="create_example_diagram" lang="Dutch" value="create_example_diagram" />
+    <Localized key="create_example_diagram" lang="Dutch" value="Voorbeelddiagram maken" />
   </LocalizedDictionary>
 </Panel>

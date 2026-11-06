@@ -53,19 +53,19 @@
 	<LocalizedDictionary id="7">
 		<Localized id="8" lang="English"
 			value="Enable long focusing" key="enable_long_focusing" />
-		<Localized id="9" lang="Dutch" value="Enable long focusing"
+		<Localized id="9" lang="Dutch" value="Lang focussen activeren"
 			key="enable_long_focusing" />
 		<Localized id="10" lang="French"
 			value="Activer le contrôle maintenu" key="enable_long_focusing" />
 		<Localized id="11" lang="English"
 			value="Long focusing delay (ms)" key="long_focusing_delay_(ms)" />
 		<Localized id="12" lang="Dutch"
-			value="Long focusing delay (ms)" key="long_focusing_delay_(ms)" />
+			value="Vertraging voor lang focussen (ms)" key="long_focusing_delay_(ms)" />
 		<Localized id="13" lang="French"
 			value="Délai d'activation (ms)" key="long_focusing_delay_(ms)" />
 		<Localized id="14" lang="English" value="Long focusing"
 			key="long_focusing" />
-		<Localized id="15" lang="Dutch" value="Long focusing"
+		<Localized id="15" lang="Dutch" value="Lang focussen"
 			key="long_focusing" />
 		<Localized id="16" lang="French" value="Contrôles maintenus"
 			key="long_focusing" />

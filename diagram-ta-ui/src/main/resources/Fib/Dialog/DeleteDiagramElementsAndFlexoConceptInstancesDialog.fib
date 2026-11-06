@@ -32,13 +32,13 @@
   <LocalizedDictionary>
     <Localized key="validate" lang="English" value="Validate" />
     <Localized key="validate" lang="French" value="Valider" />
-    <Localized key="validate" lang="Dutch" value="Validate" />
+    <Localized key="validate" lang="Dutch" value="Valideren" />
     <Localized key="type" lang="English" value="Type" />
     <Localized key="delete" lang="English" value="Delete" />
     <Localized key="type" lang="French" value="Type" />
     <Localized key="delete" lang="French" value="Supprimer" />
     <Localized key="type" lang="Dutch" value="Type" />
-    <Localized key="delete" lang="Dutch" value="Delete" />
+    <Localized key="delete" lang="Dutch" value="Verwijderen" />
     <Localized key="delete_shema_elements" lang="French" value="Supprimer des éléments du shéma" />
     <Localized key="delete_shema_elements" lang="English" value="Delete shema elements" />
     <Localized key="confirmation_text" lang="French" value="Voulez vous supprimer ces éléments de la vue ?" />
@@ -48,12 +48,12 @@
     <Localized key="label" lang="French" value="Libellé" />
     <Localized key="select_all" lang="French" value="Sélectionner tout" />
     <Localized key="label" lang="Dutch" value="Label" />
-    <Localized key="select_all" lang="Dutch" value="Select all" />
+    <Localized key="select_all" lang="Dutch" value="Alles selecteren" />
     <Localized key="also_delete_following_ontologic_objects" lang="French" value="les objets ontologiques suivants seront supprimés" />
     <Localized key="also_delete_following_ontologic_objects" lang="English" value="also delete following ontologic objects" />
     <Localized key="show_objects_that_will_be_deleted" lang="English" value="Show objects that will be deleted" />
     <Localized key="show_objects_that_will_be_deleted" lang="French" value="Voir les objets qui vont être supprimés" />
-    <Localized key="show_objects_that_will_be_deleted" lang="Dutch" value="Show objects that will be deleted" />
+    <Localized key="show_objects_that_will_be_deleted" lang="Dutch" value="De te verwijderen objecten tonen" />
     <Localized key="delete_view_elements" lang="French" value="Supprimer des éléments de la vue" />
     <Localized key="delete_view_elements" lang="English" value="Delete view elements" />
   </LocalizedDictionary>
