@@ -73,6 +73,7 @@ import org.openflexo.technologyadapter.diagram.model.DiagramFactory;
 import org.openflexo.technologyadapter.diagram.model.DiagramShape;
 import org.openflexo.technologyadapter.diagram.model.action.AddConnector;
 import org.openflexo.technologyadapter.diagram.model.action.LinkSchemeAction;
+import org.openflexo.localization.LocalizedSwing;
 
 public class DrawEdgeControl extends MouseDragControlImpl<DiagramEditor> {
 
@@ -257,7 +258,7 @@ public class DrawEdgeControl extends MouseDragControlImpl<DiagramEditor> {
 								new DrawingEdgeActionListener((FMLControlledDiagramEditor) controller, startShape, endShape, linkScheme));
 						popup.add(menuItem);
 					}
-					JMenuItem menuItem = new JMenuItem(startObject.getLocales().localizedForKey("graphical_connector_only"));
+					JMenuItem menuItem = LocalizedSwing.bind(new JMenuItem(startObject.getLocales().localizedForKey("graphical_connector_only")), startObject.getLocales(), "graphical_connector_only");
 					menuItem.addActionListener(new ActionListener() {
 						@Override
 						public void actionPerformed(ActionEvent e) {

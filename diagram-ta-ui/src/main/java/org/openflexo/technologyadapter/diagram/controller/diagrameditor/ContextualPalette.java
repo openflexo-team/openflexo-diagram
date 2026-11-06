@@ -72,6 +72,7 @@ import org.openflexo.technologyadapter.diagram.model.DiagramContainerElement;
 import org.openflexo.technologyadapter.diagram.model.DiagramElement;
 import org.openflexo.technologyadapter.diagram.model.DiagramShape;
 import org.openflexo.technologyadapter.diagram.model.action.DropSchemeAction;
+import org.openflexo.localization.LocalizedSwing;
 
 public class ContextualPalette extends DiagramEditorPaletteModel implements PropertyChangeListener {
 
@@ -295,8 +296,8 @@ public class ContextualPalette extends DiagramEditorPaletteModel implements Prop
 		else if (applicableBindings.size() > 1) {
 			JPopupMenu popup = new JPopupMenu();
 			for (final FMLDiagramPaletteElementBinding binding : applicableBindings) {
-				JMenuItem menuItem = new JMenuItem(
-						binding.getDeclaringCompilationUnit().getLocalizedDictionary().localizedForKey(binding.getDropScheme().getName()));
+				JMenuItem menuItem = LocalizedSwing.bind(new JMenuItem(
+						binding.getDeclaringCompilationUnit().getLocalizedDictionary().localizedForKey(binding.getDropScheme().getName())), binding.getDeclaringCompilationUnit().getLocalizedDictionary(), binding.getDropScheme().getName());
 				menuItem.addActionListener(new DrawingShapeActionListener(editor, binding.getDropScheme(), container,
 						parentFlexoConceptInstance, parentShapeRole, paletteElement, dropLocation));
 				popup.add(menuItem);
