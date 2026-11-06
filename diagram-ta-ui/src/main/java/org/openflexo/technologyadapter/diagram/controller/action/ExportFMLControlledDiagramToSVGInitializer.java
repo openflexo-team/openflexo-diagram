@@ -58,7 +58,6 @@ import org.openflexo.foundation.action.FlexoActionFactory;
 import org.openflexo.foundation.action.FlexoActionRunnable;
 import org.openflexo.foundation.fml.rt.FlexoConceptInstance;
 import org.openflexo.icon.IconLibrary;
-import org.openflexo.localization.FlexoLocalization;
 import org.openflexo.swing.FlexoFileChooser;
 import org.openflexo.technologyadapter.diagram.controller.diagrameditor.DiagramEditor;
 import org.openflexo.technologyadapter.diagram.controller.diagrameditor.DiagramView;
@@ -70,6 +69,7 @@ import org.openflexo.view.controller.ControllerActionInitializer;
 import org.openflexo.view.controller.FlexoController;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
+import org.openflexo.localization.LocalizedDelegate;
 
 public class ExportFMLControlledDiagramToSVGInitializer
 		extends ActionInitializer<ExportFMLControlledDiagramToSVG, FlexoConceptInstance, FlexoConceptInstance> {
@@ -89,7 +89,7 @@ public class ExportFMLControlledDiagramToSVGInitializer
 			fileChooser.setCurrentDirectory(getController().getApplicationContext().getAdvancedPrefs().getLastVisitedDirectory());
 			fileChooser.setDialogTitle(getController().getFlexoLocales().localizedForKey("enter_file_to_export_(png,gif,jpg)"));
 			fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-			fileChooser.setFileFilter(new SVGFileFilter());
+			fileChooser.setFileFilter(new SVGFileFilter(action.getLocales()));
 
 			if (fileChooser.showSaveDialog() == JFileChooser.APPROVE_OPTION) {
 
@@ -101,7 +101,7 @@ public class ExportFMLControlledDiagramToSVGInitializer
 
 				action.setExportFile(f);
 				if (f.exists()) {
-					if (FlexoController.confirm(getController().getFlexoLocales().localizedForKey("file_exists_overwrite_?"))) {
+					if (FlexoController.confirm(action.getLocales().localizedForKey("file_exists_overwrite_?"))) {
 						return true;
 					}
 					else {
@@ -186,6 +186,12 @@ public class ExportFMLControlledDiagramToSVGInitializer
 
 	public static class SVGFileFilter extends FileFilter {
 
+		private final LocalizedDelegate locales;
+
+		public SVGFileFilter(LocalizedDelegate locales) {
+			this.locales = locales;
+		}
+
 		@Override
 		public boolean accept(File f) {
 			if (f.isDirectory()) {
@@ -196,7 +202,7 @@ public class ExportFMLControlledDiagramToSVGInitializer
 
 		@Override
 		public String getDescription() {
-			return FlexoLocalization.getMainLocalizer().localizedForKey("svg_files");
+			return locales.localizedForKey("svg_files");
 		}
 
 	}
