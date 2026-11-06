@@ -10,9 +10,6 @@
     <Localized id="8" lang="English" value="Virtual model name" key="virtual_model_name" />
     <Localized id="9" lang="Dutch" value="Virtual model name" key="virtual_model_name" />
     <Localized id="10" lang="French" value="Nom du VirtualModel" key="virtual_model_name" />
-    <Localized id="11" lang="English" value="Description" key="description" />
-    <Localized id="12" lang="Dutch" value="Description" key="description" />
-    <Localized id="13" lang="French" value="Description" key="description" />
     <Localized id="14" lang="English" value="What would you like to do ?" key="what_would_you_like_to_do" />
     <Localized id="15" lang="Dutch" value="What would you like to do ?" key="what_would_you_like_to_do" />
     <Localized id="16" lang="French" value="Que voulez vous faire ?" key="what_would_you_like_to_do" />

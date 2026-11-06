@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Panel layout="gridbag" titleFont="Lucida Grande,0,11" darkLevel="0" dataClassName="org.openflexo.technologyadapter.diagram.fml.action.CreateFMLDiagramPaletteElementBinding" controllerClassName="org.openflexo.view.controller.FlexoFIBController" font="Lucida Grande,0,11" width="800" height="500" name="main">
   <LocalizedDictionary>
-    <Localized key="uri" lang="English" value="URI" />
-    <Localized key="description" lang="English" value="Description" />
-    <Localized key="uri" lang="French" value="URI" />
-    <Localized key="description" lang="French" value="Description" />
-    <Localized key="uri" lang="Dutch" value="URI" />
-    <Localized key="description" lang="Dutch" value="Description" />
     <Localized key="flexo_concept" lang="French" value="Concept flexo" />
     <Localized key="flexo_concept" lang="English" value="Flexo concept" />
     <Localized key="validate" lang="English" value="Validate" />
