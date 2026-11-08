@@ -1,388 +1,252 @@
-use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
-use org.openflexo.foundation.fml.ta.FMLModelSlot;
-
 /**
- * 
- * @version 0.1
+ * Represents a VirtualModel as a class diagram (one box per FlexoConcept, one line per property).
+ * Instantiated by the FMLDiagrammingPlugin (action CreateFMLClassDiagram) with the resource of the represented VirtualModel.
+ *
+ * Migrated from the former FMLClassDiagram.fml.xml (CORE-F-8). Deliberate divergences from the XML, which carried 19
+ * validation errors:
+ * - the role 'concept' (now a keyword) is named 'flexoConcept';
+ * - the compartments 'behaviourCompartment' and 'containmentCompartment' have their own type (the XML typed all three
+ *   as PropertiesCompartmentGR), and the concrete compartments are no longer abstract, since they are instantiated;
+ * - FlexoPropertyGR receives the shape it is drawn in ('propertiesContainer' did not exist);
+ * - 'notify' names the notified property, and targets 'topLevelShape' ('conceptShape' did not exist);
+ * - in getY, the containment compartment is tested for null, not 'displayContainment' twice;
+ * - the containment of 'icon' follows its declared container (header) in both drop schemes;
+ * - the FMLModelSlot holds the compilation unit of the represented VirtualModel, as it always did at run time (the XML
+ *   assigned it the VirtualModel, which failed); 'virtualModel' is derived from it;
+ * - the debugging logs are dropped.
  */
-@VirtualModel(uri="http://openflexo.org/fml-diagramming/FMLClassDiagram.fml")
-public class FMLClassDiagram {
 
-  public Diagram diagram;
-  public VirtualModel virtualModel;
+use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot as DIAGRAM;
+use org.openflexo.foundation.fml.ta.FMLModelSlot as FMLTA;
 
-  @CreationScheme  
-  FMLClassDiagram:init(VirtualModelResource aVirtualModelResource) {  
-    diagram = CreateDiagram();    
-    virtualModel = parameters.aVirtualModelResource.virtualModel;  
-  }  
+import org.openflexo.foundation.fml.FMLCompilationUnit;
+import org.openflexo.foundation.fml.FlexoConcept;
+import org.openflexo.foundation.fml.FlexoProperty;
+import org.openflexo.foundation.fml.VirtualModel;
+import org.openflexo.foundation.fml.rm.CompilationUnitResource;
+import org.openflexo.technologyadapter.diagram.model.Diagram;
+import org.openflexo.technologyadapter.diagram.model.DiagramShape;
+import org.openflexo.technologyadapter.diagram.metamodel.DiagramSpecification;
 
+import DiagramSpecification CLASS_DIAGRAM_SPECIFICATION from ["http://openflexo.org/fml-diagramming/FMLClassDiagram.diagramspecification"];
+import Diagram EXAMPLE_DIAGRAM from ["http://openflexo.org/fml-diagramming/FMLClassDiagram.diagramspecification/ExampleDiagram.diagram"];
+import DiagramShape CONTAINER_SHAPE from [EXAMPLE_DIAGRAM:"SYL-2"];
+import DiagramShape HEADER_SHAPE from [EXAMPLE_DIAGRAM:"SYL-4"];
+import DiagramShape ICON_SHAPE from [EXAMPLE_DIAGRAM:"SYL-5"];
+import DiagramShape TITLE_SHAPE from [EXAMPLE_DIAGRAM:"SYL-6"];
+import DiagramShape COMPARTMENT_SHAPE from [EXAMPLE_DIAGRAM:"SYL-7"];
+import DiagramShape PROPERTY_SHAPE from [EXAMPLE_DIAGRAM:"SYL-12"];
 
-  @FlexoConcept  
-  public class FlexoConceptGR extends ContainerGR  {  
-  
-    public DiagramShape header;  
-    public DiagramShape icon;  
-    public DiagramShape title;  
-  
-    @DropScheme    
-    FlexoConceptGR:dropFlexoConceptGRAtTopLevel() {    
-      concept = virtualModel.CreateFlexoConcept();      
-      this.initContainerGR(true,true,false)      
-      header = diagram.AddShape();      
-      icon = diagram.AddShape();      
-      title = diagram.AddShape();      
-      topLevelShape.firePropertyChange invalidate    
-    }    
-  
-    @DeletionScheme    
-    Void delete() {    
-      delete header;      
-      delete icon;      
-      delete title;    
-    }    
-  
-    @DropScheme    
-    FlexoConceptGR:representFlexoConceptGRAtTopLevel(FlexoConcept aConcept) {    
-      this.initContainerGR(true,true,false)      
-      header = diagram.AddShape();      
-      icon = diagram.AddShape();      
-      title = diagram.AddShape();      
-      concept = parameters.aConcept;      
-      this.updateProperties()    
-    }    
-  
-    @ActionScheme    
-    public Void updateProperties() {    
-      log "updateProperties()"      
-      MatchingSet matchingSet = this.initiateMatching(FlexoPropertyGR);      
-      for (property : concept.declaredProperties) {      
-        log ("Pour la property " + property)        
-        FML@RT::MatchFlexoConceptInstance as FlexoPropertyGR match=(property=property) using FlexoPropertyGR:create(property)      
-      }      
-      matchingSet.finalizeMatching()      
-      conceptShape.firePropertyChange invalidate    
-    }    
-  
-  }  
+@URI("http://openflexo.org/fml-diagramming/FMLClassDiagram.fml")
+@Version("0.1")
+model FMLClassDiagram {
 
-  @FlexoConcept  
-  public class FlexoPropertyGR {  
-  
-    public DiagramShape propertyShape;  
-    public FlexoProperty property;  
-  
-    @DeletionScheme    
-    Void delete() {    
-      
-    }    
-  
-    @DropScheme    
-    FlexoPropertyGR:dropProperty() {    
-      
-    }    
-  
-    @CreationScheme    
-    FlexoPropertyGR:create(FlexoProperty<Object> aProperty) {    
-      property = parameters.aProperty;      
-      log ("Coucou je cree la property " + parameters.aProperty)      
-      propertyShape = diagram.AddShape();    
-    }    
-  
-  }  
+	Diagram diagram with TypedDiagram(
+			diagramSpecification=CLASS_DIAGRAM_SPECIFICATION,
+			templateDiagram=EXAMPLE_DIAGRAM,
+			isRequired=true,
+			paletteElementBindings={
+					PaletteElementBinding:(call=new FlexoConceptGR::dropFlexoConceptGRAtTopLevel(), paletteElementId="http://openflexo.org/fml-diagramming/FMLClassDiagram.diagramspecification/Palette.palette#FlexoConceptGR")
+			});
 
-  @FlexoConcept  
-  public class ContainerGR {  
-  
-    public PropertiesCompartmentGR propertyCompartment;  
-    public PropertiesCompartmentGR behaviourCompartment;  
-    public PropertiesCompartmentGR containmentCompartment;  
-    public boolean displayProperties;  
-    public boolean displayBehaviours;  
-    public boolean displayContainment;  
-    public DiagramShape topLevelShape;  
-    public FlexoConcept concept;  
-    @GetSetProperty(value="totalRequiredHeight", access=get)    
-    public Double getTotalRequiredHeight {    
-      log "Compute required height"      
-      Double returned = 20.0;      
-      if displayProperties {      
-        returned = (returned + propertyCompartment.requiredHeight);      
-      }      
-      if displayBehaviours {      
-        returned = (returned + behaviourCompartment.requiredHeight);      
-      }      
-      if displayContainment {      
-        returned = (returned + containmentCompartment.requiredHeight);      
-      }      
-      return returned;    
-    }  
-    @GetSetProperty(value="totalHeightSpan", access=get)    
-    public Double getTotalHeightSpan {    
-      log "Compute height span"      
-      Double returned = 0.0;      
-      if displayProperties {      
-        returned = (returned + propertyCompartment.heightSpan);      
-      }      
-      if displayBehaviours {      
-        returned = (returned + behaviourCompartment.heightSpan);      
-      }      
-      if displayContainment {      
-        returned = (returned + containmentCompartment.heightSpan);      
-      }      
-      return returned;    
-    }  
-    public double containerHeight;  
-  
-    @DeletionScheme    
-    Void delete() {    
-      
-    }    
-  
-    @ActionScheme    
-    Void initContainerGR(Boolean displayProperties, Boolean displayBehaviours, Boolean displayContainment) {    
-      containerHeight = 50.0;      
-      topLevelShape = diagram.AddShape();      
-      displayProperties = parameters.displayProperties;      
-      displayBehaviours = parameters.displayBehaviours;      
-      displayContainment = parameters.displayContainment;      
-      if displayProperties {      
-        log "Je cree le compartiment properties"        
-        propertyCompartment = PropertiesCompartmentGR.create(topLevelShape);      
-      }    
-    }    
-  
-  
-    @FlexoConcept    
-    public class CompartmentGR {    
-      
-          
-      abstract Double requiredHeight;    
-          
-      abstract Double heightSpan;    
-      public DiagramShape compartmentShape;    
-      
-      @ActionScheme      
-      Double getY(Double availableHeight) {      
-        Double returned = 20.0;        
-        if (concept = null) {        
-          return returned;        
-        }        
-        if (this = propertyCompartment) {        
-          return returned;        
-        }        
-        if (displayProperties & (propertyCompartment != null)) {        
-          returned = (returned + propertyCompartment.getHeight(parameters.availableHeight));        
-        }        
-        if (this = behaviourCompartment) {        
-          return returned;        
-        }        
-        if (displayBehaviours & (behaviourCompartment != null)) {        
-          returned = (returned + behaviourCompartment.getHeight(parameters.availableHeight));        
-        }        
-        if (this = containmentCompartment) {        
-          return returned;        
-        }        
-        if (displayContainment & (displayContainment != null)) {        
-          returned = (returned + containmentCompartment.getHeight(parameters.availableHeight));        
-        }        
-        return returned;      
-      }      
-      
-      @ActionScheme      
-      Double getHeight(Double availableHeight) {      
-        if (concept = null) {        
-          return parameters.availableHeight;        
-        }        
-        Double extraSpace = (parameters.availableHeight - totalRequiredHeight);        
-        return (requiredHeight + ((extraSpace * heightSpan) / totalHeightSpan));      
-      }      
-      
-      @ActionScheme      
-      Void init(DiagramShape topLevelShape) {      
-        log "Jusque ici ca va"        
-        log ("y=" + this.getY(100))        
-        log ("height=" + this.getHeight(100))        
-        compartmentShape = diagram.AddShape();      
-      }      
-      
-    }    
-  
-    @FlexoConcept    
-    public class PropertiesCompartmentGR extends CompartmentGR  {    
-      
-          
-      public Double requiredHeight = ((concept != null) ? ((concept.declaredProperties.size * 16) + 10.0) : 10.0);    
-          
-      public Double heightSpan = 10.0;    
-      
-      @CreationScheme      
-      PropertiesCompartmentGR:create(DiagramShape topLevelShape) {      
-        this.init(parameters.topLevelShape)      
-      }      
-      
-      @DeletionScheme      
-      Void delete() {      
-          
-      }      
-      
-    }    
-  
-    @FlexoConcept    
-    public class BehaviourCompartmentGR extends CompartmentGR  {    
-      
-          
-      public Double requiredHeight = ((concept != null) ? ((concept.declaredFlexoBehaviours.size * 16) + 10.0) : 10.0);    
-          
-      public Double heightSpan = 10.0;    
-      
-      @CreationScheme      
-      BehaviourCompartmentGR:create() {      
-          
-      }      
-      
-      @DeletionScheme      
-      Void delete() {      
-          
-      }      
-      
-    }    
-  
-    @FlexoConcept    
-    public class ContainmentCompartmentGR extends CompartmentGR  {    
-      
-          
-      public Double requiredHeight = 10.0;    
-          
-      public Double heightSpan = 80.0;    
-      
-      @CreationScheme      
-      ContainmentCompartmentGR:create() {      
-          
-      }      
-      
-      @DeletionScheme      
-      Void delete() {      
-          
-      }      
-      
-    }    
-  
-  }  
+	FMLCompilationUnit compilationUnit with FMLModelSlot(isRequired=true);
+	VirtualModel virtualModel values compilationUnit.virtualModel;
 
-  @FlexoConcept  
-  public class CompartmentGR {  
-  
-      
-    abstract Double requiredHeight;  
-      
-    abstract Double heightSpan;  
-    public DiagramShape compartmentShape;  
-  
-    @ActionScheme    
-    Double getY(Double availableHeight) {    
-      Double returned = 20.0;      
-      if (concept = null) {      
-        return returned;      
-      }      
-      if (this = propertyCompartment) {      
-        return returned;      
-      }      
-      if (displayProperties & (propertyCompartment != null)) {      
-        returned = (returned + propertyCompartment.getHeight(parameters.availableHeight));      
-      }      
-      if (this = behaviourCompartment) {      
-        return returned;      
-      }      
-      if (displayBehaviours & (behaviourCompartment != null)) {      
-        returned = (returned + behaviourCompartment.getHeight(parameters.availableHeight));      
-      }      
-      if (this = containmentCompartment) {      
-        return returned;      
-      }      
-      if (displayContainment & (displayContainment != null)) {      
-        returned = (returned + containmentCompartment.getHeight(parameters.availableHeight));      
-      }      
-      return returned;    
-    }    
-  
-    @ActionScheme    
-    Double getHeight(Double availableHeight) {    
-      if (concept = null) {      
-        return parameters.availableHeight;      
-      }      
-      Double extraSpace = (parameters.availableHeight - totalRequiredHeight);      
-      return (requiredHeight + ((extraSpace * heightSpan) / totalHeightSpan));    
-    }    
-  
-    @ActionScheme    
-    Void init(DiagramShape topLevelShape) {    
-      log "Jusque ici ca va"      
-      log ("y=" + this.getY(100))      
-      log ("height=" + this.getHeight(100))      
-      compartmentShape = diagram.AddShape();    
-    }    
-  
-  }  
+	create::init(CompilationUnitResource aVirtualModelResource) {
+		diagram = DIAGRAM::CreateDiagram(resourceName=(this.name + "Diagram"), resourceCenter=this.resourceCenter, relativePath=(parameters.aVirtualModelResource.parentPathRelativeToResourceCenter(this.resourceCenter) + "/.Diagrams"));
+		compilationUnit = parameters.aVirtualModelResource.compilationUnit;
+	}
 
-  @FlexoConcept  
-  public class PropertiesCompartmentGR extends CompartmentGR  {  
-  
-      
-    public Double requiredHeight = ((concept != null) ? ((concept.declaredProperties.size * 16) + 10.0) : 10.0);  
-      
-    public Double heightSpan = 10.0;  
-  
-    @CreationScheme    
-    PropertiesCompartmentGR:create(DiagramShape topLevelShape) {    
-      this.init(parameters.topLevelShape)    
-    }    
-  
-    @DeletionScheme    
-    Void delete() {    
-      
-    }    
-  
-  }  
+	abstract concept ContainerGR {
 
-  @FlexoConcept  
-  public class BehaviourCompartmentGR extends CompartmentGR  {  
-  
-      
-    public Double requiredHeight = ((concept != null) ? ((concept.declaredFlexoBehaviours.size * 16) + 10.0) : 10.0);  
-      
-    public Double heightSpan = 10.0;  
-  
-    @CreationScheme    
-    BehaviourCompartmentGR:create() {    
-      
-    }    
-  
-    @DeletionScheme    
-    Void delete() {    
-      
-    }    
-  
-  }  
+		DiagramShape topLevelShape with ShapeRole(metamodelElement=CONTAINER_SHAPE, exampleLabel="", height=containerHeight);
+		FlexoConcept flexoConcept with FlexoConceptRole(container=virtualModel);
 
-  @FlexoConcept  
-  public class ContainmentCompartmentGR extends CompartmentGR  {  
-  
-      
-    public Double requiredHeight = 10.0;  
-      
-    public Double heightSpan = 80.0;  
-  
-    @CreationScheme    
-    ContainmentCompartmentGR:create() {    
-      
-    }    
-  
-    @DeletionScheme    
-    Void delete() {    
-      
-    }    
-  
-  }  
+		PropertiesCompartmentGR propertyCompartment with ConceptInstance(virtualModelInstance=container);
+		BehaviourCompartmentGR behaviourCompartment with ConceptInstance(virtualModelInstance=container);
+		ContainmentCompartmentGR containmentCompartment with ConceptInstance(virtualModelInstance=container);
 
+		boolean displayProperties;
+		boolean displayBehaviours;
+		boolean displayContainment;
+		double containerHeight;
+
+		double totalRequiredHeight {
+			double get() {
+				double returned = 20.0;
+				if (displayProperties) {
+					returned = returned + propertyCompartment.requiredHeight;
+				}
+				if (displayBehaviours) {
+					returned = returned + behaviourCompartment.requiredHeight;
+				}
+				if (displayContainment) {
+					returned = returned + containmentCompartment.requiredHeight;
+				}
+				return returned;
+			}
+		};
+
+		double totalHeightSpan {
+			double get() {
+				double returned = 0.0;
+				if (displayProperties) {
+					returned = returned + propertyCompartment.heightSpan;
+				}
+				if (displayBehaviours) {
+					returned = returned + behaviourCompartment.heightSpan;
+				}
+				if (displayContainment) {
+					returned = returned + containmentCompartment.heightSpan;
+				}
+				return returned;
+			}
+		};
+
+		delete() {
+		}
+
+		void initContainerGR(boolean displayProperties, boolean displayBehaviours, boolean displayContainment) {
+			containerHeight = 50.0;
+			topLevelShape = DIAGRAM::AddShape(container=diagram) in diagram;
+			displayProperties = parameters.displayProperties;
+			displayBehaviours = parameters.displayBehaviours;
+			displayContainment = parameters.displayContainment;
+			if (displayProperties) {
+				propertyCompartment = this.new PropertiesCompartmentGR(topLevelShape);
+			}
+		}
+
+		abstract concept CompartmentGR {
+
+			abstract Double requiredHeight;
+			abstract Double heightSpan;
+
+			DiagramShape compartmentShape with ShapeRole(metamodelElement=COMPARTMENT_SHAPE);
+
+			double getY(double availableHeight) {
+				double returned = 20.0;
+				if (flexoConcept == null) {
+					return returned;
+				}
+				if (this == propertyCompartment) {
+					return returned;
+				}
+				if (displayProperties && propertyCompartment != null) {
+					returned = returned + propertyCompartment.getHeight(parameters.availableHeight);
+				}
+				if (this == behaviourCompartment) {
+					return returned;
+				}
+				if (displayBehaviours && behaviourCompartment != null) {
+					returned = returned + behaviourCompartment.getHeight(parameters.availableHeight);
+				}
+				if (this == containmentCompartment) {
+					return returned;
+				}
+				if (displayContainment && containmentCompartment != null) {
+					returned = returned + containmentCompartment.getHeight(parameters.availableHeight);
+				}
+				return returned;
+			}
+
+			double getHeight(double availableHeight) {
+				if (flexoConcept == null) {
+					return parameters.availableHeight;
+				}
+				double extraSpace = parameters.availableHeight - totalRequiredHeight;
+				return requiredHeight + extraSpace * heightSpan / totalHeightSpan;
+			}
+
+			void init(DiagramShape topLevelShape) {
+				compartmentShape = DIAGRAM::AddShape(container=parameters.topLevelShape) in diagram;
+			}
+		}
+
+		concept PropertiesCompartmentGR extends CompartmentGR {
+			Double requiredHeight values (flexoConcept != null ? flexoConcept.declaredProperties.size * 16 + 10.0 : 10.0);
+			Double heightSpan values 10.0;
+			create(DiagramShape topLevelShape) {
+				this.init(parameters.topLevelShape);
+			}
+			delete() {
+			}
+		}
+
+		concept BehaviourCompartmentGR extends CompartmentGR {
+			Double requiredHeight values (flexoConcept != null ? flexoConcept.declaredFlexoBehaviours.size * 16 + 10.0 : 10.0);
+			Double heightSpan values 10.0;
+			create() {
+			}
+			delete() {
+			}
+		}
+
+		concept ContainmentCompartmentGR extends CompartmentGR {
+			Double requiredHeight values 10.0;
+			Double heightSpan values 80.0;
+			create() {
+			}
+			delete() {
+			}
+		}
+	}
+
+	concept FlexoConceptGR extends ContainerGR {
+
+		DiagramShape header with ShapeRole(metamodelElement=HEADER_SHAPE, exampleLabel="");
+		DiagramShape icon with ShapeRole(metamodelElement=ICON_SHAPE, containerElement=header, exampleLabel="");
+		DiagramShape title with ShapeRole(metamodelElement=TITLE_SHAPE, containerElement=header, exampleLabel="Concept", label=flexoConcept.name);
+
+		FlexoConceptGR dropFlexoConceptGRAtTopLevel() with DropScheme(targetType=FMLClassDiagram) {
+			flexoConcept = FMLTA::CreateFlexoConcept(conceptName="Concept", container=virtualModel) in virtualModel;
+			this.initContainerGR(true, true, false);
+			header = DIAGRAM::AddShape(container=topLevelShape) in diagram;
+			icon = DIAGRAM::AddShape(container=header) in diagram;
+			title = DIAGRAM::AddShape(container=header) in diagram;
+			notify "invalidate" in topLevelShape;
+		}
+
+		FlexoConceptGR representFlexoConceptGRAtTopLevel(FlexoConcept aConcept) with DropScheme(targetType=FMLClassDiagram) {
+			this.initContainerGR(true, true, false);
+			header = DIAGRAM::AddShape(container=topLevelShape) in diagram;
+			icon = DIAGRAM::AddShape(container=header) in diagram;
+			title = DIAGRAM::AddShape(container=header) in diagram;
+			flexoConcept = parameters.aConcept;
+			this.updateProperties();
+		}
+
+		delete() {
+			delete header;
+			delete icon;
+			delete title;
+		}
+
+		public void updateProperties() {
+			MatchingSet matchingSet = begin match FlexoPropertyGR from container;
+			for (FlexoProperty property : flexoConcept.declaredProperties) {
+				match FlexoPropertyGR in matchingSet from container where (property=property)
+					unmatched: container.new FlexoPropertyGR(property, propertyCompartment.compartmentShape);
+			}
+			end match FlexoPropertyGR in matchingSet unmatched: delete();
+			notify "invalidate" in topLevelShape;
+		}
+	}
+
+	concept FlexoPropertyGR {
+
+		DiagramShape propertyShape with ShapeRole(metamodelElement=PROPERTY_SHAPE, exampleLabel="property", label=property.name);
+		FlexoProperty property with FlexoPropertyRole(container=virtualModel);
+
+		create(FlexoProperty aProperty, DiagramShape aContainer) {
+			property = parameters.aProperty;
+			propertyShape = DIAGRAM::AddShape(container=parameters.aContainer) in diagram;
+		}
+
+		FlexoPropertyGR dropProperty() with DropScheme(targetType=FlexoConceptGR) {
+		}
+
+		delete() {
+		}
+	}
 }

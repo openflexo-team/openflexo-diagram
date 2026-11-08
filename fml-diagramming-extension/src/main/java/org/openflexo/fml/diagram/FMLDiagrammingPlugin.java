@@ -143,7 +143,7 @@ public class FMLDiagrammingPlugin extends TechnologyAdapterPluginController<FMLT
 		if (object instanceof FlexoConceptInstance && ((FlexoConceptInstance) object).getFlexoConcept() != null
 				&& ((FlexoConceptInstance) object).getFlexoConcept().getName().equals("FlexoConceptGR")) {
 			try {
-				return (FlexoConcept) ((FlexoConceptInstance) object).execute("concept");
+				return (FlexoConcept) ((FlexoConceptInstance) object).execute("flexoConcept");
 			} catch (TypeMismatchException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

@@ -8,4 +8,5 @@ dependencies {
   // testing dep
    testImplementation ginaTest()
    testImplementation flexoUiTest()
+   testImplementation flexoFoundationTest()
 }

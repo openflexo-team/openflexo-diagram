@@ -123,7 +123,7 @@ public class TestDiagramFlexoConceptView extends OpenflexoFIBTestCase {
 
 		VirtualModelLibrary vpLib = serviceManager.getVirtualModelLibrary();
 		assertNotNull(vpLib);
-		viewPoint = vpLib.getVirtualModel("http://openflexo.org/test/TestResourceCenter/TestControlledDiagramViewPoint2.fml");
+		viewPoint = vpLib.getVirtualModel("http://openflexo.org/test/TestResourceCenter/TestControlledDiagramViewPoint.fml");
 		assertNotNull(viewPoint);
 		assertFalse(viewPoint.hasNature(FMLControlledDiagramVirtualModelNature.INSTANCE));
 
