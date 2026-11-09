@@ -46,8 +46,8 @@ import org.openflexo.connie.binding.IBindingPathElement;
 import org.openflexo.connie.expr.BindingPath;
 import org.openflexo.foundation.FlexoException;
 import org.openflexo.foundation.InvalidNameException;
-import org.openflexo.foundation.fml.FlexoBehaviourParameter;
-import org.openflexo.foundation.fml.FlexoBehaviourParameter.WidgetType;
+import org.openflexo.foundation.fml.FlexoBehaviourArgument;
+import org.openflexo.foundation.fml.FlexoBehaviourArgument.WidgetType;
 import org.openflexo.foundation.fml.FlexoConcept;
 import org.openflexo.foundation.fml.binding.ModelSlotBindingVariable;
 import org.openflexo.foundation.fml.binding.ModelSlotPathElement;
@@ -219,7 +219,7 @@ public class MapConnectorToIndividualStrategy extends FlexoConceptFromConnectorC
 		FlexoOntologyModelSlot<?, ?, ?, ?> flexoOntologyModelSlot = getFlexoOntologyModelSlot();
 
 		if (flexoOntologyModelSlot != null) {
-			FlexoBehaviourParameter uriParameter = getTransformationAction().getFactory().newParameter(newLinkScheme);
+			FlexoBehaviourArgument uriParameter = getTransformationAction().getFactory().newParameter(newLinkScheme);
 			uriParameter.setWidget(WidgetType.TEXT_FIELD);
 			try {
 				uriParameter.setName("uri");

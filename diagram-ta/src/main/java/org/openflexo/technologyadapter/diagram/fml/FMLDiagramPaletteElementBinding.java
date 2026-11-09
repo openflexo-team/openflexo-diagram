@@ -51,7 +51,7 @@ import org.openflexo.diana.control.PaletteElement;
 import org.openflexo.foundation.DataModification;
 import org.openflexo.foundation.fml.FMLModelFactory;
 import org.openflexo.foundation.fml.FlexoBehaviour;
-import org.openflexo.foundation.fml.FlexoBehaviourParameter;
+import org.openflexo.foundation.fml.FlexoBehaviourArgument;
 import org.openflexo.foundation.fml.FlexoConcept;
 import org.openflexo.foundation.fml.FlexoConceptObject;
 import org.openflexo.foundation.fml.VirtualModel;
@@ -480,7 +480,7 @@ public interface FMLDiagramPaletteElementBinding extends FlexoConceptObject {
 			unusedParameterInstances.addAll(getParameters());
 
 			for (FlexoBehaviour es : boundFlexoConcept.getFlexoBehaviours()) {
-				for (FlexoBehaviourParameter parameter : es.getParameters()) {
+				for (FlexoBehaviourArgument parameter : es.getParameters()) {
 					FMLDiagramPaletteElementBindingParameter parameterInstance = getParameter(parameter.getName());
 					if (parameterInstance != null) {
 						unusedParameterInstances.remove(parameterInstance);

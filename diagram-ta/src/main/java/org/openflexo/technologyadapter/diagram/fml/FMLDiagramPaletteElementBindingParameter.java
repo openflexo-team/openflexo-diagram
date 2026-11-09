@@ -58,7 +58,7 @@ public interface FMLDiagramPaletteElementBindingParameter extends BehaviourCallA
 
 	// @PropertyIdentifier(type = FMLDiagramPaletteElementBinding.class)
 	// public static final String PALETTE_ELEMENT_BINDING_KEY = "paletteElementBinding";
-	/*@PropertyIdentifier(type = FlexoBehaviourParameter.class)
+	/*@PropertyIdentifier(type = FlexoBehaviourArgument.class)
 	public static final String PARAMETER_KEY = "parameter";
 	@PropertyIdentifier(type = DataBinding.class)
 	public static final String VALUE_KEY = "value";*/
@@ -71,10 +71,10 @@ public interface FMLDiagramPaletteElementBindingParameter extends BehaviourCallA
 	public void setDiagramPaletteElementBinding(FMLDiagramPaletteElementBinding diagramPaletteElementBinding);*/
 
 	/*@Getter(PARAMETER_KEY)
-	public FlexoBehaviourParameter getParameter();
+	public FlexoBehaviourArgument getParameter();
 	
 	@Setter(PARAMETER_KEY)
-	public void setParameter(FlexoBehaviourParameter parameter);
+	public void setParameter(FlexoBehaviourArgument parameter);
 	
 	@Override
 	@Getter(value = VALUE_KEY)
@@ -96,7 +96,7 @@ public interface FMLDiagramPaletteElementBindingParameter extends BehaviourCallA
 			return null;
 		}
 
-		/*private FlexoBehaviourParameter _parameter;
+		/*private FlexoBehaviourArgument _parameter;
 		// private FMLDiagramPaletteElementBinding elementBinding;
 		private String value;
 		
@@ -104,7 +104,7 @@ public interface FMLDiagramPaletteElementBindingParameter extends BehaviourCallA
 			super();
 		}
 		
-		public FMLDiagramPaletteElementBindingParameterImpl(FlexoBehaviourParameter p) {
+		public FMLDiagramPaletteElementBindingParameterImpl(FlexoBehaviourArgument p) {
 			super();
 			_parameter = p;
 			setName(p.getName());
@@ -159,12 +159,12 @@ public interface FMLDiagramPaletteElementBindingParameter extends BehaviourCallA
 		}*/
 
 		/*@Override
-			public FlexoBehaviourParameter getParameter() {
+			public FlexoBehaviourArgument getParameter() {
 				return _parameter;
 			}
 		
 		@Override
-			public void setParameter(FlexoBehaviourParameter parameter) {
+			public void setParameter(FlexoBehaviourArgument parameter) {
 				_parameter = parameter;
 			}
 		
