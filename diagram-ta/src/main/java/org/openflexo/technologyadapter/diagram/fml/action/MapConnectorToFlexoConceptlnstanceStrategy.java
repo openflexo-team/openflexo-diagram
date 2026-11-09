@@ -52,7 +52,8 @@ import org.openflexo.foundation.fml.rt.AbstractFMLRTModelSlot;
 import org.openflexo.foundation.fml.rt.FMLRTVirtualModelInstance;
 import org.openflexo.foundation.fml.rt.FlexoConceptInstance;
 import org.openflexo.foundation.fml.rt.VirtualModelInstance;
-import org.openflexo.foundation.fml.rt.editionaction.AddFlexoConceptInstance;
+import org.openflexo.foundation.fml.CreationScheme;
+import org.openflexo.foundation.fml.editionaction.ExpressionAction;
 import org.openflexo.foundation.technologyadapter.ModelSlot;
 import org.openflexo.technologyadapter.diagram.fml.LinkScheme;
 import org.openflexo.technologyadapter.diagram.model.DiagramConnector;
@@ -185,13 +186,16 @@ public class MapConnectorToFlexoConceptlnstanceStrategy extends FlexoConceptFrom
 	protected void initializeLinkScheme(LinkScheme newLinkScheme) {
 		super.initializeLinkScheme(newLinkScheme);
 
-		// AddFlexoConceptInstance action
-		AddFlexoConceptInstance<?> newAddFCI = getTransformationAction().getFactory().newInstance(AddFlexoConceptInstance.class);
-		newAddFCI.setReceiver(new DataBinding<>(getVirtualModelInstance().toString()));
-		newAddFCI.setFlexoConceptType(getTypeConcept());
+		// Instantiation of the concept: <vmi>.new Concept[::scheme]()
+		String creation = getTypeConcept() != null ? getTypeConcept().getName() : "";
 		if (getTypeConcept() != null && getTypeConcept().getCreationSchemes().size() > 0) {
-			newAddFCI.setCreationScheme(getTypeConcept().getCreationSchemes().get(0));
+			CreationScheme creationScheme = getTypeConcept().getCreationSchemes().get(0);
+			if (!creationScheme.isAnonymous()) {
+				creation = creation + "::" + creationScheme.getName();
+			}
 		}
+		ExpressionAction<FlexoConceptInstance> newAddFCI = getTransformationAction().getFactory()
+				.newExpressionAction(getVirtualModelInstance() + ".new " + creation + "()");
 
 		AssignationAction<FlexoConceptInstance> assignationAction = getTransformationAction().getFactory().newAssignationAction(newAddFCI);
 		assignationAction.setAssignation(new DataBinding<>(getFlexoConceptInstanceRoleName()));
