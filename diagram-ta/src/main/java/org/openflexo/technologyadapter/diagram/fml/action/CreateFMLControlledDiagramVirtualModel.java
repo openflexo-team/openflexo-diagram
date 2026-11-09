@@ -163,7 +163,6 @@ public class CreateFMLControlledDiagramVirtualModel extends AbstractCreateNature
 		performSetParentConcepts();
 		performCreateProperties();
 		performCreateBehaviours();
-		performCreateInspectors();
 		performPostProcessings();
 
 		// newVirtualModel = VirtualModelImpl.newVirtualModel(newVirtualModelName, getFocusedObject());

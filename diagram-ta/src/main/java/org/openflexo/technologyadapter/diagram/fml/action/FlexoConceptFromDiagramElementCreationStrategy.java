@@ -48,7 +48,6 @@ import org.openflexo.foundation.InvalidNameException;
 import org.openflexo.foundation.action.transformation.FlexoConceptCreationStrategy;
 import org.openflexo.foundation.fml.FlexoBehaviour;
 import org.openflexo.foundation.fml.FlexoConcept;
-import org.openflexo.foundation.fml.inspector.FlexoConceptInspector;
 import org.openflexo.technologyadapter.diagram.fml.ConnectorRole;
 import org.openflexo.technologyadapter.diagram.fml.DropScheme;
 import org.openflexo.technologyadapter.diagram.fml.GraphicalElementRole;
@@ -135,56 +134,6 @@ public abstract class FlexoConceptFromDiagramElementCreationStrategy<A extends D
 			}
 		}
 		// newFlexoConcept.setPrimaryRepresentationRole(primaryRepresentationRole);
-
-		// Add inspector
-		FlexoConceptInspector inspector = newFlexoConcept.getOrCreateInspector();
-		inspector.setInspectorTitle(getFlexoConceptName());
-
-		/*for (PropertyEntry e : propertyEntries) {
-				if (e.selectEntry) {
-					if (e.property instanceof IFlexoOntologyObjectProperty) {
-						IFlexoOntologyConcept range = ((IFlexoOntologyObjectProperty) e.property).getRange();
-						if (range instanceof IFlexoOntologyClass) {
-							InspectorEntry newInspectorEntry = null;
-							newInspectorEntry = new TextFieldInspectorEntry(builder);
-							newInspectorEntry.setName(e.property.getName());
-							newInspectorEntry.setLabel(e.label);
-							newInspectorEntry.setIsReadOnly(true);
-							newInspectorEntry.setData(new DataBinding<Object>(e.property.getName() + ".uriName"));
-							inspector.addToEntries(newInspectorEntry);
-						}
-					} else if (e.property instanceof IFlexoOntologyDataProperty) {
-						InspectorEntry newInspectorEntry = null;
-						switch (((IFlexoOntologyDataProperty) e.property).getRange().getBuiltInDataType()) {
-						case Boolean:
-							newInspectorEntry = new CheckboxInspectorEntry(builder);
-							break;
-						case Byte:
-						case Integer:
-						case Long:
-						case Short:
-							newInspectorEntry = new IntegerInspectorEntry(builder);
-							break;
-						case Double:
-						case Float:
-							newInspectorEntry = new FloatInspectorEntry(builder);
-							break;
-						case String:
-							newInspectorEntry = new TextFieldInspectorEntry(builder);
-							break;
-						default:
-							logger.warning("Not handled: " + ((IFlexoOntologyDataProperty) e.property).getRange());
-						}
-						if (newInspectorEntry != null) {
-							newInspectorEntry.setName(e.property.getName());
-							newInspectorEntry.setLabel(e.label);
-							newInspectorEntry.setData(new DataBinding<Object>(getIndividualFlexoRoleName() + "."
-									+ e.property.getName()));
-							inspector.addToEntries(newInspectorEntry);
-						}
-					}
-				}
-			}*/
 
 		return newFlexoConcept;
 	}

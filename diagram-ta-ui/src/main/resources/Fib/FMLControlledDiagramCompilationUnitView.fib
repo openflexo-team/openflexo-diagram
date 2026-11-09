@@ -145,8 +145,6 @@
 				icon="controller.iconForObject(virtualModel)"
 				label="virtualModel.name" editableLabel="virtualModel.name"
 				isEditable="false" name="virtualModel">
-				<Children id="37" data="virtualModel.inspector"
-					name="inspector" />
 				<Children id="38" data="virtualModel.structuralFacet"
 					name="structural" />
 				<Children id="39" data="virtualModel.behaviouralFacet"
@@ -315,20 +313,6 @@
 					method="controller.deleteFlexoConceptObject(selected)"
 					name="delete_action" />
 			</BrowserElement>
-			<BrowserElement id="84"
-				dataClassName="org.openflexo.foundation.fml.inspector.FlexoConceptInspector"
-				icon="controller.iconForObject(inspector)"
-				label="&quot;Inspector&quot;" isEditable="false" name="inspector">
-				<Children id="85" data="inspector.entries" name="entries" />
-				<BrowserAddAction id="86"
-					method="controller.createInspectorEntry(selected)"
-					name="add_inspector_entry" />
-			</BrowserElement>
-			<BrowserElement id="87"
-				dataClassName="org.openflexo.foundation.fml.inspector.InspectorEntry"
-				icon="controller.iconForObject(inspectorEntry)"
-				label="inspectorEntry.name" editableLabel="inspectorEntry.name"
-				isEditable="false" name="inspectorEntry" />
 			<BrowserElement id="90"
 				dataClassName="org.openflexo.foundation.fml.FlexoConceptStructuralFacet"
 				icon="controller.iconForObject(flexoConceptStructuralFacet)"
