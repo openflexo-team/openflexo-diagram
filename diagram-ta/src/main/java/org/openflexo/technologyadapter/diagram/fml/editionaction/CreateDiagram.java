@@ -57,8 +57,6 @@ import org.openflexo.pamela.annotations.ImplementationClass;
 import org.openflexo.pamela.annotations.ModelEntity;
 import org.openflexo.pamela.annotations.PropertyIdentifier;
 import org.openflexo.pamela.annotations.Setter;
-import org.openflexo.pamela.annotations.XMLAttribute;
-import org.openflexo.pamela.annotations.XMLElement;
 import org.openflexo.pamela.exceptions.ModelDefinitionException;
 import org.openflexo.technologyadapter.diagram.DiagramModelSlot;
 import org.openflexo.technologyadapter.diagram.DiagramTechnologyAdapter;
@@ -74,7 +72,6 @@ import org.openflexo.toolbox.StringUtils;
 
 @ModelEntity
 @ImplementationClass(CreateDiagram.CreateDiagramImpl.class)
-@XMLElement
 @FML(
 		value = "CreateDiagram",
 		description = "<html>This edition primitive addresses the creation of a new diagram.<br>"
@@ -97,7 +94,6 @@ public interface CreateDiagram extends AbstractCreateResource<DiagramModelSlot, 
 	public static final String DIAGRAM_URI_KEY = "diagramURI";
 
 	@Getter(value = DIAGRAM_NAME_KEY)
-	@XMLAttribute
 	@Deprecated // Use getResourceName()
 	public DataBinding<String> getDiagramName();
 
@@ -106,7 +102,6 @@ public interface CreateDiagram extends AbstractCreateResource<DiagramModelSlot, 
 	public void setDiagramName(DataBinding<String> diagramName);
 
 	@Getter(value = DIAGRAM_URI_KEY)
-	@XMLAttribute
 	@Deprecated // Use getResourceURI()
 	public DataBinding<String> getDiagramURI();
 
@@ -115,7 +110,6 @@ public interface CreateDiagram extends AbstractCreateResource<DiagramModelSlot, 
 	public void setDiagramURI(DataBinding<String> diagramURI);
 
 	@Getter(value = DIAGRAM_SPECIFICATION_URI_KEY)
-	@XMLAttribute
 	public String getDiagramSpecificationURI();
 
 	@Setter(DIAGRAM_SPECIFICATION_URI_KEY)

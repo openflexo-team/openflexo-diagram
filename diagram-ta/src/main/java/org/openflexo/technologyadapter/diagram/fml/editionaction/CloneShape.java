@@ -44,7 +44,6 @@ import org.openflexo.foundation.fml.annotations.FML;
 import org.openflexo.gina.annotation.FIBPanel;
 import org.openflexo.pamela.annotations.ImplementationClass;
 import org.openflexo.pamela.annotations.ModelEntity;
-import org.openflexo.pamela.annotations.XMLElement;
 
 /**
  * This edition primitive addresses the duplication of a shape
@@ -55,7 +54,6 @@ import org.openflexo.pamela.annotations.XMLElement;
 @FIBPanel("Fib/CloneShapePanel.fib")
 @ModelEntity
 @ImplementationClass(CloneShape.CloneShapeImpl.class)
-@XMLElement
 @FML("CloneShape")
 public interface CloneShape extends AddShape {
 

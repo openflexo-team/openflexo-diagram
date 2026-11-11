@@ -52,8 +52,6 @@ import org.openflexo.pamela.annotations.ModelEntity;
 import org.openflexo.pamela.annotations.PropertyIdentifier;
 import org.openflexo.pamela.annotations.Setter;
 import org.openflexo.pamela.annotations.Updater;
-import org.openflexo.pamela.annotations.XMLAttribute;
-import org.openflexo.pamela.annotations.XMLElement;
 import org.openflexo.technologyadapter.diagram.fml.binding.DrawRectangleBindingModel;
 import org.openflexo.toolbox.StringUtils;
 
@@ -66,7 +64,6 @@ import org.openflexo.toolbox.StringUtils;
 @FIBPanel("Fib/DrawRectangleSchemePanel.fib")
 @ModelEntity
 @ImplementationClass(DrawRectangleScheme.DrawRectangleSchemeImpl.class)
-@XMLElement
 @FML("DrawRectangleScheme")
 public interface DrawRectangleScheme extends AbstractCreationScheme, DiagramFlexoBehaviour {
 
@@ -126,7 +123,6 @@ public interface DrawRectangleScheme extends AbstractCreationScheme, DiagramFlex
 	@FMLMigration
 	@Deprecated
 	@Getter(value = TARGET_KEY)
-	@XMLAttribute
 	public String _getTarget();
 
 	@FMLMigration
@@ -137,7 +133,6 @@ public interface DrawRectangleScheme extends AbstractCreationScheme, DiagramFlex
 	@FMLMigration
 	@Deprecated
 	@Getter(value = CHILDREN_KEY)
-	@XMLAttribute
 	public String _getChildren();
 
 	@FMLMigration
@@ -149,7 +144,6 @@ public interface DrawRectangleScheme extends AbstractCreationScheme, DiagramFlex
 	 * Whether the objects enclosed in the drawn rectangle are offered to the behaviour as the "selection" variable
 	 */
 	@Getter(value = SELECT_OBJECTS_KEY, defaultValue = "false")
-	@XMLAttribute
 	@FMLAttribute(value = SELECT_OBJECTS_KEY, required = false)
 	public boolean getSelectObjects();
 

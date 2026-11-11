@@ -64,8 +64,6 @@ import org.openflexo.pamela.annotations.ImplementationClass;
 import org.openflexo.pamela.annotations.ModelEntity;
 import org.openflexo.pamela.annotations.PropertyIdentifier;
 import org.openflexo.pamela.annotations.Setter;
-import org.openflexo.pamela.annotations.XMLAttribute;
-import org.openflexo.pamela.annotations.XMLElement;
 import org.openflexo.pamela.validation.FixProposal;
 import org.openflexo.pamela.validation.ValidationError;
 import org.openflexo.pamela.validation.ValidationIssue;
@@ -88,7 +86,6 @@ import org.openflexo.technologyadapter.diagram.model.DiagramShape;
  */
 @ModelEntity
 @ImplementationClass(AddShape.AddShapeImpl.class)
-@XMLElement
 @FML(
 		value = "AddShape",
 		description = "<html>This edition primitive addresses the creation of a new shape in a diagram.</html>",
@@ -108,7 +105,6 @@ public interface AddShape extends AddDiagramElementAction<DiagramShape> {
 	public static final String EXTEND_PARENT_BOUNDS_TO_HOST_THIS_SHAPE_KEY = "extendParentBoundsToHostThisShape";
 
 	@Getter(value = CONTAINER_KEY)
-	@XMLAttribute
 	@FMLAttribute(value = CONTAINER_KEY, required = true, description = "<html>container for newly created shape</html>")
 	public DataBinding<DiagramContainerElement<?>> getContainer();
 
@@ -116,7 +112,6 @@ public interface AddShape extends AddDiagramElementAction<DiagramShape> {
 	public void setContainer(DataBinding<DiagramContainerElement<?>> container);
 
 	@Getter(value = EXTEND_PARENT_BOUNDS_TO_HOST_THIS_SHAPE_KEY, defaultValue = "false")
-	@XMLAttribute
 	@FMLAttribute(
 			value = EXTEND_PARENT_BOUNDS_TO_HOST_THIS_SHAPE_KEY,
 			defaultValue = "false",

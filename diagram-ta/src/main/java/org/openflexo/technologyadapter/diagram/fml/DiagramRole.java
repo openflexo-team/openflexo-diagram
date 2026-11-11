@@ -53,8 +53,6 @@ import org.openflexo.pamela.annotations.ImplementationClass;
 import org.openflexo.pamela.annotations.ModelEntity;
 import org.openflexo.pamela.annotations.PropertyIdentifier;
 import org.openflexo.pamela.annotations.Setter;
-import org.openflexo.pamela.annotations.XMLAttribute;
-import org.openflexo.pamela.annotations.XMLElement;
 import org.openflexo.pamela.validation.ValidationError;
 import org.openflexo.pamela.validation.ValidationIssue;
 import org.openflexo.pamela.validation.ValidationRule;
@@ -66,7 +64,6 @@ import org.openflexo.toolbox.StringUtils;
 
 @ModelEntity
 @ImplementationClass(DiagramRole.DiagramRoleImpl.class)
-@XMLElement
 @FML("DiagramRole")
 public interface DiagramRole extends GraphicalElementRole<Diagram, DrawingGraphicalRepresentation> {
 
@@ -74,7 +71,6 @@ public interface DiagramRole extends GraphicalElementRole<Diagram, DrawingGraphi
 	public static final String DIAGRAM_SPECIFICATION_URI_KEY = "diagramSpecificationURI";
 
 	@Getter(value = DIAGRAM_SPECIFICATION_URI_KEY)
-	@XMLAttribute
 	public String getDiagramSpecificationURI();
 
 	@Setter(DIAGRAM_SPECIFICATION_URI_KEY)

@@ -71,8 +71,6 @@ import org.openflexo.pamela.annotations.ModelEntity;
 import org.openflexo.pamela.annotations.PropertyIdentifier;
 import org.openflexo.pamela.annotations.Remover;
 import org.openflexo.pamela.annotations.Setter;
-import org.openflexo.pamela.annotations.XMLAttribute;
-import org.openflexo.pamela.annotations.XMLElement;
 import org.openflexo.pamela.validation.ValidationError;
 import org.openflexo.pamela.validation.ValidationIssue;
 import org.openflexo.pamela.validation.ValidationRule;
@@ -171,7 +169,6 @@ public abstract interface GraphicalElementRole<T extends DiagramElement<GR>, GR 
 	String TRANSPARENCY_KEY = "transparency";
 
 	@Getter(EXAMPLE_LABEL_KEY)
-	@XMLAttribute
 	@FMLAttribute(EXAMPLE_LABEL_KEY)
 	public String getExampleLabel();
 
@@ -179,7 +176,6 @@ public abstract interface GraphicalElementRole<T extends DiagramElement<GR>, GR 
 	public void setExampleLabel(String exampleLabel);
 
 	@Getter(value = ACTIONS_KEY, cardinality = Cardinality.LIST, inverse = GraphicalElementAction.GRAPHICAL_ELEMENT_ROLE_KEY)
-	@XMLElement
 	public List<GraphicalElementAction> getActions();
 
 	@Setter(ACTIONS_KEY)
@@ -192,7 +188,6 @@ public abstract interface GraphicalElementRole<T extends DiagramElement<GR>, GR 
 	public void removeFromActions(GraphicalElementAction aAction);
 
 	@Getter(value = DECLARED_GRSPECIFICATIONS_KEY, cardinality = Cardinality.LIST)
-	@XMLElement
 	public List<GraphicalElementSpecification<?, GR>> _getDeclaredGRSpecifications();
 
 	@Setter(DECLARED_GRSPECIFICATIONS_KEY)
@@ -212,7 +207,6 @@ public abstract interface GraphicalElementRole<T extends DiagramElement<GR>, GR 
 	public void setMetamodelElement(T anElement);
 
 	@Getter(value = METAMODEL_ELEMENT_REFERENCE_KEY, isStringConvertable = true)
-	@XMLAttribute
 	public FlexoObjectReference<T> getMetamodelElementReference();
 
 	@Setter(METAMODEL_ELEMENT_REFERENCE_KEY)

@@ -61,8 +61,6 @@ import org.openflexo.pamela.annotations.ImplementationClass;
 import org.openflexo.pamela.annotations.ModelEntity;
 import org.openflexo.pamela.annotations.PropertyIdentifier;
 import org.openflexo.pamela.annotations.Setter;
-import org.openflexo.pamela.annotations.XMLAttribute;
-import org.openflexo.pamela.annotations.XMLElement;
 import org.openflexo.pamela.validation.FixProposal;
 import org.openflexo.pamela.validation.ValidationError;
 import org.openflexo.pamela.validation.ValidationIssue;
@@ -80,7 +78,6 @@ import org.openflexo.technologyadapter.diagram.model.DiagramShape;
 
 @ModelEntity
 @ImplementationClass(GraphicalAction.GraphicalActionImpl.class)
-@XMLElement
 @FML("GraphicalAction")
 public interface GraphicalAction extends DiagramAction<TypedDiagramModelSlot, DiagramElement<?>> {
 
@@ -92,7 +89,6 @@ public interface GraphicalAction extends DiagramAction<TypedDiagramModelSlot, Di
 	public static final String GRAPHICAL_FEATURE_NAME_KEY = "graphicalFeatureName";
 
 	@Getter(value = SUBJECT_KEY)
-	@XMLAttribute
 	@FMLAttribute(value = SUBJECT_KEY, required = true, description = "<html>the diagram element whose graphical feature is set</html>")
 	public DataBinding<DiagramElement<?>> getSubject();
 
@@ -100,7 +96,6 @@ public interface GraphicalAction extends DiagramAction<TypedDiagramModelSlot, Di
 	public void setSubject(DataBinding<DiagramElement<?>> subject);
 
 	@Getter(value = VALUE_KEY)
-	@XMLAttribute
 	@FMLAttribute(value = VALUE_KEY, required = true, description = "<html>value to be set for that graphical feature</html>")
 	public DataBinding<Object> getValue();
 
@@ -108,7 +103,6 @@ public interface GraphicalAction extends DiagramAction<TypedDiagramModelSlot, Di
 	public void setValue(DataBinding<Object> value);
 
 	@Getter(value = GRAPHICAL_FEATURE_NAME_KEY)
-	@XMLAttribute(xmlTag = "feature")
 	@FMLAttribute(value = GRAPHICAL_FEATURE_NAME_KEY, required = true, description = "<html>name of the graphical feature to set (eg 'label')</html>")
 	public String _getGraphicalFeatureName();
 

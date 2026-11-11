@@ -70,8 +70,6 @@ import org.openflexo.pamela.annotations.PropertyIdentifier;
 import org.openflexo.pamela.annotations.Reindexer;
 import org.openflexo.pamela.annotations.Remover;
 import org.openflexo.pamela.annotations.Setter;
-import org.openflexo.pamela.annotations.XMLAttribute;
-import org.openflexo.pamela.annotations.XMLElement;
 import org.openflexo.pamela.exceptions.ModelDefinitionException;
 import org.openflexo.technologyadapter.diagram.fml.ConnectorRole;
 import org.openflexo.technologyadapter.diagram.fml.DiagramNavigationScheme;
@@ -105,7 +103,6 @@ import org.openflexo.technologyadapter.diagram.rm.DiagramResourceFactory;
 @DeclareFetchRequests({})
 @ModelEntity
 @ImplementationClass(TypedDiagramModelSlot.TypedDiagramModelSlotImpl.class)
-@XMLElement
 @FML(
 		value = "TypedDiagram",
 		description = "<html>This ModelSlot represents access to a Diagram conform to a DiagramSpecification<br>"
@@ -135,7 +132,6 @@ public interface TypedDiagramModelSlot extends TypeAwareModelSlot<Diagram, Diagr
 	/*@Getter(value = GRAPHICAL_REPRESENTATION_KEY)
 	@CloningStrategy(StrategyType.CLONE)
 	@Embedded
-	@XMLElement
 	public DrawingGraphicalRepresentation getGraphicalRepresentation();
 	
 	@Setter(GRAPHICAL_REPRESENTATION_KEY)
@@ -145,7 +141,6 @@ public interface TypedDiagramModelSlot extends TypeAwareModelSlot<Diagram, Diagr
 			value = PALETTE_ELEMENTS_BINDING_KEY,
 			cardinality = Cardinality.LIST,
 			inverse = FMLDiagramPaletteElementBinding.DIAGRAM_MODEL_SLOT_KEY)
-	@XMLElement
 	@FMLAttribute(value = PALETTE_ELEMENTS_BINDING_KEY, kind = AttributeKind.InstancesList)
 	@Embedded
 	public List<FMLDiagramPaletteElementBinding> getPaletteElementBindings();
@@ -186,14 +181,12 @@ public interface TypedDiagramModelSlot extends TypeAwareModelSlot<Diagram, Diagr
 	public void setTemplateDiagram(Diagram aDiagram);
 
 	@Getter(value = TEMPLATE_DIAGRAM_REFERENCE_KEY, isStringConvertable = true)
-	@XMLAttribute
 	public FlexoObjectReference<Diagram> getTemplateDiagramReference();
 
 	@Setter(TEMPLATE_DIAGRAM_REFERENCE_KEY)
 	public void setTemplateDiagramReference(FlexoObjectReference<Diagram> anElementReference);
 
 	@Getter(value = INITIALIZE_WITH_CONTENTS_KEY, defaultValue = "false")
-	@XMLAttribute
 	@FMLAttribute(
 			value = INITIALIZE_WITH_CONTENTS_KEY,
 			required = false,

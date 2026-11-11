@@ -51,8 +51,6 @@ import org.openflexo.pamela.annotations.Imports;
 import org.openflexo.pamela.annotations.ModelEntity;
 import org.openflexo.pamela.annotations.PropertyIdentifier;
 import org.openflexo.pamela.annotations.Setter;
-import org.openflexo.pamela.annotations.XMLAttribute;
-import org.openflexo.pamela.annotations.XMLElement;
 import org.openflexo.technologyadapter.diagram.metamodel.DiagramPalette;
 
 @ModelEntity(isAbstract = true)
@@ -77,14 +75,12 @@ public interface OverridingGraphicalRepresentation<GR extends GraphicalRepresent
 	public void setDiagramPaletteElementBinding(FMLDiagramPaletteElementBinding diagramPaletteElementBinding);
 
 	@Getter(value = PATTERN_ROLE_KEY)
-	@XMLAttribute
 	public GraphicalElementRole<?, GR> getPatternRole();
 
 	@Setter(PATTERN_ROLE_KEY)
 	public void setPatternRole(GraphicalElementRole<?, GR> aPatternRole);
 
 	@Getter(value = GRAPHICAL_REPRESENTATION_KEY)
-	@XMLElement
 	public GR getGraphicalRepresentation();
 
 	@Setter(GRAPHICAL_REPRESENTATION_KEY)
@@ -128,12 +124,10 @@ public interface OverridingGraphicalRepresentation<GR extends GraphicalRepresent
 	}
 
 	@ModelEntity
-	@XMLElement
 	public static interface ShapeOverridingGraphicalRepresentation extends OverridingGraphicalRepresentation<ShapeGraphicalRepresentation> {
 	}
 
 	@ModelEntity
-	@XMLElement
 	public static interface ConnectorOverridingGraphicalRepresentation
 			extends OverridingGraphicalRepresentation<ConnectorGraphicalRepresentation> {
 	}

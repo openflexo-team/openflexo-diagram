@@ -53,13 +53,10 @@ import org.openflexo.pamela.annotations.ImplementationClass;
 import org.openflexo.pamela.annotations.ModelEntity;
 import org.openflexo.pamela.annotations.PropertyIdentifier;
 import org.openflexo.pamela.annotations.Setter;
-import org.openflexo.pamela.annotations.XMLAttribute;
-import org.openflexo.pamela.annotations.XMLElement;
 import org.openflexo.pamela.validation.Validable;
 
 @ModelEntity
 @ImplementationClass(GraphicalElementAction.GraphicalElementActionImpl.class)
-@XMLElement(xmlTag = "Action")
 public interface GraphicalElementAction extends FlexoConceptObject {
 
 	public static enum ActionMask {
@@ -82,14 +79,12 @@ public interface GraphicalElementAction extends FlexoConceptObject {
 	public void setGraphicalElementRole(GraphicalElementRole<?, ?> role);
 
 	@Getter(value = ACTION_MASK_KEY)
-	@XMLAttribute
 	public ActionMask getActionMask();
 
 	@Setter(ACTION_MASK_KEY)
 	public void setActionMask(ActionMask actionMask);
 
 	@Getter(value = ABSTRACT_ACTION_SCHEME_KEY)
-	@XMLElement
 	public AbstractActionScheme getAbstractActionScheme();
 
 	@Setter(ABSTRACT_ACTION_SCHEME_KEY)

@@ -65,8 +65,6 @@ import org.openflexo.pamela.annotations.ImplementationClass;
 import org.openflexo.pamela.annotations.ModelEntity;
 import org.openflexo.pamela.annotations.PropertyIdentifier;
 import org.openflexo.pamela.annotations.Setter;
-import org.openflexo.pamela.annotations.XMLAttribute;
-import org.openflexo.pamela.annotations.XMLElement;
 import org.openflexo.pamela.validation.FixProposal;
 import org.openflexo.pamela.validation.ValidationError;
 import org.openflexo.pamela.validation.ValidationIssue;
@@ -91,7 +89,6 @@ import org.openflexo.technologyadapter.diagram.model.action.LinkSchemeAction;
  */
 @ModelEntity
 @ImplementationClass(AddConnector.AddConnectorImpl.class)
-@XMLElement
 @FML(
 		value = "AddConnector",
 		description = "<html>This edition primitive addresses the creation of a new connector linking two shapes in a diagram</html>",
@@ -108,7 +105,6 @@ public interface AddConnector extends AddDiagramElementAction<DiagramConnector> 
 	public static final String TO_SHAPE_KEY = "toShape";
 
 	@Getter(value = FROM_SHAPE_KEY)
-	@XMLAttribute
 	@FMLAttribute(value = FROM_SHAPE_KEY, required = true)
 	public DataBinding<DiagramShape> getFromShape();
 
@@ -116,7 +112,6 @@ public interface AddConnector extends AddDiagramElementAction<DiagramConnector> 
 	public void setFromShape(DataBinding<DiagramShape> fromShape);
 
 	@Getter(value = TO_SHAPE_KEY)
-	@XMLAttribute
 	@FMLAttribute(value = TO_SHAPE_KEY, required = true)
 	public DataBinding<DiagramShape> getToShape();
 

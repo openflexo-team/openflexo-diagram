@@ -42,7 +42,6 @@ import org.openflexo.foundation.fml.FlexoBehaviour;
 import org.openflexo.foundation.fml.rt.editionaction.BehaviourCallArgument;
 import org.openflexo.pamela.annotations.ImplementationClass;
 import org.openflexo.pamela.annotations.ModelEntity;
-import org.openflexo.pamela.annotations.XMLElement;
 
 /**
  * Represents a valued parameter in the context of a {@link FMLDiagramPaletteElementBinding}
@@ -53,7 +52,6 @@ import org.openflexo.pamela.annotations.XMLElement;
 @Deprecated
 @ModelEntity
 @ImplementationClass(FMLDiagramPaletteElementBindingParameter.FMLDiagramPaletteElementBindingParameterImpl.class)
-@XMLElement
 public interface FMLDiagramPaletteElementBindingParameter extends BehaviourCallArgument<FMLDiagramPaletteElementBinding> {
 
 	// @PropertyIdentifier(type = FMLDiagramPaletteElementBinding.class)
@@ -78,7 +76,6 @@ public interface FMLDiagramPaletteElementBindingParameter extends BehaviourCallA
 	
 	@Override
 	@Getter(value = VALUE_KEY)
-	@XMLAttribute
 	public DataBinding<Object> getValue();
 	
 	@Override

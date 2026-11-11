@@ -59,8 +59,6 @@ import org.openflexo.pamela.annotations.ImplementationClass;
 import org.openflexo.pamela.annotations.ModelEntity;
 import org.openflexo.pamela.annotations.PropertyIdentifier;
 import org.openflexo.pamela.annotations.Setter;
-import org.openflexo.pamela.annotations.XMLAttribute;
-import org.openflexo.pamela.annotations.XMLElement;
 import org.openflexo.pamela.validation.Validable;
 import org.openflexo.technologyadapter.diagram.model.DiagramElement;
 
@@ -72,7 +70,6 @@ import org.openflexo.technologyadapter.diagram.model.DiagramElement;
  */
 @ModelEntity
 @ImplementationClass(GraphicalElementSpecification.GraphicalElementSpecificationImpl.class)
-@XMLElement(xmlTag = "GRSpec")
 public interface GraphicalElementSpecification<T, GR extends GraphicalRepresentation> extends FlexoConceptObject {
 
 	@PropertyIdentifier(type = String.class)
@@ -83,7 +80,6 @@ public interface GraphicalElementSpecification<T, GR extends GraphicalRepresenta
 	public static final String READ_ONLY_KEY = "readOnly";
 
 	@Getter(value = FEATURE_NAME_KEY)
-	@XMLAttribute
 	public String getFeatureName();
 
 	@Setter(FEATURE_NAME_KEY)
@@ -94,14 +90,12 @@ public interface GraphicalElementSpecification<T, GR extends GraphicalRepresenta
 	public void setFeature(GraphicalFeature<T, GR> feature);
 
 	@Getter(value = VALUE_KEY)
-	@XMLAttribute
 	public DataBinding<T> getValue();
 
 	@Setter(VALUE_KEY)
 	public void setValue(DataBinding<T> value);
 
 	/*@Getter(value = READ_ONLY_KEY, defaultValue = "true")
-	@XMLAttribute
 	public boolean getReadOnly();
 	
 	@Setter(READ_ONLY_KEY)

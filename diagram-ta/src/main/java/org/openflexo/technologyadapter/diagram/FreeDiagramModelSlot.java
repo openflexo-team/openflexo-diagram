@@ -51,7 +51,6 @@ import org.openflexo.foundation.fml.annotations.UsageExample;
 import org.openflexo.foundation.technologyadapter.FreeModelSlot;
 import org.openflexo.pamela.annotations.ImplementationClass;
 import org.openflexo.pamela.annotations.ModelEntity;
-import org.openflexo.pamela.annotations.XMLElement;
 import org.openflexo.technologyadapter.diagram.fml.ConnectorRole;
 import org.openflexo.technologyadapter.diagram.fml.DiagramNavigationScheme;
 import org.openflexo.technologyadapter.diagram.fml.DiagramRole;
@@ -81,7 +80,6 @@ import org.openflexo.technologyadapter.diagram.rm.DiagramResource;
 @DeclareFetchRequests({})
 @ModelEntity
 @ImplementationClass(FreeDiagramModelSlot.FreeDiagramModelSlotImpl.class)
-@XMLElement
 @FML(
 		value = "FreeDiagram",
 		description = "<html>This ModelSlot represents access to a Diagram without any DiagramSpecification conformance</html>",

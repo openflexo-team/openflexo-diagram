@@ -52,8 +52,6 @@ import org.openflexo.pamela.annotations.ModelEntity;
 import org.openflexo.pamela.annotations.PropertyIdentifier;
 import org.openflexo.pamela.annotations.Setter;
 import org.openflexo.pamela.annotations.Updater;
-import org.openflexo.pamela.annotations.XMLAttribute;
-import org.openflexo.pamela.annotations.XMLElement;
 import org.openflexo.technologyadapter.diagram.fml.binding.LinkSchemeBindingModel;
 import org.openflexo.toolbox.StringUtils;
 
@@ -66,7 +64,6 @@ import org.openflexo.toolbox.StringUtils;
 @FIBPanel("Fib/LinkSchemePanel.fib")
 @ModelEntity
 @ImplementationClass(LinkScheme.LinkSchemeImpl.class)
-@XMLElement
 @FML("LinkScheme")
 public interface LinkScheme extends AbstractCreationScheme, DiagramFlexoBehaviour {
 
@@ -129,7 +126,6 @@ public interface LinkScheme extends AbstractCreationScheme, DiagramFlexoBehaviou
 	@FMLMigration
 	@Deprecated
 	@Getter(value = FROM_TARGET_KEY)
-	@XMLAttribute
 	public String _getFromTarget();
 
 	@FMLMigration
@@ -140,7 +136,6 @@ public interface LinkScheme extends AbstractCreationScheme, DiagramFlexoBehaviou
 	@FMLMigration
 	@Deprecated
 	@Getter(value = TO_TARGET_KEY)
-	@XMLAttribute
 	public String _getToTarget();
 
 	@FMLMigration
@@ -149,42 +144,36 @@ public interface LinkScheme extends AbstractCreationScheme, DiagramFlexoBehaviou
 	public void _setToTarget(String toTarget);
 
 	@Getter(value = IS_AVAILABLE_WITH_FLOATING_PALETTE_KEY, defaultValue = "false")
-	@XMLAttribute
 	public boolean getIsAvailableWithFloatingPalette();
 
 	@Setter(IS_AVAILABLE_WITH_FLOATING_PALETTE_KEY)
 	public void setIsAvailableWithFloatingPalette(boolean isAvailableWithFloatingPalette);
 
 	@Getter(value = INVERSE_DIRECTION_WHEN_COMPOSED_KEY, defaultValue = "false")
-	@XMLAttribute
 	public boolean getInverseDirectionWhenComposed();
 
 	@Setter(INVERSE_DIRECTION_WHEN_COMPOSED_KEY)
 	public void setInverseDirectionWhenComposed(boolean inverseDirectionWhenComposed);
 
 	@Getter(value = NORTH_DIRECTION_SUPPORTED_KEY, defaultValue = "false")
-	@XMLAttribute
 	public boolean getNorthDirectionSupported();
 
 	@Setter(NORTH_DIRECTION_SUPPORTED_KEY)
 	public void setNorthDirectionSupported(boolean northDirectionSupported);
 
 	@Getter(value = EAST_DIRECTION_SUPPORTED_KEY, defaultValue = "false")
-	@XMLAttribute
 	public boolean getEastDirectionSupported();
 
 	@Setter(EAST_DIRECTION_SUPPORTED_KEY)
 	public void setEastDirectionSupported(boolean eastDirectionSupported);
 
 	@Getter(value = SOUTH_DIRECTION_SUPPORTED_KEY, defaultValue = "false")
-	@XMLAttribute
 	public boolean getSouthDirectionSupported();
 
 	@Setter(SOUTH_DIRECTION_SUPPORTED_KEY)
 	public void setSouthDirectionSupported(boolean southDirectionSupported);
 
 	@Getter(value = WEST_DIRECTION_SUPPORTED_KEY, defaultValue = "false")
-	@XMLAttribute
 	public boolean getWestDirectionSupported();
 
 	@Setter(WEST_DIRECTION_SUPPORTED_KEY)

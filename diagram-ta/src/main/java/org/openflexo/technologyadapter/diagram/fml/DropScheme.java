@@ -56,8 +56,6 @@ import org.openflexo.pamela.annotations.ModelEntity;
 import org.openflexo.pamela.annotations.PropertyIdentifier;
 import org.openflexo.pamela.annotations.Setter;
 import org.openflexo.pamela.annotations.Updater;
-import org.openflexo.pamela.annotations.XMLAttribute;
-import org.openflexo.pamela.annotations.XMLElement;
 import org.openflexo.technologyadapter.diagram.fml.binding.DropSchemeBindingModel;
 import org.openflexo.toolbox.StringUtils;
 
@@ -70,7 +68,6 @@ import org.openflexo.toolbox.StringUtils;
 @FIBPanel("Fib/DropSchemePanel.fib")
 @ModelEntity
 @ImplementationClass(DropScheme.DropSchemeImpl.class)
-@XMLElement
 @FML("DropScheme")
 public interface DropScheme extends AbstractCreationScheme, DiagramFlexoBehaviour {
 
@@ -108,7 +105,6 @@ public interface DropScheme extends AbstractCreationScheme, DiagramFlexoBehaviou
 	@FMLMigration
 	@Deprecated
 	@Getter(value = TARGET_KEY)
-	@XMLAttribute
 	public String _getTarget();
 
 	@FMLMigration
@@ -117,7 +113,6 @@ public interface DropScheme extends AbstractCreationScheme, DiagramFlexoBehaviou
 	public void _setTarget(String target);
 
 	@Getter(value = TARGET_SHAPE_ROLE_KEY)
-	@XMLElement
 	public ShapeRole getTargetShapeRole();
 
 	@Setter(TARGET_SHAPE_ROLE_KEY)

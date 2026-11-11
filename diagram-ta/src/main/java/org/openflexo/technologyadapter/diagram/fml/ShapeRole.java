@@ -56,8 +56,6 @@ import org.openflexo.pamela.annotations.ImplementationClass;
 import org.openflexo.pamela.annotations.ModelEntity;
 import org.openflexo.pamela.annotations.PropertyIdentifier;
 import org.openflexo.pamela.annotations.Setter;
-import org.openflexo.pamela.annotations.XMLAttribute;
-import org.openflexo.pamela.annotations.XMLElement;
 import org.openflexo.pamela.validation.ValidationError;
 import org.openflexo.pamela.validation.ValidationIssue;
 import org.openflexo.pamela.validation.ValidationRule;
@@ -67,7 +65,6 @@ import org.openflexo.technologyadapter.diagram.model.DiagramShape;
 
 @ModelEntity
 @ImplementationClass(ShapeRole.ShapeRoleImpl.class)
-@XMLElement
 @FML("ShapeRole")
 public interface ShapeRole extends GraphicalElementRole<DiagramShape, ShapeGraphicalRepresentation> {
 
@@ -245,7 +242,6 @@ public interface ShapeRole extends GraphicalElementRole<DiagramShape, ShapeGraph
 	public static final String DEFINE_CONTAINER_KEY = "defineContainer";
 
 	@Getter(value = CONTAINER_ELEMENT_KEY)
-	@XMLAttribute
 	@FMLAttribute(value = CONTAINER_ELEMENT_KEY, required = false, description = "<html>container of shape (contracting assertion)</html>")
 	public DataBinding<DiagramContainerElement<?>> getContainerElement();
 
@@ -253,7 +249,6 @@ public interface ShapeRole extends GraphicalElementRole<DiagramShape, ShapeGraph
 	public void setContainerElement(DataBinding<DiagramContainerElement<?>> container);
 
 	@Getter(value = DEFINE_CONTAINER_KEY, defaultValue = "false")
-	@XMLAttribute
 	/*@FMLAttribute(
 			value = DEFINE_CONTAINER_KEY,
 			defaultValue = "false",
@@ -266,7 +261,6 @@ public interface ShapeRole extends GraphicalElementRole<DiagramShape, ShapeGraph
 	@FMLMigration
 	@Deprecated
 	@Getter(value = PARENT_SHAPE_ROLE_KEY)
-	@XMLElement(context = "Parent")
 	public ShapeRole getParentShapeRole();
 
 	@FMLMigration
@@ -295,28 +289,24 @@ public interface ShapeRole extends GraphicalElementRole<DiagramShape, ShapeGraph
 	public List<ShapeRole> getPossibleParentShapeRoles();
 
 	@Getter(value = PREVIEW_X_KEY, defaultValue = "3.14")
-	@XMLAttribute
 	public double getPreviewX();
 
 	@Setter(value = PREVIEW_X_KEY)
 	public void setPreviewX(double aValue);
 
 	@Getter(value = PREVIEW_Y_KEY, defaultValue = "3.14")
-	@XMLAttribute
 	public double getPreviewY();
 
 	@Setter(value = PREVIEW_Y_KEY)
 	public void setPreviewY(double aValue);
 
 	@Getter(value = PREVIEW_WIDTH_KEY, defaultValue = "50.0")
-	@XMLAttribute
 	public double getPreviewWidth();
 
 	@Setter(value = PREVIEW_WIDTH_KEY)
 	public void setPreviewWidth(double aValue);
 
 	@Getter(value = PREVIEW_HEIGHT_KEY, defaultValue = "40.0")
-	@XMLAttribute
 	public double getPreviewHeight();
 
 	@Setter(value = PREVIEW_HEIGHT_KEY)

@@ -52,7 +52,6 @@ import org.openflexo.pamela.annotations.ImplementationClass;
 import org.openflexo.pamela.annotations.ModelEntity;
 import org.openflexo.pamela.annotations.PropertyIdentifier;
 import org.openflexo.pamela.annotations.Setter;
-import org.openflexo.pamela.annotations.XMLElement;
 import org.openflexo.pamela.validation.ValidationError;
 import org.openflexo.pamela.validation.ValidationIssue;
 import org.openflexo.pamela.validation.ValidationRule;
@@ -62,7 +61,6 @@ import org.openflexo.technologyadapter.diagram.model.dm.GraphicalRepresentationC
 
 @ModelEntity
 @ImplementationClass(ConnectorRole.ConnectorRoleImpl.class)
-@XMLElement
 @FML("ConnectorRole")
 public interface ConnectorRole extends GraphicalElementRole<DiagramConnector, ConnectorGraphicalRepresentation> {
 
@@ -92,14 +90,12 @@ public interface ConnectorRole extends GraphicalElementRole<DiagramConnector, Co
 	public void setArtifactToGraphicalRepresentation(ShapeGraphicalRepresentation artifactToGraphicalRepresentation);
 
 	@Getter(value = START_SHAPE_ROLE_KEY)
-	@XMLElement(context = "StartShape_")
 	public ShapeRole getStartShapeRole();
 
 	@Setter(START_SHAPE_ROLE_KEY)
 	public void setStartShapeRole(ShapeRole startShapeRole);
 
 	@Getter(value = END_SHAPE_ROLE_KEY)
-	@XMLElement(context = "EndShape_")
 	public ShapeRole getEndShapeRole();
 
 	@Setter(END_SHAPE_ROLE_KEY)

@@ -43,7 +43,6 @@ import java.util.logging.Logger;
 import org.openflexo.foundation.fml.annotations.FML;
 import org.openflexo.pamela.annotations.ImplementationClass;
 import org.openflexo.pamela.annotations.ModelEntity;
-import org.openflexo.pamela.annotations.XMLElement;
 import org.openflexo.technologyadapter.diagram.model.action.LinkSchemeAction;
 
 /**
@@ -54,7 +53,6 @@ import org.openflexo.technologyadapter.diagram.model.action.LinkSchemeAction;
  */
 @ModelEntity
 @ImplementationClass(CloneConnector.CloneConnectorImpl.class)
-@XMLElement
 @FML("CloneConnector")
 public interface CloneConnector extends AddConnector {
 

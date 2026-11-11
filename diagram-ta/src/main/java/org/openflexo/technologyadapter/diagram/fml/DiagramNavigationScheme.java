@@ -45,10 +45,8 @@ import org.openflexo.foundation.fml.rt.VirtualModelInstance;
 import org.openflexo.foundation.nature.FlexoNature;
 import org.openflexo.pamela.annotations.ImplementationClass;
 import org.openflexo.pamela.annotations.ModelEntity;
-import org.openflexo.pamela.annotations.XMLElement;
 
 @ModelEntity
-@XMLElement
 @ImplementationClass(DiagramNavigationScheme.DiagramNavigationSchemeImpl.class)
 @FML("DiagramNavigationScheme")
 public interface DiagramNavigationScheme extends NavigationScheme, DiagramFlexoBehaviour {

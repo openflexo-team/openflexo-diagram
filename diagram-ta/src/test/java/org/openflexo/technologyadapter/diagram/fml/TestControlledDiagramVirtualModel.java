@@ -306,7 +306,7 @@ public class TestControlledDiagramVirtualModel extends DiagramTestCase {
 
 		virtualModel.getResource().save();
 
-		System.out.println(virtualModel.getFMLModelFactory().stringRepresentation(virtualModel));
+		System.out.println(virtualModel.getFMLPrettyPrint());
 
 		assertTrue(virtualModel.hasNature(FMLControlledDiagramVirtualModelNature.INSTANCE));
 		assertEquals(typedDiagramModelSlot, FMLControlledDiagramVirtualModelNature.getTypedDiagramModelSlot(virtualModel));

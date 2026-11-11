@@ -71,8 +71,6 @@ import org.openflexo.pamela.annotations.ModelEntity;
 import org.openflexo.pamela.annotations.PropertyIdentifier;
 import org.openflexo.pamela.annotations.Remover;
 import org.openflexo.pamela.annotations.Setter;
-import org.openflexo.pamela.annotations.XMLAttribute;
-import org.openflexo.pamela.annotations.XMLElement;
 import org.openflexo.technologyadapter.diagram.DiagramTechnologyAdapter;
 import org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
 import org.openflexo.technologyadapter.diagram.metamodel.DiagramPalette;
@@ -89,7 +87,6 @@ import org.openflexo.technologyadapter.diagram.metamodel.DiagramSpecification;
  */
 @ModelEntity
 @ImplementationClass(FMLDiagramPaletteElementBinding.FMLDiagramPaletteElementBindingImpl.class)
-@XMLElement
 @FML("PaletteElementBinding")
 public interface FMLDiagramPaletteElementBinding extends FlexoConceptObject {
 
@@ -124,7 +121,6 @@ public interface FMLDiagramPaletteElementBinding extends FlexoConceptObject {
 	public void setPaletteElement(DiagramPaletteElement aPaletteElement);
 
 	@Getter(value = PALETTE_ELEMENT_ID_KEY)
-	@XMLAttribute
 	@FMLAttribute(PALETTE_ELEMENT_ID_KEY)
 	public String getPaletteElementId();
 
@@ -148,7 +144,6 @@ public interface FMLDiagramPaletteElementBinding extends FlexoConceptObject {
 
 	@Deprecated
 	@Getter(value = DROP_SCHEME_KEY)
-	@XMLElement(primary = false)
 	public DropScheme getDropScheme();
 
 	@Deprecated
@@ -157,7 +152,6 @@ public interface FMLDiagramPaletteElementBinding extends FlexoConceptObject {
 
 	@Deprecated
 	@Getter(value = PARAMETERS_KEY, cardinality = Cardinality.LIST, inverse = FMLDiagramPaletteElementBindingParameter.OWNER_KEY)
-	@XMLElement
 	public List<FMLDiagramPaletteElementBindingParameter> getParameters();
 
 	@Deprecated
@@ -181,7 +175,6 @@ public interface FMLDiagramPaletteElementBinding extends FlexoConceptObject {
 			cardinality = Cardinality.LIST,
 			inverse = OverridingGraphicalRepresentation.PALETTE_ELEMENT_BINDING_KEY,
 			ignoreType = true)
-	// @XMLElement
 	@Deprecated
 	public List<OverridingGraphicalRepresentation<?>> getOverridingGraphicalRepresentations();
 
