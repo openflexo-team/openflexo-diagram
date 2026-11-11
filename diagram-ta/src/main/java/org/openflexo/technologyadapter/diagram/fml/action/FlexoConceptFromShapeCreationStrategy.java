@@ -306,7 +306,7 @@ public abstract class FlexoConceptFromShapeCreationStrategy
 					if (editionScheme.isTopTarget()) {
 						newAddShape.setContainer(new DataBinding<DiagramContainerElement<?>>(DiagramBehaviourBindingModel.TOP_LEVEL));
 					} else {
-						ShapeRole containerRole = getVirtualModel().getFlexoConcept(editionScheme._getTarget())
+						ShapeRole containerRole = editionScheme.getTargetFlexoConcept()
 								.getDeclaredProperties(ShapeRole.class).get(0);
 						newAddShape.setContainer(new DataBinding<DiagramContainerElement<?>>(
 								DropSchemeBindingModel.TARGET + "." + containerRole.getRoleName()));

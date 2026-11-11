@@ -47,7 +47,6 @@ import org.openflexo.connie.DataBinding;
 import org.openflexo.connie.DataBinding.BindingDefinitionType;
 import org.openflexo.connie.expr.BindingPath;
 import org.openflexo.diana.ShapeGraphicalRepresentation;
-import org.openflexo.foundation.fml.FMLMigration;
 import org.openflexo.foundation.fml.annotations.FML;
 import org.openflexo.foundation.fml.annotations.FMLAttribute;
 import org.openflexo.pamela.annotations.DefineValidationRule;
@@ -79,9 +78,10 @@ public interface ShapeRole extends GraphicalElementRole<DiagramShape, ShapeGraph
 
 	// @PropertyIdentifier(type = GraphicalRepresentation.class)
 	// public static final String GRAPHICAL_REPRESENTATION_KEY = "graphicalRepresentation";
-	@FMLMigration
-	@Deprecated
-	@PropertyIdentifier(type = ShapeRole.class)
+	/**
+	 * Name of the event fired when the parent shape role changes; not a model property: the parent shape role is read from and written
+	 * to {@link #getContainerElement()}
+	 */
 	public static final String PARENT_SHAPE_ROLE_KEY = "parentShapeRole";
 
 	public static GraphicalFeature<Double, ShapeGraphicalRepresentation> POS_X_FEATURE = new GraphicalFeature<Double, ShapeGraphicalRepresentation>(
@@ -258,26 +258,21 @@ public interface ShapeRole extends GraphicalElementRole<DiagramShape, ShapeGraph
 	@Setter(DEFINE_CONTAINER_KEY)
 	public void setDefineContainer(boolean flag);
 
-	@FMLMigration
-	@Deprecated
-	@Getter(value = PARENT_SHAPE_ROLE_KEY)
+	/**
+	 * The shape role of the same concept that contains this one, as named by {@link #getContainerElement()}; null when the container is
+	 * given by the edition action
+	 */
 	public ShapeRole getParentShapeRole();
 
-	@FMLMigration
-	@Deprecated
-	@Setter(PARENT_SHAPE_ROLE_KEY)
+	/**
+	 * Set {@link #getContainerElement()} to the supplied shape role (null to let the edition action give the container)
+	 */
 	public void setParentShapeRole(ShapeRole parentShapeRole);
 
-	@FMLMigration
-	@Deprecated
 	public boolean isContainedIn(ShapeRole container);
 
-	@FMLMigration
-	@Deprecated
 	public boolean getParentShapeAsDefinedInAction();
 
-	@FMLMigration
-	@Deprecated
 	public void setParentShapeAsDefinedInAction(boolean flag);
 
 	/**
@@ -519,8 +514,6 @@ public interface ShapeRole extends GraphicalElementRole<DiagramShape, ShapeGraph
 			notifiedBindingChanged(this.containerElement);
 		}
 
-		@FMLMigration
-		@Deprecated
 		@Override
 		public ShapeRole getParentShapeRole() {
 			if (parentShapeRole == null && getContainerElement().isSet() && getContainerElement().isValid()) {
@@ -534,8 +527,6 @@ public interface ShapeRole extends GraphicalElementRole<DiagramShape, ShapeGraph
 			return parentShapeRole;
 		}
 
-		@FMLMigration
-		@Deprecated
 		@Override
 		public void setParentShapeRole(ShapeRole parentShapeRole) {
 			if (parentShapeRole != this.parentShapeRole) {
@@ -581,15 +572,11 @@ public interface ShapeRole extends GraphicalElementRole<DiagramShape, ShapeGraph
 			}
 		}
 
-		@FMLMigration
-		@Deprecated
 		@Override
 		public boolean getParentShapeAsDefinedInAction() {
 			return getParentShapeRole() == null;
 		}
 
-		@FMLMigration
-		@Deprecated
 		@Override
 		public void setParentShapeAsDefinedInAction(boolean flag) {
 			// System.out.println(">>>> setParentShapeAsDefinedInAction() with " + flag);
@@ -619,8 +606,6 @@ public interface ShapeRole extends GraphicalElementRole<DiagramShape, ShapeGraph
 			getPropertyChangeSupport().firePropertyChange(DEFINE_CONTAINER_KEY, !flag, flag);
 		}
 
-		@FMLMigration
-		@Deprecated
 		@Override
 		public boolean isContainedIn(ShapeRole container) {
 			if (container == this) {

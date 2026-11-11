@@ -41,7 +41,6 @@ package org.openflexo.technologyadapter.diagram.fml;
 import java.util.List;
 
 import org.openflexo.foundation.fml.AbstractCreationScheme;
-import org.openflexo.foundation.fml.FMLMigration;
 import org.openflexo.foundation.fml.FlexoConcept;
 import org.openflexo.foundation.fml.FlexoConceptInstanceType;
 import org.openflexo.foundation.fml.FlexoRole;
@@ -57,7 +56,6 @@ import org.openflexo.pamela.annotations.PropertyIdentifier;
 import org.openflexo.pamela.annotations.Setter;
 import org.openflexo.pamela.annotations.Updater;
 import org.openflexo.technologyadapter.diagram.fml.binding.DropSchemeBindingModel;
-import org.openflexo.toolbox.StringUtils;
 
 /**
  * A creation behaviour triggered while dropping a shape from a palette
@@ -73,8 +71,6 @@ public interface DropScheme extends AbstractCreationScheme, DiagramFlexoBehaviou
 
 	@PropertyIdentifier(type = FlexoConceptInstanceType.class)
 	public static final String TARGET_TYPE_KEY = "targetType";
-	@PropertyIdentifier(type = String.class)
-	public static final String TARGET_KEY = "target";
 	@PropertyIdentifier(type = ShapeRole.class)
 	public static final String TARGET_SHAPE_ROLE_KEY = "targetShapeRole";
 	@PropertyIdentifier(type = FlexoConcept.class)
@@ -102,28 +98,24 @@ public interface DropScheme extends AbstractCreationScheme, DiagramFlexoBehaviou
 	@Updater(TARGET_TYPE_KEY)
 	public void updateTargetType(FlexoConceptInstanceType type);
 
-	@FMLMigration
-	@Deprecated
-	@Getter(value = TARGET_KEY)
-	public String _getTarget();
-
-	@FMLMigration
-	@Deprecated
-	@Setter(TARGET_KEY)
-	public void _setTarget(String target);
-
 	@Getter(value = TARGET_SHAPE_ROLE_KEY)
 	public ShapeRole getTargetShapeRole();
 
 	@Setter(TARGET_SHAPE_ROLE_KEY)
 	public void setTargetShapeRole(ShapeRole targetShapeRole);
 
-	@FMLMigration
-	@Deprecated
+	/**
+	 * The concept of {@link #getTargetType()}: null when the target type is not set
+	 * 
+	 * @return
+	 */
 	public FlexoConcept getTargetFlexoConcept();
 
-	@FMLMigration
-	@Deprecated
+	/**
+	 * Set the target type to the instance type of the supplied concept (null to unset it)
+	 * 
+	 * @param targetFlexoConcept
+	 */
 	public void setTargetFlexoConcept(FlexoConcept targetFlexoConcept);
 
 	public boolean isValidTarget(FlexoConcept aTarget, FlexoRole<?> contextRole);
@@ -138,11 +130,7 @@ public interface DropScheme extends AbstractCreationScheme, DiagramFlexoBehaviou
 
 	public static abstract class DropSchemeImpl extends AbstractCreationSchemeImpl implements DropScheme {
 
-		private static final String TOP = "top";
-
-		private String target = TOP;
 		private ShapeRole targetShapeRole;
-		private FlexoConcept lastKnownTargetFlexoConcept;
 
 		private FlexoConceptInstanceType targetType;
 
@@ -155,9 +143,6 @@ public interface DropScheme extends AbstractCreationScheme, DiagramFlexoBehaviou
 			if (targetType != null) {
 				return targetType;
 			}
-			if (getTargetFlexoConcept() != null) {
-				return getTargetFlexoConcept().getInstanceType();
-			}
 			return getTopLevelInstanceType();
 		}
 
@@ -165,8 +150,10 @@ public interface DropScheme extends AbstractCreationScheme, DiagramFlexoBehaviou
 		public void setTargetType(FlexoConceptInstanceType targetType) {
 			if ((targetType == null && this.targetType != null) || (targetType != null && !targetType.equals(this.targetType))) {
 				FlexoConceptInstanceType oldValue = this.targetType;
+				FlexoConcept oldConcept = getTargetFlexoConcept();
 				this.targetType = targetType;
 				getPropertyChangeSupport().firePropertyChange(TARGET_TYPE_KEY, oldValue, targetType);
+				getPropertyChangeSupport().firePropertyChange(TARGET_FLEXO_CONCEPT_KEY, oldConcept, getTargetFlexoConcept());
 			}
 		}
 
@@ -189,63 +176,13 @@ public interface DropScheme extends AbstractCreationScheme, DiagramFlexoBehaviou
 		}
 
 		@Override
-		public String _getTarget() {
-			return target;
-		}
-
-		@Override
-		public void _setTarget(String target) {
-			if (requireChange(this.target, target)) {
-				FlexoConcept oldValue = getTargetFlexoConcept();
-				this.target = target;
-				getPropertyChangeSupport().firePropertyChange(TARGET_FLEXO_CONCEPT_KEY, oldValue, getTargetFlexoConcept());
-			}
-		}
-
-		@Override
-		public void finalizeDeserialization() {
-			super.finalizeDeserialization();
-			getTargetFlexoConcept();
-		}
-
-		private FlexoConcept targetFlexoConcept;
-
-		@Override
-		@Deprecated
 		public FlexoConcept getTargetFlexoConcept() {
-			if (targetType != null && targetType.getFlexoConcept() != null) {
-				return targetType.getFlexoConcept();
-			}
-			if (targetFlexoConcept != null) {
-				return targetFlexoConcept;
-			}
-
-			if (StringUtils.isEmpty(_getTarget())) {
-				return null;
-			}
-			if (getOwningVirtualModel() != null) {
-				targetFlexoConcept = getOwningVirtualModel().getFlexoConcept(_getTarget());
-				if (lastKnownTargetFlexoConcept != targetFlexoConcept) {
-					FlexoConcept oldValue = lastKnownTargetFlexoConcept;
-					lastKnownTargetFlexoConcept = targetFlexoConcept;
-					getPropertyChangeSupport().firePropertyChange(TARGET_FLEXO_CONCEPT_KEY, oldValue, targetFlexoConcept);
-				}
-				return targetFlexoConcept;
-			}
-			return null;
+			return targetType != null ? targetType.getFlexoConcept() : null;
 		}
 
 		@Override
-		@Deprecated
 		public void setTargetFlexoConcept(FlexoConcept aTargetFlexoConcept) {
-			FlexoConcept oldTargetFlexoConcept = this.targetFlexoConcept;
-			this.targetFlexoConcept = aTargetFlexoConcept;
-			if (aTargetFlexoConcept != null) {
-				setTargetType(aTargetFlexoConcept.getInstanceType());
-			}
-			_setTarget(aTargetFlexoConcept != null ? aTargetFlexoConcept.getURI() : null);
-			getPropertyChangeSupport().firePropertyChange(TARGET_FLEXO_CONCEPT_KEY, oldTargetFlexoConcept, aTargetFlexoConcept);
-			// updateBindingModels();
+			setTargetType(aTargetFlexoConcept != null ? aTargetFlexoConcept.getInstanceType() : null);
 		}
 
 		@Override

@@ -138,7 +138,7 @@ public class DrawRectangleBindingModel extends DiagramBehaviourBindingModel {
 		}
 		if (evt.getSource() == getFlexoBehaviour()) {
 			if (evt.getPropertyName().equals(DrawRectangleScheme.SELECT_OBJECTS_KEY)
-					|| evt.getPropertyName().equals(DrawRectangleScheme.CHILDREN_KEY)
+					|| evt.getPropertyName().equals(DrawRectangleScheme.CHILDREN_TYPE_KEY)
 					|| evt.getPropertyName().equals(DrawRectangleScheme.CHILDREN_FLEXO_CONCEPT_KEY)) {
 
 				Type selectionType;

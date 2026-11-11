@@ -121,8 +121,8 @@ public abstract class FlexoConceptFromConnectorCreationStrategy
 		}
 		/*if (selectedLinkScheme != null && 
 				getVirtualModel()!=null &&
-				getVirtualModel().getFlexoConcept(selectedLinkScheme._getFromTarget()) != null) {
-			FlexoConcept currentFromEp = getVirtualModel().getFlexoConcept(selectedLinkScheme._getFromTarget());
+				selectedLinkScheme.getFromTargetFlexoConcept() != null) {
+			FlexoConcept currentFromEp = selectedLinkScheme.getFromTargetFlexoConcept();
 			FlexoConcept firstEp = flexoConceptsFromList.get(0);
 			if (!currentFromEp.equals(firstEp)) {
 				int lastIndex = flexoConceptsFromList.indexOf(currentFromEp);
@@ -142,8 +142,8 @@ public abstract class FlexoConceptFromConnectorCreationStrategy
 			flexoConceptsToList.clear();
 			flexoConceptsToList.addAll(getTransformationAction().getVirtualModel().getFlexoConcepts());
 		}
-		/*if (selectedLinkScheme != null && getVirtualModel()!=null && getVirtualModel().getFlexoConcept(selectedLinkScheme._getToTarget()) != null) {
-			FlexoConcept currentToEp = getVirtualModel().getFlexoConcept(selectedLinkScheme._getToTarget());
+		/*if (selectedLinkScheme != null && getVirtualModel()!=null && selectedLinkScheme.getToTargetFlexoConcept() != null) {
+			FlexoConcept currentToEp = selectedLinkScheme.getToTargetFlexoConcept();
 			FlexoConcept firstEp = flexoConceptsToList.get(0);
 			if (!currentToEp.equals(firstEp)) {
 				int lastIndex = flexoConceptsToList.indexOf(currentToEp);
@@ -358,7 +358,7 @@ public abstract class FlexoConceptFromConnectorCreationStrategy
 					if (editionScheme.isTopTarget()) {
 						newAddShape.setContainer(new DataBinding<DiagramContainerElement<?>>(DiagramBehaviourBindingModel.TOP_LEVEL));
 					} else {
-						ShapeRole containerRole = getVirtualModel().getFlexoConcept(editionScheme._getTarget())
+						ShapeRole containerRole = editionScheme.getTargetFlexoConcept()
 								.getDeclaredProperties(ShapeRole.class).get(0);
 						newAddShape.setContainer(new DataBinding<DiagramContainerElement<?>>(
 								DropSchemeBindingModel.TARGET + "." + containerRole.getRoleName()));

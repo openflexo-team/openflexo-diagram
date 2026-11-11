@@ -40,7 +40,6 @@ package org.openflexo.technologyadapter.diagram.fml;
 
 import org.openflexo.foundation.fml.AbstractCreationScheme;
 import org.openflexo.foundation.fml.FlexoConcept;
-import org.openflexo.foundation.fml.FMLMigration;
 import org.openflexo.foundation.fml.FlexoConceptInstanceType;
 import org.openflexo.foundation.fml.annotations.FML;
 import org.openflexo.foundation.fml.annotations.FMLAttribute;
@@ -53,7 +52,6 @@ import org.openflexo.pamela.annotations.PropertyIdentifier;
 import org.openflexo.pamela.annotations.Setter;
 import org.openflexo.pamela.annotations.Updater;
 import org.openflexo.technologyadapter.diagram.fml.binding.DrawRectangleBindingModel;
-import org.openflexo.toolbox.StringUtils;
 
 /**
  * A creation behaviour triggered while drawing a rectangle
@@ -71,10 +69,6 @@ public interface DrawRectangleScheme extends AbstractCreationScheme, DiagramFlex
 	public static final String TARGET_TYPE_KEY = "targetType";
 	@PropertyIdentifier(type = FlexoConceptInstanceType.class)
 	public static final String CHILDREN_TYPE_KEY = "childrenType";
-	@PropertyIdentifier(type = String.class)
-	public static final String TARGET_KEY = "target";
-	@PropertyIdentifier(type = String.class)
-	public static final String CHILDREN_KEY = "children";
 	@PropertyIdentifier(type = Boolean.class)
 	public static final String SELECT_OBJECTS_KEY = "selectObjects";
 	@PropertyIdentifier(type = FlexoConcept.class)
@@ -120,26 +114,6 @@ public interface DrawRectangleScheme extends AbstractCreationScheme, DiagramFlex
 	@Updater(CHILDREN_TYPE_KEY)
 	public void updateChildrenType(FlexoConceptInstanceType type);
 
-	@FMLMigration
-	@Deprecated
-	@Getter(value = TARGET_KEY)
-	public String _getTarget();
-
-	@FMLMigration
-	@Deprecated
-	@Setter(TARGET_KEY)
-	public void _setTarget(String target);
-
-	@FMLMigration
-	@Deprecated
-	@Getter(value = CHILDREN_KEY)
-	public String _getChildren();
-
-	@FMLMigration
-	@Deprecated
-	@Setter(CHILDREN_KEY)
-	public void _setChildren(String children);
-
 	/**
 	 * Whether the objects enclosed in the drawn rectangle are offered to the behaviour as the "selection" variable
 	 */
@@ -150,34 +124,44 @@ public interface DrawRectangleScheme extends AbstractCreationScheme, DiagramFlex
 	@Setter(SELECT_OBJECTS_KEY)
 	public void setSelectObjects(boolean selectObjects);
 
+	/**
+	 * Whether the rectangle is drawn at top level: no target type is declared
+	 */
 	public boolean isTopTarget();
 
 	public boolean getTopTarget();
 
+	/**
+	 * Setting the top target removes the target type; unsetting it, when no target type is set, starts from the concept declaring this
+	 * scheme (the inspector then shows the concept selector)
+	 */
 	public void setTopTarget(boolean flag);
 
+	/**
+	 * The concept of {@link #getTargetType()}: null at top level
+	 */
 	public FlexoConcept getTargetFlexoConcept();
 
-	public void setTargetFlexoConcept(FlexoConcept childrenFlexoConcept);
+	/**
+	 * Set the target type to the instance type of the supplied concept (null for top level)
+	 */
+	public void setTargetFlexoConcept(FlexoConcept targetFlexoConcept);
 
+	/**
+	 * The concept of {@link #getChildrenType()}: null when not set
+	 */
 	public FlexoConcept getChildrenFlexoConcept();
 
+	/**
+	 * Set the children type to the instance type of the supplied concept (null to unset it)
+	 */
 	public void setChildrenFlexoConcept(FlexoConcept childrenFlexoConcept);
 
 	public boolean isValidTarget(FlexoConcept aTarget);
 
 	public static abstract class DrawRectangleSchemeImpl extends AbstractCreationSchemeImpl implements DrawRectangleScheme {
 
-		private static final String TOP = "top";
-
-		private String target = TOP;
-		private FlexoConcept lastKnownTargetFlexoConcept;
-		private FlexoConcept targetFlexoConcept;
 		private FlexoConceptInstanceType targetType;
-
-		private String children = null;
-		private FlexoConcept lastKnownChildrenFlexoConcept;
-		private FlexoConcept childrenFlexoConcept;
 		private FlexoConceptInstanceType childrenType;
 
 		/**
@@ -187,13 +171,7 @@ public interface DrawRectangleScheme extends AbstractCreationScheme, DiagramFlex
 		 */
 		@Override
 		public FlexoConceptInstanceType getTargetType() {
-			if (targetType != null) {
-				return targetType;
-			}
-			if (getTargetFlexoConcept() != null) {
-				return getTargetFlexoConcept().getInstanceType();
-			}
-			return null;
+			return targetType;
 		}
 
 		@Override
@@ -202,6 +180,9 @@ public interface DrawRectangleScheme extends AbstractCreationScheme, DiagramFlex
 				FlexoConceptInstanceType oldValue = this.targetType;
 				this.targetType = targetType;
 				getPropertyChangeSupport().firePropertyChange(TARGET_TYPE_KEY, oldValue, targetType);
+				getPropertyChangeSupport().firePropertyChange(TARGET_FLEXO_CONCEPT_KEY, oldValue != null ? oldValue.getFlexoConcept() : null,
+						getTargetFlexoConcept());
+				getPropertyChangeSupport().firePropertyChange(TOP_TARGET_KEY, oldValue == null, isTopTarget());
 			}
 		}
 
@@ -224,13 +205,7 @@ public interface DrawRectangleScheme extends AbstractCreationScheme, DiagramFlex
 
 		@Override
 		public FlexoConceptInstanceType getChildrenType() {
-			if (childrenType != null) {
-				return childrenType;
-			}
-			if (getChildrenFlexoConcept() != null) {
-				return getChildrenFlexoConcept().getInstanceType();
-			}
-			return null;
+			return childrenType;
 		}
 
 		@Override
@@ -262,57 +237,13 @@ public interface DrawRectangleScheme extends AbstractCreationScheme, DiagramFlex
 		}
 
 		@Override
-		public String _getTarget() {
-			return target;
-		}
-
-		@Override
-		public void _setTarget(String target) {
-			if (requireChange(this.target, target)) {
-				FlexoConcept oldValue = getTargetFlexoConcept();
-				this.target = target;
-				getPropertyChangeSupport().firePropertyChange(TARGET_FLEXO_CONCEPT_KEY, oldValue, getTargetFlexoConcept());
-				getPropertyChangeSupport().firePropertyChange(TOP_TARGET_KEY, !isTopTarget(), isTopTarget());
-			}
-		}
-
-		@Override
 		public FlexoConcept getTargetFlexoConcept() {
-			if (targetType != null) {
-				return targetType.getFlexoConcept();
-			}
-			if (isTopTarget()) {
-				return null;
-			}
-			if (targetFlexoConcept != null) {
-				return targetFlexoConcept;
-			}
-
-			if (StringUtils.isEmpty(_getTarget())) {
-				return null;
-			}
-			if (getOwningVirtualModel() != null) {
-				targetFlexoConcept = getOwningVirtualModel().getFlexoConcept(_getTarget());
-				if (lastKnownTargetFlexoConcept != targetFlexoConcept) {
-					FlexoConcept oldValue = lastKnownTargetFlexoConcept;
-					lastKnownTargetFlexoConcept = targetFlexoConcept;
-					getPropertyChangeSupport().firePropertyChange(TARGET_FLEXO_CONCEPT_KEY, oldValue, targetFlexoConcept);
-				}
-				return targetFlexoConcept;
-			}
-			return null;
+			return targetType != null ? targetType.getFlexoConcept() : null;
 		}
 
 		@Override
 		public void setTargetFlexoConcept(FlexoConcept aTargetFlexoConcept) {
-			FlexoConcept oldTargetFlexoConcept = this.targetFlexoConcept;
-			this.targetFlexoConcept = aTargetFlexoConcept;
-			if (aTargetFlexoConcept != null) {
-				setTargetType(aTargetFlexoConcept.getInstanceType());
-			}
-			_setTarget(aTargetFlexoConcept != null ? aTargetFlexoConcept.getURI() : null);
-			getPropertyChangeSupport().firePropertyChange(TARGET_FLEXO_CONCEPT_KEY, oldTargetFlexoConcept, aTargetFlexoConcept);
-			// updateBindingModels();
+			setTargetType(aTargetFlexoConcept != null ? aTargetFlexoConcept.getInstanceType() : null);
 		}
 
 		@Override
@@ -322,82 +253,27 @@ public interface DrawRectangleScheme extends AbstractCreationScheme, DiagramFlex
 
 		@Override
 		public boolean getTopTarget() {
-			if (StringUtils.isEmpty(_getTarget())) {
-				return false;
-			}
-			return _getTarget().equalsIgnoreCase(TOP);
+			return targetType == null;
 		}
 
 		@Override
 		public void setTopTarget(boolean flag) {
 			if (flag) {
-				_setTarget(TOP);
+				setTargetType(null);
 			}
-			else {
-				_setTarget("");
+			else if (targetType == null && getFlexoConcept() != null) {
+				setTargetType(getFlexoConcept().getInstanceType());
 			}
-		}
-
-		@Override
-		public String _getChildren() {
-			return children;
-		}
-
-		@Override
-		public void _setChildren(String children) {
-			if (requireChange(this.children, children)) {
-				FlexoConcept oldValue = getChildrenFlexoConcept();
-				this.children = children;
-				getPropertyChangeSupport().firePropertyChange(CHILDREN_FLEXO_CONCEPT_KEY, oldValue, getChildrenFlexoConcept());
-			}
-		}
-
-		@Override
-		public void finalizeDeserialization() {
-			super.finalizeDeserialization();
-			getChildrenFlexoConcept();
 		}
 
 		@Override
 		public FlexoConcept getChildrenFlexoConcept() {
-			if (childrenType != null) {
-				return childrenType.getFlexoConcept();
-			}
-			if (StringUtils.isEmpty(_getChildren())) {
-				return null;
-			}
-			if (childrenFlexoConcept != null) {
-				return childrenFlexoConcept;
-			}
-
-			if (StringUtils.isEmpty(_getChildren())) {
-				return null;
-			}
-			if (getOwningVirtualModel() != null) {
-				childrenFlexoConcept = getOwningVirtualModel().getFlexoConcept(_getChildren());
-				if (lastKnownChildrenFlexoConcept != childrenFlexoConcept) {
-					FlexoConcept oldValue = lastKnownChildrenFlexoConcept;
-					lastKnownChildrenFlexoConcept = childrenFlexoConcept;
-					getPropertyChangeSupport().firePropertyChange(CHILDREN_FLEXO_CONCEPT_KEY, oldValue, childrenFlexoConcept);
-				}
-				return childrenFlexoConcept;
-			}
-			return null;
+			return childrenType != null ? childrenType.getFlexoConcept() : null;
 		}
 
 		@Override
 		public void setChildrenFlexoConcept(FlexoConcept aChildrenFlexoConcept) {
-			/*if (targetFlexoConcept != null) {
-				setTopTarget(false);
-			}*/
-			FlexoConcept oldChildrenFlexoConcept = this.childrenFlexoConcept;
-			this.childrenFlexoConcept = aChildrenFlexoConcept;
-			if (aChildrenFlexoConcept != null) {
-				setChildrenType(aChildrenFlexoConcept.getInstanceType());
-			}
-			_setChildren(aChildrenFlexoConcept != null ? aChildrenFlexoConcept.getURI() : null);
-			getPropertyChangeSupport().firePropertyChange(CHILDREN_FLEXO_CONCEPT_KEY, oldChildrenFlexoConcept, aChildrenFlexoConcept);
-			// updateBindingModels();
+			setChildrenType(aChildrenFlexoConcept != null ? aChildrenFlexoConcept.getInstanceType() : null);
 		}
 
 		@Override

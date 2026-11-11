@@ -39,7 +39,6 @@
 package org.openflexo.technologyadapter.diagram.fml;
 
 import org.openflexo.foundation.fml.AbstractCreationScheme;
-import org.openflexo.foundation.fml.FMLMigration;
 import org.openflexo.foundation.fml.FlexoConcept;
 import org.openflexo.foundation.fml.FlexoConceptInstanceType;
 import org.openflexo.foundation.fml.annotations.FML;
@@ -53,7 +52,6 @@ import org.openflexo.pamela.annotations.PropertyIdentifier;
 import org.openflexo.pamela.annotations.Setter;
 import org.openflexo.pamela.annotations.Updater;
 import org.openflexo.technologyadapter.diagram.fml.binding.LinkSchemeBindingModel;
-import org.openflexo.toolbox.StringUtils;
 
 /**
  * A creation behaviour triggered while connecting two shapes
@@ -71,10 +69,6 @@ public interface LinkScheme extends AbstractCreationScheme, DiagramFlexoBehaviou
 	public static final String FROM_TYPE_KEY = "fromType";
 	@PropertyIdentifier(type = FlexoConceptInstanceType.class)
 	public static final String TO_TYPE_KEY = "toType";
-	@PropertyIdentifier(type = String.class)
-	public static final String FROM_TARGET_KEY = "fromTarget";
-	@PropertyIdentifier(type = String.class)
-	public static final String TO_TARGET_KEY = "toTarget";
 	@PropertyIdentifier(type = boolean.class)
 	public static final String IS_AVAILABLE_WITH_FLOATING_PALETTE_KEY = "isAvailableWithFloatingPalette";
 	@PropertyIdentifier(type = boolean.class)
@@ -123,26 +117,6 @@ public interface LinkScheme extends AbstractCreationScheme, DiagramFlexoBehaviou
 	@Updater(TO_TYPE_KEY)
 	public void updateToType(FlexoConceptInstanceType to);
 
-	@FMLMigration
-	@Deprecated
-	@Getter(value = FROM_TARGET_KEY)
-	public String _getFromTarget();
-
-	@FMLMigration
-	@Deprecated
-	@Setter(FROM_TARGET_KEY)
-	public void _setFromTarget(String fromTarget);
-
-	@FMLMigration
-	@Deprecated
-	@Getter(value = TO_TARGET_KEY)
-	public String _getToTarget();
-
-	@FMLMigration
-	@Deprecated
-	@Setter(TO_TARGET_KEY)
-	public void _setToTarget(String toTarget);
-
 	@Getter(value = IS_AVAILABLE_WITH_FLOATING_PALETTE_KEY, defaultValue = "false")
 	public boolean getIsAvailableWithFloatingPalette();
 
@@ -179,28 +153,17 @@ public interface LinkScheme extends AbstractCreationScheme, DiagramFlexoBehaviou
 	@Setter(WEST_DIRECTION_SUPPORTED_KEY)
 	public void setWestDirectionSupported(boolean westDirectionSupported);
 
-	@FMLMigration
-	@Deprecated
 	public FlexoConcept getFromTargetFlexoConcept();
 
-	@FMLMigration
-	@Deprecated
 	public void setFromTargetFlexoConcept(FlexoConcept targetFlexoConcept);
 
-	@FMLMigration
-	@Deprecated
 	public FlexoConcept getToTargetFlexoConcept();
 
-	@FMLMigration
-	@Deprecated
 	public void setToTargetFlexoConcept(FlexoConcept targetFlexoConcept);
 
 	public boolean isValidTarget(FlexoConcept actualFromTarget, FlexoConcept actualToTarget);
 
 	public static abstract class LinkSchemeImpl extends AbstractCreationSchemeImpl implements LinkScheme {
-
-		private String fromTarget;
-		private String toTarget;
 
 		private boolean northDirectionSupported = true;
 		private boolean eastDirectionSupported = true;
@@ -209,61 +172,13 @@ public interface LinkScheme extends AbstractCreationScheme, DiagramFlexoBehaviou
 
 		private boolean isAvailableWithFloatingPalette = true;
 
-		private FlexoConcept fromTargetFlexoConcept = null;
-		private FlexoConcept toTargetFlexoConcept = null;
-
-		private FlexoConcept lastKnownFromTargetFlexoConcept = null;
-		private FlexoConcept lastKnownToTargetFlexoConcept = null;
-
 		private FlexoConceptInstanceType fromType;
 		private FlexoConceptInstanceType toType;
-
-		@Override
-		@Deprecated
-		public String _getFromTarget() {
-			return fromTarget;
-		}
-
-		@Override
-		@Deprecated
-		public void _setFromTarget(String fromTarget) {
-			if (requireChange(this.fromTarget, fromTarget)) {
-				FlexoConcept oldValue = lastKnownFromTargetFlexoConcept;
-				this.fromTarget = fromTarget;
-				getPropertyChangeSupport().firePropertyChange(FROM_TARGET_FLEXO_CONCEPT_KEY, oldValue, getFromTargetFlexoConcept());
-			}
-		}
-
-		@Override
-		@Deprecated
-		public String _getToTarget() {
-			return toTarget;
-		}
-
-		@Override
-		@Deprecated
-		public void _setToTarget(String toTarget) {
-			if (requireChange(this.toTarget, toTarget)) {
-				FlexoConcept oldValue = lastKnownToTargetFlexoConcept;
-				this.toTarget = toTarget;
-				getPropertyChangeSupport().firePropertyChange(TO_TARGET_FLEXO_CONCEPT_KEY, oldValue, getToTargetFlexoConcept());
-			}
-		}
-
-		@Override
-		public void finalizeDeserialization() {
-			super.finalizeDeserialization();
-			getFromTargetFlexoConcept();
-			getToTargetFlexoConcept();
-		}
 
 		@Override
 		public FlexoConceptInstanceType getFromType() {
 			if (fromType != null) {
 				return fromType;
-			}
-			if (getFromTargetFlexoConcept() != null) {
-				return getFromTargetFlexoConcept().getInstanceType();
 			}
 			return FlexoConceptInstanceType.UNDEFINED_FLEXO_CONCEPT_INSTANCE_TYPE;
 		}
@@ -272,8 +187,10 @@ public interface LinkScheme extends AbstractCreationScheme, DiagramFlexoBehaviou
 		public void setFromType(FlexoConceptInstanceType fromType) {
 			if ((fromType == null && this.fromType != null) || (fromType != null && !fromType.equals(this.fromType))) {
 				FlexoConceptInstanceType oldValue = this.fromType;
+				FlexoConcept oldConcept = getFromTargetFlexoConcept();
 				this.fromType = fromType;
 				getPropertyChangeSupport().firePropertyChange(FROM_TYPE_KEY, oldValue, fromType);
+				getPropertyChangeSupport().firePropertyChange(FROM_TARGET_FLEXO_CONCEPT_KEY, oldConcept, getFromTargetFlexoConcept());
 			}
 		}
 
@@ -300,9 +217,6 @@ public interface LinkScheme extends AbstractCreationScheme, DiagramFlexoBehaviou
 			if (toType != null) {
 				return toType;
 			}
-			if (getToTargetFlexoConcept() != null) {
-				return getToTargetFlexoConcept().getInstanceType();
-			}
 			return FlexoConceptInstanceType.UNDEFINED_FLEXO_CONCEPT_INSTANCE_TYPE;
 		}
 
@@ -310,8 +224,10 @@ public interface LinkScheme extends AbstractCreationScheme, DiagramFlexoBehaviou
 		public void setToType(FlexoConceptInstanceType toType) {
 			if ((toType == null && this.toType != null) || (toType != null && !toType.equals(this.toType))) {
 				FlexoConceptInstanceType oldValue = this.toType;
+				FlexoConcept oldConcept = getToTargetFlexoConcept();
 				this.toType = toType;
 				getPropertyChangeSupport().firePropertyChange(TO_TYPE_KEY, oldValue, toType);
+				getPropertyChangeSupport().firePropertyChange(TO_TARGET_FLEXO_CONCEPT_KEY, oldConcept, getToTargetFlexoConcept());
 			}
 		}
 
@@ -334,73 +250,23 @@ public interface LinkScheme extends AbstractCreationScheme, DiagramFlexoBehaviou
 		}
 
 		@Override
-		@Deprecated
 		public FlexoConcept getFromTargetFlexoConcept() {
-
-			if (fromType != null && fromType.getFlexoConcept() != null) {
-				return fromType.getFlexoConcept();
-			}
-
-			if (fromTargetFlexoConcept != null) {
-				return fromTargetFlexoConcept;
-			}
-
-			if (!StringUtils.isEmpty(_getFromTarget()) && getOwningVirtualModel() != null) {
-				fromTargetFlexoConcept = getOwningVirtualModel().getFlexoConcept(_getFromTarget());
-			}
-			if (lastKnownFromTargetFlexoConcept != fromTargetFlexoConcept) {
-				FlexoConcept oldValue = lastKnownFromTargetFlexoConcept;
-				lastKnownFromTargetFlexoConcept = fromTargetFlexoConcept;
-				getPropertyChangeSupport().firePropertyChange(FROM_TARGET_FLEXO_CONCEPT_KEY, oldValue, fromTargetFlexoConcept);
-			}
-			return fromTargetFlexoConcept;
+			return fromType != null ? fromType.getFlexoConcept() : null;
 		}
 
 		@Override
-		@Deprecated
 		public void setFromTargetFlexoConcept(FlexoConcept targetFlexoConcept) {
-			FlexoConcept oldFromTargetFlexoConcept = fromTargetFlexoConcept;
-			fromTargetFlexoConcept = targetFlexoConcept;
-			if (fromTargetFlexoConcept != null) {
-				setFromType(fromTargetFlexoConcept.getInstanceType());
-			}
-			_setFromTarget(targetFlexoConcept != null ? targetFlexoConcept.getURI() : null);
-			getPropertyChangeSupport().firePropertyChange(FROM_TARGET_FLEXO_CONCEPT_KEY, oldFromTargetFlexoConcept, fromTargetFlexoConcept);
+			setFromType(targetFlexoConcept != null ? targetFlexoConcept.getInstanceType() : null);
 		}
 
 		@Override
-		@Deprecated
 		public FlexoConcept getToTargetFlexoConcept() {
-
-			if (toType != null && toType.getFlexoConcept() != null) {
-				return toType.getFlexoConcept();
-			}
-
-			if (toTargetFlexoConcept != null) {
-				return toTargetFlexoConcept;
-			}
-
-			if (!StringUtils.isEmpty(_getToTarget()) && getOwningVirtualModel() != null) {
-				toTargetFlexoConcept = getOwningVirtualModel().getFlexoConcept(_getToTarget());
-			}
-			if (lastKnownToTargetFlexoConcept != toTargetFlexoConcept) {
-				FlexoConcept oldValue = lastKnownToTargetFlexoConcept;
-				lastKnownToTargetFlexoConcept = toTargetFlexoConcept;
-				getPropertyChangeSupport().firePropertyChange(TO_TARGET_FLEXO_CONCEPT_KEY, oldValue, toTargetFlexoConcept);
-			}
-			return toTargetFlexoConcept;
+			return toType != null ? toType.getFlexoConcept() : null;
 		}
 
 		@Override
-		@Deprecated
 		public void setToTargetFlexoConcept(FlexoConcept targetFlexoConcept) {
-			FlexoConcept oldToTargetFlexoConcept = toTargetFlexoConcept;
-			toTargetFlexoConcept = targetFlexoConcept;
-			if (toTargetFlexoConcept != null) {
-				setToType(toTargetFlexoConcept.getInstanceType());
-			}
-			_setToTarget(targetFlexoConcept != null ? targetFlexoConcept.getURI() : null);
-			getPropertyChangeSupport().firePropertyChange(TO_TARGET_FLEXO_CONCEPT_KEY, oldToTargetFlexoConcept, toTargetFlexoConcept);
+			setToType(targetFlexoConcept != null ? targetFlexoConcept.getInstanceType() : null);
 		}
 
 		@Override
