@@ -97,7 +97,9 @@ public abstract class DiagramPaletteResourceImpl extends PamelaXMLSerializableRe
 		DiagramPalette returned = super.performLoad();
 		if (getContainer() != null && getContainer().getDiagramSpecification() != null
 				&& !getContainer().getDiagramSpecification().getPalettes().contains(returned)) {
-			getContainer().getDiagramSpecification().addToPalettes(returned);
+			// Linking a palette loaded from its resource to its specification is not an edition (CORE-D-45)
+			getContainer().getDiagramSpecification()
+					.runWithoutMarkingModified(() -> getContainer().getDiagramSpecification().addToPalettes(returned));
 			setChanged();
 			notifyObservers(new DataModification("diagramPalette", null, returned));
 		}

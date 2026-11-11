@@ -235,7 +235,8 @@ public interface DiagramSpecification extends TechnologyObject<DiagramTechnology
 					if (r instanceof DiagramPaletteResource) {
 						DiagramPalette palette = ((DiagramPaletteResource) r).getDiagramPalette();
 						if (!palettes.contains(palette)) {
-							addToPalettes(palette);
+							// The palettes of a specification are those of its resource: building the list is not an edition (CORE-D-45)
+							runWithoutMarkingModified(() -> addToPalettes(palette));
 						}
 					}
 				}
@@ -253,8 +254,9 @@ public interface DiagramSpecification extends TechnologyObject<DiagramTechnology
 					if (r instanceof DiagramResource) {
 						Diagram exampleDiagram = ((DiagramResource) r).getDiagram();
 						if (!exampleDiagrams.contains(exampleDiagram)) {
-							addToExampleDiagrams(exampleDiagram);
-							exampleDiagram.setDiagramSpecification(this);
+							// Linking a diagram loaded from its resource to its specification is not an edition (CORE-D-45)
+							runWithoutMarkingModified(() -> addToExampleDiagrams(exampleDiagram));
+							exampleDiagram.runWithoutMarkingModified(() -> exampleDiagram.setDiagramSpecification(this));
 						}
 					}
 				}
@@ -376,7 +378,7 @@ public interface DiagramSpecification extends TechnologyObject<DiagramTechnology
 			}
 			if (!exampleDiagrams.contains(aDiagram)) {
 				exampleDiagrams.add(aDiagram);
-				aDiagram.setDiagramSpecification(this);
+				aDiagram.runWithoutMarkingModified(() -> aDiagram.setDiagramSpecification(this));
 				getPropertyChangeSupport().firePropertyChange("exampleDiagrams", null, aDiagram);
 			}
 		}
