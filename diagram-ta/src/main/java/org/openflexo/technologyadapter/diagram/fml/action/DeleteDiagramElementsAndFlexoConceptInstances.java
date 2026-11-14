@@ -43,6 +43,7 @@ import java.util.List;
 import java.util.Vector;
 import java.util.logging.Logger;
 
+import org.openflexo.foundation.FlexoException;
 import org.openflexo.foundation.FlexoEditor;
 import org.openflexo.foundation.FlexoObject;
 import org.openflexo.foundation.FlexoObject.FlexoObjectImpl;
@@ -50,6 +51,7 @@ import org.openflexo.foundation.action.FlexoAction;
 import org.openflexo.foundation.action.FlexoActionFactory;
 import org.openflexo.foundation.fml.DeletionScheme;
 import org.openflexo.foundation.fml.FlexoConcept;
+import org.openflexo.foundation.fml.rt.FMLExecutionException;
 import org.openflexo.foundation.fml.rt.FlexoConceptInstance;
 import org.openflexo.foundation.fml.rt.VirtualModelInstance;
 import org.openflexo.foundation.fml.rt.action.DeletionSchemeAction;
@@ -148,7 +150,7 @@ public class DeleteDiagramElementsAndFlexoConceptInstances
 	}
 
 	@Override
-	protected void doAction(Object context) {
+	protected void doAction(Object context) throws FlexoException {
 
 		logger.info("Delete Flexo Concept Instances");
 
@@ -163,6 +165,12 @@ public class DeleteDiagramElementsAndFlexoConceptInstances
 				// deletionSchemeAction.setVirtualModelInstance(vmi);
 				// deletionSchemeAction.setDeletionScheme(fciEntry.currentDeletionScheme);
 				deletionSchemeAction.doAction();
+				if (deletionSchemeAction.hasActionExecutionFailed()) {
+					// The deletion scheme failed: the instance is kept (CORE-D-47), and the deletion stops here, before its diagram
+					// elements are deleted; the failure is reported to the user
+					throw new FMLExecutionException("Deletion scheme failed for " + fciEntry.getFlexoConceptInstance(),
+							deletionSchemeAction.getThrownException());
+				}
 				vmi.removeFromFlexoConceptInstances(fciEntry.getFlexoConceptInstance());
 				fciEntry.getFlexoConceptInstance().delete(context);
 			}
