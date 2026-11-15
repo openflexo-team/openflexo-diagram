@@ -17,3 +17,11 @@ Fixed defects are moved to [`FIXED_DEFECTS.md`](./FIXED_DEFECTS.md) once their s
 ### DIAGRAM-D-3 — An empty `paletteElementBindings` list of a `TypedDiagram` role has no node either  ·  `TODO`
 
 Seen while writing the test of DIAGRAM-D-1 (fixture with `Diagram diagram with TypedDiagram(diagramSpecification=…, isRequired=true)`, no `paletteElementBindings`): `Cannot find P2PPNode for object FMLInstancesListPropertyValue[paletteElementBindings=[]]`. Same mechanism: an empty list is a value different from the default (null) of an attribute nobody wrote. Not seen in formod. Not investigated further.
+
+### DIAGRAM-D-4 — `TestCommonPalettes.testCommonPaletteGroup` fails now and then: an opened palette is still empty  ·  `TODO`
+
+UI test of diagram-ta-ui. Failed once on 2026-11-15, in the run of the whole module through the openflexo-dev composite (`testAll`):
+`AssertionError` at `TestCommonPalettes.java:128`, `<title> is empty`, so a palette of the common group had no elements just after its panel
+was opened. Passed in the previous full run, and 3 times out of 3 when run alone (`./gradlew :openflexo-diagram:diagram-ta-ui:uiTest --tests
+'*TestCommonPalettes'`). Not investigated: probably the palette of a panel is loaded asynchronously and the test reads it before it is loaded.
+Not related to CORE-F-11 (the test runs no action).
