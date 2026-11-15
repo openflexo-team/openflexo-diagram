@@ -526,6 +526,10 @@ public class FMLControlledDiagramFloatingPalette extends ControlArea<DianaRoundR
 		dropSchemeAction.setDropLocation(dropLocation);
 		dropSchemeAction.escapeParameterRetrievingWhenValid = true;
 		dropSchemeAction.doAction();
+		// A failure was reported by the editor: no shape, so no connector to it (CORE-F-11)
+		if (!dropSchemeAction.hasActionExecutionSucceeded()) {
+			return null;
+		}
 
 		return controller.getDrawing().getFederatedShape(dropSchemeAction.getPrimaryShape());
 
@@ -541,6 +545,10 @@ public class FMLControlledDiagramFloatingPalette extends ControlArea<DianaRoundR
 		action.setToShape(to.getDiagramElement());
 		action.escapeParameterRetrievingWhenValid = true;
 		action.doAction();
+		// A failure was reported by the editor: no connector (CORE-F-11)
+		if (!action.hasActionExecutionSucceeded()) {
+			return null;
+		}
 
 		return controller.getDrawing().getFederatedConnector(action.getNewConnector());
 	}

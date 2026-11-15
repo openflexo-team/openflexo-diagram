@@ -42,8 +42,6 @@ import javax.swing.Icon;
 
 import org.openflexo.foundation.action.FlexoActionFactory;
 import org.openflexo.foundation.action.FlexoActionRunnable;
-import org.openflexo.foundation.action.FlexoExceptionHandler;
-import org.openflexo.foundation.action.NotImplementedException;
 import org.openflexo.foundation.fml.rt.FMLRTVirtualModelInstance;
 import org.openflexo.foundation.fml.rt.VirtualModelInstanceObject;
 import org.openflexo.technologyadapter.diagram.fml.LinkScheme;
@@ -51,7 +49,6 @@ import org.openflexo.technologyadapter.diagram.gui.DiagramIconLibrary;
 import org.openflexo.technologyadapter.diagram.model.action.LinkSchemeAction;
 import org.openflexo.view.controller.ActionInitializer;
 import org.openflexo.view.controller.ControllerActionInitializer;
-import org.openflexo.view.controller.FlexoController;
 import org.openflexo.view.controller.ParametersRetriever;
 
 public class LinkSchemeActionInitializer
@@ -98,16 +95,6 @@ public class LinkSchemeActionInitializer
 		};
 	}
 
-	@Override
-	protected FlexoExceptionHandler<LinkSchemeAction, FMLRTVirtualModelInstance, VirtualModelInstanceObject> getDefaultExceptionHandler() {
-		return (exception, action) -> {
-			if (exception instanceof NotImplementedException) {
-				FlexoController.notify(action.getLocales().localizedForKey("not_implemented_yet"));
-				return true;
-			}
-			return false;
-		};
-	}
 
 	@Override
 	protected Icon getEnabledIcon(

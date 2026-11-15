@@ -100,6 +100,7 @@ public class FMLControlledDiagramMouseClickControl extends MouseClickControlImpl
 						if (action.getAbstractActionScheme() instanceof NavigationScheme) {
 							NavigationSchemeAction navigationAction = new NavigationSchemeActionFactory(
 									(NavigationScheme) action.getAbstractActionScheme(), epi).makeNewAction(epi, null, editor);
+							// The click is handled even when the behaviour fails: the editor reported the failure (CORE-F-11)
 							navigationAction.doAction();
 							return true;
 						} else if (action.getAbstractActionScheme() instanceof ActionScheme) {

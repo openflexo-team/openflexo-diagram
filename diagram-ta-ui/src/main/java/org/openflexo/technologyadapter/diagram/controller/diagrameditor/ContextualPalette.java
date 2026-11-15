@@ -322,6 +322,10 @@ public class ContextualPalette extends DiagramEditorPaletteModel implements Prop
 			action.setDropLocation(dropLocation);
 
 			action.doAction();
+			// A failure was reported by the editor, and its edits undone: no new shape to notify (CORE-F-11)
+			if (!action.hasActionExecutionSucceeded()) {
+				return false;
+			}
 
 			// The new shape has well be added to the diagram, and the drawing (which listen to the diagram) has well received the event
 			// The drawing is now up-to-date... but there is something wrong if we are in FML-controlled mode.
@@ -368,6 +372,10 @@ public class ContextualPalette extends DiagramEditorPaletteModel implements Prop
 			action.setPaletteElement(paletteElement);
 			action.setDropLocation(dropLocation);
 			action.doAction();
+			// A failure was reported by the editor, and its edits undone: no new shape to notify (CORE-F-11)
+			if (!action.hasActionExecutionSucceeded()) {
+				return;
+			}
 
 			// The new shape has well be added to the diagram, and the drawing (which listen to the diagram) has well received the event
 			// The drawing is now up-to-date... but there is something wrong if we are in FML-controlled mode.

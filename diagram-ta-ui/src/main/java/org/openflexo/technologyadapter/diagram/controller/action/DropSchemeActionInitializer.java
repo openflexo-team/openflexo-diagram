@@ -48,8 +48,6 @@ import org.openflexo.diana.Drawing.ShapeNode;
 import org.openflexo.diana.swing.view.JShapeView;
 import org.openflexo.foundation.action.FlexoActionFactory;
 import org.openflexo.foundation.action.FlexoActionRunnable;
-import org.openflexo.foundation.action.FlexoExceptionHandler;
-import org.openflexo.foundation.action.NotImplementedException;
 import org.openflexo.foundation.fml.rt.FMLRTVirtualModelInstance;
 import org.openflexo.foundation.fml.rt.VirtualModelInstanceObject;
 import org.openflexo.gina.controller.FIBController.Status;
@@ -63,7 +61,6 @@ import org.openflexo.technologyadapter.diagram.model.action.DropSchemeAction;
 import org.openflexo.view.ModuleView;
 import org.openflexo.view.controller.ActionInitializer;
 import org.openflexo.view.controller.ControllerActionInitializer;
-import org.openflexo.view.controller.FlexoController;
 
 public class DropSchemeActionInitializer
 		extends ActionInitializer<DropSchemeAction, FMLRTVirtualModelInstance, VirtualModelInstanceObject> {
@@ -174,16 +171,6 @@ public class DropSchemeActionInitializer
 		return true;
 	}
 
-	@Override
-	protected FlexoExceptionHandler<DropSchemeAction, FMLRTVirtualModelInstance, VirtualModelInstanceObject> getDefaultExceptionHandler() {
-		return (exception, action) -> {
-			if (exception instanceof NotImplementedException) {
-				FlexoController.notify(action.getLocales().localizedForKey("not_implemented_yet"));
-				return true;
-			}
-			return false;
-		};
-	}
 
 	@Override
 	protected Icon getEnabledIcon(

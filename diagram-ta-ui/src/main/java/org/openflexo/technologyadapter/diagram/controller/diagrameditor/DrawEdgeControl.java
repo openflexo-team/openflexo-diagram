@@ -188,7 +188,10 @@ public class DrawEdgeControl extends MouseDragControlImpl<DiagramEditor> {
 
 			// System.out.println("Added new connector !");
 			// editingContext.getUndoManager().stopRecording(drawEdgeEdit);
-			controller.setSelectedObject(controller.getDrawing().getDrawingTreeNode(action.getNewConnector()));
+			// A failure was reported by the editor: there is no connector to select (CORE-F-11)
+			if (action.hasActionExecutionSucceeded()) {
+				controller.setSelectedObject(controller.getDrawing().getDrawingTreeNode(action.getNewConnector()));
+			}
 
 			drawEdge = false;
 			fromShape = null;
