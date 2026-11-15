@@ -38,6 +38,7 @@
 
 package org.openflexo.technologyadapter.diagram.fml.editionaction;
 
+import org.openflexo.foundation.fml.rt.error.FMLExecutionException;
 import java.lang.reflect.Type;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -144,7 +145,7 @@ public interface AddShape extends AddDiagramElementAction<DiagramShape> {
 			return out.toString();
 		}*/
 
-		public DiagramContainerElement<?> getContainer(RunTimeEvaluationContext evaluationContext) {
+		public DiagramContainerElement<?> getContainer(RunTimeEvaluationContext evaluationContext) throws FMLExecutionException {
 			if (evaluationContext instanceof FlexoBehaviourAction
 					&& ((FlexoBehaviourAction<?, ?, ?>) evaluationContext).getFlexoConceptInstance() != null
 					&& getAssignedFlexoProperty() != null && !getAssignedFlexoProperty().getParentShapeAsDefinedInAction()) {
@@ -229,7 +230,7 @@ public interface AddShape extends AddDiagramElementAction<DiagramShape> {
 		}*/
 
 		@Override
-		public DiagramShape execute(RunTimeEvaluationContext evaluationContext) {
+		public DiagramShape execute(RunTimeEvaluationContext evaluationContext) throws FMLExecutionException {
 			DiagramContainerElement<?> container = getContainer(evaluationContext);
 			if (container == null) {
 				logger.warning("When adding shape, cannot find container for action " + getAssignedFlexoProperty() + " container="
