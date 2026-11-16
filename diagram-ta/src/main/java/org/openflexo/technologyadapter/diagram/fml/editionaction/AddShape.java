@@ -38,6 +38,7 @@
 
 package org.openflexo.technologyadapter.diagram.fml.editionaction;
 
+import org.openflexo.foundation.fml.rt.error.FMLNullReferenceError;
 import org.openflexo.foundation.fml.rt.error.FMLExecutionException;
 import java.lang.reflect.Type;
 import java.util.Vector;
@@ -233,9 +234,7 @@ public interface AddShape extends AddDiagramElementAction<DiagramShape> {
 		public DiagramShape execute(RunTimeEvaluationContext evaluationContext) throws FMLExecutionException {
 			DiagramContainerElement<?> container = getContainer(evaluationContext);
 			if (container == null) {
-				logger.warning("When adding shape, cannot find container for action " + getAssignedFlexoProperty() + " container="
-						+ getContainer(evaluationContext) + " container=" + getContainer());
-				return null;
+				throw new FMLNullReferenceError("No container to add the shape of " + getAssignedFlexoProperty() + " to: " + getContainer());
 			}
 
 			Diagram diagram = container.getDiagram();
@@ -248,9 +247,7 @@ public interface AddShape extends AddDiagramElementAction<DiagramShape> {
 
 				// If no GR is defined for this shape, create a default one
 				if (getAssignedFlexoProperty().getGraphicalRepresentation() == null) {
-					System.out.println("No GR, creating ");
 					grToUse = factory.makeShapeGraphicalRepresentation(ShapeType.RECTANGLE);
-					System.out.println("Creating " + grToUse);
 				}
 				else {
 					grToUse = getAssignedFlexoProperty().getGraphicalRepresentation();

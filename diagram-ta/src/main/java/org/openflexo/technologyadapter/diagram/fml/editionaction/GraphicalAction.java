@@ -38,6 +38,11 @@
 
 package org.openflexo.technologyadapter.diagram.fml.editionaction;
 
+import org.openflexo.foundation.fml.rt.error.FMLNullReferenceError;
+import org.openflexo.foundation.fml.rt.error.FMLResolutionError;
+import org.openflexo.foundation.fml.rt.error.FMLEvaluation;
+import org.openflexo.foundation.fml.rt.error.FMLExecutionException;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -255,17 +260,8 @@ public interface GraphicalAction extends DiagramAction<TypedDiagramModelSlot, Di
 			this.subject = subject;
 		}
 
-		public DiagramElement<?> getSubject(RunTimeEvaluationContext evaluationContext) {
-			try {
-				return getSubject().getBindingValue(evaluationContext);
-			} catch (TypeMismatchException e) {
-				e.printStackTrace();
-			} catch (NullReferenceException e) {
-				e.printStackTrace();
-			} catch (ReflectiveOperationException e) {
-				e.printStackTrace();
-			}
-			return null;
+		public DiagramElement<?> getSubject(RunTimeEvaluationContext evaluationContext) throws FMLExecutionException {
+			return FMLEvaluation.evaluate(getSubject(), evaluationContext, this);
 		}
 
 		@Override
@@ -280,23 +276,25 @@ public interface GraphicalAction extends DiagramAction<TypedDiagramModelSlot, Di
 
 		@SuppressWarnings({ "unchecked", "rawtypes" })
 		@Override
-		public DiagramElement<?> execute(RunTimeEvaluationContext evaluationContext) {
-			logger.info("Perform graphical action " + evaluationContext);
+		public DiagramElement<?> execute(RunTimeEvaluationContext evaluationContext) throws FMLExecutionException {
+			if (logger.isLoggable(Level.FINE)) {
+				logger.fine("Perform graphical action " + evaluationContext);
+			}
 			if (getGraphicalFeature() == null) {
-				logger.warning("No graphical feature supplied, aborting");
-				return null;
+				throw new FMLResolutionError("No graphical feature to apply");
 			}
 
 			DiagramElement<?> graphicalElement = getSubject(evaluationContext);
 			Object value = null;
 			try {
-				value = getValue().getBindingValue(evaluationContext);
-			} catch (TypeMismatchException e) {
-				e.printStackTrace();
-			} catch (NullReferenceException e) {
-				e.printStackTrace();
-			} catch (ReflectiveOperationException e) {
-				e.printStackTrace();
+				value = FMLEvaluation.evaluate(getValue(), evaluationContext, this);
+			} catch (FMLNullReferenceError e) {
+				// A value computed from a graphical representation that does not exist yet (a diagram created headlessly) leaves the
+				// feature unchanged, as before (see below): it is not a failure of the behaviour
+				if (logger.isLoggable(Level.FINE)) {
+					logger.fine("No value computed for " + getGraphicalFeature() + ": " + e.getMessage());
+				}
+				value = null;
 			}
 			if (logger.isLoggable(Level.FINE)) {
 				logger.fine("Element is " + graphicalElement);
@@ -304,7 +302,11 @@ public interface GraphicalAction extends DiagramAction<TypedDiagramModelSlot, Di
 				logger.fine("Value is " + value);
 			}
 
-			if (graphicalElement == null || graphicalElement.getGraphicalRepresentation() == null) {
+			if (graphicalElement == null) {
+				throw new FMLNullReferenceError("No graphical element to apply " + getGraphicalFeature() + " to");
+			}
+			// A graphical element without representation yet (a diagram created headlessly) is left unchanged, as before
+			if (graphicalElement.getGraphicalRepresentation() == null) {
 				logger.warning("No graphical element to apply " + getGraphicalFeature() + " to: action ignored");
 				return graphicalElement;
 			}

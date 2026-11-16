@@ -43,6 +43,9 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.openflexo.foundation.fml.rt.error.FMLTechnologyError;
+import org.openflexo.foundation.fml.rt.error.FMLNullReferenceError;
+import org.openflexo.foundation.fml.rt.error.FMLExecutionException;
 import org.openflexo.connie.DataBinding;
 import org.openflexo.connie.DataBinding.BindingDefinitionType;
 import org.openflexo.connie.exception.NullReferenceException;
@@ -279,7 +282,7 @@ public interface AddConnector extends AddDiagramElementAction<DiagramConnector> 
 		}*/
 
 		@Override
-		public DiagramConnector execute(RunTimeEvaluationContext evaluationContext) {
+		public DiagramConnector execute(RunTimeEvaluationContext evaluationContext) throws FMLExecutionException {
 
 			DiagramShape fromShape = getFromShape(evaluationContext);
 			DiagramShape toShape = getToShape(evaluationContext);
@@ -331,7 +334,7 @@ public interface AddConnector extends AddDiagramElementAction<DiagramConnector> 
 
 				DiagramContainerElement<?> parent = DiagramElementImpl.getFirstCommonAncestor(fromShape, toShape);
 				if (parent == null) {
-					throw new IllegalArgumentException("No common ancestor");
+					throw new FMLTechnologyError("No common ancestor to the shapes " + fromShape + " and " + toShape + ": the connector cannot be placed");
 				}
 
 				ConnectorRole fr = getAssignedFlexoProperty();
@@ -370,8 +373,7 @@ public interface AddConnector extends AddDiagramElementAction<DiagramConnector> 
 				return newConnector;
 			}
 			else {
-				logger.warning("AddConnector failed due to null source or target shape");
-				return null;
+				throw new FMLNullReferenceError("AddConnector failed due to null source or target shape");
 			}
 		}
 

@@ -48,6 +48,9 @@ import org.openflexo.foundation.fml.annotations.FML;
 import org.openflexo.foundation.fml.annotations.SeeAlso;
 import org.openflexo.foundation.fml.annotations.UsageExample;
 import org.openflexo.foundation.fml.editionaction.AbstractCreateResource;
+import org.openflexo.foundation.fml.rt.error.FMLCancellation;
+import org.openflexo.foundation.fml.rt.error.FMLInternalError;
+import org.openflexo.foundation.fml.rt.error.FMLTechnologyError;
 import org.openflexo.foundation.fml.rt.error.FMLExecutionException;
 import org.openflexo.foundation.fml.rt.RunTimeEvaluationContext;
 import org.openflexo.foundation.resource.ResourceLoadingCancelledException;
@@ -220,19 +223,13 @@ public interface CreateDiagram extends AbstractCreateResource<DiagramModelSlot, 
 			try {
 				newDiagramResource = createResource(diagramTA, DiagramResourceFactory.class, evaluationContext,
 						DiagramResourceFactory.DIAGRAM_SUFFIX, true);
-				System.out.println("Return new diagram resource: " + newDiagramResource);
 
 				newDiagramResource.setMetaModelResource(getDiagramSpecificationResource());
 
-				System.out.println("model slot = " + getAssignedFlexoProperty());
 
 				if (getAssignedFlexoProperty() instanceof TypedDiagramModelSlot) {
 					TypedDiagramModelSlot ms = (TypedDiagramModelSlot) getAssignedFlexoProperty();
 					if (ms.getTemplateDiagram() != null) {
-						System.out.println("newDiagramResource.getDiagram().getGraphicalRepresentation()="
-								+ newDiagramResource.getDiagram().getGraphicalRepresentation());
-						System.out.println("ms.getTemplateDiagram().getGraphicalRepresentation()="
-								+ ms.getTemplateDiagram().getGraphicalRepresentation());
 						Diagram newDiagram = newDiagramResource.getDiagram();
 						if (newDiagram.getGraphicalRepresentation() == null) {
 							newDiagram.setGraphicalRepresentation(newDiagramResource.getFactory().makeDrawingGraphicalRepresentation());
@@ -249,12 +246,16 @@ public interface CreateDiagram extends AbstractCreateResource<DiagramModelSlot, 
 
 				Diagram diagram = newDiagramResource.getResourceData();
 
-				System.out.println("Return " + diagram);
 				return diagram;
-			} catch (SaveResourceException | ModelDefinitionException | FileNotFoundException | ResourceLoadingCancelledException e) {
-				throw new FMLExecutionException(e);
-			} catch (FlexoException e) {
-				throw new FMLExecutionException(e);
+			} catch (FMLExecutionException e) {
+				// Already typed (a null name or resource center...): rethrown unchanged (CORE-F-11)
+				throw e;
+			} catch (ModelDefinitionException e) {
+				throw new FMLInternalError(e);
+			} catch (ResourceLoadingCancelledException e) {
+				throw new FMLCancellation("Loading of the new diagram was cancelled", e);
+			} catch (FileNotFoundException | FlexoException e) {
+				throw new FMLTechnologyError("Cannot create the diagram: " + e.getMessage(), e);
 			}
 		}
 
