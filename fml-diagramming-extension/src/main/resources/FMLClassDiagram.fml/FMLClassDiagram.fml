@@ -53,8 +53,8 @@ model FMLClassDiagram {
 	VirtualModel virtualModel values compilationUnit.virtualModel;
 
 	create::init(CompilationUnitResource aVirtualModelResource) {
-		diagram = DIAGRAM::CreateDiagram(resourceName=(this.name + "Diagram"), resourceCenter=this.resourceCenter, relativePath=(parameters.aVirtualModelResource.parentPathRelativeToResourceCenter(this.resourceCenter) + "/.Diagrams"));
-		compilationUnit = parameters.aVirtualModelResource.compilationUnit;
+		diagram = DIAGRAM::CreateDiagram(resourceName=(this.name + "Diagram"), resourceCenter=this.resourceCenter, relativePath=(aVirtualModelResource.parentPathRelativeToResourceCenter(this.resourceCenter) + "/.Diagrams"));
+		compilationUnit = aVirtualModelResource.compilationUnit;
 	}
 
 	abstract concept ContainerGR {
@@ -109,10 +109,10 @@ model FMLClassDiagram {
 		void initContainerGR(boolean displayProperties, boolean displayBehaviours, boolean displayContainment) {
 			containerHeight = 50.0;
 			topLevelShape = DIAGRAM::AddShape(container=diagram) in diagram;
-			displayProperties = parameters.displayProperties;
-			displayBehaviours = parameters.displayBehaviours;
-			displayContainment = parameters.displayContainment;
-			if (displayProperties) {
+			this.displayProperties = displayProperties;
+			this.displayBehaviours = displayBehaviours;
+			this.displayContainment = displayContainment;
+			if (this.displayProperties) {
 				propertyCompartment = this.new PropertiesCompartmentGR(topLevelShape);
 			}
 		}
@@ -133,33 +133,33 @@ model FMLClassDiagram {
 					return returned;
 				}
 				if (displayProperties && propertyCompartment != null) {
-					returned = returned + propertyCompartment.getHeight(parameters.availableHeight);
+					returned = returned + propertyCompartment.getHeight(availableHeight);
 				}
 				if (this == behaviourCompartment) {
 					return returned;
 				}
 				if (displayBehaviours && behaviourCompartment != null) {
-					returned = returned + behaviourCompartment.getHeight(parameters.availableHeight);
+					returned = returned + behaviourCompartment.getHeight(availableHeight);
 				}
 				if (this == containmentCompartment) {
 					return returned;
 				}
 				if (displayContainment && containmentCompartment != null) {
-					returned = returned + containmentCompartment.getHeight(parameters.availableHeight);
+					returned = returned + containmentCompartment.getHeight(availableHeight);
 				}
 				return returned;
 			}
 
 			double getHeight(double availableHeight) {
 				if (flexoConcept == null) {
-					return parameters.availableHeight;
+					return availableHeight;
 				}
-				double extraSpace = parameters.availableHeight - totalRequiredHeight;
+				double extraSpace = availableHeight - totalRequiredHeight;
 				return requiredHeight + extraSpace * heightSpan / totalHeightSpan;
 			}
 
 			void init(DiagramShape topLevelShape) {
-				compartmentShape = DIAGRAM::AddShape(container=parameters.topLevelShape) in diagram;
+				compartmentShape = DIAGRAM::AddShape(container=topLevelShape) in diagram;
 			}
 		}
 
@@ -167,7 +167,7 @@ model FMLClassDiagram {
 			Double requiredHeight values (flexoConcept != null ? flexoConcept.declaredProperties.size * 16 + 10.0 : 10.0);
 			Double heightSpan values 10.0;
 			create(DiagramShape topLevelShape) {
-				this.init(parameters.topLevelShape);
+				this.init(topLevelShape);
 			}
 			delete() {
 			}
@@ -212,7 +212,7 @@ model FMLClassDiagram {
 			header = DIAGRAM::AddShape(container=topLevelShape) in diagram;
 			icon = DIAGRAM::AddShape(container=header) in diagram;
 			title = DIAGRAM::AddShape(container=header) in diagram;
-			flexoConcept = parameters.aConcept;
+			flexoConcept = aConcept;
 			this.updateProperties();
 		}
 
@@ -239,8 +239,8 @@ model FMLClassDiagram {
 		FlexoProperty property with FlexoPropertyRole(container=virtualModel);
 
 		create(FlexoProperty aProperty, DiagramShape aContainer) {
-			property = parameters.aProperty;
-			propertyShape = DIAGRAM::AddShape(container=parameters.aContainer) in diagram;
+			property = aProperty;
+			propertyShape = DIAGRAM::AddShape(container=aContainer) in diagram;
 		}
 
 		FlexoPropertyGR dropProperty() with DropScheme(targetType=FlexoConceptGR) {

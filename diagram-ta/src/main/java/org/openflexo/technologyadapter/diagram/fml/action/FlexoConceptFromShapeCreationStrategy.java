@@ -244,8 +244,8 @@ public abstract class FlexoConceptFromShapeCreationStrategy
 					editionScheme.addToParameters(individualParameter);
 					// Add individual action
 					AssignationAction<?> declareFlexoRole = getFactory().newAssignationAction(
-							getFactory().newExpressionAction(new DataBinding<Object>("parameters." + individualParameter.getName())));
-					declareFlexoRole.setAssignation(new DataBinding<Object>(individualFlexoRole.getName()));
+							getFactory().newExpressionAction(new DataBinding<Object>(individualParameter.getName())));
+					declareFlexoRole.setAssignation(new DataBinding<Object>("this." + individualFlexoRole.getName()));
 					editionScheme.addToActions(declareFlexoRole);
 				}
 				if (editionSchemeConfiguration.getType() == FlexoBehaviourChoice.DROP_AND_CREATE) {
@@ -274,8 +274,8 @@ public abstract class FlexoConceptFromShapeCreationStrategy
 					editionScheme.addToParameters(flexoConceptInstanceParameter);
 					// Add individual action
 					AssignationAction<?> declareFlexoRole = getFactory()
-							.newAssignationAction(new DataBinding<Object>("parameters." + flexoConceptInstanceParameter.getName()));
-					declareFlexoRole.setAssignation(new DataBinding<Object>(flexoConceptInstanceRole.getName()));
+							.newAssignationAction(new DataBinding<Object>(flexoConceptInstanceParameter.getName()));
+					declareFlexoRole.setAssignation(new DataBinding<Object>("this." + flexoConceptInstanceRole.getName()));
 					editionScheme.addToActions(declareFlexoRole);
 				}
 				if (editionSchemeConfiguration.getType() == FlexoBehaviourChoice.DROP_AND_CREATE) {

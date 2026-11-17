@@ -30,7 +30,7 @@ model TestDiagramVM2 {
         }
         
     	create::fromDiagram(Diagram diagram) {
-    		diagram = parameters.diagram;
+    		this.diagram = diagram;
     	}
 
         concept TutuGR {

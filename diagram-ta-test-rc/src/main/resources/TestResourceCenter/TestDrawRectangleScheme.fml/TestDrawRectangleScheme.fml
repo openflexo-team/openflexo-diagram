@@ -23,7 +23,7 @@ model TestDrawRectangleScheme {
 	concept Group {
 		/** A rectangle drawn at top level: the scheme declares no target type */
 		void drawGroup(required String title) with DrawRectangleScheme(childrenType=Box,selectObjects=true) {
-			log "drawing " + parameters.title;
+			log "drawing " + title;
 		}
 	}
 }
