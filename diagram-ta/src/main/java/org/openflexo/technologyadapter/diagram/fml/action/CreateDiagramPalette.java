@@ -43,7 +43,7 @@ import java.util.Vector;
 import java.util.logging.Logger;
 
 import org.openflexo.foundation.FlexoEditor;
-import org.openflexo.foundation.FlexoException;
+import org.openflexo.foundation.OpenflexoRuntimeException;
 import org.openflexo.foundation.FlexoObject;
 import org.openflexo.foundation.FlexoObject.FlexoObjectImpl;
 import org.openflexo.foundation.action.FlexoAction;
@@ -99,7 +99,7 @@ public class CreateDiagramPalette extends FlexoAction<CreateDiagramPalette, Diag
 	}
 
 	@Override
-	protected void doAction(Object context) throws InvalidParameterException, FlexoException {
+	protected void doAction(Object context) throws InvalidParameterException, OpenflexoRuntimeException {
 		logger.info("Add diagram palette to diagram specification");
 
 		// DiagramPaletteResource paletteResource = DiagramPaletteImpl.newDiagramPalette(getFocusedObject(), newPaletteName,
@@ -109,7 +109,7 @@ public class CreateDiagramPalette extends FlexoAction<CreateDiagramPalette, Diag
 		try {
 			paletteResource = _makeDiagramPalette();
 		} catch (ModelDefinitionException e) {
-			throw new FlexoException(e);
+			throw new OpenflexoRuntimeException(e);
 		}
 
 		_newPalette = paletteResource.getDiagramPalette();

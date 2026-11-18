@@ -44,7 +44,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.openflexo.connie.DataBinding;
 import org.openflexo.connie.binding.IBindingPathElement;
 import org.openflexo.connie.expr.BindingPath;
-import org.openflexo.foundation.FlexoException;
+import org.openflexo.foundation.OpenflexoRuntimeException;
 import org.openflexo.foundation.InvalidNameException;
 import org.openflexo.foundation.fml.FlexoBehaviourArgument;
 import org.openflexo.foundation.fml.FlexoBehaviourArgument.WidgetType;
@@ -140,7 +140,7 @@ public class MapShapeToIndividualStrategy extends FlexoConceptFromShapeCreationS
 		return null;
 	}
 
-	public FlexoMetaModel<?> getMetaModel() throws FileNotFoundException, ResourceLoadingCancelledException, FlexoException {
+	public FlexoMetaModel<?> getMetaModel() throws FileNotFoundException, ResourceLoadingCancelledException, OpenflexoRuntimeException {
 		if (getFlexoOntologyModelSlot() != null) {
 			return getFlexoOntologyModelSlot().getMetaModelResource().getResourceData();
 		}
@@ -158,7 +158,7 @@ public class MapShapeToIndividualStrategy extends FlexoConceptFromShapeCreationS
 			e.printStackTrace();
 		} catch (ResourceLoadingCancelledException e) {
 			e.printStackTrace();
-		} catch (FlexoException e) {
+		} catch (OpenflexoRuntimeException e) {
 			e.printStackTrace();
 		}
 		return null;

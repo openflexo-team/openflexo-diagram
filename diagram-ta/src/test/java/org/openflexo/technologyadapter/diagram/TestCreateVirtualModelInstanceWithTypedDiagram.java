@@ -50,7 +50,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openflexo.connie.DataBinding;
 import org.openflexo.foundation.FlexoEditor;
-import org.openflexo.foundation.FlexoException;
+import org.openflexo.foundation.OpenflexoRuntimeException;
 import org.openflexo.foundation.FlexoProject;
 import org.openflexo.foundation.fml.CompilationUnitRepository;
 import org.openflexo.foundation.fml.CreationScheme;
@@ -279,12 +279,12 @@ public class TestCreateVirtualModelInstanceWithTypedDiagram extends OpenflexoPro
 	 * Reload project, check that everything is still ok
 	 * 
 	 * @throws ResourceLoadingCancelledException
-	 * @throws FlexoException
+	 * @throws OpenflexoRuntimeException
 	 * @throws IOException
 	 */
 	@Test
 	@TestOrder(6)
-	public void testReloadProject() throws ResourceLoadingCancelledException, FlexoException, IOException {
+	public void testReloadProject() throws ResourceLoadingCancelledException, OpenflexoRuntimeException, IOException {
 
 		instanciateTestServiceManager(DiagramTechnologyAdapter.class);
 

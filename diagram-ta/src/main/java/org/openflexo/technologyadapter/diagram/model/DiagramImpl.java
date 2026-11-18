@@ -46,7 +46,7 @@ import java.util.logging.Logger;
 import org.openflexo.diana.DrawingGraphicalRepresentation;
 import org.openflexo.diana.ScreenshotBuilder;
 import org.openflexo.diana.ScreenshotBuilder.ScreenshotImage;
-import org.openflexo.foundation.FlexoException;
+import org.openflexo.foundation.OpenflexoRuntimeException;
 import org.openflexo.foundation.FlexoServiceManager;
 import org.openflexo.foundation.resource.CannotRenameException;
 import org.openflexo.foundation.resource.FileIODelegate;
@@ -237,7 +237,7 @@ public abstract class DiagramImpl extends DiagramContainerElementImpl<DrawingGra
 					e.printStackTrace();
 				} catch (ResourceLoadingCancelledException e) {
 					e.printStackTrace();
-				} catch (FlexoException e) {
+				} catch (OpenflexoRuntimeException e) {
 					e.printStackTrace();
 				}
 			}

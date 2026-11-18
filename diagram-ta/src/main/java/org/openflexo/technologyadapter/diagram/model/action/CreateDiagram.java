@@ -42,7 +42,7 @@ import java.util.Vector;
 import java.util.logging.Logger;
 
 import org.openflexo.foundation.FlexoEditor;
-import org.openflexo.foundation.FlexoException;
+import org.openflexo.foundation.OpenflexoRuntimeException;
 import org.openflexo.foundation.FlexoObject;
 import org.openflexo.foundation.FlexoObject.FlexoObjectImpl;
 import org.openflexo.foundation.action.FlexoAction;
@@ -129,12 +129,12 @@ public class CreateDiagram extends FlexoAction<CreateDiagram, RepositoryFolder<D
 	}
 
 	@Override
-	protected void doAction(Object context) throws FlexoException {
+	protected void doAction(Object context) throws OpenflexoRuntimeException {
 
 		try {
 			diagramResource = _makeDiagram();
 		} catch (ModelDefinitionException e) {
-			throw new FlexoException(e);
+			throw new OpenflexoRuntimeException(e);
 		}
 	}
 

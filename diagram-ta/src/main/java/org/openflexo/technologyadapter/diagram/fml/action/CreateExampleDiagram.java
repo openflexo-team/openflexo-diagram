@@ -43,7 +43,7 @@ import java.util.Vector;
 import java.util.logging.Logger;
 
 import org.openflexo.foundation.FlexoEditor;
-import org.openflexo.foundation.FlexoException;
+import org.openflexo.foundation.OpenflexoRuntimeException;
 import org.openflexo.foundation.FlexoObject.FlexoObjectImpl;
 import org.openflexo.foundation.action.FlexoAction;
 import org.openflexo.foundation.action.FlexoActionFactory;
@@ -102,13 +102,13 @@ public class CreateExampleDiagram extends FlexoAction<CreateExampleDiagram, Diag
 	}
 
 	@Override
-	protected void doAction(Object context) throws InvalidParameterException, FlexoException {
+	protected void doAction(Object context) throws InvalidParameterException, OpenflexoRuntimeException {
 		logger.info("Add example diagram");
 
 		try {
 			newDiagramResource = _makeDiagram();
 		} catch (ModelDefinitionException e) {
-			throw new FlexoException(e);
+			throw new OpenflexoRuntimeException(e);
 		}
 
 		/*String newDiagramURI = getFocusedObject().getURI() + "/" + newDiagramName;

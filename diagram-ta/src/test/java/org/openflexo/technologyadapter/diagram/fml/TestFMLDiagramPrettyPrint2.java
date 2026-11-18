@@ -49,7 +49,7 @@ import org.junit.runner.RunWith;
 import org.openflexo.connie.DataBinding;
 import org.openflexo.foundation.DefaultFlexoEditor;
 import org.openflexo.foundation.FlexoEditor;
-import org.openflexo.foundation.FlexoException;
+import org.openflexo.foundation.OpenflexoRuntimeException;
 import org.openflexo.foundation.fml.CreationScheme;
 import org.openflexo.foundation.fml.FMLCompilationUnit;
 import org.openflexo.foundation.fml.FlexoConcept;
@@ -116,7 +116,7 @@ public class TestFMLDiagramPrettyPrint2 extends FMLParserTestCase {
 	@Test
 	@TestOrder(1)
 	public void initServiceManager()
-			throws ParseException, ModelDefinitionException, IOException, ResourceLoadingCancelledException, FlexoException {
+			throws ParseException, ModelDefinitionException, IOException, ResourceLoadingCancelledException, OpenflexoRuntimeException {
 		instanciateTestServiceManager();
 
 		editor = new DefaultFlexoEditor(null, serviceManager);
@@ -144,7 +144,7 @@ public class TestFMLDiagramPrettyPrint2 extends FMLParserTestCase {
 	@Test
 	@TestOrder(2)
 	public void loadInitialVersion()
-			throws ParseException, ModelDefinitionException, IOException, ResourceLoadingCancelledException, FlexoException {
+			throws ParseException, ModelDefinitionException, IOException, ResourceLoadingCancelledException, OpenflexoRuntimeException {
 		instanciateTestServiceManager();
 
 		log("Initial version");

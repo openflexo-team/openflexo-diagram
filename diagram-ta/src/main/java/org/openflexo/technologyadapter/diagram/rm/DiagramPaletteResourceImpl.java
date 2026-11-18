@@ -43,7 +43,7 @@ import java.io.IOException;
 import java.util.logging.Logger;
 
 import org.openflexo.foundation.DataModification;
-import org.openflexo.foundation.FlexoException;
+import org.openflexo.foundation.OpenflexoRuntimeException;
 import org.openflexo.foundation.resource.PamelaXMLSerializableResourceImpl;
 import org.openflexo.foundation.resource.ResourceLoadingCancelledException;
 import org.openflexo.technologyadapter.diagram.DiagramTechnologyAdapter;
@@ -72,7 +72,7 @@ public abstract class DiagramPaletteResourceImpl extends PamelaXMLSerializableRe
 			e.printStackTrace();
 		} catch (ResourceLoadingCancelledException e) {
 			e.printStackTrace();
-		} catch (FlexoException e) {
+		} catch (OpenflexoRuntimeException e) {
 			e.printStackTrace();
 		}
 		return null;

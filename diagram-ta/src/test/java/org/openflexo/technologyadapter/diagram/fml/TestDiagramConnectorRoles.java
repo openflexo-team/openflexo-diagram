@@ -50,7 +50,7 @@ import org.junit.runner.RunWith;
 import org.openflexo.diana.ConnectorGraphicalRepresentation;
 import org.openflexo.diana.connectors.ConnectorSymbol.EndSymbolType;
 import org.openflexo.foundation.FlexoEditor;
-import org.openflexo.foundation.FlexoException;
+import org.openflexo.foundation.OpenflexoRuntimeException;
 import org.openflexo.foundation.FlexoServiceManager;
 import org.openflexo.foundation.fml.FlexoConcept;
 import org.openflexo.foundation.fml.FlexoRole;
@@ -123,14 +123,14 @@ public class TestDiagramConnectorRoles extends OpenflexoTestCase {
 	/**
 	 * Retrieve the ViewPoint
 	 * 
-	 * @throws FlexoException
+	 * @throws OpenflexoRuntimeException
 	 * @throws ResourceLoadingCancelledException
 	 * @throws FileNotFoundException
 	 */
 	@Test
 	@TestOrder(2)
 	@Category(UITest.class)
-	public void testLoadViewPointAndVirtualModel() throws FileNotFoundException, ResourceLoadingCancelledException, FlexoException {
+	public void testLoadViewPointAndVirtualModel() throws FileNotFoundException, ResourceLoadingCancelledException, OpenflexoRuntimeException {
 		instanciateTestServiceManager(DiagramTechnologyAdapter.class);
 		VirtualModelLibrary vpLib = serviceManager.getVirtualModelLibrary();
 		assertNotNull(vpLib);

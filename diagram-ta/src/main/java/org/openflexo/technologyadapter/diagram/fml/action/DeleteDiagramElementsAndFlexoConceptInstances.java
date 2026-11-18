@@ -43,7 +43,7 @@ import java.util.List;
 import java.util.Vector;
 import java.util.logging.Logger;
 
-import org.openflexo.foundation.FlexoException;
+import org.openflexo.foundation.OpenflexoRuntimeException;
 import org.openflexo.foundation.FlexoEditor;
 import org.openflexo.foundation.FlexoObject;
 import org.openflexo.foundation.FlexoObject.FlexoObjectImpl;
@@ -150,7 +150,7 @@ public class DeleteDiagramElementsAndFlexoConceptInstances
 	}
 
 	@Override
-	protected void doAction(Object context) throws FlexoException {
+	protected void doAction(Object context) throws OpenflexoRuntimeException {
 
 		logger.info("Delete Flexo Concept Instances");
 

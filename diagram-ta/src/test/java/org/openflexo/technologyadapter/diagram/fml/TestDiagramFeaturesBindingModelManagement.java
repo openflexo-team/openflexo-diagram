@@ -52,7 +52,7 @@ import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.openflexo.diana.ShapeGraphicalRepresentation;
 import org.openflexo.diana.shapes.ShapeSpecification.ShapeType;
-import org.openflexo.foundation.FlexoException;
+import org.openflexo.foundation.OpenflexoRuntimeException;
 import org.openflexo.foundation.InvalidNameException;
 import org.openflexo.foundation.fml.FMLTechnologyAdapter;
 import org.openflexo.foundation.fml.FlexoConcept;
@@ -557,14 +557,14 @@ public class TestDiagramFeaturesBindingModelManagement extends DiagramTestCase {
 	/**
 	 * Retrieve the ViewPoint
 	 * 
-	 * @throws FlexoException
+	 * @throws OpenflexoRuntimeException
 	 * @throws ResourceLoadingCancelledException
 	 * @throws FileNotFoundException
 	 */
 	@Test
 	@TestOrder(9)
 	@Category(UITest.class)
-	public void testLoadViewPointAndVirtualModel() throws FileNotFoundException, ResourceLoadingCancelledException, FlexoException {
+	public void testLoadViewPointAndVirtualModel() throws FileNotFoundException, ResourceLoadingCancelledException, OpenflexoRuntimeException {
 
 		instanciateTestServiceManager(DiagramTechnologyAdapter.class);
 		VirtualModelLibrary vpLib = serviceManager.getVirtualModelLibrary();

@@ -53,7 +53,7 @@ import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.openflexo.diana.geom.DianaPoint;
 import org.openflexo.foundation.FlexoEditor;
-import org.openflexo.foundation.FlexoException;
+import org.openflexo.foundation.OpenflexoRuntimeException;
 import org.openflexo.foundation.FlexoProject;
 import org.openflexo.foundation.fml.FlexoConcept;
 import org.openflexo.foundation.fml.VirtualModel;
@@ -112,14 +112,14 @@ public class TestInstantiateControlledDiagramVirtualModel extends OpenflexoProje
 	/**
 	 * Retrieve the ViewPoint
 	 * 
-	 * @throws FlexoException
+	 * @throws OpenflexoRuntimeException
 	 * @throws ResourceLoadingCancelledException
 	 * @throws FileNotFoundException
 	 */
 	@Test
 	@TestOrder(1)
 	@Category(UITest.class)
-	public void testLoadViewPoint() throws FileNotFoundException, ResourceLoadingCancelledException, FlexoException {
+	public void testLoadViewPoint() throws FileNotFoundException, ResourceLoadingCancelledException, OpenflexoRuntimeException {
 		instanciateTestServiceManager(DiagramTechnologyAdapter.class);
 		VirtualModelLibrary vpLib = serviceManager.getVirtualModelLibrary();
 		assertNotNull(vpLib);
@@ -328,14 +328,14 @@ public class TestInstantiateControlledDiagramVirtualModel extends OpenflexoProje
 	/**
 	 * Instantiate in project a FMLRTVirtualModelInstance conform to the VirtualModel
 	 * 
-	 * @throws FlexoException
+	 * @throws OpenflexoRuntimeException
 	 * @throws ResourceLoadingCancelledException
 	 * @throws FileNotFoundException
 	 */
 	@Test
 	@TestOrder(6)
 	@Category(UITest.class)
-	public void testReloadProject() throws FileNotFoundException, ResourceLoadingCancelledException, FlexoException {
+	public void testReloadProject() throws FileNotFoundException, ResourceLoadingCancelledException, OpenflexoRuntimeException {
 
 		log("testReloadProject()");
 

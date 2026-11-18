@@ -46,7 +46,7 @@ import org.openflexo.diana.DianaModelFactory;
 import org.openflexo.diana.DianaModelFactoryImpl;
 import org.openflexo.diana.DrawingGraphicalRepresentation;
 import org.openflexo.foundation.FlexoEditor;
-import org.openflexo.foundation.FlexoException;
+import org.openflexo.foundation.OpenflexoRuntimeException;
 import org.openflexo.foundation.FlexoObject;
 import org.openflexo.foundation.FlexoObject.FlexoObjectImpl;
 import org.openflexo.foundation.action.FlexoActionFactory;
@@ -146,7 +146,7 @@ public class CreateFMLControlledDiagramVirtualModel extends AbstractCreateNature
 	}
 
 	@Override
-	protected void doAction(Object context) throws FlexoException {
+	protected void doAction(Object context) throws OpenflexoRuntimeException {
 
 		Progress.progress(getLocales().localizedForKey("create_virtual_model"));
 
@@ -157,7 +157,7 @@ public class CreateFMLControlledDiagramVirtualModel extends AbstractCreateNature
 		} catch (SaveResourceException e) {
 			throw new SaveResourceException(null);
 		} catch (ModelDefinitionException e) {
-			throw new FlexoException(e);
+			throw new OpenflexoRuntimeException(e);
 		}
 
 		performSetParentConcepts();
