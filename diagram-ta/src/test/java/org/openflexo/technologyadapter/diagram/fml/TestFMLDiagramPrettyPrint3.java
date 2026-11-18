@@ -135,7 +135,7 @@ public class TestFMLDiagramPrettyPrint3 extends FMLParserTestCase {
 
 		TypedDiagramModelSlotImpl modelSlot = (TypedDiagramModelSlotImpl) virtualModel.getModelSlots().get(0);
 		assertNotNull(modelSlot);
-		ModelSlotPropertyNode msNode = checkNodeForObject("(17:8)-(26:19)", "(17:8)-(17:8)", "(26:19)-(27:0)", null, modelSlot);
+		ModelSlotPropertyNode msNode = checkNodeForObject("(17:8)-(26:19)", "(17:0)-(17:8)", "(26:19)-(27:0)", null, modelSlot);
 
 		FMLSimplePropertyValue dsPropertyValue = (FMLSimplePropertyValue) modelSlot.getFMLPropertyValues(modelSlot.getFMLModelFactory())
 				.get(0);
