@@ -45,15 +45,18 @@ import org.openflexo.foundation.FlexoEditor;
 import org.openflexo.foundation.FlexoObject;
 import org.openflexo.foundation.FlexoObject.FlexoObjectImpl;
 import org.openflexo.foundation.action.FlexoActionFactory;
+import org.openflexo.foundation.action.TechnologySpecificFlexoAction;
 import org.openflexo.foundation.fml.VirtualModel;
 import org.openflexo.foundation.fml.rt.VirtualModelInstance;
 import org.openflexo.foundation.fml.rt.action.CreateFMLRTVirtualModelInstance;
 import org.openflexo.foundation.resource.RepositoryFolder;
+import org.openflexo.technologyadapter.diagram.DiagramTechnologyAdapter;
 import org.openflexo.technologyadapter.diagram.fml.FMLControlledDiagramContainerNature;
 import org.openflexo.technologyadapter.diagram.fml.FMLControlledDiagramVirtualModelNature;
 
 public class CreateFMLControlledDiagramVirtualModelInstance
-		extends CreateFMLRTVirtualModelInstance<CreateFMLControlledDiagramVirtualModelInstance> {
+		extends CreateFMLRTVirtualModelInstance<CreateFMLControlledDiagramVirtualModelInstance>
+		implements TechnologySpecificFlexoAction<DiagramTechnologyAdapter> {
 
 	private static final Logger logger = Logger.getLogger(CreateFMLControlledDiagramVirtualModelInstance.class.getPackage().getName());
 
@@ -98,6 +101,14 @@ public class CreateFMLControlledDiagramVirtualModelInstance
 
 	CreateFMLControlledDiagramVirtualModelInstance(FlexoObject focusedObject, Vector<FlexoObject> globalSelection, FlexoEditor editor) {
 		super(actionType, focusedObject, globalSelection, editor);
+	}
+
+	/**
+	 * This action belongs to the diagram technology adapter: its name and texts are resolved in that adapter's dictionary.
+	 */
+	@Override
+	public Class<DiagramTechnologyAdapter> getTechnologyAdapterClass() {
+		return DiagramTechnologyAdapter.class;
 	}
 
 	@Override
