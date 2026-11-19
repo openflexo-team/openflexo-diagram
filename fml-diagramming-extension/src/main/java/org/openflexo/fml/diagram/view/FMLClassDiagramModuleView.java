@@ -104,6 +104,9 @@ public class FMLClassDiagramModuleView extends FMLControlledDiagramModuleView {
 
 		super.willHide();
 
+		// The browser is shared: give its drag and drop back to the browser itself
+		getCompilationUnitBrowser().getFIBBrowserWidget().unregisterDragGestureListener();
+
 		// TODO
 		// getPerspective().hideGoalDiagramBrowser();
 	}
