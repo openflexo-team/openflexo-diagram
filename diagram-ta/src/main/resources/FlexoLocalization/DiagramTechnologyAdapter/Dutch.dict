@@ -75,6 +75,7 @@ features=Features
 file_already_existing=Het bestand bestaat al
 file_exists_overwrite_?=Het bestand bestaat al. Wilt u het overschrijven?
 flexo_id=OpenFlexo ID
+fml_controlled_diagram=FML-gestuurd diagram
 foreground_inspector=Voorgrondinspecteur
 from=van
 from_shape=van de vorm

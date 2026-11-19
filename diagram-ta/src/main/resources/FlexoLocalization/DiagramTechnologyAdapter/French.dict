@@ -75,6 +75,7 @@ features=Fonctionnalit\u00E9s
 file_already_existing=Le fichier existe d\u00e9j\u00e0
 file_exists_overwrite_?=Le fichier existe d\u00e9j\u00e0. Voulez-vous le remplacer ?
 flexo_id=Identifiant OpenFlexo
+fml_controlled_diagram=Diagramme f\u00E9d\u00E9r\u00E9
 foreground_inspector=Inspecteur d'avant-plan
 from=de
 from_shape=de la forme

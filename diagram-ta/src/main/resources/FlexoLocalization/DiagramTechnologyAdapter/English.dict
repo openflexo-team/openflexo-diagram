@@ -75,6 +75,7 @@ features=Features
 file_already_existing=File already existing
 file_exists_overwrite_?=File exists overwrite ?
 flexo_id=OpenFlexo ID
+fml_controlled_diagram=FML-controlled diagram
 foreground_inspector=Foreground inspector
 from=From
 from_shape=From shape
