@@ -145,8 +145,8 @@ public class DeclareConnectorInFlexoConceptWizard
 
 			initialRepresentations = new HashMap<>();
 			if (getAction().getFlexoConcept() == null && getAction().getVirtualModel() != null
-					&& getAction().getVirtualModel().getFlexoConcepts().size() > 0) {
-				setFlexoConcept(getAction().getVirtualModel().getFlexoConcepts().get(0));
+					&& getAction().getVirtualModel().getAllFlexoConcepts().size() > 0) {
+				setFlexoConcept(getAction().getVirtualModel().getAllFlexoConcepts().get(0));
 			}
 
 			if (getStrategy().getFlexoRole() == null && getAction().getFlexoConcept() != null && getAvailableFlexoRoles().size() > 0) {
@@ -241,8 +241,8 @@ public class DeclareConnectorInFlexoConceptWizard
 		public CreateConnectorInExistingFlexoConcept(ConnectorRoleCreationStrategy strategy) {
 			super(strategy);
 			if (getAction().getFlexoConcept() == null && getAction().getVirtualModel() != null
-					&& getAction().getVirtualModel().getFlexoConcepts().size() > 0) {
-				getAction().setFlexoConcept(getAction().getVirtualModel().getFlexoConcepts().get(0));
+					&& getAction().getVirtualModel().getAllFlexoConcepts().size() > 0) {
+				getAction().setFlexoConcept(getAction().getVirtualModel().getAllFlexoConcepts().get(0));
 			}
 
 			if (StringUtils.isEmpty(getStrategy().getNewRoleName()) && getFlexoConcept() != null) {

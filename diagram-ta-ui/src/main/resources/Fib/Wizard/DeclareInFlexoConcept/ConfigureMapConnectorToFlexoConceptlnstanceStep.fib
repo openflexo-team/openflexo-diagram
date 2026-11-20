@@ -164,7 +164,7 @@
 			data="data.action.dropScheme.targetFlexoConcept" showReset="false"
 			staticList="" autoSelectFirstRow="true" name="targetFlexoConceptDropdown"
 			controllerClassName="org.openflexo.gina.controller.FIBController"
-			localize="true" constraints="flow(location=west)" list="data.action.virtualModel.flexoConcepts"
+			localize="true" constraints="flow(location=west)" list="data.action.virtualModel.allFlexoConcepts"
 			format="object.name" showText="true" readOnly="false"
 			iteratorClassName="org.openflexo.foundation.fml.FlexoConcept"
 			showIcon="false">

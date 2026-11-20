@@ -146,7 +146,7 @@ public class TestDiagramConnectorRoles extends OpenflexoTestCase {
 		assertNotNull(virtualModel.getBindingModel().bindingVariableNamed("diagram"));
 		assertTrue(virtualModel.getBindingModel().bindingVariableNamed("diagram").getType().equals(Diagram.class));
 
-		flexoConcept = virtualModel.getFlexoConcepts().get(0);
+		flexoConcept = virtualModel.getAllFlexoConcepts().get(0);
 		assertNotNull(flexoConcept);
 
 		dropScheme = (DropScheme) flexoConcept.getFlexoBehaviours().get(0);
@@ -167,7 +167,7 @@ public class TestDiagramConnectorRoles extends OpenflexoTestCase {
 		assertNotNull(virtualModel.getBindingModel().bindingVariableNamed("diagram"));
 		assertTrue(virtualModel.getBindingModel().bindingVariableNamed("diagram").getType().equals(Diagram.class));
 
-		flexoConcept = virtualModel.getFlexoConcepts().get(0);
+		flexoConcept = virtualModel.getAllFlexoConcepts().get(0);
 		assertNotNull(flexoConcept);
 
 		dropScheme = (DropScheme) flexoConcept.getFlexoBehaviours().get(0);
@@ -183,7 +183,7 @@ public class TestDiagramConnectorRoles extends OpenflexoTestCase {
 	@Category(UITest.class)
 	public void testRetrieveConcept() {
 
-		flexoConcept = virtualModel.getFlexoConcepts().get(0);
+		flexoConcept = virtualModel.getAllFlexoConcepts().get(0);
 		assertNotNull(flexoConcept);
 		assertTrue(flexoConcept.getName().equals(BASIC_CONCEPT_NAME));
 

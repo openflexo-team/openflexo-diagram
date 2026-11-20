@@ -90,7 +90,7 @@
 			data="data.flexoConcept" showReset="false" autoSelectFirstRow="true"
 			name="flexoConceptDropDown" index="8" localize="false"
 			constraints="twocols(anchor=center;expandHorizontally=true;fill=horizontal;gridHeight=1;gridWidth=0;gridX=1;gridY=1;index=8;insetsBottom=0;insetsLeft=0;insetsRight=20;insetsTop=0;location=center;padX=0;padY=0;weightX=1.0;weightY=0.0)"
-			list="data.virtualModel.flexoConcepts" format="object.name" showText="true"
+			list="data.virtualModel.allFlexoConcepts" format="object.name" showText="true"
 			readOnly="false" iteratorClassName="org.openflexo.foundation.fml.FlexoConcept"
 			showIcon="false">
 			<Dependancy id="19" componentName="virtualModelSelector" />

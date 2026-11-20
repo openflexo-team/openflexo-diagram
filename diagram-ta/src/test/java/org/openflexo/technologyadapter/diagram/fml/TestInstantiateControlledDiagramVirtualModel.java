@@ -130,7 +130,7 @@ public class TestInstantiateControlledDiagramVirtualModel extends OpenflexoProje
 		assertNotNull(virtualModel);
 		assertTrue(virtualModel.hasNature(FMLControlledDiagramVirtualModelNature.INSTANCE));
 
-		flexoConcept = virtualModel.getFlexoConcepts().get(0);
+		flexoConcept = virtualModel.getAllFlexoConcepts().get(0);
 		assertNotNull(flexoConcept);
 
 		dropScheme = (DropScheme) flexoConcept.getFlexoBehaviours().get(0);

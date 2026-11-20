@@ -158,7 +158,7 @@ public class TestFMLClassDiagramVirtualModel extends OpenflexoProjectAtRunTimeTe
 		FMLModelFactory fmlFactory = represented.getFMLModelFactory();
 		person = fmlFactory.newFlexoConcept();
 		person.setName("Person");
-		represented.addToFlexoConcepts(person);
+		represented.addToContents(person);
 		for (String name : new String[] { "firstName", "lastName" }) {
 			PrimitiveRole<?> role = fmlFactory.newPrimitiveRole();
 			role.setName(name);
@@ -227,7 +227,7 @@ public class TestFMLClassDiagramVirtualModel extends OpenflexoProjectAtRunTimeTe
 		action.doAction();
 		assertTrue(action.hasActionExecutionSucceeded());
 		assertEquals(2, classDiagramInstance.getFlexoConceptInstances("FlexoConceptGR").size());
-		assertEquals(2, represented.getFlexoConcepts().size());
+		assertEquals(2, represented.getAllFlexoConcepts().size());
 		assertNotNull(represented.getFlexoConcept("Concept"));
 	}
 }

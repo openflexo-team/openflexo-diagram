@@ -279,8 +279,9 @@ public class CreateFMLDiagramPaletteElementBindingFromDiagramPaletteElement
 		}
 		flexoConcepts.clear();
 		if (getVirtualModel() != null) {
-			for (FlexoConcept fc : getVirtualModel().getFlexoConcepts()) {
-				if (fc.getFlexoBehaviours(DropScheme.class) != null) {
+			for (FlexoConcept fc : getVirtualModel().getAllFlexoConcepts()) {
+				// DIAGRAM-D-5: only a concept that can be dropped (getFlexoBehaviours() is never null)
+				if (!fc.getFlexoBehaviours(DropScheme.class).isEmpty()) {
 					flexoConcepts.add(fc);
 				}
 			}

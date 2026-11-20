@@ -162,10 +162,10 @@ public interface FMLControlledDiagramShape extends FMLControlledDiagramElement<D
 			List<DropAndLinkScheme> availableDropAndLinkSchemeFromThisShape = new ArrayList<>();
 			VirtualModel virtualModel = getFlexoConceptInstance().getVirtualModelInstance().getVirtualModel();
 
-			for (FlexoConcept c : virtualModel.getFlexoConcepts()) {
+			for (FlexoConcept c : virtualModel.getAllFlexoConcepts()) {
 				for (DropScheme ds : c.getFlexoBehaviours(DropScheme.class)) {
 					if (ds.getTargetFlexoConcept() == targetFlexoConcept || (ds.isTopTarget() && targetFlexoConcept == null)) {
-						for (FlexoConcept c2 : virtualModel.getFlexoConcepts()) {
+						for (FlexoConcept c2 : virtualModel.getAllFlexoConcepts()) {
 							List<LinkScheme> acceptableLinkSchemes = new ArrayList<>();
 							for (LinkScheme ls : c2.getFlexoBehaviours(LinkScheme.class)) {
 								if (ls.isValidTarget(getFlexoConceptInstance().getFlexoConcept(), ds.getFlexoConcept())
@@ -204,9 +204,9 @@ public interface FMLControlledDiagramShape extends FMLControlledDiagramElement<D
 			List<LinkScheme> availableLinkSchemeFromThisShape = new ArrayList<>();
 			VirtualModel virtualModel = getFlexoConceptInstance().getVirtualModelInstance().getVirtualModel();
 
-			for (FlexoConcept c : virtualModel.getFlexoConcepts()) {
+			for (FlexoConcept c : virtualModel.getAllFlexoConcepts()) {
 				for (LinkScheme ls : c.getFlexoBehaviours(LinkScheme.class)) {
-					for (FlexoConcept c2 : virtualModel.getFlexoConcepts()) {
+					for (FlexoConcept c2 : virtualModel.getAllFlexoConcepts()) {
 						if (ls.isValidTarget(getFlexoConceptInstance().getFlexoConcept(), c2) && ls.getIsAvailableWithFloatingPalette()) {
 							// This candidate is acceptable
 							availableLinkSchemeFromThisShape.add(ls);
@@ -236,7 +236,7 @@ public interface FMLControlledDiagramShape extends FMLControlledDiagramElement<D
 			List<LinkScheme> availableLinkSchemeFromThisShape = new ArrayList<>();
 			VirtualModel virtualModel = getFlexoConceptInstance().getVirtualModelInstance().getVirtualModel();
 
-			for (FlexoConcept c : virtualModel.getFlexoConcepts()) {
+			for (FlexoConcept c : virtualModel.getAllFlexoConcepts()) {
 				for (LinkScheme ls : c.getFlexoBehaviours(LinkScheme.class)) {
 					if (ls.isValidTarget(getFlexoConceptInstance().getFlexoConcept(), targetFlexoConcept)
 							&& ls.getIsAvailableWithFloatingPalette()) {
@@ -276,7 +276,7 @@ public interface FMLControlledDiagramShape extends FMLControlledDiagramElement<D
 			if (getFlexoConceptInstance() != null && getFlexoConceptInstance().getVirtualModelInstance() != null
 					&& getFlexoConceptInstance().getVirtualModelInstance().getVirtualModel() != null) {
 				if (evt.getSource() == getFlexoConceptInstance().getVirtualModelInstance().getVirtualModel()) {
-					if (evt.getPropertyName().equals(VirtualModel.FLEXO_CONCEPTS_KEY)) {
+					if (evt.getPropertyName().equals(VirtualModel.ALL_FLEXO_CONCEPTS_KEY)) {
 						ShapeNode<FMLControlledDiagramShapeImpl> shapeNode = getDrawing().getShapeNode(this);
 						if (shapeNode != null) {
 							shapeNode.clearControlAreas();

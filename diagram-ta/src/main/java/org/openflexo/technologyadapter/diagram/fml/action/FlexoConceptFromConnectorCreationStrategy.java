@@ -117,7 +117,7 @@ public abstract class FlexoConceptFromConnectorCreationStrategy
 		}
 		if (getTransformationAction().getVirtualModel() != null) {
 			flexoConceptsFromList.clear();
-			flexoConceptsFromList.addAll(getTransformationAction().getVirtualModel().getFlexoConcepts());
+			flexoConceptsFromList.addAll(getTransformationAction().getVirtualModel().getAllFlexoConcepts());
 		}
 		/*if (selectedLinkScheme != null && 
 				getVirtualModel()!=null &&
@@ -140,7 +140,7 @@ public abstract class FlexoConceptFromConnectorCreationStrategy
 		}
 		if (getTransformationAction().getVirtualModel() != null) {
 			flexoConceptsToList.clear();
-			flexoConceptsToList.addAll(getTransformationAction().getVirtualModel().getFlexoConcepts());
+			flexoConceptsToList.addAll(getTransformationAction().getVirtualModel().getAllFlexoConcepts());
 		}
 		/*if (selectedLinkScheme != null && getVirtualModel()!=null && selectedLinkScheme.getToTargetFlexoConcept() != null) {
 			FlexoConcept currentToEp = selectedLinkScheme.getToTargetFlexoConcept();

@@ -577,7 +577,7 @@ public interface FMLDiagramPaletteElementBinding extends FlexoConceptObject {
 		public List<FlexoConcept> allAvailableFlexoConcepts() {
 			if (getOwningVirtualModel() != null) {
 				List<FlexoConcept> returned = new ArrayList<>();
-				for (FlexoConcept ep : getOwningVirtualModel().getFlexoConcepts()) {
+				for (FlexoConcept ep : getOwningVirtualModel().getAllFlexoConcepts()) {
 					if (ep.getFlexoBehaviours(DropScheme.class).size() > 0) {
 						returned.add(ep);
 					}

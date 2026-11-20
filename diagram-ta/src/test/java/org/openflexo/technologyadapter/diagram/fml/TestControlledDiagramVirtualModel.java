@@ -269,7 +269,7 @@ public class TestControlledDiagramVirtualModel extends DiagramTestCase {
 
 		FlexoConcept flexoConcept = virtualModel.getFMLModelFactory().newInstance(FlexoConcept.class);
 		flexoConcept.setName("TestFlexoConcept");
-		virtualModel.addToFlexoConcepts(flexoConcept);
+		virtualModel.addToContents(flexoConcept);
 
 		CreateTechnologyRole createShapeRole = CreateTechnologyRole.actionType.makeNewAction(flexoConcept, null, editor);
 		createShapeRole.setRoleName("shape");

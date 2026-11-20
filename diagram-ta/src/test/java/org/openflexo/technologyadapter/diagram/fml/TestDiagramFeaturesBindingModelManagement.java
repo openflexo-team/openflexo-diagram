@@ -278,7 +278,7 @@ public class TestDiagramFeaturesBindingModelManagement extends DiagramTestCase {
 
 		flexoConcept = virtualModel.getFMLModelFactory().newInstance(FlexoConcept.class);
 		flexoConcept.setName("Concept");
-		virtualModel.addToFlexoConcepts(flexoConcept);
+		virtualModel.addToContents(flexoConcept);
 
 		CreateTechnologyRole createShapeRole = CreateTechnologyRole.actionType.makeNewAction(flexoConcept, null, editor);
 		createShapeRole.setRoleName("shape");
@@ -376,7 +376,7 @@ public class TestDiagramFeaturesBindingModelManagement extends DiagramTestCase {
 
 		flexoConcept2 = virtualModel.getFMLModelFactory().newInstance(FlexoConcept.class);
 		flexoConcept2.setName("Concept2");
-		virtualModel.addToFlexoConcepts(flexoConcept2);
+		virtualModel.addToContents(flexoConcept2);
 		dropScheme.setTargetFlexoConcept(flexoConcept2);
 		assertFalse(dropScheme.isTopTarget());
 		assertEquals(7, dropScheme.getBindingModel().getBindingVariablesCount());
@@ -582,7 +582,7 @@ public class TestDiagramFeaturesBindingModelManagement extends DiagramTestCase {
 		assertNotNull(virtualModel.getBindingModel().bindingVariableNamed("diagram"));
 		assertTrue(virtualModel.getBindingModel().bindingVariableNamed("diagram").getType().equals(Diagram.class));
 
-		flexoConcept = virtualModel.getFlexoConcepts().get(0);
+		flexoConcept = virtualModel.getAllFlexoConcepts().get(0);
 		assertNotNull(flexoConcept);
 
 		dropScheme = (DropScheme) flexoConcept.getFlexoBehaviours().get(0);

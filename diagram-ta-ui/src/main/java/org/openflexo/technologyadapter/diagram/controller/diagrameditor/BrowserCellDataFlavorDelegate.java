@@ -211,7 +211,7 @@ public class BrowserCellDataFlavorDelegate extends DataFlavorDelegate {
 			return returned;
 		}
 		VirtualModel diagramVirtualModel = getFMLControlledDiagram().getVirtualModel();
-		for (FlexoConcept concept : diagramVirtualModel.getFlexoConcepts()) {
+		for (FlexoConcept concept : diagramVirtualModel.getAllFlexoConcepts()) {
 			// System.out.println("on regarde le concept " + concept);
 			for (DropScheme ds : concept.getFlexoBehaviours(DropScheme.class)) {
 				// System.out.println("ds=" + ds);
