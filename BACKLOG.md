@@ -29,3 +29,30 @@ failures (the null error that follows hides the cause). Chosen without an explic
 error (it was ignored).
 
 **Verified (2026-11-16).** diagram-ta 25 (22 run, 2 skipped): `TestFMLDiagramPrettyPrint3` red as before phase 3 (same message), the others green; formod-test 32 green (a diagram created headlessly, see GraphicalAction); ECJ compiles diagram-ta. No new test.
+
+## FML diagrammatic editor
+
+### DIAGRAM-F-2 — Complete the diagrammatic editor of FML (fml-diagramming-extension)  ·  `TODO`
+
+**GitHub:** [openflexo-team/openflexo-diagram#12](https://github.com/openflexo-team/openflexo-diagram/issues/12)
+
+**Problem.** FML has only a rudimentary diagrammatic editor. The module `fml-diagramming-extension` (plug-in `FMLDiagrammingPlugin`) provides an embryo of it: a class diagram of a virtual model, with the virtual model `FMLClassDiagram`, the diagram specification `FMLClassDiagramSpecification` (palette, shapes for the concepts, icons for the primitive types), the action and wizard `CreateFMLClassDiagram`, `UpdateConceptProperties`, and the module view `FMLClassDiagramModuleView`. Its development is not finished: it covers few operations, and has one test (`TestFMLClassDiagramVirtualModel`).
+
+Verified on the current `3.0` branch: the module contains the classes listed above and no other entry of the backlog covers its completion. What the embryo does today, and what is missing, has not been inventoried.
+
+**Goal.** Finish the development of the diagrammatic editor of FML, so that a user can view and edit a virtual model as a diagram.
+
+**Open questions.** Nothing is decided yet; the design is part of this entry.
+- Scope: what the diagram shows and edits. Concepts, properties, inheritance and containment, and possibly behaviours, enums, events and imports. Read-only visualization, or editing that modifies the FML.
+- Inventory: what the embryo does today and what is missing, to be listed before the work is cut into steps.
+- Synchronization: whether a change made on the diagram is applied to the FML and the other way round (the diagram follows the FML edited in the text editor).
+- Relation with the free modelling editor (`free-modelling-editor`, its extension for diagrams): shared parts, or a distinct subject.
+- Interface: palette, inspectors, wizards, creation of a concept or a link on the diagram, layout, and the interaction with the FML browser.
+- Impacts to inventory: the metamodel and notifications of the concepts (see the containment and inspector entries of `openflexo-core`), the pretty-print, localization, and tests.
+
+**Acceptance criteria** (to be refined once the scope is chosen).
+- The operations decided on are available on the diagram: they modify the FML (or only show it, as decided) and keep it valid.
+- A change in the FML text is reflected on the diagram, as decided.
+- Inspectors and wizards of the editor are covered by tests.
+- A test proves the round trip between the FML and its diagram.
+- The new texts are localized in English, French and Dutch.
