@@ -39,15 +39,20 @@
 package org.openflexo.technologyadapter.diagram.controller;
 
 import java.awt.Window;
+import java.util.Collections;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 
+import org.openflexo.components.wizard.FlexoWizard;
+import org.openflexo.components.wizard.WizardStep;
 import org.openflexo.diana.swing.control.SwingToolFactory;
 import org.openflexo.diana.swing.control.tools.JDianaDialogInspectors;
 import org.openflexo.diana.swing.control.tools.JDianaInspectors;
 import org.openflexo.diana.swing.control.tools.JDianaScaleSelector;
 import org.openflexo.foundation.FlexoObject;
 import org.openflexo.foundation.fml.FlexoBehaviour;
+import org.openflexo.foundation.fml.action.template.VirtualModelTemplate;
 import org.openflexo.foundation.fml.FlexoConceptInstanceRole;
 import org.openflexo.foundation.fml.FlexoRole;
 import org.openflexo.foundation.fml.editionaction.DeleteAction;
@@ -70,8 +75,8 @@ import org.openflexo.technologyadapter.diagram.controller.action.CreateExampleDi
 import org.openflexo.technologyadapter.diagram.controller.action.CreateExampleDiagramInitializer;
 import org.openflexo.technologyadapter.diagram.controller.action.CreateFMLControlledDiagramFlexoConceptInitializer;
 import org.openflexo.technologyadapter.diagram.controller.action.CreateFMLControlledDiagramPaletteElementInitializer;
-import org.openflexo.technologyadapter.diagram.controller.action.CreateFMLControlledDiagramVirtualModelInitializer;
 import org.openflexo.technologyadapter.diagram.controller.action.CreateFMLControlledDiagramVirtualModelInstanceInitializer;
+import org.openflexo.technologyadapter.diagram.controller.action.FMLControlledDiagramVirtualModelTemplateSteps;
 import org.openflexo.technologyadapter.diagram.controller.action.CreateFMLDiagramPaletteElementBindingFromDiagramPaletteElementInitializer;
 import org.openflexo.technologyadapter.diagram.controller.action.CreateFMLDiagramPaletteElementBindingInitializer;
 import org.openflexo.technologyadapter.diagram.controller.action.CreatePaletteElementFromFlexoConceptInitializer;
@@ -107,6 +112,7 @@ import org.openflexo.technologyadapter.diagram.fml.DropScheme;
 import org.openflexo.technologyadapter.diagram.fml.FMLDiagramPaletteElementBinding;
 import org.openflexo.technologyadapter.diagram.fml.LinkScheme;
 import org.openflexo.technologyadapter.diagram.fml.ShapeRole;
+import org.openflexo.technologyadapter.diagram.fml.action.FMLControlledDiagramVirtualModelTemplate;
 import org.openflexo.technologyadapter.diagram.fml.editionaction.AddConnector;
 import org.openflexo.technologyadapter.diagram.fml.editionaction.AddShape;
 import org.openflexo.technologyadapter.diagram.fml.editionaction.CreateDiagram;
@@ -178,6 +184,15 @@ public class DiagramTechnologyAdapterController extends TechnologyAdapterControl
 	}
 
 	@Override
+	public List<WizardStep> makeVirtualModelTemplateSteps(VirtualModelTemplate<?> template, FlexoWizard wizard) {
+		if (template instanceof FMLControlledDiagramVirtualModelTemplate) {
+			return Collections.singletonList(new FMLControlledDiagramVirtualModelTemplateSteps.ChooseDiagramSpecification(
+					(FMLControlledDiagramVirtualModelTemplate) template, wizard));
+		}
+		return super.makeVirtualModelTemplateSteps(template, wizard);
+	}
+
+	@Override
 	protected void initializeActions(ControllerActionInitializer actionInitializer) {
 
 		WindowMenu viewMenu = actionInitializer.getController().getMenuBar().getWindowMenu();
@@ -236,8 +251,6 @@ public class DiagramTechnologyAdapterController extends TechnologyAdapterControl
 		new DeleteDiagramPaletteInitializer(actionInitializer);
 		new CreateDiagramPaletteElementInitializer(actionInitializer);
 		new DeleteDiagramPaletteElementInitializer(actionInitializer);
-
-		new CreateFMLControlledDiagramVirtualModelInitializer(actionInitializer);
 
 		new CreateFMLControlledDiagramVirtualModelInstanceInitializer(actionInitializer);
 		new OpenFMLControlledDiagramVirtualModelInstanceInitializer(actionInitializer);

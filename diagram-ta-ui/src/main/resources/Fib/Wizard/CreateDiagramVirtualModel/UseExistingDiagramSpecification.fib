@@ -30,5 +30,5 @@
 			variable="component.resourceDataClass" />
 	</Custom>
 	<FIBVariable id="12" name="data"
-		type="org.openflexo.technologyadapter.diagram.controller.action.CreateFMLControlledDiagramVirtualModelWizard$UseExistingDiagramSpecification" />
+		type="org.openflexo.technologyadapter.diagram.controller.action.FMLControlledDiagramVirtualModelTemplateSteps$UseExistingDiagramSpecification" />
 </Panel>

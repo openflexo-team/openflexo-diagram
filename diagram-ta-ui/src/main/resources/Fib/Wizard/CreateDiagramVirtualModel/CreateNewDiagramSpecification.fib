@@ -41,5 +41,5 @@
 		name="TextField3"
 		constraints="twocols(expandHorizontally=true;expandVertically=false;insetsBottom=0;insetsLeft=0;insetsRight=20;insetsTop=0;location=right)" />
 	<FIBVariable id="53" name="data"
-		type="org.openflexo.technologyadapter.diagram.controller.action.CreateFMLControlledDiagramVirtualModelWizard$CreateNewDiagramSpecification" />
+		type="org.openflexo.technologyadapter.diagram.controller.action.FMLControlledDiagramVirtualModelTemplateSteps$CreateNewDiagramSpecification" />
 </Panel>

@@ -48,6 +48,7 @@ import org.openflexo.foundation.fml.annotations.DeclareModelSlots;
 import org.openflexo.foundation.fml.annotations.DeclareResourceFactories;
 import org.openflexo.foundation.fml.annotations.DeclareTechnologySpecificTypes;
 import org.openflexo.foundation.fml.annotations.DeclareVirtualModelInstanceNatures;
+import org.openflexo.foundation.fml.annotations.DeclareVirtualModelTemplates;
 import org.openflexo.foundation.fml.annotations.FML;
 import org.openflexo.foundation.fml.rt.FMLRTVirtualModelInstance;
 import org.openflexo.foundation.fml.rt.VirtualModelInstance;
@@ -62,6 +63,7 @@ import org.openflexo.foundation.technologyadapter.TechnologyAdapterService;
 import org.openflexo.technologyadapter.diagram.fml.DropScheme;
 import org.openflexo.technologyadapter.diagram.fml.FMLControlledDiagramVirtualModelInstanceNature;
 import org.openflexo.technologyadapter.diagram.fml.LinkScheme;
+import org.openflexo.technologyadapter.diagram.fml.action.FMLControlledDiagramVirtualModelTemplate;
 import org.openflexo.technologyadapter.diagram.metamodel.DiagramPalette;
 import org.openflexo.technologyadapter.diagram.model.Diagram;
 import org.openflexo.technologyadapter.diagram.model.DiagramElement;
@@ -90,6 +92,7 @@ import org.openflexo.technologyadapter.diagram.rm.DiagramSpecificationResourceFa
 @DeclareTechnologySpecificTypes({ DiagramType.class })
 @DeclareResourceFactories({ DiagramSpecificationResourceFactory.class, DiagramResourceFactory.class })
 @DeclareVirtualModelInstanceNatures({ FMLControlledDiagramVirtualModelInstanceNature.class })
+@DeclareVirtualModelTemplates({ FMLControlledDiagramVirtualModelTemplate.class })
 public class DiagramTechnologyAdapter extends TechnologyAdapter<DiagramTechnologyAdapter> {
 	private ScreenshotBuilder<Diagram> screenshotBuilder;
 
